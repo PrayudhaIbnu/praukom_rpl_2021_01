@@ -15,7 +15,7 @@ return new class extends Migration
     {
         //
         Schema::create('level_user', function (Blueprint $table) {
-            $table->engine = 'innodb';;
+            $table->engine = 'innodb';
             $table->char('id_level', 3)->primary();
             $table->string('nama_level', 25);
         });
@@ -29,5 +29,6 @@ return new class extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('level_user');
     }
 };

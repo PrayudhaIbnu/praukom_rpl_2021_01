@@ -14,13 +14,11 @@ return new class extends Migration
     public function up()
     {
         //
-
-        Schema::create('supplier', function (Blueprint $table) {
+        Schema::create('laba', function (Blueprint $table) {
             $table->engine = 'innodb';
-            $table->char('id_supplier', 8)->primary();
-            $table->string('nama_supplier', 60);
-            $table->text('alamat_supplier')->nullable();
-            $table->string('telp_supplier', 15);
+            $table->string('id_laba')->primary();
+            $table->date('tanggal')->default(now());
+            $table->integer('total_rugi');
         });
     }
 
@@ -32,6 +30,6 @@ return new class extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('supplier');
+        Schema::dropIfExists('laba');
     }
 };
