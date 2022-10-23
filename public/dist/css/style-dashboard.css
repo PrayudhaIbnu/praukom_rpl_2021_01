@@ -1,0 +1,22 @@
+.navbar {
+    background-color: #ef791f;
+    background-image: linear-gradient(to right, #db670e, #ff9b3f);
+}
+
+.img {
+    width: 70px;
+    margin: auto;
+}
+
+.logout {
+    background-color: #ff4d4d;
+    color: #ffffff;
+}
+.font-level {
+    font-size: smaller;
+}
+
+.nav-header {
+    display: block;
+    padding: 0.5rem 1rem;
+}

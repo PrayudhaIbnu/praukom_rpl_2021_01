@@ -17,7 +17,6 @@ return new class extends Migration
         Schema::create('barang_keluar', function (Blueprint $table) {
             $table->engine = 'innodb';
             $table->string('id_produk', 15);
-            $table->string('laba', 50);
             $table->integer('qty');
             $table->text('keterangan');
 
@@ -27,11 +26,11 @@ return new class extends Migration
                 ->on('produk')
                 ->cascadeOnDelete();
 
-            $table
-                ->foreign('laba')
-                ->references('id_laba')
-                ->on('laba')
-                ->cascadeOnDelete();
+            // $table
+            //     ->foreign('laba')
+            //     ->references('id_laba')
+            //     ->on('laba')
+            //     ->cascadeOnDelete();
         });
     }
 
