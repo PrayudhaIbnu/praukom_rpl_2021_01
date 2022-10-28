@@ -15,7 +15,7 @@
         <ul class="navbar-nav ml-auto">
           <!-- Navbar Search -->
           <li class="nav-item">
-            <div class="navbar-search-block">
+            {{-- <div class="search-block">
               <form class="form-inline">
                 <div class="input-group input-group-sm">
                   <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -29,7 +29,7 @@
                   </div>
                 </div>
               </form>
-            </div>
+            </div> --}}
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">

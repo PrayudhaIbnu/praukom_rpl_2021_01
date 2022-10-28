@@ -17,6 +17,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('admin/dashboard');
+// ROUTES UNTUK ROLE ADMIN
+Route::prefix('/admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
+
+    Route::get('/produk', function () {
+        return view('admin.daftarproduk');
+    });
 });
+
+// ROUTES UNTUK ROLE KASIR
+Route::prefix('/kasir')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('kasir.dashboard');
+    });
+});
+
+// ROUTES UNTUK ROLE PENGAWAS

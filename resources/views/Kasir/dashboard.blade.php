@@ -4,24 +4,13 @@
   {{-- x-dashboard buat struktur dashboard --}}
   <x-dashboard />
   {{-- CONTENT --}}
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
               <h1 class="m-0">Dashboard</h1>
-            </div>
-            <!-- /.col -->
-            <div class="col-sm-6">
-              <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                  <div class="input-group-append">
-                  <button class="btn btn-sidebar">
-                    <i class="fas fa-search fa-fw"></i>
-                  </button>
-               </div>
-             </div>
             </div>
           </div>
         </div>
@@ -54,12 +43,10 @@
                 </div>
               </div>
             </div>
-  
-            <div class="col-lg-6">
                <div class="card">
                 <div class="card-header border-0">
                   <h3 class="card-title">Products</h3>
-                  <div class="card-tools">
+                <div class="card-tools">
                     <a href="#" class="btn btn-tool btn-sm">
                       <i class="fas fa-download"></i>
                     </a>
@@ -160,9 +147,8 @@
                   </table>
                 </div>
               </div>
-            </div>
             <!-- bates -->
-            <div class="col-lg-6 mt-0">
+            <div class="col-lg-6 mt-0" style="margin-top: -200px">
               <div class="card">
                 <div class="card-header border-0">
                   <div class="d-flex justify-content-between">
