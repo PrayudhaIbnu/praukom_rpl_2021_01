@@ -22,7 +22,9 @@
   </head>
   <body class="sidebar-mini">
     
-{{ $slot }}
+  <div class="wrapper">
+  {{ $slot }}
+  </div>
     
   <!-- jQuery -->
   <script src="{{ asset('others/jquery/jquery.min.js') }}"></script>
