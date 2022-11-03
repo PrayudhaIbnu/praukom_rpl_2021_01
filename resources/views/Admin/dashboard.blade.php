@@ -2,7 +2,7 @@
 {{-- x-app-layout buat struktur html --}}
 <x-app-layout>
   {{-- x-dashboard buat struktur dashboard --}}
-  <x-dashboard />
+  <x-dashboard-admin />
   {{-- CONTENT --}}
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->

@@ -1,5 +1,5 @@
 <x-app-layout>
-  <x-dashboard />
+  <x-dashboard-admin />
   <div class="content-wrapper">
     {{--  --}}
     <div class="content-header">
