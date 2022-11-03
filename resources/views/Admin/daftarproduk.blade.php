@@ -22,7 +22,7 @@
         </div>
         <div class="container">
           <div class="float-end">
-            <button class="btn btn-primary my-3">+ Tambah</button>
+            <button class="btn btn-success my-3">+ Tambah</button>
           </div>
           {{-- TABLE --}}
           <table class="table mt-4 ">
@@ -37,13 +37,14 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row">1234567890123</th>
-                <td>Minuman Ibnu</td>
+                <th scope="row">1</th>
+                <td>MinumanSaya</td>
                 <td>Rp.200</td>
                 <td>2</td>
                 <td>
-                  <button class="btn btn-warning">Edit</button>
-                  <button class="btn btn-danger">Hapus</button>
+                  <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
+                  <button class="btn btn-edit btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button class="btn btn-hapus btn-danger"><i class="fa-solid fa-trash"></i></button>
                 </td>
               </tr>
               <tr>

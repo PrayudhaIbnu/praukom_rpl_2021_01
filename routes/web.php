@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('auth/', function () {
+    return view('auth.login');
+});
+
 // ROUTES UNTUK ROLE ADMIN
 Route::prefix('/admin')->group(function () {
     Route::get('/dashboard', function () {
@@ -26,6 +30,7 @@ Route::prefix('/admin')->group(function () {
     Route::get('/produk', function () {
         return view('admin.daftarproduk');
     });
+    
 });
 
 // ROUTES UNTUK ROLE KASIR
