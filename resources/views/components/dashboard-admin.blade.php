@@ -64,7 +64,7 @@
             <a href="/admin/produk" class="nav-link">
                 <i class="nav-icon fas fa-box-open"></i>
               <p>
-                Daftar Produk
+                Produk
               </p>
             </a>
           </li>
