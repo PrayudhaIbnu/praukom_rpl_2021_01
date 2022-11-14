@@ -25,3 +25,15 @@
     padding: 0, 10, 0, 10;
     color: #ffffff;
 }
+
+table, thead{
+    border-radius: 10px;
+}
+
+.table{
+    background-color: #ffffff;
+}
+
+.dropdown-menu {
+    border-radius: 10px;
+}

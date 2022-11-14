@@ -1,12 +1,11 @@
 <x-app-layout>
   <x-dashboard-admin />
   <div class="content-wrapper">
-    {{--  --}}
     <div class="content-header">
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-6">
-            <h1 class="m-0">Produk</h1>
+            <h1 class="m-0">Daftar Produk</h1>
           </div>
           <!-- /.col -->
           <div class="row col-sm-6">
@@ -21,11 +20,23 @@
           </div>
         </div>
         <div class="container">
-          <div class="float-end">
-            <button class="btn btn-success my-3">+ Tambah</button>
+          <div class="float-start">
+            <button class="btn btn-warning btn-sm my-3 m-0" type="button">
+              Kategori
+            </button>
+            <button type="button" class="btn btn-sm my-3 btn-warning dropdown-toggle dropdown-toggle-split m-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Makanan</a>
+              <a class="dropdown-item" href="#">Minuman</a>
+              <a class="dropdown-item" href="#">Lainnya</a>
+            </div>
           </div>
-          {{-- TABLE --}}
-          <table class="table mt-4 ">
+          <div class="float-end">
+            <button class="btn btn-success my-3 btn-sm">+ Tambah</button>
+          </div>
+          <table class="table mt-4 table-borderless">
             <thead class="table-warning">
               <tr>
                 <th scope="col">Barcode</th>
@@ -46,17 +57,6 @@
                   <button class="btn btn-edit btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
                   <button class="btn btn-hapus btn-danger"><i class="fa-solid fa-trash"></i></button>
                 </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
               </tr>
             </tbody>
           </table>

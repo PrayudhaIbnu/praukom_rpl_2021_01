@@ -21,7 +21,7 @@
   <body class="sidebar-mini">
     
   <div class="wrapper">
-  {{ $slot }}
+    {{ $slot }}
   </div>
     
   <!-- jQuery -->
@@ -30,6 +30,9 @@
   <script src="{{ asset('others/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- JS -->
   <script src="{{ asset('dist/js/dashboard.js') }}"></script>
+  <!-- switalert -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+  <!-- pontawesom -->
   <script src="https://kit.fontawesome.com/61b10549df.js" crossorigin="anonymous"></script>
 
   <!-- OPTIONAL SCRIPTS -->

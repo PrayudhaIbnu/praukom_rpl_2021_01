@@ -21,7 +21,7 @@
     
               <span class="dropdown-item dropdown-header">
                 <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
-                <p>Pera<?php {{ $user; }} ?></p>
+                <p>Prayudha Ibnu<?php {{ $user; }} ?></p>
                 <p class="font-level">Pengawas<?php {{ $level; }}?></p>
               </span>
     
@@ -46,10 +46,8 @@
           <img src="/img/logoblud.png" alt="BLUD Logo" class="brand-image">
           <span class="brand-text font-weight-bold text-yellow">One</span><span class="brand-text font-weight-bold text-orange">Mart</span>
         </a>
-    
-        <!-- Sidebar -->
+        <!-- sidebar nih -->
         <div class="sidebar">
-          <!-- Sidebar Menu -->
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item">
@@ -59,6 +57,29 @@
                     Dashboard
                   </p>
                 </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-box-open"></i>                  
+                  <p>
+                    Produk
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview pl-4">
+                  <li class="nav-item">
+                    <a href="admin/produk" class="nav-link">
+                      <i class="fa-solid fa-list-ul"></i>                      
+                      <p>Daftar Produk</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="fa-brands fa-wpforms"></i>                      
+                      <p>Input Stok Produk</p>
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -73,84 +94,6 @@
                     <i class="nav-icon fas fa-history"></i>              
                   <p>
                     Riwayat Transaksi
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="admin/produk " class="nav-link">
-                <i class="nav-icon fas fa-box-open"></i>              
-                  <p>
-                    Daftar Produk
-                  </p>
-                </a>  
-              </li>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="pages/tables/simple.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Simple Tables</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/tables/data.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>DataTables</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>jsGrid</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-header">EXAMPLES</li>
-              <li class="nav-item">
-                <a href="pages/calendar.html" class="nav-link">
-                  <i class="nav-icon fas fa-calendar-alt"></i>
-                  <p>
-                    Calendar
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/gallery.html" class="nav-link">
-                  <i class="nav-icon far fa-image"></i>
-                  <p>
-                    Gallery
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/kanban.html" class="nav-link">
-                  <i class="nav-icon fas fa-columns"></i>
-                  <p>
-                    Kanban Board
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon far fa-envelope"></i>
-                  <p>
-                    Mailbox
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-book"></i>
-                  <p>
-                    Pages
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon far fa-plus-square"></i>
-                  <p>
-                    Extras
                   </p>
                 </a>
               </li>
