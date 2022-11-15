@@ -1,12 +1,11 @@
 <x-app-layout>
   <x-dashboard-admin />
   <div class="content-wrapper">
-    {{--  --}}
     <div class="content-header">
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-6">
-            <h1 class="m-0">Produk</h1>
+            <h1 class="m-0">Daftar Produk</h1>
           </div>
           <!-- /.col -->
           <div class="row col-sm-6">
@@ -20,12 +19,23 @@
            </div>
           </div>
         </div>
-        <div class="container">
-          <div class="float-end">
-            <button class="btn btn-primary my-3">+ Tambah</button>
+        <div class="container-fluid">
+          <div class="float-start">
+            <!-- Example single danger button -->
+            <div class="btn-group">
+              <button type="button" class="btn btn-warning btn-sm my-3 m-0 dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                Semua
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Makanan</a></li>
+                <li><a class="dropdown-item" href="#">Minuman</a></li>
+              </ul>
+            </div>
           </div>
-          {{-- TABLE --}}
-          <table class="table mt-4 ">
+          <div class="float-end">
+            <button class="btn btn-success my-3 btn-sm">+ Tambah</button>
+          </div>
+          <table class="table mt-4 table-borderless">
             <thead class="table-warning">
               <tr>
                 <th scope="col">Barcode</th>
@@ -37,25 +47,15 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row">1234567890123</th>
-                <td>Minuman Ibnu</td>
+                <th scope="row">1</th>
+                <td>Minuman Saya</td>
                 <td>Rp.200</td>
                 <td>2</td>
                 <td>
-                  <button class="btn btn-warning">Edit</button>
-                  <button class="btn btn-danger">Hapus</button>
+                  <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
+                  <button class="btn btn-edit btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button class="btn btn-hapus btn-danger"><i class="fa-solid fa-trash"></i></button>
                 </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
               </tr>
             </tbody>
           </table>

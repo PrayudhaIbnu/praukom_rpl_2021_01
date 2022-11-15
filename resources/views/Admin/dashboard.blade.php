@@ -27,7 +27,7 @@
         </div>
       </div>
       <!-- Main content -->
-      {{-- <div class="content">
+      <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-0 col-sm-3">
@@ -203,7 +203,7 @@
             <!-- bates -->
           </div>
         </div>
-      </div> --}}
+      </div>
 
     </div>  
 </x-app-layout>

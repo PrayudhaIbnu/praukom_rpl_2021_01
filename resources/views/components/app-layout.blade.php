@@ -12,8 +12,6 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    {{-- <link rel="stylesheet" href="/others/fontawesome-free/css/all.min.css"> --}}
     <!-- IonIcons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
@@ -23,7 +21,7 @@
   <body class="sidebar-mini">
     
   <div class="wrapper">
-  {{ $slot }}
+    {{ $slot }}
   </div>
     
   <!-- jQuery -->
@@ -32,7 +30,10 @@
   <script src="{{ asset('others/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- JS -->
   <script src="{{ asset('dist/js/dashboard.js') }}"></script>
-  <script src="https://kit.fontawesome.com/34d490285c.js" crossorigin="anonymous"></script>
+  <!-- switalert -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+  <!-- pontawesom -->
+  <script src="https://kit.fontawesome.com/61b10549df.js" crossorigin="anonymous"></script>
 
   <!-- OPTIONAL SCRIPTS -->
   <script src="others/chart.js/Chart.min.js"></script>

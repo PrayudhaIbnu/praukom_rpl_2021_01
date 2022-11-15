@@ -46,7 +46,6 @@ var $container = $("<div />", {
 
 $sidebar.append($container);
 
-// Checkboxes
 
 $container.append('<h5>Customize AdminLTE</h5><hr class="mb-2"/>');
 
