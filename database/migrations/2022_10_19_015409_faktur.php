@@ -16,8 +16,8 @@ return new class extends Migration
         //
         Schema::create('faktur', function (Blueprint $table) {
             $table->engine = 'innodb';
-            $table->integer('id_faktur')->primary();
-            $table->integer('penjualan');
+            $table->char('id_faktur', 13)->primary();
+            $table->char('penjualan', 13);
             $table->integer('jml_tunai');
             $table->integer('jml_kembalian');
 

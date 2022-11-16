@@ -16,7 +16,7 @@ return new class extends Migration
         //
         Schema::create('penjualan', function (Blueprint $table) {
             $table->engine = 'innodb';
-            $table->integer('id_penjualan')->primary();
+            $table->char('id_penjualan', 13)->primary();
             $table->date('tanggal')->default(now());
             $table->time('jam_jual')->default(now());
             $table->text('keterangan')->nullable();
