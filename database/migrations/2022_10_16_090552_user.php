@@ -21,7 +21,7 @@ return new class extends Migration
                 $table->string('nama', 60);
                 $table->string('username')->unique();
                 $table->text('password');
-                $table->text('foto');
+                $table->text('foto')->nullable();
                 $table->char('level', 3);
 
                 $table->timestamps();
