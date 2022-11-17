@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class SuperAdmin extends Model
+class Users extends Model
 {
     use HasFactory;
-    protected $table = "user";
+    protected $table = "users";
     protected $fillable = [
         'id_user',
         'nama',

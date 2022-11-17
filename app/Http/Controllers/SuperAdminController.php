@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SuperAdmin;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,9 +12,9 @@ class SuperAdminController extends Controller
     {
         // $user = SuperAdmin::all();
         $level_user = DB::table('level_user')->select()->get();
-        $user = DB::table('user')
-            ->select(['user.nama', 'user.username', 'level_user.nama_level', 'user.foto'])
-            ->join('level_user', 'user.level', '=', 'level_user.id_level')
+        $user = DB::table('users')
+            ->select(['users.nama', 'users.username', 'level_user.nama_level', 'users.foto'])
+            ->join('level_user', 'users.level', '=', 'level_user.id_level')
             ->get();
         // dd($user);
         // $level_user = DB::table('level_user')->select()->get();
@@ -23,7 +23,7 @@ class SuperAdminController extends Controller
 
     public function tambah(Request $request)
     {
-        $user = new SuperAdmin;
+        $user = new Users;
         $id_user = substr(md5(rand(0, 99999)), -4);
         $user['id_user'] = $id_user;
         $user->nama = $request->input('nama');
