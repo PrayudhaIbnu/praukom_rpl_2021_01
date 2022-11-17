@@ -15,7 +15,7 @@ return new class extends Migration
     {
         //
         {
-            Schema::create('user', function (Blueprint $table) {
+            Schema::create('users', function (Blueprint $table) {
                 $table->engine = 'innodb';
                 $table->char('id_user', 5)->primary();
                 $table->string('nama', 60);
