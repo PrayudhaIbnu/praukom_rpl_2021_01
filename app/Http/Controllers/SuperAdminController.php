@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SuperAdmin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +23,7 @@ class SuperAdminController extends Controller
 
     public function tambah(Request $request)
     {
-        $user = new SuperAdmin;
+        $user = new User;
         $id_user = substr(md5(rand(0, 99999)), -4);
         $user['id_user'] = $id_user;
         $user->nama = $request->input('nama');
@@ -32,14 +32,11 @@ class SuperAdminController extends Controller
         $user->foto = $request->file('foto')->store('post-images');
         $user->level = $request->input('id_level');
         $user->save();
-        return redirect()->back()->with('status', "Data berhasi di tambah");
+        return redirect()->back()->with('success', "Data berhasi di tambah");
     }
 
     public function edit($id = null)
     { {
-            $edit = $this->SuperAdmin->find($id);
-            // echo json_encode($edit);
-            return view('SuperAdmin.index', $edit);
         }
     }
 }
