@@ -19,11 +19,15 @@
     <link rel="stylesheet" href="{{ asset('dist/css/style-dashboard.css') }}">
   </head>
   <body class="sidebar-mini">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <!-- OPTIONAL SCRIPTS -->
+    <script src={{ asset("others/chart.js/Chart.min.js") }}></script>
+    <script src={{ asset("others/chart.js/Chart.js") }}></script>
   <div class="wrapper">
     {{ $slot }}
   </div>
-    
+  
   <!-- jQuery -->
   <script src="{{ asset('others/jquery/jquery.min.js') }}"></script>
   <!-- Bootstrap -->
@@ -34,12 +38,10 @@
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
   <!-- pontawesom -->
   <script src="https://kit.fontawesome.com/61b10549df.js" crossorigin="anonymous"></script>
-
-  <!-- OPTIONAL SCRIPTS -->
-  <script src="others/chart.js/Chart.min.js"></script>
-  <!-- for demo purposes -->
-  <script src="dist/js/demo.js"></script>
   <!-- dashboard demo (This is only for demo purposes) -->
-  <script src="dist/js/pages/chartsales.js"></script>
-  </body>
+  {{-- <script src={{ asset("dist/js/pages/chartsales.js") }}></script> --}}
+
+  {{-- Daftar Chart --}}
+  <script src={{ asset("dist/js/pages/linechart.js") }}></script>
+</body>
 </html>

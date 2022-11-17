@@ -185,9 +185,9 @@
                   </div>
   
                   <div class="position-relative mb-4">
-                    <canvas id="sales-chart" height="200"></canvas>
+                    {{-- chart js --}}
+                    <canvas id="myChart" height="200"></canvas>
                   </div>
-  
                   <div class="d-flex flex-row justify-content-end">
                     <span class="mr-2">
                       <i class="fas fa-square text-primary"></i> This year
@@ -204,6 +204,5 @@
           </div>
         </div>
       </div>
-
     </div>  
 </x-app-layout>
