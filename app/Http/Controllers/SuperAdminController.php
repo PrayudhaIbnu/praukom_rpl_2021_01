@@ -32,14 +32,11 @@ class SuperAdminController extends Controller
         $user->foto = $request->file('foto')->store('post-images');
         $user->level = $request->input('id_level');
         $user->save();
-        return redirect()->back()->with('status', "Data berhasi di tambah");
+        return redirect()->back()->with('success', "Data berhasi di tambah");
     }
 
     public function edit($id = null)
     { {
-            $edit = $this->SuperAdmin->find($id);
-            // echo json_encode($edit);
-            return view('SuperAdmin.index', $edit);
         }
     }
 }

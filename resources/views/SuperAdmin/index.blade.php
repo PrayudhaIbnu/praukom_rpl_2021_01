@@ -1,14 +1,16 @@
 <x-app-layout>
     <x-dashboard-super-admin />
+    
     <div class="content-wrapper">
       <div class="content-header">
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-6">
-              <h1 class="ml-1">Kelola Akun</h1>
+              <h1>Kelola Akun</h1>
             </div>
             <!-- /.col -->
             <div class="row col-sm-6">
+              {{-- Search --}}
               <div class="input-group">
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                   <div class="input-group-append">
@@ -17,15 +19,19 @@
                   </button>
                </div>
              </div>
+             {{-- End Search --}}
             </div>
           </div>
-          <div class="container-fluid">
-             
+          <div class="container-fluid-6">
             <div class="float-start">
-              @if (session('status'))
-              <div class="alert alert-success my-3"  role="alert">
-                {{ session('status') }}</div>
-              @endif
+              {{-- alert --}}
+              @if(session('success_message'))
+               <div class="alert alert-success" >
+                {{ session('success_message') }}
+               </div>
+              @endif 
+
+              {{-- End allert --}}
             </div>
             <!-- Button  modal -->
             <div class="float-end">           
@@ -181,6 +187,8 @@
         </div>
       </div>
     </div>
+
+    @include('sweetalert::alert')
     <!-- End Modal Edit User -->
     
   </x-app-layout>

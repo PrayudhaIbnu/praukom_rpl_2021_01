@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
+use RealRashid\SweetAlert\Facades\Alert;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,3 +66,21 @@ Route::prefix('/kasir')->group(function () {
 
 
 // ROUTES UNTUK ROLE PENGAWAS
+
+Route::prefix('/pengawas')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('pengawas.index');
+    });
+    Route::get('/laporan', function () {
+        return view('pengawas.laporan');
+    });
+    Route::get('/logproduk', function () {
+        return view('pengawas.logproduk');
+    });
+    Route::get('/logkelolaakun', function () {
+        return view('pengawas.logkelolaakun');
+    });
+    Route::get('/historypenjualan', function () {
+        return view('pengawas.historypenjualan');
+    });
+});
