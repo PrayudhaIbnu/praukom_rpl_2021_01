@@ -26,7 +26,7 @@
   <!-- jQuery -->
   <script src="{{ asset('others/jquery/jquery.min.js') }}"></script>
   <!-- Bootstrap -->
-  {{-- <script src="{{ asset('others/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
+  <script src="{{ asset('others/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- JS -->
   <script src="{{ asset('dist/js/dashboard.js') }}"></script>
   <!-- switalert -->
