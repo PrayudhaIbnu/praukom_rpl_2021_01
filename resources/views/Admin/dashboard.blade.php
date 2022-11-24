@@ -31,71 +31,78 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col">
-              <table class="table">
-                <thead class="table-warning">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="card">
+                <h6 class="fw-lighter text-center p-2">Daftar Stok Produk yang Hampir Habis</h6>
+                <table class="table">
+                  <thead class="table-warning">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">First</th>
+                      <th scope="col">Last</th>
+                      <th scope="col">Handle</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Jacob</td>
+                      <td>Thornton</td>
+                      <td>@fat</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td colspan="2">Larry the Bird</td>
+                      <td>@twitter</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div class="col ">
-              <table class="table">
-                <thead class="table-warning">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="card">
+                <h6 class="fw-lighter text-center p-2">Daftar Produk yang Paling sedikit Terjual</h6>
+                <table class="table">
+                  <thead class="table-warning">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">First</th>
+                      <th scope="col">Last</th>
+                      <th scope="col">Handle</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Jacob</td>
+                      <td>Thornton</td>
+                      <td>@fat</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td colspan="2">Larry the Bird</td>
+                      <td>@twitter</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
           <div class="row gx-3">
-            <div class="col-7">
+            <div class="col-md-8">
               <div class="card" style="overflow-y: scroll; height:100%; ">
+                <h6 class="fw-lighter text-center p-2">Daftar Produk yang Hampir Kadaluarsa</h6>
                 <table class="table">
                   <thead class="sticky-top table-warning">
                     <tr>
@@ -147,9 +154,18 @@
                 </table>
               </div>
             </div>
-            <div class="col-5">
-              <div class="card p-2 w-100">
-                <canvas id="myChart" style="height:400px;"></canvas>
+            <div class="col-md-4 ">
+              <div class="card p-2">
+                <h6 class="fw-bold text-center p-2">Top 5 Produk Terlaris</h6>
+                <canvas id="produkTerlasis" style="height:400px;"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-12 container ">
+              <div class="card">
+                <h6 class="fw-bold text-center p-2">Top 5 Produk Terlaris</h6>
+                <canvas id="grafikBulanan" class="p-2" style="height: 400px;"></canvas>
               </div>
             </div>
           </div>
