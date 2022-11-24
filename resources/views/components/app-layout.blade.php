@@ -17,8 +17,8 @@
   <body class="sidebar-mini">
     
     <!-- CHART JS UDH DI NPM TAPI GK KLUAR JDI LEWAT FOLDER AJA DLU -->
-    <script src={{ asset("others/chart.js/Chart.min.js") }}></script>
-    <script src={{ asset("others/chart.js/Chart.js") }}></script>
+    <script src="{{ asset('others/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('others/chart.js/Chart.js') }}"></script>
   <div class="wrapper">
     {{ $slot }}
   </div>
@@ -33,6 +33,8 @@
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 
   {{-- Daftar Chart --}}
-  <script src={{ asset("dist/js/pages/linechart.js") }}></script>
+  <script src="{{ asset('dist/js/pages/barchart.js') }}"></script>
+  <script src="{{ asset('dist/js/pages/linechart.js') }}"></script>
+
 </body>
 </html>

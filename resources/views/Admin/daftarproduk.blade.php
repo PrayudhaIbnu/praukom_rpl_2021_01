@@ -41,8 +41,10 @@
                 <tr>
                   <th scope="col">Barcode</th>
                   <th scope="col">Nama Produk</th>
-                  <th scope="col">Harga</th>
                   <th scope="col">Qty</th>
+                  <th scope="col">Satuan</th>
+                  <th scope="col">Harga Jual</th>
+                  <th scope="col">Harga Beli</th>
                   <th scope="col">Aksi</th>
                 </tr>
               </thead>
@@ -50,8 +52,10 @@
                 <tr>
                   <th scope="row">1</th>
                   <td>Minuman Saya</td>
-                  <td>Rp.200</td>
-                  <td>2</td>
+                  <td>200</td>
+                  <td>Pcs</td>
+                  <td>2000</td>
+                  <td>4000</td>
                   <td>
                     <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
                     <button class="btn btn-edit btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -63,18 +67,18 @@
           </div>
         
           {{-- Awal Table Expand --}}
-          <div class="rounded">
+          <!-- <div class="rounded">
             <div class="table-responsive table-borderless">
               <table class="table">
                 <thead class="table-warning">
                   <tr>
-                    <th class="text-center">S. No.</th>
-                    <th>Order #</th>
-                    <th>Company name</th>
-                    <th>status</th>
-                    <th>Total</th>
-                    <th>Created</th>
-                    <th></th>
+                  <th scope="col">Barcode</th>
+                  <th scope="col">Nama Produk</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Satuan</th>
+                  <th scope="col">Harga Jual</th>
+                  <th scope="col">Harga Beli</th>
+                  <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody class="table-body">
@@ -98,8 +102,8 @@
                   </tbody>
                 </table>
               </div>
-            </div>
-{{-- Akhir Table Expand --}}
+            </div> -->
+          {{-- Akhir Table Expand --}}
         </div>
       </div>
     </div>
