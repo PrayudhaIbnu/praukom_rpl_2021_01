@@ -39,9 +39,10 @@
   <!-- pontawesom -->
   <script src="https://kit.fontawesome.com/61b10549df.js" crossorigin="anonymous"></script>
   <!-- dashboard demo (This is only for demo purposes) -->
-  {{-- <script src={{ asset("dist/js/pages/chartsales.js") }}></script> --}}
-
+  <script src={{ asset("dist/js/pages/chartsales.js") }}></script>
   {{-- Daftar Chart --}}
   <script src={{ asset("dist/js/pages/linechart.js") }}></script>
+{{-- jquery --}}
+  @stack('jquery')
 </body>
 </html>

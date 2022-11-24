@@ -28,7 +28,7 @@ Route::get('/auth', function () {
 // ROUTES UNTUK  ROLE SUPER ADMIN
 Route::get('/superadmin/kelolaakun', [SuperAdminController::class, 'index']);
 Route::post('tambah-user', [SuperAdminController::class, 'tambah']);
-Route::get('edit-user', [SuperAdminController::class, 'edit']);
+Route::get('edit-user/{username}', [SuperAdminController::class, 'edit']);
 
 // ROUTES UNTUK ROLE ADMIN
 // Routes Dashboard Admin

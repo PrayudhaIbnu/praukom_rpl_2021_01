@@ -35,8 +35,13 @@ class SuperAdminController extends Controller
         return redirect()->back()->with('success', "Data berhasi di tambah");
     }
 
-    public function edit($id = null)
-    { {
-        }
+    public function edit($username)
+    {
+
+        $user = Users::where('username', $username)->first();
+
+        return response()->json([
+            'user' => $user
+        ]);
     }
 }
