@@ -16,16 +16,16 @@
             <div class="col-3 flex">
               <!-- Main content --> 
               <div class="card" style="width: 100%; height: 165px;">
-                <div class="card-body ">
+                <div class="card-body" style="vertical-align: middle; margin-top: 20px;">
 
                   <div class="mb-3 row">
                     <label for="staticEmail" class="col-sm-5 col-form-label">Tanggal</label>
                     <div class="col-sm-7">
-                      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ date('d-m-Y') }}">
                     </div>
                     <label for="staticEmail" class="col-sm-5 col-form-label">Kasir</label>
                     <div class="col-sm-7">
-                      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Vera Uhuyyy">
                     </div>
                   </div>        
                 </div>
@@ -37,8 +37,8 @@
               <div class="card" style="width: 100%; height: 165px;">
                 <div class="card-body">
                   <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Produk</label>
-                    <div class="col-sm-10 mb-2">
+                    <label for="staticEmail" class="col-sm-3 col-form-label">Produk</label>
+                    <div class="col-sm-9 mb-2">
                       <select class="form-select" aria-label="Default select example">
                         <option selected>Open this select menu</option>
                         <option value="1">One</option>
@@ -46,8 +46,8 @@
                         <option value="3">Three</option>
                       </select>
                     </div>
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Qty</label>
-                    <div class="col-sm-10">
+                    <label for="inputPassword" class="col-sm-3 col-form-label">Qty</label>
+                    <div class="col-sm-9">
                       <input type="number" class="form-control" id="inputPassword">
                     </div>
                     
@@ -69,7 +69,7 @@
             </div>
           </div>
           {{-- Akhir Card Grid --}}
-          <div class="card" style="width: 100%; height: 280px; overflow-y: scroll;">
+          <div class="card" style="width: 100%; height: 210px; overflow-y: scroll;">
             <table class="table table-borderless " >
               <thead class="table-warning sticky-top">
                 <tr>
@@ -93,6 +93,49 @@
             </table>
           </div>
             {{-- akhir table   --}}
+            <div class="row gx-3 ">
+              <div class="col-3 flex">
+                <!-- Main content --> 
+                <div class="card" style="width: 100%; height: 120px;">
+                  <div class="card-body" >
+  
+                    <div class=" row">
+                      <label for="staticEmail" class="col-sm-5 col-form-label">Tanggal</label>
+                      <div class="col-sm-7">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ date('d-m-Y') }}">
+                      </div>
+                      <label for="staticEmail" class="col-sm-5 col-form-label">Kasir</label>
+                      <div class="col-sm-7">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Vera Uhuyyy">
+                      </div>
+                    </div>        
+                  </div>
+                </div>
+                {{-- akhir card --}}
+              </div>
+              <div class="col-5">
+                <!-- Main content --> 
+                <div class="card" style="width: 100%; height: 120px;">
+                  <div class="card-body">
+                    <div class="row">
+                      
+                    </div>        
+                    
+                  </div>
+                </div>
+                {{-- akhir card --}}
+              </div>
+              <div class="col">
+                <!-- Main content --> 
+                <div class="card" style="width: 100%; height: 120px;">
+                  <div class="card-body">
+                    <h2 class="h3" style="font-weight: 500; color: #a2a2a2">Grand Total</h2>
+                    <p class="float-end" style=" font-weight: 600;">5000</p>
+                  </div>
+                </div>
+                {{-- akhir card --}}
+              </div>
+            </div>
         </div>
       </div>
   </div>  
