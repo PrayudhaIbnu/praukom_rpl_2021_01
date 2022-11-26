@@ -9,17 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Laporan Transaksi</h1>
-          </div>
-          <div class="row col-sm-6">
-            <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
-              </div>
-            </div>
+            <h1 class="m-0">Produk</h1>
           </div>
         </div>
         <!-- Main content -->
@@ -27,9 +17,9 @@
           <table class="table mt-4 table-borderless ">
             <thead class="table-warning">
               <tr>
-                <th scope="col" style="width: 140px">Tanggal</th>
-                <th scope="col" style="width: 90px">Jam</th>
+                <th scope="col">Kode Produk</th>
                 <th scope="col" style="width: 400px">Nama Produk</th>
+                <th scope="col" style="width: 90px">Jam</th>
                 <th scope="col">Qty</th>
                 <th scope="col">Harga Total</th>
                 <th scope="col">Faktur</th>
@@ -37,7 +27,7 @@
             </thead>
             <tbody>
               <tr>
-                <th>20-02-2022</th>
+                <th scope="row">0998129129112</th>
                 <td>12.20</td>
                 <td>Yhahahahaha</td>
                 <td>2</td>
@@ -49,6 +39,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </x-app-layout>

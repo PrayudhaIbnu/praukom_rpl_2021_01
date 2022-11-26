@@ -58,8 +58,8 @@ Route::prefix('/kasir')->group(function () {
         return view('kasir.laporan');
     });
 
-    Route::get('/log', function () {
-        return view('kasir.logaktivitas');
+    Route::get('/produk', function () {
+        return view('Kasir.daftarproduk');
     });
 });
 // Routes CRUD Kasir
