@@ -5,8 +5,8 @@ const data = {
     datasets: [
         {
             label: "My First dataset",
-            backgroundColor: ["rgb(255, 99, 132)", "#fff"],
-            borderColor: "rgb(255, 99, 132)",
+            backgroundColor: ["#E53945", "#52499C", "#00798C", "#EDAD49"],
+            borderColor: ["#E53945", "#52499C", "#00798C", "#EDAD49"],
             fill: false,
             data: users,
         },
@@ -14,9 +14,9 @@ const data = {
 };
 
 const config = {
-    type: "line",
+    type: "pie",
     data: data,
     options: {},
 };
 
-const myChart = new Chart(document.getElementById("myChart"), config);
+const myChart = new Chart(document.getElementById("produkTerlasis"), config);

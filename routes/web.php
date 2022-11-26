@@ -19,19 +19,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/auth', function () {
+Route::get('/login', function () {
     return view('auth.login');
 });
 
 
 
-// ROUTES UNTUK  ROLE SUPER ADMIN
+// ROUTES CRUD Super Admin
 Route::get('/superadmin/kelolaakun', [SuperAdminController::class, 'index']);
 Route::post('tambah-user', [SuperAdminController::class, 'tambah']);
-Route::get('edit-user', [SuperAdminController::class, 'edit']);
+Route::get('edit-user/{username}', [SuperAdminController::class, 'edit']);
 
 // ROUTES UNTUK ROLE ADMIN
-// Routes Dashboard Admin
 Route::prefix('/admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');

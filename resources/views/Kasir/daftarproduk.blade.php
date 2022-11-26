@@ -11,12 +11,22 @@
           <div class="col-sm-6">
             <h1 class="m-0">Produk</h1>
           </div>
+          <div class="row col-sm-6">
+            <div class="input-group">
+              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-sidebar">
+                  <i class="fas fa-search fa-fw"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- Main content -->
         <div class="table-responsive-xl">
           <table class="table mt-4 table-borderless ">
             <thead class="table-warning">
-              <tr>
+              <tr style="vertical-align: middle;">
                 <th scope="col">Kode Produk</th>
                 <th scope="col" style="width: 400px">Nama Produk</th>
                 <th scope="col" style="width: 90px">Jam</th>

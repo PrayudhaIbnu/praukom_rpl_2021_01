@@ -17,7 +17,7 @@ return new class extends Migration
         {
             Schema::create('produk_kategori', function (Blueprint $table) {
                 $table->engine = 'innodb';
-                $table->char('id_kategori', 2)->primary();
+                $table->increments('id_kategori');
                 $table->string('kategori_produk', 20);
             });
         }
