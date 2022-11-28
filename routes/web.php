@@ -46,7 +46,7 @@ Route::controller(ProdukController::class)
     ->prefix('/admin')
     ->group(function (){    
     Route::get('/produk', 'index');
-    Route::get('/detail', 'index');
+    Route::get('/produk/detail', 'index');
 });
 
 // ROUTES UNTUK ROLE KASIR

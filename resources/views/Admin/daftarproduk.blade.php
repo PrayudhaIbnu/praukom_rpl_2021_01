@@ -22,19 +22,27 @@
         <div class="container-fluid">
           <div class="float-start">
             <!-- Example single danger button -->
-            <div class="btn-group">
-              <button type="button" class="btn btn-warning btn-sm my-3 m-0 dropdown-toggle" data-toggle="dropdown"
-                aria-expanded="false">
-                Semua
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Makanan</a></li>
-                <li><a class="dropdown-item" href="#">Minuman</a></li>
-              </ul>
+            <div class="btn-group mb-2 mt-2">
+              <div class="col">
+                <select class="form-select bg-warning form-select-sm" aria-label="Default select example">
+                  <option class="bg-light" selected>Pilih...</option>
+                  <option class="bg-light" value="Makanan">Makanan</option>
+                  <option class="bg-light" value="Minuman">Minuman</option>
+                  <option class="bg-light" value="Lainnya">Lainnya</option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="float-end">
-            <button class="btn btn-success my-3 btn-sm" data-toggle="modal" data-target="#tambahproduk">+ Tambah</button>
+            <div class="dropdown mb-2 mt-2">
+              <button class="btn btn-success dropdown-toggle rounded-3 btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown button
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" >Tambah Kategori</a></li>
+                <li><button class="dropdown-item" data-toggle="modal" data-target="#tambahproduk" >Tambah Produk</button></li>
+              </ul>
+            </div>            
           </div>
           <div class="table-responsive-xl">
             <table class="table mt-4 table-borderless ">
