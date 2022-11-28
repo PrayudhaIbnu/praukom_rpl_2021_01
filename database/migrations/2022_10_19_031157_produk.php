@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->text('foto')->nullable();
-            $table->char('supplier', 5);
+            $table->char('supplier', 5)->nullable();
             $table->char('user', 5);
 
             $table

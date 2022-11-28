@@ -16,7 +16,9 @@ class ProdukController extends Controller
     public function index()
     {
         //
-        DB::table('produk')->select()->get();
+       $data = DB::table('produk')->get();
+
+       return view('admin.daftarproduk', ['data' => $data]);
     }
 
     /**

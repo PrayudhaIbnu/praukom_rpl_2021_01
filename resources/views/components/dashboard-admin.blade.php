@@ -79,6 +79,12 @@
                       <p>Input Stok Produk</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link pl-3">
+                      <i class="fa-solid fa-circle-xmark"></i>                      
+                      <p>Produk Reject</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li class="nav-item">

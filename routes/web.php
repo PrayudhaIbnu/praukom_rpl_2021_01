@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\ProdukController;
 use RealRashid\SweetAlert\Facades\Alert;
 
 /*
@@ -36,11 +37,17 @@ Route::prefix('/admin')->group(function () {
         return view('admin.dashboard');
     });
 
-    Route::get('/produk', function () {
-        return view('admin.daftarproduk');
-    });
+    // Route::get('/produk', function () {
+    //      return view('admin.daftarproduk');
+    // });
 });
 // Routes CRUD Admin
+Route::controller(ProdukController::class)
+    ->prefix('/admin')
+    ->group(function (){    
+    Route::get('/produk', 'index');
+    Route::get('/detail', 'index');
+});
 
 // ROUTES UNTUK ROLE KASIR
 // Routes Dashboard Kasir
