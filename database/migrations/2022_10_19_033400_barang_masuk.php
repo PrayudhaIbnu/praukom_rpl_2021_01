@@ -18,6 +18,7 @@ return new class extends Migration
             $table->engine = 'innodb';
             $table->string('id_produk', 15);
             $table->date('tanggal_masuk');
+            $table->date('tanggal_exp');
             $table->integer('qty');
             $table->char('supplier', 5);
 

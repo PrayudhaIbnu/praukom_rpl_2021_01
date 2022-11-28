@@ -1,5 +1,5 @@
-var labels = ["satu", "dua", "tiga"];
-var users = [100, 200, 300];
+var labels = ["satu", "dua", "tiga", "empat", "lima"];
+var users = [100, 200, 300, 400, 500];
 const data = {
     labels: labels,
     datasets: [
