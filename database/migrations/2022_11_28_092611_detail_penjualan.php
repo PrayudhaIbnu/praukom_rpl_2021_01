@@ -14,24 +14,24 @@ return new class extends Migration
     public function up()
     {
         //
-        Schema::create('barang_keluar', function (Blueprint $table) {
+        Schema::create('detail_penjualan', function (Blueprint $table) {
             $table->engine = 'innodb';
             $table->string('produk', 15);
+            $table->char('penjualan', 13);
             $table->integer('qty');
-            $table->date('tanggal_keluar');
-            $table->text('keterangan');
+            $table->integer('sub_total_hrg');
+
+            $table
+                ->foreign('penjualan')
+                ->references('id_penjualan')
+                ->on('penjualan')
+                ->cascadeOnDelete();
 
             $table
                 ->foreign('produk')
                 ->references('id_produk')
                 ->on('produk')
                 ->cascadeOnDelete();
-
-            // $table
-            //     ->foreign('laba')
-            //     ->references('id_laba')
-            //     ->on('laba')
-            //     ->cascadeOnDelete();
         });
     }
 
@@ -43,6 +43,5 @@ return new class extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('barang_keluar');
     }
 };
