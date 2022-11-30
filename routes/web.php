@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\SupplierController;
 use RealRashid\SweetAlert\Facades\Alert;
 
 /*
@@ -42,12 +43,22 @@ Route::prefix('/admin')->group(function () {
     // });
 });
 // Routes CRUD Admin
+Route::post('tambah-produk', [ProdukController::class, 'tambah']);
 Route::controller(ProdukController::class)
     ->prefix('/admin')
     ->group(function (){    
     Route::get('/produk', 'index');
-    Route::get('/produk/detail', 'index');
+    Route::get('/produk/detail/{id}', 'show');
 });
+
+// Routes CRUD Admin
+Route::post('tambah-supplier', [SupplierController::class, 'tambah']);
+Route::controller(SupplierController::class)
+    ->prefix('/admin')
+    ->group(function (){    
+    Route::get('/supplier', 'index');
+});
+
 
 // ROUTES UNTUK ROLE KASIR
 // Routes Dashboard Kasir

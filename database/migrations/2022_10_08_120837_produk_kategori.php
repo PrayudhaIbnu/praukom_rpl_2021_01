@@ -16,6 +16,9 @@ return new class extends Migration
         //
         {
             Schema::create('produk_kategori', function (Blueprint $table) {
+                $table->engine = env('DB_STORAGE_ENGINE', 'InnoDB');
+                $table->charset = env('DB_CHARSET', 'utf8mb4');
+                $table->collation = env('DB_COLLATION', 'utf8mb4_general_ci');
                 $table->engine = 'innodb';
                 $table->increments('id_kategori');
                 $table->string('kategori_produk', 20);

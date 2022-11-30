@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produk;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProdukController extends Controller
-
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,28 +15,21 @@ class ProdukController extends Controller
      */
     public function index()
     {
-       $produk = DB::table('produk')->get();
-       $kategori = DB::table('produk_kategori')
-       ->select()
-       ->get();
-       return view('admin.daftarproduk', compact('produk', 'kategori'));
+        $data = DB::table('supplier')->get();
+
+        return view('admin.daftarsupplier', ['data' => $data]); 
     }
 
     public function tambah(Request $request)
     {
-        $produk = new Produk;
-        $id_produk = substr(md5(rand(0, 99999)), -4);
-        $produk['id_produk'] = $id_produk;
-        $produk->kategori = $request->input('kategori');
-        $produk->nama_produk = $request->input('nama_produk');
-        // $produk->stok = $request->input('stok'); 
-        $produk->satuan_produk = $request->input('satuan_produk');
-        $produk->harga_beli = $request->input('harga_beli');
-        $produk->harga_jual = $request->input('harga_jual');
-        // $produk->foto_produk = $request->file('foto_produk')->store('post-images');
-        // $produk->supplier = $request->input('supplier');
-        $produk['id_user'] = 'L02';
-        $produk->save();
+        $supplier = new Supplier;
+        $id_supplier = substr(md5(rand(0, 99999)), -4);
+        $supplier['id_supplier'] = $id_supplier;
+        $supplier->nama_supplier = $request->input('nama_supplier');
+        // $supplier->foto_supplier = $request->file('foto_supplier')->store('post-images');
+        $supplier->alamat_supplier = $request->input('alamat_supplier');
+        $supplier->telp_supplier = $request->input('telp_supplier');
+        $supplier->save();
         return redirect()->back()->with('success', "Data berhasi di tambah");
     }
 
@@ -68,15 +60,10 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-
     public function show($id)
     {
-        $detail = collect(DB::select('CALL get_one_produk_by_id(?)', [$id]))->first();
-        // echo json_encode($edit);
-        return view('admin.detailproduk', compact('detail'));
+        //
     }
-
 
     /**
      * Show the form for editing the specified resource.
