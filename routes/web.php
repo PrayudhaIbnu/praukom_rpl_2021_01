@@ -17,6 +17,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 |
 */
 
+Route::get('/produkreject', [TypeaheadController::class, 'index']);
+Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -37,10 +40,13 @@ Route::prefix('/admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     });
+    Route::get('/produk', function () {
+         return view('admin.daftarproduk');
+    });
+    Route::get('/produkreject', function () {
+        return view('admin.produkreject');
+    });
 
-    // Route::get('/produk', function () {
-    //      return view('admin.daftarproduk');
-    // });
 });
 // Routes CRUD Admin
 Route::post('tambah-produk', [ProdukController::class, 'tambah']);
@@ -49,6 +55,10 @@ Route::controller(ProdukController::class)
     ->group(function (){    
     Route::get('/produk', 'index');
     Route::get('/produk/detail/{id}', 'show');
+    Route::get('/produkreject', [TypeaheadController::class, 'index']);
+    Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
+    
+    
 });
 
 // Routes CRUD Admin
@@ -57,6 +67,7 @@ Route::controller(SupplierController::class)
     ->prefix('/admin')
     ->group(function (){    
     Route::get('/supplier', 'index');
+    Route::get('/supplier/detail/{id}', 'show');
 });
 
 

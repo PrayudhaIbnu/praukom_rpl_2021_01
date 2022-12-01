@@ -62,8 +62,11 @@ class SupplierController extends Controller
      */
     public function show($id)
     {
-        //
+        $detailSupplier = collect(DB::select('CALL get_one_supplier_by_id(?)', [$id]))->first();
+        // echo json_encode($edit);
+        return view('admin.detailsupplier', compact('detailSupplier'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

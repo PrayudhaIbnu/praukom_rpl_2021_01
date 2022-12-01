@@ -46,7 +46,7 @@
                   <td>{{$d->alamat_supplier}}</td>
                   <td>{{$d->telp_supplier}}</td>
                   <td>
-                  <a href="/detail/{{ $d->id_supplier }}">
+                  <a href="/supplier/detail/{{ $d->id_supplier }}">
                     <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
                   </a>
                     <button class="btn btn-edit btn-primary" data-toggle="modal" data-target="#editsupplier"><i class="fa-solid fa-pen-to-square"></i></button>

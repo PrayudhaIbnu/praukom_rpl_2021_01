@@ -23,6 +23,11 @@ class ProdukController extends Controller
        return view('admin.daftarproduk', compact('produk', 'kategori'));
     }
 
+    public function produkreject(Request $request)
+    {
+
+    }
+
     public function tambah(Request $request)
     {
         $produk = new Produk;
@@ -72,9 +77,9 @@ class ProdukController extends Controller
 
     public function show($id)
     {
-        $detail = collect(DB::select('CALL get_one_produk_by_id(?)', [$id]))->first();
+        $detailProduk = collect(DB::select('CALL get_one_produk_by_id(?)', [$id]))->first();
         // echo json_encode($edit);
-        return view('admin.detailproduk', compact('detail'));
+        return view('admin.detailproduk', compact('detailProduk'));
     }
 
 
