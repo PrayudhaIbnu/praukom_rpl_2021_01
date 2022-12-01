@@ -42,7 +42,7 @@
 
           {{-- TABEL --}}
           <table class="table table-hover mt-4 ">
-            <thead class="table-warning">
+            <thead class="table-warning" style="vertical-align: middle;">
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">Foto</th>
@@ -56,7 +56,7 @@
             $no = 1;
             ?>
             @foreach ($user as $item)
-              <tr>
+              <tr style="vertical-align: middle;">
                 <td> {{ $no++ }}</td>
                 <td>
                   <img id="gambar" src="{{ asset('storage/' . $item->foto) }}" alt="" style="width: 100px">
@@ -197,12 +197,20 @@
 
   @push('jquery')
     <script>
+      // Ajax
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+
       $(document).ready(function() {
 
         $('.btn-edit').on('click', function() {
           var user = $(this).val();
           // alert(user);
-          $('#edituser').modal('show');
+
           fetch("/edit-user/" + user)
             .then(res => res.json())
             .then(data => {
@@ -217,6 +225,7 @@
                 password,
                 username
               } = user;
+              $('#edituser').modal('show');
               $('#username').val(user.username);
               $('#password').val(user.password);
               $('#nama').val(user.nama);

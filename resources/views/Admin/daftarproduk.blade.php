@@ -10,7 +10,7 @@
           <!-- /.col -->
           <div class="row col-sm-6">
             <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+              <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search-input">
               <div class="input-group-append">
                 <button class="btn btn-sidebar">
                   <i class="fas fa-search fa-fw"></i>
@@ -35,14 +35,16 @@
           </div>
           <div class="float-end">
             <div class="dropdown mb-2 mt-2">
-              <button class="btn btn-success dropdown-toggle rounded-3 btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="btn btn-success dropdown-toggle rounded-3 btn-sm" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 Dropdown button
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" >Tambah Kategori</a></li>
-                <li><button class="dropdown-item" data-toggle="modal" data-target="#tambahproduk" >Tambah Produk</button></li>
+                <li><a class="dropdown-item">Tambah Kategori</a></li>
+                <li><button class="dropdown-item" data-toggle="modal" data-target="#tambahproduk">Tambah Produk</button>
+                </li>
               </ul>
-            </div>            
+            </div>
           </div>
           <div class="table-responsive-xl">
             <table class="table mt-4 table-borderless ">
@@ -50,7 +52,7 @@
                 <tr>
                   <th scope="col">Barcode</th>
                   <th scope="col">Nama Produk</th>
-                  <th scope="col">Qty</th>
+                  <th scope="col">Stok</th>
                   <th scope="col">Satuan</th>
                   <th scope="col">Harga Jual</th>
                   <th scope="col">Harga Beli</th>
@@ -59,21 +61,22 @@
               </thead>
               <tbody>
                 @foreach ($data as $d)
-                <tr>
-                  <th scope="row">{{$d->id_produk}}</th>
-                  <td>{{$d->nama_produk}}</td>
-                  <td>{{$d->stok}}</td>
-                  <td>{{$d->satuan_produk}}</td>
-                  <td>{{$d->harga_jual}}</td>
-                  <td>{{$d->harga_beli}}</td>
-                  <td>
-                  <a href="produk/detail/<!-- {{ $d->id_produk }} -->">
-                    <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
-                  </a>
-                    <button class="btn btn-edit btn-primary" data-toggle="modal" data-target="#editproduk"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn btn-hapus btn-danger"><i class="fa-solid fa-trash"></i></button>
-                  </td>
-                </tr>
+                  <tr>
+                    <td scope="row" id="s">{{ $d->id_produk }}</td>
+                    <td id="e">{{ $d->nama_produk }}</td>
+                    <td>{{ $d->stok }}</td>
+                    <td>{{ $d->satuan_produk }}</td>
+                    <td>{{ $d->harga_jual }}</td>
+                    <td id="a">{{ $d->harga_beli }}</td>
+                    <td>
+                      <a href="produk/detail/<!-- {{ $d->id_produk }} -->">
+                        <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
+                      </a>
+                      <button class="btn btn-edit btn-primary" data-toggle="modal" data-target="#editproduk"><i
+                          class="fa-solid fa-pen-to-square"></i></button>
+                      <button class="btn btn-hapus btn-danger"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                  </tr>
                 @endforeach
               </tbody>
             </table>
@@ -152,20 +155,20 @@
               <div class="col mb-3">
                 <label for="id_level" class="form-label font-weight-normal">Kategori</label>
                 <select name="id_level" id="id_level" class="form-select" aria-label="Default select example">
-                    <option value=""></option>
+                  <option value=""></option>
                 </select>
               </div>
             </div>
             <div class="row align-items-end">
               <div class="col mb-2">
                 <label for="namaproduk" class="form-label font-weight-normal">Nama Produk</label>
-                <input required name="namaproduk" id="namaproduk" class="form-control form-control-sm" type="text"
-                  aria-label=".form-control-sm example">
+                <input required name="namaproduk" id="namaproduk" class="form-control form-control-sm"
+                  type="text" aria-label=".form-control-sm example">
               </div>
               <div class="col mb-2">
                 <label for="satuanproduk" class="form-label font-weight-normal">Satuan Produk</label>
-                <input required name="satuanproduk" id="satuanproduk" class="form-control form-control-sm" type="password"
-                  aria-label=".form-control-sm example">
+                <input required name="satuanproduk" id="satuanproduk" class="form-control form-control-sm"
+                  type="password" aria-label=".form-control-sm example">
               </div>
             </div>
             <div class="row align-items-center">
@@ -219,20 +222,20 @@
               <div class="col mb-3">
                 <label for="id_level" class="form-label font-weight-normal">Kategori</label>
                 <select name="id_level" id="id_level" class="form-select" aria-label="Default select example">
-                    <option value=""></option>
+                  <option value=""></option>
                 </select>
               </div>
             </div>
             <div class="row align-items-end">
               <div class="col mb-2">
                 <label for="namaproduk" class="form-label font-weight-normal">Nama Produk</label>
-                <input required name="namaproduk" id="namaproduk" class="form-control form-control-sm" type="text"
-                  aria-label=".form-control-sm example">
+                <input required name="namaproduk" id="namaproduk" class="form-control form-control-sm"
+                  type="text" aria-label=".form-control-sm example">
               </div>
               <div class="col mb-2">
                 <label for="satuanproduk" class="form-label font-weight-normal">Satuan Produk</label>
-                <input required name="satuanproduk" id="satuanproduk" class="form-control form-control-sm" type="password"
-                  aria-label=".form-control-sm example">
+                <input required name="satuanproduk" id="satuanproduk" class="form-control form-control-sm"
+                  type="password" aria-label=".form-control-sm example">
               </div>
             </div>
             <div class="row align-items-center">
@@ -256,5 +259,6 @@
       </div>
     </div>
   </div>
+
 
 </x-app-layout>
