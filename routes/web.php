@@ -30,10 +30,13 @@ Route::get('/login', function () {
 
 
 
-// ROUTES CRUD Super Admin
+// ROUTES Super Admin
 Route::get('/superadmin/kelolaakun', [SuperAdminController::class, 'index']);
-Route::post('tambah-user', [SuperAdminController::class, 'tambah']);
-Route::get('edit-user/{username}', [SuperAdminController::class, 'edit']);
+// Route::get('/superadmin/kelolaakun/search', [SuperAdminController::class, 'search']);
+Route::post('tambah-user', [SuperAdminController::class, 'store']);
+Route::get('/superadmin/edit-user/{id}', [SuperAdminController::class, 'edit']);
+Route::put('update-user', [SuperAdminController::class, 'update']);
+Route::delete('delete-user', [SuperAdminController::class, 'destroy']);
 
 // ROUTES UNTUK ROLE ADMIN
 Route::prefix('/admin')->group(function () {
@@ -41,34 +44,31 @@ Route::prefix('/admin')->group(function () {
         return view('admin.dashboard');
     });
     Route::get('/produk', function () {
-         return view('admin.daftarproduk');
+        return view('admin.daftarproduk');
     });
     Route::get('/produkreject', function () {
         return view('admin.produkreject');
     });
-
 });
 // Routes CRUD Admin
 Route::post('tambah-produk', [ProdukController::class, 'tambah']);
 Route::controller(ProdukController::class)
     ->prefix('/admin')
-    ->group(function (){    
-    Route::get('/produk', 'index');
-    Route::get('/produk/detail/{id}', 'show');
-    Route::get('/produkreject', [TypeaheadController::class, 'index']);
-    Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
-    
-    
-});
+    ->group(function () {
+        Route::get('/produk', 'index');
+        Route::get('/produk/detail/{id}', 'show');
+        Route::get('/produkreject', [TypeaheadController::class, 'index']);
+        Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
+    });
 
 // Routes CRUD Admin
 Route::post('tambah-supplier', [SupplierController::class, 'tambah']);
 Route::controller(SupplierController::class)
     ->prefix('/admin')
-    ->group(function (){    
-    Route::get('/supplier', 'index');
-    Route::get('/supplier/detail/{id}', 'show');
-});
+    ->group(function () {
+        Route::get('/supplier', 'index');
+        Route::get('/supplier/detail/{id}', 'show');
+    });
 
 
 // ROUTES UNTUK ROLE KASIR

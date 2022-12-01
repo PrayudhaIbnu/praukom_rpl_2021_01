@@ -17,7 +17,7 @@ class SupplierController extends Controller
     {
         $data = DB::table('supplier')->get();
 
-        return view('admin.daftarsupplier', ['data' => $data]); 
+        return view('admin.daftarsupplier', ['data' => $data]);
     }
 
     public function tambah(Request $request)
