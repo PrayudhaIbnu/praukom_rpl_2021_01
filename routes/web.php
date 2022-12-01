@@ -17,9 +17,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 |
 */
 
-Route::get('/produkreject', [TypeaheadController::class, 'index']);
-Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -46,6 +43,12 @@ Route::prefix('/admin')->group(function () {
     Route::get('/produkreject', function () {
         return view('admin.produkreject');
     });
+    Route::get('/inputstok', function () {
+        return view('admin.inputstokproduk');
+    });
+    Route::get('/listkategori', function () {
+        return view('admin.listkategori');
+    });
 
 });
 // Routes CRUD Admin
@@ -55,10 +58,8 @@ Route::controller(ProdukController::class)
     ->group(function (){    
     Route::get('/produk', 'index');
     Route::get('/produk/detail/{id}', 'show');
-    Route::get('/produkreject', [TypeaheadController::class, 'index']);
-    Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
-    
-    
+    // Route::get('/produk/produkreject', [TypeaheadController::class, 'index']);
+    // Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
 });
 
 // Routes CRUD Admin
