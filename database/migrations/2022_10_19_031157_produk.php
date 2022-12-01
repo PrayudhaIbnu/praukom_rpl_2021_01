@@ -15,11 +15,13 @@ return new class extends Migration
     {
         //
         Schema::create('produk', function (Blueprint $table) {
-            $table->engine = 'innodb';
+            $table->engine = env('DB_STORAGE_ENGINE', 'InnoDB');
+            $table->charset = env('DB_CHARSET', 'utf8mb4');
+            $table->collation = env('DB_COLLATION', 'utf8mb4_general_ci');
             $table->string('id_produk', 15)->primary();
             $table->integer('kategori')->unsigned();
             $table->string('nama_produk', 100);
-            $table->integer('stok');
+            $table->integer('stok')->nullable();
             $table->string('satuan_produk', 8);
             $table->integer('harga_beli');
             $table->integer('harga_jual');

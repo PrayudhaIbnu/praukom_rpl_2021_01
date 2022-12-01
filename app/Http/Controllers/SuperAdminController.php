@@ -24,7 +24,8 @@ class SuperAdminController extends Controller
     public function tambah(Request $request)
     {
         $user = new Users;
-        $id_user = substr(md5(rand(0, 99999)), -4);
+        // $id_user = substr(md5(rand(0, 99999)), -4);
+        $id_user = collect(DB::select('SELECT new_iduser() AS new_iduser'))->first()->new_iduser;
         $user['id_user'] = $id_user;
         $user->nama = $request->input('nama');
         $user->username = $request->input('username');

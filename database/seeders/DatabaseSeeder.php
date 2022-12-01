@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +21,38 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        DB::table('level_user')->insert(
+            [
+                [
+
+                    'id_level' => 'L01',
+                    'nama_level' => 'Super Admin',
+                ],
+                [
+                    'id_level' => 'L02',
+                    'nama_level' => 'Admin',
+                ],
+                [
+                    'id_level' => 'L03',
+                    'nama_level' => 'Kasir',
+                ],
+                [
+                    'id_level' => 'L04',
+                    'nama_level' => 'Pengawas',
+                ],
+            ]
+        );
+
+        DB::table('produk_kategori')->insert(
+            [
+                [
+                    'kategori_produk' => 'Makanan',
+                ],
+                [
+                    'kategori_produk' => 'Minuman',
+                ]
+            ]
+        );
     }
 }
