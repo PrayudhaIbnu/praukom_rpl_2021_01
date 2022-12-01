@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class SupplierController extends Controller
 {
@@ -27,6 +28,13 @@ class SupplierController extends Controller
         $supplier['id_supplier'] = $id_supplier;
         $supplier->nama_supplier = $request->input('nama_supplier');
         // $supplier->foto_supplier = $request->file('foto_supplier')->store('post-images');
+        if ($request->hasFile('foto_supplier')) {
+            $file = $request->file('foto_supplier');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('storage/post-images/', $filename);
+            $supplier->foto_supplier = $filename;
+        }
         $supplier->alamat_supplier = $request->input('alamat_supplier');
         $supplier->telp_supplier = $request->input('telp_supplier');
         $supplier->save();
@@ -41,11 +49,11 @@ class SupplierController extends Controller
      */
     public function show($id)
     {
-        //
-        $detail = collect(DB::select('CALL get_one_supplier_by_id(?)', [$id]))->first();
+        $detailSupplier = collect(DB::select('CALL get_one_supplier_by_id(?)', [$id]))->first();
         // echo json_encode($edit);
-        return view('admin.detailsupplier', compact('detail'));
+        return view('admin.detailsupplier', compact('detailSupplier'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -76,8 +84,16 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $id_supplier = $request->input('delete_supplier_id');
+        $supplier = Supplier::find($id_supplier);
+        $destination = 'storage/post-images/' . $supplier->foto_supplier;
+        if (file::exists($destination)) {
+            file::delete($destination);
+        }
+        $supplier->delete();
+        return redirect()->back()->with('success', "Data Berhasil di Hapus");
     }
 }

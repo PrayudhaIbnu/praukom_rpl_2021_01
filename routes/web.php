@@ -17,6 +17,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 |
 */
 
+Route::get('/produkreject', [TypeaheadController::class, 'index']);
+Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,20 +30,25 @@ Route::get('/login', function () {
 
 
 
-// ROUTES CRUD Super Admin
+// ROUTES Super Admin
 Route::get('/superadmin/kelolaakun', [SuperAdminController::class, 'index']);
-Route::post('tambah-user', [SuperAdminController::class, 'tambah']);
-Route::get('edit-user/{username}', [SuperAdminController::class, 'edit']);
+// Route::get('/superadmin/kelolaakun/search', [SuperAdminController::class, 'search']);
+Route::post('tambah-user', [SuperAdminController::class, 'store']);
+Route::get('/superadmin/edit-user/{id}', [SuperAdminController::class, 'edit']);
+Route::put('update-user', [SuperAdminController::class, 'update']);
+Route::delete('delete-user', [SuperAdminController::class, 'destroy']);
 
 // ROUTES UNTUK ROLE ADMIN
 Route::prefix('/admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     });
-
-    // Route::get('/produk', function () {
-    //      return view('admin.daftarproduk');
-    // });
+    Route::get('/produk', function () {
+        return view('admin.daftarproduk');
+    });
+    Route::get('/produkreject', function () {
+        return view('admin.produkreject');
+    });
 });
 
 // Routes CRUD Admin
@@ -49,16 +57,20 @@ Route::controller(ProdukController::class)
     ->prefix('/admin')
     ->group(function () {
         Route::get('/produk', 'index')->name('produk');
-        Route::post('/tambah-produk', 'tambah')->name('tambah-produk');
         Route::get('/produk/detail/{id}', 'show');
+        Route::post('/tambah-produk', 'tambah')->name('tambah-produk');
+        Route::get('/produkreject', [TypeaheadController::class, 'index']);
+        Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
     });
 
 // Routes CRUD Admin
 Route::post('tambah-supplier', [SupplierController::class, 'tambah']);
+Route::delete('delete-supplier', [SupplierController::class, 'destroy']);
 Route::controller(SupplierController::class)
     ->prefix('/admin')
     ->group(function () {
         Route::get('/supplier', 'index')->name('supplier');
+        Route::get('/supplier/detail/{id}', 'show');
     });
 
 

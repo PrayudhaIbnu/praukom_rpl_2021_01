@@ -23,11 +23,16 @@ class ProdukController extends Controller
         return view('admin.daftarproduk', compact('produk', 'kategori'));
     }
 
+    public function produkreject(Request $request)
+    {
+    }
+
     public function tambah(Request $request)
     {
         $produk = new Produk;
-        $id_produk = substr(md5(rand(0, 99999)), -4);
-        $produk['id_produk'] = $id_produk;
+        // $id_produk = substr(md5(rand(0, 99999)), -4);
+        // $produk['id_produk'] = $id_produk;
+        $produk->id_produk = $request->input('kode_produk');
         $produk->kategori = $request->input('id_kategori');
         $produk->nama_produk = $request->input('nama_produk');
         // $stok = 0;
@@ -73,9 +78,9 @@ class ProdukController extends Controller
 
     public function show($id)
     {
-        $detail = collect(DB::select('CALL get_one_produk_by_id(?)', [$id]))->first();
+        $detailProduk = collect(DB::select('CALL get_one_produk_by_id(?)', [$id]))->first();
         // echo json_encode($edit);
-        return view('admin.detailproduk', compact('detail'));
+        return view('admin.detailproduk', compact('detailProduk'));
     }
 
 

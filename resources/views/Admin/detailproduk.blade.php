@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-6">
-            <h1 class="m-0">Daftar Produk</h1>
+            <h1 class="m-0">Detail Produk</h1>
           </div>
         </div>
         <div class="container-fluid">
@@ -15,37 +15,37 @@
                 <div class="row mt-3">              
                   <div class="col-3">
                     <td><h6 class="mb-0 text-secondary">Kode Produk</h6></td>
-                    <th><h6 class="fw-bold mt-0">{{ $detail->id_produk }}</h6></th>
+                    <th><h6 class="fw-bold mt-0">{{ $detailProduk->id_produk }}</h6></th>
                   </div>
                   <div class="col-3">
                     <td><h6 class="mb-0 text-secondary">Nama Produk</h6></td>
-                    <th><h6 class="fw-bold mt-0">{{ $detail->nama_produk }}</h6></th>
+                    <th><h6 class="fw-bold mt-0">{{ $detailProduk->nama_produk }}</h6></th>
                   </div>  
                 </div>
                 <div class="row mt-3">
                   <div class="col-3">
                     <td><h6 class="mb-0 text-secondary">Kategori</h6></td>
-                    <th><h6 class="fw-bold mt-0">{{ $detail->kategori }}</h6></th>
+                    <th><h6 class="fw-bold mt-0">{{ $detailProduk->kategori }}</h6></th>
                   </div>
                   <div class="col-3">
                     <td><h6 class="mb-0 text-secondary">Stok</h6></td>
-                    <th><h6 class="fw-bold mt-0">{{ $detail->stok }}</h6></th>
+                    <th><h6 class="fw-bold mt-0">{{ $detailProduk->stok }}</h6></th>
                   </div>
                 </div>
                 <div class="row mt-3">
                   <div class="col-3">
                     <td><h6 class="mb-0 text-secondary">Satuan Produk</h6></td>
-                    <th><h6 class="fw-bold mt-0">{{ $detail->satuan_produk }}</h6></th>
+                    <th><h6 class="fw-bold mt-0">{{ $detailProduk->satuan_produk }}</h6></th>
                   </div>
                   <div class="col-3">
                     <td><h6 class="mb-0 text-secondary">Harga Jual</h6></td>
-                    <th><h6 class="fw-bold mt-0">{{ $detail->harga_jual }}</h6></th>
+                    <th><h6 class="fw-bold mt-0">{{ $detailProduk->harga_jual }}</h6></th>
                   </div>
                 </div>
                 <div class="row mt-3">
                   <div class="col-3">
                     <td><h6 class="mb-0 text-secondary">Harga Beli</h6></td>
-                    <th><h6 class="fw-bold mt-0">{{ $detail->harga_beli }}</h6></th>
+                    <th><h6 class="fw-bold mt-0">{{ $detailProduk->harga_beli }}</h6></th>
                   </div>
                 </div>
               </div>
