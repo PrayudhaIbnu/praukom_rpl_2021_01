@@ -1,0 +1,39 @@
+.navbar {
+    background-color: #ef791f;
+    background-image: linear-gradient(to right, #db670e, #ff9b3f);
+}
+
+.img {
+    width: 70px;
+    margin: auto;
+}
+
+.logout {
+    background-color: #ff4d4d;
+    color: #ffffff;
+}
+.font-level {
+    font-size: smaller;
+}
+
+.nav-header {
+    display: block;
+    padding: 0.5rem 1rem;
+}
+
+.btn-detail, .btn-edit, .btn-hapus {
+    padding: 0, 10, 0, 10;
+    color: #ffffff;
+}
+
+table, thead{
+    border-radius: 10px;
+}
+
+.table{
+    background-color: #ffffff;
+}
+
+.dropdown-menu {
+    border-radius: 10px;
+}   
