@@ -73,7 +73,7 @@
                 <input name="foto" class="form-control form-control-sm" type="file" accept="image/*">
                 {{-- <img src="{{ asset('storage/post-images/' . $user->foto) }} alt=""> --}}
               </div>
-              <div class="mb-2" id="foto"> </div>
+              {{-- <div class="mb-2" id="foto"> </div> --}}
             </div>
             <div class="row align-items-center">
               <div class="col mb-3">

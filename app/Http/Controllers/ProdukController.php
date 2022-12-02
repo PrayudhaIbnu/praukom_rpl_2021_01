@@ -30,8 +30,6 @@ class ProdukController extends Controller
     public function tambah(Request $request)
     {
         $produk = new Produk;
-        // $id_produk = substr(md5(rand(0, 99999)), -4);
-        // $produk['id_produk'] = $id_produk;
         $produk->id_produk = $request->input('kode_produk');
         $produk->kategori = $request->input('id_kategori');
         $produk->nama_produk = $request->input('nama_produk');

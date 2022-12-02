@@ -64,6 +64,10 @@ class SupplierController extends Controller
     public function edit($id)
     {
         //
+        $supplier = Supplier::whereIdSupplier($id)->first();
+        return response()->json([
+            'supplier' => $supplier,
+        ]);
     }
 
     /**
@@ -73,9 +77,27 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $user_id = $request->input('supplier_id');
+        $supplier = Supplier::find($user_id);
+        $supplier->nama_supplier = $request->input('nama_supplier');
+        $supplier->alamat_supplier = $request->input('alamat_supplier');
+        $supplier->telp_supplier = $request->input('telp_supplier');
+        if ($request->hasFile('foto_supplier')) {
+            $destination = 'storage/post-images/' . $supplier->foto;
+            if (file::exists($destination)) {
+                file::delete($destination);
+            }
+            $file = $request->file('foto_supplier');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('storage/post-images/', $filename);
+            $supplier->foto = $filename;
+        }
+        $supplier->update();
+        return redirect()->back()->with('success', "Data Berhasil di Edit");
     }
 
     /**

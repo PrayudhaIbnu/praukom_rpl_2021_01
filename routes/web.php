@@ -52,7 +52,6 @@ Route::prefix('/admin')->group(function () {
 });
 
 // Routes CRUD Admin
-// Route::post('tambah-produk', [ProdukController::class, 'tambah']);
 Route::controller(ProdukController::class)
     ->prefix('/admin')
     ->group(function () {
@@ -65,6 +64,8 @@ Route::controller(ProdukController::class)
 
 // Routes CRUD Admin
 Route::post('tambah-supplier', [SupplierController::class, 'tambah']);
+Route::get('admin/edit-supplier/{id}', [SupplierController::class, 'edit']);
+Route::put('update-supplier', [SupplierController::class, 'update']);
 Route::delete('delete-supplier', [SupplierController::class, 'destroy']);
 Route::controller(SupplierController::class)
     ->prefix('/admin')
