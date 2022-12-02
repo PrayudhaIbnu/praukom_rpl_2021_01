@@ -12,16 +12,16 @@
           <!-- /.col -->
           <div class="row col-sm-6">
             {{-- Search --}}
-            {{-- <form action="/superadmin/kelolaakun/search" method="GET"> --}}
+            <form action="" method="GET">
             <div class="input-group">
               <input class="form-control" name="search" type="text" placeholder="Search" autocomplete="off">
               <div class="input-group-append">
-                <button class="btn btn-info" type="submit">
+                <button class="btn btn-warning" type="submit">
                   <i class="fas fa-search fa-fw"></i>
                 </button>
               </div>
             </div>
-          {{-- </form> --}}
+          </form>
 
             {{-- End Search --}}
           </div>
@@ -79,6 +79,9 @@
             </tbody>
           </table>
           {{-- End Table --}}
+        </div>
+        <div>
+          {{ $user->links() }}
         </div>
       </div>
     </div>

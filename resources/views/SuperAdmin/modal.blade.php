@@ -107,8 +107,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-          <button type="submit" class="btn btn-primary btn-simpan">Update</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary btn-simpan">Perbarui</button>
         </div>
         </form>
       </div>

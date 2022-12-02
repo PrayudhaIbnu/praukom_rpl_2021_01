@@ -9,15 +9,19 @@ use Illuminate\Support\Facades\File;
 
 class SuperAdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $user = Users::all();
+        // $user = Users::all();
+        $search = $request->search;
         $level_user = DB::table('level_user')->select()->get();
         $user = DB::table('users')
             ->select(['users.nama', 'users.username', 'level_user.nama_level', 'users.foto', 'users.id_user', 'users.level'])
             ->join('level_user', 'users.level', '=', 'level_user.id_level')
             ->orderBy('nama', 'ASC')
-            ->get();
+            ->where('nama', 'LIKE', '%' . $search . '%')
+            ->orWhere('nama_level', 'LIKE', '%' . $search . '%')
+            ->orWhere('username', 'LIKE', '%' . $search . '%')
+            ->paginate(5);
         return view('SuperAdmin.index', compact('user', 'level_user'));
     }
 
@@ -89,10 +93,10 @@ class SuperAdminController extends Controller
     }
 
     // search
-    public function search(Request $request)
-    {
-        $get_name = $request->search;
-        $user = Users::where('nama', 'LIKE', '%' . $get_name, '%')->get();
-        return view('SuperAdmin.index', compact('user'));
-    }
+    // public function search(Request $request)
+    // {
+    //     $get_name = $request->search;
+    //     $user = Users::where('nama', 'LIKE', '%' . $get_name, '%')->get();
+    //     return view('SuperAdmin.index', compact('user'));
+    // }
 }
