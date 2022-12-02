@@ -13,7 +13,8 @@
             {{-- Search --}}
             {{-- <form action="/superadmin/kelolaakun/search" method="GET"> --}}
             <div class="input-group">
-              <input class="form-control" name="search" type="text" placeholder="Search" autocomplete="off">
+              <input class="form-control" name="search" id="search-input" type="text" placeholder="Search"
+                autocomplete="off">
               <div class="input-group-append">
                 <button class="btn btn-info" type="submit">
                   <i class="fas fa-search fa-fw"></i>
@@ -57,17 +58,14 @@
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
-            <?php
-            $no = 1;
-            ?>
             @foreach ($user as $item)
               <tr style="vertical-align: middle;">
-                <td> {{ $no++ }}</td>
+                <td> {{ $loop->iteration }}</td>
                 <td>
                   <img id="gambar" src="{{ asset('storage/post-images/' . $item->foto) }}" alt=""
                     style="width: 100px">
                 </td>
-                <td>{{ $item->nama }}</td>
+                <td id="s">{{ $item->nama }}</td>
                 <td>{{ $item->nama_level }}</td>
                 <td>{{ $item->username }}</td>
                 <td>

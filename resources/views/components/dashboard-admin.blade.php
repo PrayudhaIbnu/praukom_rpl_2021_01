@@ -75,7 +75,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/admin/inputstok" class="nav-link">
                 <i class="fa-brands fa-wpforms"></i>
                 <p>Input Stok Produk</p>
               </a>

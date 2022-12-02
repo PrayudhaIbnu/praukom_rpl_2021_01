@@ -20,28 +20,30 @@
               </div>
               <div class="row align-items-center">
                   <div class="col mb-3">
-                  <label for="nama_supplier" class="form-label font-weight-normal">Nama Supplier</label>
-                  <input required name="nama_supplier" id="nama" class="form-control form-control-sm" type="text"
-                      aria-label=".form-control-sm example">
+                    <label for="nama_supplier" class="form-label font-weight-normal">Nama Supplier</label>
+                    <input type="text" id="search" name="search" placeholder="Search" class="form-control" />
                   </div>
               </div>
               <div class="row align-items-center">
                   <div class="col mb-2">
-                  <label for="telp_supplier" class="form-label font-weight-normal">No. Telp</label>
-                  <input required name="telp_supplier" id="telp_supplier" class="form-control form-control-sm" type="text"
-                      aria-label=".form-control-sm example">
+                    <label for="telp_supplier" class="form-label font-weight-normal">Jumlah Keluar</label>
+                    <input required name="telp_supplier" id="telp_supplier" class="form-control form-control-sm" type="number" aria-label=".form-control-sm example">
+                  </div>
+                  <div class="col mb-2">
+                    <label for="telp_supplier" class="form-label font-weight-normal">Tanggal Keluar</label>
+                    <input required name="telp_supplier" id="telp_supplier" class="form-control form-control-sm" type="date" aria-label=".form-control-sm example">
                   </div>
               </div>
               <div class="row align-items-center">
                   <div class="col mb-2">
-                  <label for="alamat_supplier" name="alamat_supplier" class="form-label font-weight-normal">Alamat</label>
+                  <label for="alamat_supplier" name="alamat_supplier" class="form-label font-weight-normal">Keterangan </label>
                   <textarea class="form-control" name="alamat_supplier" id="alamat_supplier" rows="4"></textarea>
               </div>
               </div>
               </div>
               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary rounded-3 btn-sm pl-3 pr-3" data-dismiss="modal">Kembali</button>
-                  <button type="submit" class="btn btn-primary rounded-3 btn-sm pl-3 pr-3">Simpan</button>
+                  <button type="button" class="btn btn-secondary btn-sm pl-3 pr-3" data-dismiss="modal">Kembali</button>
+                  <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3">Simpan</button>
               </div>
             </div>
           </form>
