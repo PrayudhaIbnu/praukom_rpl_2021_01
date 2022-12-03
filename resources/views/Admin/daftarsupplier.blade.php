@@ -87,8 +87,8 @@
             <div class="row align-items-start">
               <div class="col mb-3">
                 <label for="foto_supplier" class="form-label font-weight-normal">Foto Supplier</label>
-                <input required name="foto_supplier" id="foto_supplier" class="form-control form-control-sm"
-                  type="file" accept="image/*">
+                <input name="foto_supplier" id="foto_supplier" class="form-control form-control-sm" type="file"
+                  accept="image/*">
 
               </div>
             </div>

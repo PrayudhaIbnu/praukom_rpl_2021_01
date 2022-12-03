@@ -23,7 +23,7 @@ return new class extends Migration
                    FROM produk WHERE id_produk = id;
             SET jumlahmasuk_last = jumlahmasuk_last + jumlah;
             UPDATE produk SET stok = jumlahmasuk_last
-                        WHERE id_barang = id;
+                        WHERE id_produk = id;
             END;"
         );
     }

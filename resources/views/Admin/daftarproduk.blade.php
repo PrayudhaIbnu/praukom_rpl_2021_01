@@ -24,11 +24,12 @@
             <!-- Example single danger button -->
             <div class="btn-group mb-2 mt-2">
               <div class="col">
-                <select class="form-select bg-warning form-select-sm" aria-label="Default select example">
-                  <option class="bg-light" selected>Pilih...</option>
-                  <option class="bg-light" value="Makanan">Makanan</option>
-                  <option class="bg-light" value="Minuman">Minuman</option>
-                  <option class="bg-light" value="Lainnya">Lainnya</option>
+                <select class="form-select bg-warning form-select-sm" id="sort-kategori"
+                  aria-label="Default select example">
+                  <option class="bg-light" selected value="semua">Semua</option>
+                  @foreach ($kategori as $k)
+                    <option class="bg-light" value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -60,9 +61,9 @@
                   <th scope="col">Aksi</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="produk">
                 @foreach ($produk as $d)
-                  <tr>
+                  <tr class="produk-info" data-custom-type="{{ $d->kategori }}">
                     <th scope="row" id="s">{{ $d->id_produk }}</th>
                     <td>{{ $d->nama_produk }}</td>
                     <td>{{ $d->stok }}</td>
@@ -104,19 +105,20 @@
             <div class="row align-items-start">
               <div class="col mb-3">
                 <label for="foto_produk" class="form-label font-weight-normal">Foto produk</label>
-                <input required name="foto_produk" id="foto_produk" class="form-control form-control-sm" type="file">
+                <input name="foto_produk" id="foto_produk" class="form-control form-control-sm" type="file">
 
               </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-3">
                 <label for="kode_produk" class="form-label font-weight-normal">Kode Produk (Barcode ID)</label>
-                <input required name="kode_produk" id="kode_produk" class="form-control form-control-sm" type="text"
+                <input required name="kode_produk" id="kode_produk" class="form-control form-control-sm" type="number"
                   aria-label=".form-control-sm example">
               </div>
               <div class="col mb-3">
                 <label for="id_kategori" class="form-label font-weight-normal">Kategori</label>
-                <select name="id_kategori" id="id_kategori" class="form-select" aria-label="Default select example">
+                <select required name="id_kategori" id="id_kategori" class="form-select"
+                  aria-label="Default select example">
                   @foreach ($kategori as $k)
                     <option value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
                   @endforeach
@@ -159,3 +161,28 @@
   </div>
   @include('sweetalert::alert')
 </x-app-layout>
+
+{{-- FILTER KATEGORI --}}
+<script>
+  //Filter Recruiters
+  $('select#sort-kategori').change(function() {
+    var filter = $(this).val();
+    filterList(filter);
+  });
+
+  // Recruiters filter function
+  function filterList(value) {
+    var list = $(".produk .produk-info");
+    $(list).hide();
+    if (value == "semua") {
+      $(".produk").find("tr").each(function(i) {
+        $(this).show();
+      });
+    } else {
+      // *=" means that if a data-custom type contains multiple values, it will find them
+      $(".produk").find("tr[data-custom-type=" + value + "]").each(function(i) {
+        $(this).show();
+      });
+    }
+  }
+</script>

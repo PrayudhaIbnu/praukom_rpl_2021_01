@@ -17,7 +17,8 @@ return new class extends Migration
         DB::unprepared("DROP FUNCTION IF EXISTS new_iduser");
         DB::unprepared(
             "CREATE FUNCTION new_iduser()
-               BEGIN
+            RETURNS CHAR(5)
+            BEGIN
                 DECLARE kode_lama char(5);
                 DECLARE kode_baru char(5);
                 DECLARE ambil_angka INT;
@@ -27,7 +28,7 @@ return new class extends Migration
                 SET get_nol = LPAD(ambil_angka, 2, 0);
                 SET kode_baru = CONCAT('USR', get_nol);
                 RETURN kode_baru;
-                END;"
+            END;"
         );
     }
 };

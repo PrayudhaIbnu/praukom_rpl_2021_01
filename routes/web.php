@@ -48,9 +48,6 @@ Route::prefix('/admin')->group(function () {
     Route::get('/produkreject', function () {
         return view('admin.produkreject');
     });
-    Route::get('/inputstok', function () {
-        return view('admin.inputstokproduk');
-    });
     Route::get('/listkategori', function () {
         return view('admin.listkategori');
     });
@@ -61,8 +58,10 @@ Route::controller(ProdukController::class)
     ->prefix('/admin')
     ->group(function () {
         Route::get('/produk', 'index')->name('produk');
+        Route::get('/inputstok', 'indexstok');
         Route::get('/produk/detail/{id}', 'show');
-        Route::post('/tambah-produk', 'tambah')->name('tambah-produk');
+        Route::post('/tambah-stok', 'produkmasuk')->name('tambah-stok');
+        Route::post('/tambah-produk', 'store')->name('tambah-produk');
         Route::get('/produkreject', [TypeaheadController::class, 'index']);
         Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
     });
