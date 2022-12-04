@@ -1,4 +1,3 @@
-
 <x-app-layout>
   <x-dashboard-super-admin />
 
@@ -14,7 +13,8 @@
             {{-- Search --}}
             <form action="" method="GET">
             <div class="input-group">
-              <input class="form-control" name="search" type="text" placeholder="Search" autocomplete="off">
+              <input class="form-control" name="search" id="search-input" type="text" placeholder="Search"
+                autocomplete="off">
               <div class="input-group-append">
                 <button class="btn btn-warning" type="submit">
                   <i class="fas fa-search fa-fw"></i>
@@ -39,15 +39,16 @@
           </div>
           <!-- Button  modal -->
           <div class="float-end">
-              <button type="button" class="btn btn-success my-3 btn-sm" data-bs-toggle="modal" data-bs-target="#tambahuser">
-                Tambah User
-              </button>  
+            <button type="button" class="btn btn-success my-3 btn-sm" data-bs-toggle="modal"
+              data-bs-target="#tambahuser">
+              Tambah User
+            </button>
           </div>
           {{-- End button modal --}}
 
           {{-- TABEL --}}
           <table class="table table-hover mt-4 ">
-            <thead class="table-warning">
+            <thead class="table-warning" style="vertical-align: middle;">
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">Foto</th>
@@ -57,22 +58,22 @@
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
-            <?php
-            $no = 1;
-            ?>
-            @foreach ($user as $item)
-              <tr>
-                <td> {{ $no++ }}</td>
+            <tbody>
+              @foreach ($user as $item)
+              <tr style="vertical-align: middle;">
+                <td> {{ $loop->iteration }}</td>
                 <td>
-                  <img id="gambar" src="{{ asset('storage/post-images/' . $item->foto) }}" alt="" style="width: 100px">
+                  <img id="gambar" src="{{ asset('storage/post-images/' . $item->foto) }}" alt=""
+                    style="width: 100px">
                 </td>
-                <td>{{ $item->nama }}</td>
+                <td id="s">{{ $item->nama }}</td>
                 <td>{{ $item->nama_level }}</td>
                 <td>{{ $item->username }}</td>
                 <td>
                   <button type="button" value="{{ $item->id_user }}" class="btn btn-edit btn-primary"><i
                       class="fa-solid fa-pen-to-square"></i></button>
-                  <button type="button" value="{{ $item->id_user }}"  class="btn btn-hapus btn-danger"><i class="fa-solid fa-trash"></i></button>
+                  <button type="button" value="{{ $item->id_user }}" class="btn btn-hapus btn-danger"><i
+                      class="fa-solid fa-trash"></i></button>
                 </td>
               </tr>
             @endforeach
@@ -81,7 +82,7 @@
           {{-- End Table --}}
         </div>
         <div>
-          {{ $user->links() }}
+          {{ $user->withQueryString()->links() }}
         </div>
       </div>
     </div>
@@ -89,4 +90,4 @@
   @include('SuperAdmin.modal')
   @include('sweetalert::alert')
 </x-app-layout>
-  @include('SuperAdmin.script')
+@include('SuperAdmin.script')

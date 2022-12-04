@@ -6,7 +6,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
+      <div class="container-fluid transaksi">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="">Transaksi</h1>
@@ -41,7 +41,7 @@
                   <div class="col-sm-9 mb-2">
                     <select class="form-select" id="produk" aria-label="Default select example">
                       {{-- @foreach ($nama_produk as $item)
-                        <option value="{{ $item->id_produk }}">{{ $item->nama_produk }}</option>
+                        <option value="{{ $item->nama_produk }}">{{ $item->nama_produk }}</option>
                       @endforeach --}}
                     </select>
                   </div>
@@ -134,4 +134,13 @@
   </div>
   </div>
   </div>
+
+  <script>
+    $('transaksi').each(function() {
+      var sub_total_hrg = $(this).data('lat');
+      var lon = $(this).data('lon');
+
+      var mymap = new L.map('mapid').setView([lat, lon], 14);
+    })
+  </script>
 </x-app-layout>

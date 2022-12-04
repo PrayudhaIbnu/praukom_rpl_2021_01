@@ -10,7 +10,7 @@
           <!-- /.col -->
           <div class="row col-sm-6">
             <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+              <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search-input">
               <div class="input-group-append">
                 <button class="btn btn-sidebar">
                   <i class="fas fa-search fa-fw"></i>
@@ -35,14 +35,17 @@
           </div>
           <div class="float-end">
             <div class="dropdown mb-2 mt-2">
-              <button class="btn btn-success dropdown-toggle rounded-3 btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="btn btn-success dropdown-toggle rounded-3 btn-sm" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 + Tambah
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" >Tambah Kategori</a></li>
-                <li><button class="dropdown-item" data-toggle="modal" data-target="#tambahproduk" >Tambah Produk</button></li>
+                <li><a class="dropdown-item">Tambah Kategori</a></li>
+                <li><button class="dropdown-item" data-toggle="modal" data-target="#tambahproduk">Tambah
+                    Produk</button>
+                </li>
               </ul>
-            </div>            
+            </div>
           </div>
           <div class="table-responsive-xl">
             <table class="table mt-4 table-borderless ">
@@ -50,7 +53,7 @@
                 <tr>
                   <th scope="col">Barcode</th>
                   <th scope="col">Nama Produk</th>
-                  <!-- <th scope="col">Qty</th> -->
+                  <th scope="col">Stok</th>
                   <th scope="col">Satuan</th>
                   <th scope="col">Harga Jual</th>
                   <th scope="col">Harga Beli</th>
@@ -59,64 +62,26 @@
               </thead>
               <tbody>
                 @foreach ($produk as $d)
-                <tr>
-                  <th scope="row">{{$d->id_produk}}</th>
-                  <td>{{$d->nama_produk}}</td>
-                  <!-- <td>{{$d->stok}}</td> -->
-                  <td>{{$d->satuan_produk}}</td>
-                  <td>{{$d->harga_jual}}</td>
-                  <td>{{$d->harga_beli}}</td>
-                  <td>
-                  <a href="/detail/{{ $d->id_produk }}">
-                    <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
-                  </a>
-                    <button class="btn btn-edit btn-primary" data-toggle="modal" data-target="#editproduk"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn btn-hapus btn-danger"><i class="fa-solid fa-trash"></i></button>
-                  </td>
-                </tr>
+                  <tr>
+                    <th scope="row" id="s">{{ $d->id_produk }}</th>
+                    <td>{{ $d->nama_produk }}</td>
+                    <td>{{ $d->stok }}</td>
+                    <td>{{ $d->satuan_produk }}</td>
+                    <td>{{ $d->harga_jual }}</td>
+                    <td>{{ $d->harga_beli }}</td>
+                    <td>
+                      <a href="produk/detail/{{ $d->id_produk }}">
+                        <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
+                      </a>
+                      <button class="btn btn-edit btn-primary" data-toggle="modal" data-target="#editproduk"><i
+                          class="fa-solid fa-pen-to-square"></i></button>
+                      <button class="btn btn-hapus btn-danger"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                  </tr>
                 @endforeach
               </tbody>
             </table>
           </div>
-
-          {{-- Awal Table Expand --}}
-          <!-- <div class="rounded">
-            <div class="table-responsive table-borderless">
-              <table class="table">
-                <thead class="table-warning">
-                  <tr>
-                  <th scope="col">Barcode</th>
-                  <th scope="col">Nama Produk</th>
-                  <th scope="col">Qty</th>
-                  <th scope="col">Satuan</th>
-                  <th scope="col">Harga Jual</th>
-                  <th scope="col">Harga Beli</th>
-                  <th scope="col">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody class="table-body">
-                    
-                    <tr class="cell-1" data-toggle="collapse" data-target="#demo">
-                      <td class="text-center">1</td>
-                      <td>#SO-13487</td>
-                      <td>Gasper Antunes</td>
-                      <td><span class="badge badge-danger">Fullfilled</span></td>
-                      <td>$2674.00</td>
-                      <td>Today</td>
-                      <td class="table-elipse" data-toggle="collapse" data-target="#demo"><i class="fa fa-ellipsis-h text-black-50"></i></td>
-                    </tr>
-                    <tr id="demo" class="collapse cell-1 row-child">
-                      <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
-                      <td colspan="1">Product&nbsp;</td>
-                      <td colspan="3">iphone SX with ratina display</td>
-                      <td colspan="1">QTY</td>
-                      <td colspan="2">2</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div> -->
-          {{-- Akhir Table Expand --}}
         </div>
       </div>
     </div>
@@ -133,7 +98,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="POST" action="{{ url('tambah-produk') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('tambah-produk') }}" enctype="multipart/form-data">
           @csrf
           <div class="modal-body">
             <div class="row align-items-start">
@@ -152,45 +117,45 @@
               <div class="col mb-3">
                 <label for="id_kategori" class="form-label font-weight-normal">Kategori</label>
                 <select name="id_kategori" id="id_kategori" class="form-select" aria-label="Default select example">
-                @foreach ($kategori as $k)
-                <option value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
-                @endforeach
+                  @foreach ($kategori as $k)
+                    <option value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
             <div class="row align-items-end">
               <div class="col mb-2">
                 <label for="nama_produk" class="form-label font-weight-normal">Nama Produk</label>
-                <input required name="nama_produk" id="nama_produk" class="form-control form-control-sm" type="text"
-                  aria-label=".form-control-sm example">
+                <input required name="nama_produk" id="nama_produk" class="form-control form-control-sm"
+                  type="text" aria-label=".form-control-sm example">
               </div>
               <div class="col mb-2">
                 <label for="satuan_produk" class="form-label font-weight-normal">Satuan Produk</label>
-                <input required name="satuan_produk" id="satuan_produk" class="form-control form-control-sm" type="text"
-                  aria-label=".form-control-sm example">
+                <input required name="satuan_produk" id="satuan_produk" class="form-control form-control-sm"
+                  type="text" aria-label=".form-control-sm example">
               </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-2">
                 <label for="harga_beli" class="form-label font-weight-normal">Harga Beli</label>
-                <input required name="harga_beli" id="harga_beli" class="form-control form-control-sm" type="text"
-                  aria-label=".form-control-sm example">
+                <input required name="harga_beli" id="harga_beli" class="form-control form-control-sm"
+                  type="text" aria-label=".form-control-sm example">
               </div>
               <div class="col mb-2">
                 <label for="harga_jual" class="form-label font-weight-normal">Harga Jual</label>
-                <input required name="harga_jual" id="harga_jual" class="form-control form-control-sm" type="text"
-                  aria-label=".form-control-sm example">
+                <input required name="harga_jual" id="harga_jual" class="form-control form-control-sm"
+                  type="text" aria-label=".form-control-sm example">
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary rounded-3 btn-sm pl-3 pr-3" data-dismiss="modal">Kembali</button>
+            <button type="button" class="btn btn-secondary rounded-3 btn-sm pl-3 pr-3"
+              data-dismiss="modal">Kembali</button>
             <button type="submit" class="btn btn-primary rounded-3 btn-sm pl-3 pr-3">Simpan</button>
           </div>
         </form>
       </div>
     </div>
   </div>
-
-
+  @include('sweetalert::alert')
 </x-app-layout>

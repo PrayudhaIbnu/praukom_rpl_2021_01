@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
-class ProdukController extends Controller
-
+class ProdukRejectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,33 +15,23 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $produk = DB::table('produk')->get();
-        $kategori = DB::table('produk_kategori')
-            ->select()
+        $produk = DB::table('produk')->select()->get();
+        $brg_keluar = DB::table('barang_keluar')
+            ->select(['produk.nama_produk', 'barang_keluar.qty', 'barang_keluar.tanggal_keluar', 'barang_keluar.keterangan'])
+            ->join('produk', 'barang_keluar.produk', '=', 'produk.id_produk')
             ->get();
-        return view('admin.daftarproduk', compact('produk', 'kategori'));
+
+        return view('admin.produkreject', compact('brg_keluar', 'produk'));
     }
 
-    public function produkreject(Request $request)
+    public function laporan()
     {
-    }
-
-    public function tambah(Request $request)
-    {
-        $produk = new Produk;
-        $produk->id_produk = $request->input('kode_produk');
-        $produk->kategori = $request->input('id_kategori');
-        $produk->nama_produk = $request->input('nama_produk');
-        // $stok = 0;
-        $produk['stok'] = 0;
-        $produk->satuan_produk = $request->input('satuan_produk');
-        $produk->harga_beli = $request->input('harga_beli');
-        $produk->harga_jual = $request->input('harga_jual');
-        // $produk->foto_produk = $request->file('foto_produk')->store('post-images');
-        // $produk->supplier = $request->input('supplier');
-        $produk['user'] = 'USR00';
-        $produk->save();
-        return redirect()->back()->with('success', "Data berhasi di tambah");
+        $produk = DB::table('produk')->select()->get();
+        $brg_keluar = DB::table('barang_keluar')
+            ->select(['produk.nama_produk', 'barang_keluar.qty', 'barang_keluar.tanggal_keluar', 'barang_keluar.keterangan'])
+            ->join('produk', 'barang_keluar.produk', '=', 'produk.id_produk')
+            ->paginate('10');
+        return view('admin.laporan', compact('brg_keluar', 'produk'));
     }
 
     /**
@@ -63,7 +52,12 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nama_produk = $request->input('produk');
+        $jml_keluar = $request->input('jml_keluar');
+        $tgl_keluar = $request->input('tgl_keluar');
+        $keterangan = $request->input('keterangan');
+        DB::select('CALL barangkeluar(?,?,?,?)', array($nama_produk, $jml_keluar, $tgl_keluar, $keterangan));
+        return redirect()->back()->with('success', "Data Berhasil di Input");
     }
 
     /**
@@ -72,15 +66,10 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-
     public function show($id)
     {
-        $detailProduk = collect(DB::select('CALL get_one_produk_by_id(?)', [$id]))->first();
-        // echo json_encode($edit);
-        return view('admin.detailproduk', compact('detailProduk'));
+        //
     }
-
 
     /**
      * Show the form for editing the specified resource.

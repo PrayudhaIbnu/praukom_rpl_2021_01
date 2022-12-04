@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class SupplierController extends Controller
 {
@@ -27,31 +28,17 @@ class SupplierController extends Controller
         $supplier['id_supplier'] = $id_supplier;
         $supplier->nama_supplier = $request->input('nama_supplier');
         // $supplier->foto_supplier = $request->file('foto_supplier')->store('post-images');
+        if ($request->hasFile('foto_supplier')) {
+            $file = $request->file('foto_supplier');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('storage/post-images/', $filename);
+            $supplier->foto_supplier = $filename;
+        }
         $supplier->alamat_supplier = $request->input('alamat_supplier');
         $supplier->telp_supplier = $request->input('telp_supplier');
         $supplier->save();
         return redirect()->back()->with('success', "Data berhasi di tambah");
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -77,6 +64,10 @@ class SupplierController extends Controller
     public function edit($id)
     {
         //
+        $supplier = Supplier::whereIdSupplier($id)->first();
+        return response()->json([
+            'supplier' => $supplier,
+        ]);
     }
 
     /**
@@ -86,9 +77,27 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $user_id = $request->input('supplier_id');
+        $supplier = Supplier::find($user_id);
+        $supplier->nama_supplier = $request->input('nama_supplier');
+        $supplier->alamat_supplier = $request->input('alamat_supplier');
+        $supplier->telp_supplier = $request->input('telp_supplier');
+        if ($request->hasFile('foto_supplier')) {
+            $destination = 'storage/post-images/' . $supplier->foto;
+            if (file::exists($destination)) {
+                file::delete($destination);
+            }
+            $file = $request->file('foto_supplier');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('storage/post-images/', $filename);
+            $supplier->foto = $filename;
+        }
+        $supplier->update();
+        return redirect()->back()->with('success', "Data Berhasil di Edit");
     }
 
     /**
@@ -97,8 +106,16 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $id_supplier = $request->input('delete_supplier_id');
+        $supplier = Supplier::find($id_supplier);
+        $destination = 'storage/post-images/' . $supplier->foto_supplier;
+        if (file::exists($destination)) {
+            file::delete($destination);
+        }
+        $supplier->delete();
+        return redirect()->back()->with('success', "Data Berhasil di Hapus");
     }
 }

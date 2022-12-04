@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ProdukRejectController;
 use RealRashid\SweetAlert\Facades\Alert;
 
 /*
@@ -17,9 +18,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 |
 */
 
-Route::get('/produkreject', [TypeaheadController::class, 'index']);
-Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -31,12 +29,13 @@ Route::get('/login', function () {
 
 
 // ROUTES Super Admin
-Route::get('/superadmin/kelolaakun', [SuperAdminController::class, 'index']);
-// Route::get('/superadmin/kelolaakun/search', [SuperAdminController::class, 'search']);
-Route::post('tambah-user', [SuperAdminController::class, 'store']);
-Route::get('/superadmin/edit-user/{id}', [SuperAdminController::class, 'edit']);
-Route::put('update-user', [SuperAdminController::class, 'update']);
-Route::delete('delete-user', [SuperAdminController::class, 'destroy']);
+Route::controller(SuperAdminController::class)->group(function () {
+    Route::get('/superadmin/kelolaakun', 'index');
+    Route::post('tambah-user', 'store');
+    Route::get('/superadmin/edit-user/{id}', 'edit');
+    Route::put('update-user',  'update');
+    Route::delete('delete-user',  'destroy');
+});
 
 // ROUTES UNTUK ROLE ADMIN
 Route::prefix('/admin')->group(function () {
@@ -46,33 +45,50 @@ Route::prefix('/admin')->group(function () {
     Route::get('/produk', function () {
         return view('admin.daftarproduk');
     });
-    Route::get('/produkreject', function () {
-        return view('admin.produkreject');
+    // Route::get('/produkreject', function () {
+    //     return view('admin.produkreject');
+    // });
+    Route::get('/inputstok', function () {
+        return view('admin.inputstokproduk');
+    });
+    Route::get('/listkategori', function () {
+        return view('admin.listkategori');
     });
 });
-// Routes CRUD Admin
-Route::post('tambah-produk', [ProdukController::class, 'tambah']);
+Route::get('/admin/laporan', [ProdukRejectController::class, 'laporan']);
+
+// Routes ADMIN CRUD Produk
 Route::controller(ProdukController::class)
     ->prefix('/admin')
     ->group(function () {
-        Route::get('/produk', 'index');
+        Route::get('/produk', 'index')->name('produk');
         Route::get('/produk/detail/{id}', 'show');
-        Route::get('/produkreject', [TypeaheadController::class, 'index']);
+        Route::post('/tambah-produk', 'tambah')->name('tambah-produk');
         Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
     });
+// Routes Admin Input Product Reject
+Route::get('/admin/produkreject', [ProdukRejectController::class, 'index']);
+Route::post('/admin/produkreject', [ProdukRejectController::class, 'store']);
 
-// Routes CRUD Admin
-Route::post('tambah-supplier', [SupplierController::class, 'tambah']);
-Route::controller(SupplierController::class)
-    ->prefix('/admin')
-    ->group(function () {
-        Route::get('/supplier', 'index');
-        Route::get('/supplier/detail/{id}', 'show');
-    });
+
+// Routes CRUD Supplier
+Route::controller(SupplierController::class)->group(function () {
+    Route::post('tambah-supplier', 'tambah');
+    Route::put('update-supplier', 'update');
+    Route::delete('delete-supplier', 'destroy');
+    Route::prefix('/admin')
+        ->group(function () {
+            Route::get('/supplier', 'index')->name('supplier');
+            Route::get('/edit-supplier/{id}', 'edit');
+            Route::get('/supplier/detail/{id}', 'show');
+        });
+});
+
+
+
 
 
 // ROUTES UNTUK ROLE KASIR
-// Routes Dashboard Kasir
 Route::prefix('/kasir')->group(function () {
     Route::get('/dashboard', function () {
         return view('kasir.dashboard');
@@ -94,7 +110,6 @@ Route::prefix('/kasir')->group(function () {
 
 
 // ROUTES UNTUK ROLE PENGAWAS
-
 Route::prefix('/pengawas')->group(function () {
     Route::get('/dashboard', function () {
         return view('pengawas.index');
