@@ -16,8 +16,13 @@
           <div class="col-3 flex">
             <!-- Main content -->
             <div class="card" style="width: 100%; height: 165px;">
-              <div class="card-body" style="vertical-align: middle; margin-top: 20px;">
+              <div class="card-body" style="vertical-align: middle; margin-top: 5px;">
                 <div class="mb-3 row">
+                  <label for="staticEmail" class="col-sm-5 col-form-label">Jam</label>
+                  <div class="col-sm-7">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                      value="{{ date('H:i') }}">
+                  </div>
                   <label for="staticEmail" class="col-sm-5 col-form-label">Tanggal</label>
                   <div class="col-sm-7">
                     <input type="text" readonly class="form-control-plaintext" id="staticEmail"
@@ -34,26 +39,29 @@
           </div>
           <div class="col-5">
             <!-- Main content -->
-            <div class="card" style="width: 100%; height: 165px;">
-              <div class="card-body">
-                <div class="mb-3 row">
-                  <label for="staticEmail" id="produk" class="col-sm-3 col-form-label">Produk</label>
-                  <div class="col-sm-9 mb-2">
-                    <select class="form-select" id="produk" aria-label="Default select example">
-                      {{-- @foreach ($nama_produk as $item)
-                        <option value="{{ $item->nama_produk }}">{{ $item->nama_produk }}</option>
-                      @endforeach --}}
-                    </select>
-                  </div>
-                  <label for="inputPassword" class="col-sm-3 col-form-label">Qty</label>
-                  <div class="col-sm-9">
-                    <input type="number" class="form-control" id="inputPassword">
-                  </div>
+            <form action="addcart" method="post">
+              <div class="card" style="width: 100%; height: 165px;">
+                <div class="card-body">
+                  <div class="mb-3 row">
+                    <label for="staticEmail" id="produk" class="col-sm-3 col-form-label">Produk</label>
+                    <div class="col-sm-9 mb-2">
+                      <select class="form-select" id="produk" aria-label="Default select example">
+                        <option disabled class="bg-light" selected>Pilih Produk...</option>
+                        @foreach ($produk as $p)
+                          <option value="{{ $p->id_produk }}">{{ $p->nama_produk }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <label for="qty" class="col-sm-3 col-form-label">Qty</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="qty">
+                    </div>
 
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-sm  float-end">Simpan</button>
                 </div>
-                <button class="btn btn-primary btn-sm  float-end">Simpan</button>
               </div>
-            </div>
+            </form>
             {{-- akhir card --}}
           </div>
           <div class="col">

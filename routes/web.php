@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\TransaksiController;
 use RealRashid\SweetAlert\Facades\Alert;
 
 /*
@@ -21,26 +23,33 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'index')->name('login');
+    Route::post('/auth', 'masuk');
+    Route::get('/logout', 'keluar');
 });
+
 
 
 
 // ROUTES Super Admin
 // Route::get('/superadmin/kelolaakun/search', [SuperAdminController::class, 'search']);
+// Route::middleware('auth')->group(function () {
+// Route::middleware('ceklevel:L01')->group(function () {
 Route::controller(SuperAdminController::class)->group(function () {
-    Route::get('/superadmin/kelolaakun', 'index');
+    Route::get('/superadmin/kelolaakun', 'index')->name('superadmin');
     Route::post('tambah-user', 'store');
     Route::get('/superadmin/edit-user/{id}', 'edit');
     Route::put('update-user',  'update');
     Route::delete('delete-user',  'destroy');
 });
+// });
+
 
 // ROUTES UNTUK ROLE ADMIN
 Route::prefix('/admin')->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        return view('admin.dashboard')->name('admin');
     });
     Route::get('/produk', function () {
         return view('admin.daftarproduk');
@@ -79,27 +88,26 @@ Route::controller(SupplierController::class)->group(function () {
         });
 });
 
+Route::controller(TransaksiController::class)->group(function () {
+    // ROUTES UNTUK ROLE KASIR
+    Route::prefix('/kasir')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('kasir.dashboard');
+        });
+        Route::get('/transaksi', 'index');
 
+        Route::get('/laporan', function () {
+            return view('kasir.laporan');
+        });
 
-// ROUTES UNTUK ROLE KASIR
-Route::prefix('/kasir')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('kasir.dashboard');
+        Route::get('/produk', function () {
+            return view('Kasir.daftarproduk');
+        });
     });
+    // Routes CRUD Kasir
 
-    Route::get('/transaksi', function () {
-        return view('kasir.transaksi');
-    });
-
-    Route::get('/laporan', function () {
-        return view('kasir.laporan');
-    });
-
-    Route::get('/produk', function () {
-        return view('Kasir.daftarproduk');
-    });
 });
-// Routes CRUD Kasir
+
 
 
 // ROUTES UNTUK ROLE PENGAWAS
@@ -120,3 +128,4 @@ Route::prefix('/pengawas')->group(function () {
         return view('pengawas.historypenjualan');
     });
 });
+// });

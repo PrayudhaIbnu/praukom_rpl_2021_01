@@ -41,7 +41,7 @@
               <tbody>
                 @foreach ($data as $d)
                   <tr>
-                    <th scope="row">{{ $d->id_supplier }}</th>
+                    <th scope="row">{{ $loop->iteration }}</th>
                     <td>
                       <img id="foto_supplier" src="{{ asset('storage/post-images/' . $d->foto_supplier) }}"
                         alt="" style="width: 100px">
@@ -189,7 +189,7 @@
         <form method="POST" action="{{ url('delete-supplier') }}" enctype="multipart/form-data">
           @csrf
           @method('DELETE')
-          <input type="" id="delete_id" name="delete_supplier_id">
+          <input type="hidden" id="delete_id" name="delete_supplier_id">
           <div class="modal-footer ">
             <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Tidak</button>
             <button type="submit" class="btn btn-danger ">Iya</button>
@@ -220,7 +220,7 @@
           console.log(response);
           $('#editsupplier').modal('show');
           $('#supplier_id').val(supplier_id);
-          // $('#foto_supplier').val(response.supplier.foto_supplier);
+          $('#foto_supplier').val(response.supplier.foto_supplier);
           // $('#foto').html(
           //   `<img src="/storage /post-images/${response.supplier.foto_supplier}" width="100" class="img-fluid img-thumbnail">`
           // );

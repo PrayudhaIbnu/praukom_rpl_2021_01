@@ -86,7 +86,7 @@ class SupplierController extends Controller
         $supplier->alamat_supplier = $request->input('alamat_supplier');
         $supplier->telp_supplier = $request->input('telp_supplier');
         if ($request->hasFile('foto_supplier')) {
-            $destination = 'storage/post-images/' . $supplier->foto;
+            $destination = 'storage/post-images/' . $supplier->foto_supplier;
             if (file::exists($destination)) {
                 file::delete($destination);
             }
@@ -94,7 +94,7 @@ class SupplierController extends Controller
             $extention = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extention;
             $file->move('storage/post-images/', $filename);
-            $supplier->foto = $filename;
+            $supplier->foto_supplier = $filename;
         }
         $supplier->update();
         return redirect()->back()->with('success', "Data Berhasil di Edit");
