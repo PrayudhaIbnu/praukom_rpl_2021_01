@@ -9,6 +9,8 @@ class Produk extends Model
 {
     use HasFactory;
     protected $table = "produk";
+    protected $keyType = 'string';
+    protected $primaryKey = "id_produk";
     protected $fillable = [
         'id_produk',
         'kategori',
@@ -21,5 +23,5 @@ class Produk extends Model
         // 'supplier',
         // 'user'
     ];
-    public $timestamps = false;   
+    public $timestamps = false;
 }

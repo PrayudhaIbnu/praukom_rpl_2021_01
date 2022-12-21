@@ -48,7 +48,7 @@
 
           {{-- TABEL --}}
           <table class="table table-hover mt-4 ">
-            <thead class="table-warning" style="vertical-align: middle;">
+            <thead class="table-warning">
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">Foto</th>
@@ -59,7 +59,7 @@
               </tr>
             </thead>
             @foreach ($user as $item)
-              <tr style="vertical-align: middle;">
+              <tr>
                 <td> {{ $loop->iteration }}</td>
                 <td>
                   <img id="gambar" src="{{ asset('storage/post-images/' . $item->foto) }}" alt=""

@@ -16,7 +16,7 @@ class SuperAdminController extends Controller
         $user = DB::table('users')
             ->select(['users.nama', 'users.username', 'level_user.nama_level', 'users.foto', 'users.id_user', 'users.level'])
             ->join('level_user', 'users.level', '=', 'level_user.id_level')
-            ->orderBy('nama', 'ASC')
+            ->orderBy('created_at', 'ASC')
             ->get();
         return view('SuperAdmin.index', compact('user', 'level_user'));
     }

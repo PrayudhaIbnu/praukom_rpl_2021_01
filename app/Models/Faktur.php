@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class Faktur extends Model
 {
     use HasFactory;
-    protected $table = "detail_penjualan";
-    // protected $primaryKey = "id_supplier";
+    protected $table = "faktur";
+    protected $primaryKey = "id_faktur";
     protected $fillable = [
-        'produk',
+        'id_faktur',
         'penjualan',
-        'qty',
-        'Sub_total_hrg'
+        'jml_tunai',
+        'jml_kembalian',
+        'grand_total'
     ];
     public $timestamps = false;
 }

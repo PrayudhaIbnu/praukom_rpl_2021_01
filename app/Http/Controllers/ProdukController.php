@@ -35,7 +35,7 @@ class ProdukController extends Controller
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
         // $produk->foto_produk = $request->file('foto_produk')->store('post-images');
-        $produk['user'] = 'USR02';
+        $produk['user'] = 'USR02'; // Auth()->user()->id();
         $produk->save();
         return redirect()->back()->with('success', "Data berhasi di tambah");
     }

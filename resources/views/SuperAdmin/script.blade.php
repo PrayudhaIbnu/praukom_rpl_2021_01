@@ -15,6 +15,7 @@
         url: "edit-user/" + user_id,
         dataType: "json",
         success: function(response) {
+          console.log(response);
           $('#edituser').modal('show');
           $('#user_id').val(user_id);
           $('#path_foto').val(response.user.foto);

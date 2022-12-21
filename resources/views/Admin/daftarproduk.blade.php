@@ -68,8 +68,8 @@
                     <td>{{ $d->nama_produk }}</td>
                     <td>{{ $d->stok }}</td>
                     <td>{{ $d->satuan_produk }}</td>
-                    <td>{{ $d->harga_jual }}</td>
-                    <td>{{ $d->harga_beli }}</td>
+                    <td> Rp {{ number_format($d->harga_jual, 2, ',', '.') }}</td>
+                    <td>Rp {{ number_format($d->harga_beli, 2, ',', '.') }}</td>
                     <td>
                       <a href="produk/detail/{{ $d->id_produk }}">
                         <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>

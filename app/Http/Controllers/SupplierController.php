@@ -24,10 +24,9 @@ class SupplierController extends Controller
     public function tambah(Request $request)
     {
         $supplier = new Supplier;
-        $id_supplier = substr(md5(rand(0, 99999)), -4);
+        $id_supplier = collect(DB::select('SELECT new_idsupplier() AS new_idsupplier'))->first()->new_idsupplier;
         $supplier['id_supplier'] = $id_supplier;
         $supplier->nama_supplier = $request->input('nama_supplier');
-        // $supplier->foto_supplier = $request->file('foto_supplier')->store('post-images');
         if ($request->hasFile('foto_supplier')) {
             $file = $request->file('foto_supplier');
             $extention = $file->getClientOriginalExtension();
@@ -50,7 +49,6 @@ class SupplierController extends Controller
     public function show($id)
     {
         $detailSupplier = collect(DB::select('CALL get_one_supplier_by_id(?)', [$id]))->first();
-        // echo json_encode($edit);
         return view('admin.detailsupplier', compact('detailSupplier'));
     }
 

@@ -6,7 +6,6 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransaksiController;
-use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +33,8 @@ Route::controller(AuthController::class)->group(function () {
 
 // ROUTES Super Admin
 // Route::get('/superadmin/kelolaakun/search', [SuperAdminController::class, 'search']);
+
+// Auth???
 // Route::middleware('auth')->group(function () {
 // Route::middleware('ceklevel:L01')->group(function () {
 Route::controller(SuperAdminController::class)->group(function () {
@@ -49,7 +50,7 @@ Route::controller(SuperAdminController::class)->group(function () {
 // ROUTES UNTUK ROLE ADMIN
 Route::prefix('/admin')->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard')->name('admin');
+        return view('admin.dashboard');
     });
     Route::get('/produk', function () {
         return view('admin.daftarproduk');
@@ -88,14 +89,19 @@ Route::controller(SupplierController::class)->group(function () {
         });
 });
 
+
+// ROUTES UNTUK ROLE KASIR
 Route::controller(TransaksiController::class)->group(function () {
-    // ROUTES UNTUK ROLE KASIR
     Route::prefix('/kasir')->group(function () {
         Route::get('/dashboard', function () {
             return view('kasir.dashboard');
         });
         Route::get('/transaksi', 'index');
-
+        Route::post('/tambah-cart', 'addItem')->name('tambah-cart');
+        Route::post('/tambah-qty', 'increaseItem')->name('tambah-qty');
+        Route::post('/kurang-qty', 'decreaseItem')->name('kurang-qty');
+        Route::post('/remove-cart', 'removeItem')->name('hapus-cart');
+        Route::post('/checkout', 'handleSubmit')->name('transaksi');
         Route::get('/laporan', function () {
             return view('kasir.laporan');
         });
@@ -104,8 +110,6 @@ Route::controller(TransaksiController::class)->group(function () {
             return view('Kasir.daftarproduk');
         });
     });
-    // Routes CRUD Kasir
-
 });
 
 
