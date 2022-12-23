@@ -97,12 +97,27 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="/admin/laporan" class="nav-link">
-            <i class="nav-icon fas fa-file-alt"></i>
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt-fast"></i>
             <p>
-              Laporan
+              History
+              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview pl-4">
+            <li class="nav-item">
+              <a href="/admin/history/barang-masuk" class="nav-link">
+                <i class="fa-solid fa-list-ul"></i>
+                <p>Barang Masuk</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/history/barang-keluar" class="nav-link">
+                <i class="fa-brands fa-wpforms"></i>
+                <p>Barang Keluar</p>
+              </a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">

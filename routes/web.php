@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\ProdukRejectController;
+use App\Http\Controllers\HistoryController;
 use RealRashid\SweetAlert\Facades\Alert;
 
 /*
@@ -45,30 +45,28 @@ Route::prefix('/admin')->group(function () {
     Route::get('/produk', function () {
         return view('admin.daftarproduk');
     });
-    // Route::get('/produkreject', function () {
-    //     return view('admin.produkreject');
-    // });
-    Route::get('/inputstok', function () {
-        return view('admin.inputstokproduk');
-    });
     Route::get('/listkategori', function () {
         return view('admin.listkategori');
     });
 });
-Route::get('/admin/laporan', [ProdukRejectController::class, 'laporan']);
+// untuk role admin history
+Route::get('/admin/history/barang-keluar', [HistoryController::class, 'historybarangkeluar']);
+Route::get('/admin/history/barang-masuk', [HistoryController::class, 'historybarangmasuk']);
 
 // Routes ADMIN CRUD Produk
 Route::controller(ProdukController::class)
     ->prefix('/admin')
     ->group(function () {
         Route::get('/produk', 'index')->name('produk');
+        Route::get('/inputstok', 'indexstok');
         Route::get('/produk/detail/{id}', 'show');
-        Route::post('/tambah-produk', 'tambah')->name('tambah-produk');
+        Route::post('/tambah-stok', 'produkmasuk')->name('tambah-stok');
+        Route::post('/tambah-produk', 'store')->name('tambah-produk');
+        Route::get('/produkreject', 'indexprodukreject');
+        Route::post('/input-produkreject', 'storeprodukreject');
         Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
     });
-// Routes Admin Input Product Reject
-Route::get('/admin/produkreject', [ProdukRejectController::class, 'index']);
-Route::post('/admin/produkreject', [ProdukRejectController::class, 'store']);
+
 
 
 // Routes CRUD Supplier

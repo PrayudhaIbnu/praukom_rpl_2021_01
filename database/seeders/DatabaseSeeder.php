@@ -44,6 +44,17 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        DB::table('users')->insert(
+            [
+                'id_user' => 'USR01',
+                'nama' => 'Super Admin',
+                'username' => 'superadmin',
+                'password' => '$2a$04$8CdTgc9ElPOyBsRLqEzG7.IbKssuQOqvcRd68cD0O7YrSvow70j8W', // onemartjaya
+                'level' => 'L01',
+
+            ]
+        );
+
         DB::table('produk_kategori')->insert(
             [
                 [
@@ -51,18 +62,6 @@ class DatabaseSeeder extends Seeder
                 ],
                 [
                     'kategori_produk' => 'Minuman',
-                ]
-            ]
-        );
-        DB::table('users')->insert(
-            [
-                [
-                    'id_user' => 'USR01',
-                    'nama' => 'Super Admin SMKN1',
-                    'username' => 'superadminsmkn1',
-                    'password' => 'superadminsmkn1bks',
-                    'foto' => '',
-                    'level' => 'L01',
                 ]
             ]
         );

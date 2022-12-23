@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 class SuperAdminController extends Controller
 {
     public function index(Request $request)
+
     {
         // $user = Users::all();
         $search = $request->search;

@@ -4,7 +4,7 @@
     <div class="content-header">
       <div class="container-fluid">
       <div class="row">
-          <div class="col-sm-6 mb-5">
+          <div class="col-sm-6 mb-4">
             <h1 class="m-0">Produk Reject</h1>
           </div>
         </div>
@@ -14,14 +14,14 @@
         </div>
       @endif
         <div class="card w-50 m-auto bg-transparent shadow-none " >
-          <form method="POST" action="/admin/produkreject" >
+          <form method="POST" action="/admin/input-produkreject" >
                 @csrf
             <div class="modal-body">
               <div class="row align-items-start">
                   <div class="col mb-3">
                     <label for="jml_keluar" class="form-label font-weight-normal">Nama Produk</label>
-                  <select name="produk" id="produk" class="form-select " aria-label="Default select example">
-                    <option value="" selected disabled>- Pilih Produk -</option>
+                  <select name="produk" id="produk" class="form-select bg-white" aria-label="Default select example">
+                    <option value="" selected disabled >- Pilih Produk -</option>
                     @foreach ($produk as $item)
                       <option value="{{ $item->id_produk }}">{{ $item->nama_produk }}</option>
                     @endforeach

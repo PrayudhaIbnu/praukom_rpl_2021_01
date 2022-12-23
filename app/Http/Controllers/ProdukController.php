@@ -23,47 +23,21 @@ class ProdukController extends Controller
         return view('admin.daftarproduk', compact('produk', 'kategori'));
     }
 
-    public function produkreject(Request $request)
+    public function store(Request $request)
     {
-    }
-
-    public function tambah(Request $request)
-    {
+        //
         $produk = new Produk;
         $produk->id_produk = $request->input('kode_produk');
         $produk->kategori = $request->input('id_kategori');
         $produk->nama_produk = $request->input('nama_produk');
-        // $stok = 0;
         $produk['stok'] = 0;
         $produk->satuan_produk = $request->input('satuan_produk');
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
         // $produk->foto_produk = $request->file('foto_produk')->store('post-images');
-        // $produk->supplier = $request->input('supplier');
-        $produk['user'] = 'USR00';
+        $produk['user'] = 'USR02';
         $produk->save();
         return redirect()->back()->with('success', "Data berhasi di tambah");
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -114,5 +88,49 @@ class ProdukController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function indexstok()
+    {
+        $produk = DB::select('SELECT id_produk, nama_produk FROM produk');
+        $supplier = DB::select('SELECT id_supplier, nama_supplier FROM Supplier');
+
+        return view('Admin.inputstokproduk', compact('produk', 'supplier'));
+    }
+
+    public function produkmasuk(Request $request)
+    {
+        $id = $request->input('id_produk');
+        $tgl_msk = $request->input('tgl_msk');
+        $tgl_exp = $request->input('tgl_exp');
+        $jumlah = $request->input('qty');
+        $supp = $request->input('id_supplier');
+        DB::select('CALL tambahstokproduk(?, ?, ?, ?, ?)', [$id, $tgl_msk, $tgl_exp, $jumlah, $supp]);
+
+        return redirect()->back()->with('success', "Data berhasil di input");
+    }
+
+
+    // untuk produk reject
+    // 1. tampilan halaman produk reject
+    public function indexprodukreject()
+    {
+        $produk = DB::table('produk')->select()->get();
+        $brg_keluar = DB::table('barang_keluar')
+            ->select(['produk.nama_produk', 'barang_keluar.qty', 'barang_keluar.tanggal_keluar', 'barang_keluar.keterangan'])
+            ->join('produk', 'barang_keluar.produk', '=', 'produk.id_produk')
+            ->get();
+
+        return view('admin.produkreject', compact('brg_keluar', 'produk'));
+    }
+    // 2.function tambah procuk reject
+    public function storeprodukreject(Request $request)
+    {
+        $nama_produk = $request->input('produk');
+        $jml_keluar = $request->input('jml_keluar');
+        $tgl_keluar = $request->input('tgl_keluar');
+        $keterangan = $request->input('keterangan');
+        DB::select('CALL barangkeluar(?,?,?,?)', array($nama_produk, $jml_keluar, $tgl_keluar, $keterangan));
+        return redirect()->back()->with('success', "Data Berhasil di Input");
     }
 }
