@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\HistoryController;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Controllers\TransaksiController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,37 +25,59 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'index')->name('login')->middleware('guest');
+    Route::post('/auth', 'masuk');
+    Route::post('/logout', 'keluar');
 });
+
+// Route::group(['middleware' => ['auth']], function () {
+//     Route::group(['middleware' => ['cekLevel:L01']], function () {
+//         Route::resource('index', SuperAdminController::class);
+//     });
+//     Route::group(['middleware' => ['cekLevel:L02']], function () {
+//         Route::resource('index', ProdukController::class);
+//     });
+//     Route::group(['middleware' => ['cekLevel:L03']], function () {
+//         Route::resource('index', SuperAdminController::class);
+//     });
+//     Route::group(['middleware' => ['cekLevel:L03']], function () {
+//         Route::resource('index', SuperAdminController::class);
+//     });
+// });
 
 
 
 // ROUTES Super Admin
-Route::controller(SuperAdminController::class)->group(function () {
-    Route::get('/superadmin/kelolaakun', 'index');
-    Route::post('tambah-user', 'store');
-    Route::get('/superadmin/edit-user/{id}', 'edit');
-    Route::put('update-user',  'update');
-    Route::delete('delete-user',  'destroy');
+Route::group(['middleware' => ['auth']], function () {
+    // Route::group(['middleware' => ['ceklevel:1']], function () {
+    Route::controller(SuperAdminController::class)->group(function () {
+        Route::get('/superadmin/kelolaakun', 'index')->name('superadmin');
+        Route::post('tambah-user', 'store');
+        Route::get('/superadmin/edit-user/{id}', 'edit');
+        Route::put('update-user',  'update');
+        Route::delete('delete-user',  'destroy');
+    });
 });
+// });
+
 
 // ROUTES UNTUK ROLE ADMIN
-Route::prefix('/admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    });
-    Route::get('/produk', function () {
-        return view('admin.daftarproduk');
-    });
-    Route::get('/listkategori', function () {
-        return view('admin.listkategori');
+Route::group(['middleware' => ['auth']], function () {
+    Route::prefix('/admin')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        });
+        Route::get('/listkategori', function () {
+            return view('admin.listkategori');
+        });
     });
 });
+// });
+
 // untuk role admin history
 Route::get('/admin/history/barang-keluar', [HistoryController::class, 'historybarangkeluar']);
 Route::get('/admin/history/barang-masuk', [HistoryController::class, 'historybarangmasuk']);
-
 // Routes ADMIN CRUD Produk
 Route::controller(ProdukController::class)
     ->prefix('/admin')
@@ -65,11 +90,16 @@ Route::controller(ProdukController::class)
         Route::get('/produkreject', 'indexprodukreject');
         Route::post('/input-produkreject', 'storeprodukreject');
         Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
+        // listkategori
+        Route::get('/listkategori', 'listkategori');
+        Route::post('/tambah-kategori', 'tambahkategori');
+        Route::get('/edit-kategori/{id}', 'editkategori');
+        Route::put('update-kategori',  'updatekategori');
     });
 
 
 
-// Routes CRUD Supplier
+// Routes CRUD ADMIN Supplier
 Route::controller(SupplierController::class)->group(function () {
     Route::post('tambah-supplier', 'tambah');
     Route::put('update-supplier', 'update');
@@ -81,30 +111,33 @@ Route::controller(SupplierController::class)->group(function () {
             Route::get('/supplier/detail/{id}', 'show');
         });
 });
-
-
-
+// });
 
 
 // ROUTES UNTUK ROLE KASIR
-Route::prefix('/kasir')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('kasir.dashboard');
-    });
+Route::group(['middleware' => ['auth']], function () {
+    Route::controller(TransaksiController::class)->group(function () {
+        Route::prefix('/kasir')->group(function () {
+            Route::get('/dashboard', function () {
+                return view('kasir.dashboard');
+            });
+            Route::get('/transaksi', 'index');
+            Route::post('/tambah-cart', 'addItem')->name('tambah-cart');
+            Route::post('/tambah-qty', 'increaseItem')->name('tambah-qty');
+            Route::post('/kurang-qty', 'decreaseItem')->name('kurang-qty');
+            Route::post('/remove-cart', 'removeItem')->name('hapus-cart');
+            Route::post('/checkout', 'handleSubmit')->name('transaksi');
+            Route::get('/laporan', function () {
+                return view('kasir.laporan');
+            });
 
-    Route::get('/transaksi', function () {
-        return view('kasir.transaksi');
-    });
-
-    Route::get('/laporan', function () {
-        return view('kasir.laporan');
-    });
-
-    Route::get('/produk', function () {
-        return view('Kasir.daftarproduk');
+            Route::get('/produk', function () {
+                return view('Kasir.daftarproduk');
+            });
+        });
     });
 });
-// Routes CRUD Kasir
+
 
 
 // ROUTES UNTUK ROLE PENGAWAS
@@ -125,3 +158,4 @@ Route::prefix('/pengawas')->group(function () {
         return view('pengawas.historypenjualan');
     });
 });
+// });

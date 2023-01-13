@@ -33,7 +33,7 @@
                   <th scope="col">No.</th>
                   <th scope="col">Foto</th>
                   <th scope="col">Nama Supplier</th>
-                  <th scope="col">Alamat Supplier</th>
+                  <th scope="col" style="width: 450px;">Alamat Supplier</th>
                   <th scope="col">No. Telp</th>
                   <th scope="col">Aksi</th>
                 </tr>
@@ -41,21 +41,21 @@
               <tbody>
                 @foreach ($data as $d)
                   <tr>
-                    <th scope="row">{{ $d->id_supplier }}</th>
-                    <td>
+                    <th style="vertical-align: middle" scope="row">{{ $loop->iteration }}</th>
+                    <td style="vertical-align: middle">
                       <img id="foto_supplier" src="{{ asset('storage/post-images/' . $d->foto_supplier) }}"
                         alt="" style="width: 100px">
                     </td>
                     </td>
-                    <td>{{ $d->nama_supplier }}</td>
-                    <td>{{ $d->alamat_supplier }}</td>
-                    <td>{{ $d->telp_supplier }}</td>
-                    <td>
+                    <td style="vertical-align: middle">{{ $d->nama_supplier }}</td>
+                    <td style="vertical-align: middle">{{ $d->alamat_supplier }}</td>
+                    <td style="vertical-align: middle">{{ $d->telp_supplier }}</td>
+                    <td style="vertical-align: middle">
                       <a href="supplier/detail/{{ $d->id_supplier }}">
                         <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
                       </a>
-                      <button class="btn btn-edit btn-primary" data-toggle="modal" data-target=""
-                        value="{{ $d->id_supplier }}"><i class="fa-solid fa-pen-to-square"></i></button>
+                      <button class="btn btn-edit btn-primary" value="{{ $d->id_supplier }}"><i
+                          class="fa-solid fa-pen-to-square"></i></button>
                       <button class="btn btn-hapus btn-danger" value="{{ $d->id_supplier }}"><i
                           class="fa-solid fa-trash"></i></button>
                     </td>
@@ -108,7 +108,8 @@
             </div>
             <div class="row align-items-center">
               <div class="col mb-2">
-                <label for="alamat_supplier" name="alamat_supplier" class="form-label font-weight-normal">Alamat</label>
+                <label for="alamat_supplier" name="alamat_supplier"
+                  class="form-label font-weight-normal">Alamat</label>
                 <textarea class="form-control" name="alamat_supplier" id="alamat_supplier" rows="4"></textarea>
               </div>
             </div>
@@ -123,15 +124,14 @@
     </div>
   </div>
 
+
   <!-- modal edit -->
   <div class="modal fade" id="editsupplier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Edit Supplier</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Form Edit User</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form method="POST" action="{{ url('update-supplier') }}" enctype="multipart/form-data">
           @csrf
@@ -167,7 +167,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary rounded-3 btn-sm pl-3 pr-3"
-              data-dismiss="modal">Kembali</button>
+              data-bs-dismiss="modal">Kembali</button>
             <button type="submit" class="btn btn-primary rounded-3 btn-sm pl-3 pr-3">Simpan</button>
           </div>
         </form>
@@ -176,7 +176,7 @@
   </div>
   {{-- akhir modal edit --}}
 
-  <div class="modal fade" id="deletesupplier" tabindex="-1" aria-labelledby="tambahuserLabel" aria-hidden="true">
+  <div class="modal fade" id="deletesupplier" tabindex="-1" aria-labelledby="hapussupplier" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content text-center">
         <div class="modal-header flex-column">
@@ -189,7 +189,7 @@
         <form method="POST" action="{{ url('delete-supplier') }}" enctype="multipart/form-data">
           @csrf
           @method('DELETE')
-          <input type="" id="delete_id" name="delete_supplier_id">
+          <input type="hidden" id="delete_id" name="delete_supplier_id">
           <div class="modal-footer ">
             <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Tidak</button>
             <button type="submit" class="btn btn-danger ">Iya</button>
@@ -220,7 +220,7 @@
           console.log(response);
           $('#editsupplier').modal('show');
           $('#supplier_id').val(supplier_id);
-          // $('#foto_supplier').val(response.supplier.foto_supplier);
+          $('#foto_supplier').val(response.supplier.foto_supplier);
           // $('#foto').html(
           //   `<img src="/storage /post-images/${response.supplier.foto_supplier}" width="100" class="img-fluid img-thumbnail">`
           // );

@@ -8,16 +8,26 @@
     <div class="content-header">
       <div class="container-fluid transaksi">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="">Transaksi</h1>
+          <div>
+            <h1 class="float-start">Transaksi</h1>
+            {{-- @if (session()->has('error'))
+              <div class="alert alert-warning float-end" role="alert">
+                {{ session('error') }}
+              </div>
+            @endif --}}
           </div>
         </div>
         <div class="row gx-3 ">
           <div class="col-3 flex">
             <!-- Main content -->
             <div class="card" style="width: 100%; height: 165px;">
-              <div class="card-body" style="vertical-align: middle; margin-top: 20px;">
+              <div class="card-body" style="vertical-align: middle; margin-top: 5px;">
                 <div class="mb-3 row">
+                  <label for="staticEmail" class="col-sm-5 col-form-label">Jam</label>
+                  <div class="col-sm-7">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                      value="{{ date('H:i') }}">
+                  </div>
                   <label for="staticEmail" class="col-sm-5 col-form-label">Tanggal</label>
                   <div class="col-sm-7">
                     <input type="text" readonly class="form-control-plaintext" id="staticEmail"
@@ -34,34 +44,40 @@
           </div>
           <div class="col-5">
             <!-- Main content -->
-            <div class="card" style="width: 100%; height: 165px;">
-              <div class="card-body">
-                <div class="mb-3 row">
-                  <label for="staticEmail" id="produk" class="col-sm-3 col-form-label">Produk</label>
-                  <div class="col-sm-9 mb-2">
-                    <select class="form-select" id="produk" aria-label="Default select example">
-                      {{-- @foreach ($nama_produk as $item)
-                        <option value="{{ $item->nama_produk }}">{{ $item->nama_produk }}</option>
-                      @endforeach --}}
-                    </select>
+            <form action="{{ route('tambah-cart') }}" method="post">
+              @csrf
+              <div class="card" style="width: 100%; height: 165px;">
+                <div class="card-body">
+                  <div class="mb-3 row">
+                    <label for="staticEmail" id="produk" class="col-sm-3 col-form-label">Produk</label>
+                    <div class="col-sm-9 mb-2">
+                      <select class="form-select" id="produk" name="produk" aria-label="Default select example">
+                        <option disabled class="bg-light" selected>Pilih Produk...</option>
+                        @foreach ($produk as $p)
+                          <option value="{{ $p->id_produk }}">{{ $p->nama_produk }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <label for="qty" class="col-sm-3 col-form-label">Qty</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" id="qty" name="qty" value="0">
+                    </div>
                   </div>
-                  <label for="inputPassword" class="col-sm-3 col-form-label">Qty</label>
-                  <div class="col-sm-9">
-                    <input type="number" class="form-control" id="inputPassword">
-                  </div>
-
+                  <button type="submit" class="btn btn-primary btn-sm  float-end">Simpan</button>
                 </div>
-                <button class="btn btn-primary btn-sm  float-end">Simpan</button>
               </div>
-            </div>
+            </form>
             {{-- akhir card --}}
           </div>
           <div class="col">
             <!-- Main content -->
             <div class="card" style="width: 100%; height: 165px;">
               <div class="card-body">
+                <input type="text" class="form-control form-control-lg float-end" style="display: none" readonly
+                  name="grand_total" id="grand_total" value="{{ $summary['total'] }}">
                 <h2 class="h3" style="font-weight: 500; color: #a2a2a2">Grand Total</h2>
-                <p class="float-end" style="font-size: 60px; font-weight: 600;">5000</p>
+                <p class="float-end" style="font-size: 45px; font-weight: 600;" id="grand_total">Rp
+                  {{ number_format($summary['total'], 2, ',', '.') }}</p>
               </div>
             </div>
             {{-- akhir card --}}
@@ -69,7 +85,7 @@
         </div>
         {{-- Akhir Card Grid --}}
         <div class="card" style="width: 100%; height: 220px; overflow-y: scroll;">
-          <table class="table table-borderless ">
+          <table class="table table-sm table-hover table-borderless ">
             <thead class="table-warning sticky-top">
               <tr>
                 <th scope="col"style="width: 80px">No</th>
@@ -81,66 +97,88 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Goodmood</td>
-                <td>21000</td>
-                <td>2</td>
-                <td>42000</td>
-                <td>
-                  <a href="">
-                    <button class="btn btn-warning">
-                      <span class="fas fa-minus"></span>
-                    </button>
-                  </a>
+              @forelse($carts as $index=>$cart)
+                <tr>
+                  <th scope="row">{{ $index + 1 }}</th>
+                  <td>{{ $cart['name'] }}</td>
+                  <td>Rp {{ number_format($cart['pricesingle'], 2, ',', '.') }}</td>
+                  <td>{{ $cart['qty'] }}</td>
+                  <td>Rp {{ number_format($cart['price'], 2, ',', '.') }}</td>
+                  <td style="display: flex">
+                    <form action="{{ route('tambah-qty') }}" method="post">
+                      @csrf
+                      <input type="hidden" value="{{ $cart['rowId'] }}" name="id">
+                      <button type="submit" class="mr-1 btn btn-primary btn-sm" style="padding:7px 10px"><i
+                          class="fas fa-plus"></i></button>
+                    </form>
+                    <form action="{{ route('kurang-qty') }}" method="post">
+                      @csrf
+                      <input type="hidden" value="{{ $cart['rowId'] }}" name="id">
+                      <button type="submit" class="mr-1 btn btn-info btn-sm" style="padding:7px 10px"><i
+                          class="fas fa-minus"></i></button>
+                    </form>
+                    <form action="{{ route('hapus-cart') }}" method="post">
+                      @csrf
+                      <input type="hidden" value="{{ $cart['rowId'] }}" name="id">
+                      <button type="submit" class="mr-1 btn btn-danger btn-sm" style="padding:7px 10px"><i
+                          class="fas fa-trash"></i></button>
+                    </form>
+                  </td>
+                </tr>
+              @empty
+                <td colspan="6">
+                  <h6 class="text-center">Keranjang Anda Kosong, Yuk Belanja!</h6>
                 </td>
-              </tr>
-
+              @endforelse
             </tbody>
           </table>
         </div>
         {{-- akhir table   --}}
-        <div class="row gx-3 ">
-          <div class="col-5">
-            <!-- Main content -->
-            <div class="card" style="width: 100%; height: 130px;">
-              <div class="card-body">
-                <h2 class="h4" style="font-weight: 500; color: #a2a2a2">Cash</h2>
-                <input class="form-control form-control-lg" type="number" placeholder="Masukan Tunai"
-                  aria-label=".form-control-lg example">
+        <form action="{{ route('transaksi') }}" method="POST">
+          @csrf
+          <div class="row gx-3 ">
+            <div class="col-5">
+              <!-- Main content -->
+              <div class="card" style="width: 100%; height: 130px;">
+                <div class="card-body">
+                  <h2 class="h4" style="font-weight: 500; color: #a2a2a2">Cash</h2>
+                  <input class="form-control form-control-lg" style="font-weight: 600;" type="number"
+                    name="tunai" id="tunai" placeholder="Masukan Tunai" aria-label=".form-control-lg example">
+                </div>
+              </div>
+              {{-- akhir card --}}
+            </div>
+            <div class="col-4">
+              <!-- Main content -->
+              <div class="card" style="width: 100%; height: 130px;">
+                <div class="card-body">
+                  <h2 class="h4" style="font-weight: 500; color: #a2a2a2">Kembali</h2>
+                  <input class="form-control form-control-lg" style="font-weight: 600;" type="number" readonly
+                    id="kembalian" name="kembalian" aria-label=".form-control-lg example">
+                </div>
               </div>
             </div>
-            {{-- akhir card --}}
-          </div>
-          <div class="col-4">
-            <!-- Main content -->
-            <div class="card" style="width: 100%; height: 130px;">
-              <div class="card-body">
-                <h2 class="h4" style="font-weight: 500; color: #a2a2a2">Kembali</h2>
-                <p class="float-end" style="font-size: 40px; font-weight: 600;">5000</p>
-                {{-- <input class="form-control form-control-lg" type="number" placeholder="Masukan Tunai" aria-label=".form-control-lg example"> --}}
-              </div>
+            <div class="col-3">
+              <!-- Main content -->
+              <button class="btn btn-danger w-100 fw-bold" style="height: 130px; font-size: 30px" id="store"
+                type="submit">BAYAR!</button>
+              {{-- akhir card --}}
             </div>
           </div>
-          <div class="col-3">
-            <!-- Main content -->
-            <button class="btn btn-danger w-100 fw-bold" style="height: 130px; font-size: 30px">BAYAR!</button>
-            {{-- akhir card --}}
-          </div>
-        </div>
-
+        </form>
       </div>
     </div>
   </div>
-  </div>
-  </div>
-
-  <script>
-    $('transaksi').each(function() {
-      var sub_total_hrg = $(this).data('lat');
-      var lon = $(this).data('lon');
-
-      var mymap = new L.map('mapid').setView([lat, lon], 14);
-    })
-  </script>
+  @include('sweetalert::alert')
 </x-app-layout>
+<script>
+  $(document).ready(function() {
+    $("#tunai").keyup(function() {
+      var tunai = parseInt($("#tunai").val());
+      var grand_total = parseInt($("#grand_total").val());
+
+      var kembalian = tunai - grand_total;
+      $("#kembalian").val(kembalian);
+    })
+  });
+</script>

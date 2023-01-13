@@ -12,39 +12,55 @@
                   style="border-radius: 1rem 0 0 1rem;" />
               </div>
               <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                <div class="card-body p-4 p-lg-5 text-black">
-
-                  <form>
+                <div class="card-body p-4 p-lg-5 text-black">   
                     <div class="d-flex align-items-center mb-3 pb-1">
-                      <img src="/img/logoblud.png" alt="User Photos" class="img">
+                      <img src="/img/logoblud.png" alt="Logo BLUD" class="img">
                     </div>
                     <h2 class="text-center fst-italic"><span class="font-weight-bold text-yellow">One</span><span
                         class="font-weight-bold text-orange">Mart</span></h2>
                     <h6 class="fw-normal mb-3 pb-1" style="letter-spacing: 1px; color: orange; text-align:center;">
                       Aplikasi Manajemen Waserba SMKN 1 Kota Bekasi</h6>
+                    <form method="POST" action="{{ url('/auth') }}">  
+                    @csrf
                     <div class="form-outline mb-4">
-                      <input type="email" id="form2Example17"
-                        class="form-control form-control-lg mb-3 border-warning form-control-sm" placeholder="Username"
-                        style="border-radius:10px;" />
+                      <input autocomplete="off" autofocus type="text" id="username" name="username"
+                        class="form-control form-control-lg  border-warning form-control-sm
+                          @error('username')
+                            is-invalid
+                          @enderror
+                          " placeholder="Username" style="border-radius:10px;" value="{{ old('username') }}" />
+                        @error('username')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror   
                     </div>
-
+                    
                     <div class="form-outline mb-4">
-                      <input type="password" id="form2Example27"
-                        class="form-control form-control-lg border-warning form-control-sm" placeholder="Password"
-                        style="border-radius:10px; " />
+                      <input type="password" id="form2Example27" name="password"
+                        class="form-control form-control-lg border-warning form-control-sm
+                          @error('password')
+                            is-invalid
+                          @enderror
+                          " placeholder="Password" style="border-radius:10px; " />
+                        @error('password')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
                     </div>
-
+                   
                     <div class="pt-1 mb-4">
-                      <button class="btn btn-lg btn-block bg-orange text-white" type="button"
+                      <button class="btn btn-lg btn-block bg-orange text-white" type="submit"
                         style="border-radius:50px;">
                         <h5 class="text-white">Masuk</h5>
                       </button>
                     </div>
+                  </form>
                     <footer>
                       <h5 class="small text-muted fw-bolder text-center"><i class="fa-regular fa-copyright"></i> 2022
                         One Mart</h5>
                     </footer>
-                  </form>
                 </div>
               </div>
             </div>

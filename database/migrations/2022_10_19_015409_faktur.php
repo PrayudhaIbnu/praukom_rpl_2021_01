@@ -22,6 +22,7 @@ return new class extends Migration
             $table->char('penjualan', 13);
             $table->integer('jml_tunai');
             $table->integer('jml_kembalian');
+            $table->integer('grand_total');
 
             $table
                 ->foreign('penjualan')

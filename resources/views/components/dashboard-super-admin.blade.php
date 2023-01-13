@@ -6,9 +6,11 @@
           <i class="fas fa-bars"></i>
         </a>
       </li>
+      @auth
       <li class="nav-item d-none d-sm-inline-block">
-          <h5 class="m-0 nav-header text-light">Selamat Datang, <?php {{ $user; }} ?></h5>
+        <h5 class="m-0 nav-header text-light">Selamat Datang, </h5>
       </li>
+      @endauth
     </ul>
 
     <!-- Right navbar links -->
@@ -26,12 +28,13 @@
           </span>
 
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item logout">
-            <p>
-            <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
+          <form action="{{ url('/logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="dropdown-item logout">
+              <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
             <span class="text-sm ">Logout</span>
-            </p>
-          </a>
+            </button>
+          </form>
         </div>  
       </li>
       <li class="nav-item">

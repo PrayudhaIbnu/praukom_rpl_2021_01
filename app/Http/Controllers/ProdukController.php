@@ -14,6 +14,8 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //  menampilkan halaman daftar produk
     public function index()
     {
         $produk = DB::table('produk')->get();
@@ -23,6 +25,46 @@ class ProdukController extends Controller
         return view('admin.daftarproduk', compact('produk', 'kategori'));
     }
 
+    // menampilkan halaman listkategori
+    public function listkategori()
+    {
+        $produk = DB::table('produk')->get();
+        $kategori = DB::table('produk_kategori')
+            ->select()
+            ->get();
+        return view('admin.listkategori', compact('produk', 'kategori'));
+    }
+
+    // tambah kategori
+    public function tambahkategori(Request $request)
+    {
+        DB::table('produk_kategori')->insert([
+            'kategori_produk' => $request['nama_kategori']
+        ]);
+        return redirect()->back()->with('success', "Data berhasi di tambah");
+    }
+
+    // edit kategori
+    public function editkategori($id)
+    {
+        $kategori = DB::table('produk_kategori')->where('id_kategori', $id)->first();
+        return response()->json([
+            'kategori' => $kategori,
+        ]);
+    }
+
+    // update kategori
+    public function updatekategori(Request $request)
+    {
+        $id_kategori = $request->input('kategori_id');
+        DB::table('produk_kategori')->where('id_kategori', $id_kategori)->update([
+            'kategori_produk' => $request['nama_kategori']
+        ]);
+
+        return redirect()->back()->with('success', "Data berhasi di Edit");
+    }
+
+    // tambah produk
     public function store(Request $request)
     {
         //
@@ -35,7 +77,7 @@ class ProdukController extends Controller
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
         // $produk->foto_produk = $request->file('foto_produk')->store('post-images');
-        $produk['user'] = 'USR02';
+        $produk['user'] = 'USR02'; // Auth()->user()->id();
         $produk->save();
         return redirect()->back()->with('success', "Data berhasi di tambah");
     }

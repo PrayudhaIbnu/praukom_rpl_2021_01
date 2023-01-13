@@ -23,7 +23,6 @@
           <div class="float-start">
             <!-- Example single danger button -->
             <div class="btn-group mb-2 mt-2">
-              <div class="col">
                 <select class="form-select bg-warning form-select-sm" id="sort-kategori"
                   aria-label="Default select example">
                   <option class="bg-light" selected value="semua">Semua</option>
@@ -31,7 +30,6 @@
                     <option class="bg-light" value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
                   @endforeach
                 </select>
-              </div>
             </div>
           </div>
           <div class="float-end">
@@ -41,7 +39,7 @@
                 + Tambah
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item">Tambah Kategori</a></li>
+                <li><a href="/admin/listkategori" class="dropdown-item">Tambah Kategori</a></li>
                 <li><button class="dropdown-item" data-toggle="modal" data-target="#tambahproduk">Tambah
                     Produk</button>
                 </li>
@@ -68,8 +66,8 @@
                     <td>{{ $d->nama_produk }}</td>
                     <td>{{ $d->stok }}</td>
                     <td>{{ $d->satuan_produk }}</td>
-                    <td>{{ $d->harga_jual }}</td>
-                    <td>{{ $d->harga_beli }}</td>
+                    <td> Rp {{ number_format($d->harga_jual, 2, ',', '.') }}</td>
+                    <td>Rp {{ number_format($d->harga_beli, 2, ',', '.') }}</td>
                     <td>
                       <a href="produk/detail/{{ $d->id_produk }}">
                         <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>

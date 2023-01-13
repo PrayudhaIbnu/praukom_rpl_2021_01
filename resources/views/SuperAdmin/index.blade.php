@@ -65,7 +65,7 @@
                 <td>
                   <img id="gambar" src="{{ asset('storage/post-images/' . $item->foto) }}" alt=""
                     style="width: 100px">
-                </td>
+                </td>             
                 <td id="s">{{ $item->nama }}</td>
                 <td>{{ $item->nama_level }}</td>
                 <td>{{ $item->username }}</td>

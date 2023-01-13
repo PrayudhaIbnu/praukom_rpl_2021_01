@@ -13,26 +13,24 @@ return new class extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('detail_penjualan', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->engine = env('DB_STORAGE_ENGINE', 'InnoDB');
             $table->charset = env('DB_CHARSET', 'utf8mb4');
             $table->collation = env('DB_COLLATION', 'utf8mb4_general_ci');
-            $table->string('produk', 15);
-            $table->char('penjualan', 13);
-            $table->integer('qty');
-            $table->integer('sub_total_hrg');
+            $table->char('id_user', 5)->primary();
+            $table->string('nama', 60);
+            $table->string('username')->unique();
+            $table->text('password');
+            $table->text('foto')->nullable();
+            $table->char('level', 3);
+            $table->rememberToken();
+            $table->timestamps();
 
+            // foreign
             $table
-                ->foreign('penjualan')
-                ->references('id_penjualan')
-                ->on('penjualan')
-                ->cascadeOnDelete();
-
-            $table
-                ->foreign('produk')
-                ->references('id_produk')
-                ->on('produk')
+                ->foreign('level')
+                ->references('id_level')
+                ->on('level_user')
                 ->cascadeOnDelete();
         });
     }
@@ -44,7 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('detail_penjualan');
+        Schema::dropIfExists('user');
     }
 };

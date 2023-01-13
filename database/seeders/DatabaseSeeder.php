@@ -26,34 +26,25 @@ class DatabaseSeeder extends Seeder
             [
                 [
 
-                    'id_level' => 'L01',
+                    'id_level' => '1',
                     'nama_level' => 'Super Admin',
                 ],
                 [
-                    'id_level' => 'L02',
+                    'id_level' => '2',
                     'nama_level' => 'Admin',
                 ],
                 [
-                    'id_level' => 'L03',
+                    'id_level' => '3',
                     'nama_level' => 'Kasir',
                 ],
                 [
-                    'id_level' => 'L04',
+                    'id_level' => '4',
                     'nama_level' => 'Pengawas',
                 ],
             ]
         );
 
-        DB::table('users')->insert(
-            [
-                'id_user' => 'USR01',
-                'nama' => 'Super Admin',
-                'username' => 'superadmin',
-                'password' => '$2a$04$8CdTgc9ElPOyBsRLqEzG7.IbKssuQOqvcRd68cD0O7YrSvow70j8W', // onemartjaya
-                'level' => 'L01',
 
-            ]
-        );
 
         DB::table('produk_kategori')->insert(
             [
