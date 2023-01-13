@@ -1,5 +1,5 @@
 <x-app-layout>
-  <x-dashboard-admin /> 
+  <x-dashboard-admin />
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -9,32 +9,42 @@
           </div>
         </div>
         <div class="container-fluid">
-          <div class="card mt-5 w-50">
-            <div class="container">
+          <div class="card mt-5">
+            <div class="row">
+
               <div class="col">
-                <div class="row mt-3">              
-                  <div class="col-3">
-                    <td><h6 class="mb-0 text-secondary">Nama supplier</h6></td>
-                    <th><h6 class="fw-bold mt-0">{{ $detailSupplier->nama_supplier }}</h6></th>
-                  </div>  
-                </div>
-                <div class="row mt-3">
-                  <div class="col-3">
-                    <td><h6 class="mb-0 text-secondary">No. Telepon</h6></td>
-                    <th><h6 class="fw-bold mt-0">{{ $detailSupplier->telp_supplier }}</h6></th>
+                <div class="row gx-5 m-4">
+                  <div class="col">
+                    <h6 class="text-secondary mb-2">Nama Supplier</h6>
+                    <h5 class="fw-bold">{{ $detailSupplier->nama_supplier }}</h3>
                   </div>
-                  <div class="col-3">
-                    <td><h6 class="mb-0 text-secondary">Alamat</h6></td>
-                    <th><h6 class="fw-bold mt-0">{{ $detailSupplier->alamat_supplier }}</h6></th>
+
+                </div>
+                <div class="row gx-5 m-4">
+                  <div class="col">
+                    <h6 class="text-secondary mb-2">No Telepon</h6>
+                    <h5 class="fw-bold">{{ $detailSupplier->telp_supplier }}</h3>
                   </div>
                 </div>
               </div>
+              <div class="col m-4">
+                <h6 class="text-secondary mb-2">Alamat</h6>
+                <h5 class="fw-bold">{{ $detailSupplier->alamat_supplier }}</h3>
+              </div>
+              <div class="col-5">
+                <div class="w-75 m-4" style="margin: 0 0 10 0; ">
+                  <img alt="Belum ada foto :("
+                    src="{{ asset('storage/post-images/' . $detailSupplier->foto_supplier) }}"
+                    class="img-fluid rounded">
+                  <a href="{{ url('/admin/supplier') }}">
+                    <button class="btn btn-primary float-end mt-2">Kembali</button>
+                  </a>
+                </div>
+
+              </div>
             </div>
+
           </div>
-          <div class="col">
-            <div class="card w-25 float-end" style="margin: 0 0 10 0">
-                <img src="https://img.icons8.com/ios-filled/300/null/noodles.png" class="img-fluid rounded-start" alt="...">
-            </div>
-          </div>              
+
         </div>
 </x-app-layout>

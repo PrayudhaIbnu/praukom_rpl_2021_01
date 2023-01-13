@@ -1,11 +1,11 @@
 <x-app-layout>
-  <x-dashboard-pengawas />
+  <x-dashboard-admin />
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-6">
-            <h1 class="mb-2">Laporan</h1>
+            <h1 class="m-0">Laporan</h1>
           </div>
           <!-- /.col -->
           <div class="row col-sm-6">
@@ -52,7 +52,6 @@
       </div>
     </div>
   </div>
-
 </x-app-layout>
 
 <script>
@@ -62,7 +61,6 @@
   var sum3 = 0;
   var sum4 = 0;
   var sum5 = 0;
-  var sum6 = 0;
   $("#harian tr").not(':first').not(':last').each(function() {
     sum1 += getnum($(this).find("td:eq(2)").text());
     sum2 += getnum($(this).find("td:eq(3)").text());
@@ -84,9 +82,8 @@
   $("#sum3").text(sum3);
 
   $("#mingguan tr").not(':first').not(':last').each(function() {
-    sum4 += getnum($(this).find("td:eq(2)").text());
-    sum5 += getnum($(this).find("td:eq(3)").text());
-    sum6 += getnum($(this).find("td:eq(4)").text());
+    sum4 += getnum($(this).find("td:eq(3)").text());
+    sum5 += getnum($(this).find("td:eq(4)").text());
 
     function getnum(t) {
       if (isNumeric(t)) {
@@ -101,5 +98,4 @@
   });
   $("#sum4").text(sum4);
   $("#sum5").text(sum5);
-  $("#sum6").text(sum6);
 </script>

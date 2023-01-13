@@ -10,11 +10,6 @@
         <div class="row mb-2">
           <div>
             <h1 class="float-start">Transaksi</h1>
-            {{-- @if (session()->has('error'))
-              <div class="alert alert-warning float-end" role="alert">
-                {{ session('error') }}
-              </div>
-            @endif --}}
           </div>
         </div>
         <div class="row gx-3 ">
@@ -35,7 +30,7 @@
                   </div>
                   <label for="staticEmail" class="col-sm-5 col-form-label">Kasir</label>
                   <div class="col-sm-7">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Vera Uhuyyy">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Kasir 1">
                   </div>
                 </div>
               </div>
@@ -44,7 +39,7 @@
           </div>
           <div class="col-5">
             <!-- Main content -->
-            <form action="{{ route('tambah-cart') }}" method="post">
+            <form action="{{ route('tambah-cart') }}" method="post" id="tambahcart">
               @csrf
               <div class="card" style="width: 100%; height: 165px;">
                 <div class="card-body">
@@ -63,7 +58,7 @@
                       <input type="number" class="form-control" id="qty" name="qty" value="0">
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-sm  float-end">Simpan</button>
+                  <button type="submit" class="btn btn-primary btn-sm float-end tambah-cart">Simpan</button>
                 </div>
               </div>
             </form>
@@ -127,7 +122,7 @@
                 </tr>
               @empty
                 <td colspan="6">
-                  <h6 class="text-center">Keranjang Anda Kosong, Yuk Belanja!</h6>
+                  <h6 class="text-center mt-3">Keranjang Anda Kosong, Yuk Belanja!</h6>
                 </td>
               @endforelse
             </tbody>
@@ -153,8 +148,8 @@
               <div class="card" style="width: 100%; height: 130px;">
                 <div class="card-body">
                   <h2 class="h4" style="font-weight: 500; color: #a2a2a2">Kembali</h2>
-                  <input class="form-control form-control-lg" style="font-weight: 600;" type="number" readonly
-                    id="kembalian" name="kembalian" aria-label=".form-control-lg example">
+                  <input class="form-control form-control-lg form-control-plaintext" style="font-weight: 600;"
+                    type="number" readonly id="kembalian" name="kembalian" aria-label=".form-control-lg example">
                 </div>
               </div>
             </div>
@@ -180,5 +175,21 @@
       var kembalian = tunai - grand_total;
       $("#kembalian").val(kembalian);
     })
+
+    // $(".tambah-cart").click(function(e) {
+
+    //   e.preventDefault();
+
+    //   $.ajax({
+    //     type: 'POST',
+    //     url: "{{ route('tambah-cart') }}",
+    //     data: $('#tambahcart').serialize(),
+    //     success: function(data) {
+    //       $('#tambahcart').trigger("reset");
+    //       alert(data.success);
+    //     }
+    //   });
+
+    // });
   });
 </script>

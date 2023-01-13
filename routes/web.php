@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ProdukController;
@@ -28,9 +29,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/logout', 'keluar');
 });
 
-
-
-
 // ROUTES Super Admin
 // Route::get('/superadmin/kelolaakun/search', [SuperAdminController::class, 'search']);
 
@@ -49,12 +47,9 @@ Route::controller(SuperAdminController::class)->group(function () {
 
 // ROUTES UNTUK ROLE ADMIN
 Route::prefix('/admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    });
-    Route::get('/produk', function () {
-        return view('admin.daftarproduk');
-    });
+    // Route::get('/dashboard', function () {
+    //     return view('admin.dashboard');
+    // });
     Route::get('/produkreject', function () {
         return view('admin.produkreject');
     });
@@ -68,9 +63,9 @@ Route::controller(ProdukController::class)
     ->prefix('/admin')
     ->group(function () {
         Route::get('/produk', 'index')->name('produk');
-        Route::get('/inputstok', 'indexstok');
+        Route::get('/inputstok', 'indexStok');
         Route::get('/produk/detail/{id}', 'show');
-        Route::post('/tambah-stok', 'produkmasuk')->name('tambah-stok');
+        Route::post('/tambah-stok', 'produkMasuk')->name('tambah-stok');
         Route::post('/tambah-produk', 'store')->name('tambah-produk');
         Route::get('/produkreject', [TypeaheadController::class, 'index']);
         Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
@@ -89,6 +84,19 @@ Route::controller(SupplierController::class)->group(function () {
         });
 });
 
+Route::controller(LaporanController::class)->group(function () {
+    Route::prefix('/admin')->group(function () {
+        Route::get('/dashboard', 'dashboardAdmin');
+        Route::get('/laporan', 'indexAdmin');
+    });
+});
+
+// Pengennya ni routes bisa dipake role admin sama pengawas 
+Route::controller(LaporanController::class)->group(function () {
+    Route::get('/cetaklaporan-harian', 'cetakHarian')->name('cetak-harian');
+    Route::post('/cetaklaporan-mingguan', 'cetakMingguan')->name('atur-tanggal');
+    Route::post('/cetaklaporan-bulanan', 'cetakBulanan')->name('atur-tanggal');
+});
 
 // ROUTES UNTUK ROLE KASIR
 Route::controller(TransaksiController::class)->group(function () {
@@ -102,34 +110,29 @@ Route::controller(TransaksiController::class)->group(function () {
         Route::post('/kurang-qty', 'decreaseItem')->name('kurang-qty');
         Route::post('/remove-cart', 'removeItem')->name('hapus-cart');
         Route::post('/checkout', 'handleSubmit')->name('transaksi');
-        Route::get('/laporan', function () {
-            return view('kasir.laporan');
-        });
-
-        Route::get('/produk', function () {
-            return view('Kasir.daftarproduk');
-        });
+        Route::get('/laporan', 'laporanTransaksi');
+        Route::get('/produk', 'indexProduk');
+        Route::get('/search', 'search')->name('search.kasir');
     });
 });
 
 
-
 // ROUTES UNTUK ROLE PENGAWAS
-Route::prefix('/pengawas')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('pengawas.index');
-    });
-    Route::get('/laporan', function () {
-        return view('pengawas.laporan');
-    });
-    Route::get('/logproduk', function () {
-        return view('pengawas.logproduk');
-    });
-    Route::get('/logkelolaakun', function () {
-        return view('pengawas.logkelolaakun');
-    });
-    Route::get('/historypenjualan', function () {
-        return view('pengawas.historypenjualan');
+Route::controller(LaporanController::class)->group(function () {
+    Route::prefix('/pengawas')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('pengawas.index');
+        });
+        Route::get('/laporan', 'indexPengawas');
+        Route::get('/logproduk', function () {
+            return view('pengawas.logproduk');
+        });
+        Route::get('/logkelolaakun', function () {
+            return view('pengawas.logkelolaakun');
+        });
+        Route::get('/historypenjualan', function () {
+            return view('pengawas.historypenjualan');
+        });
     });
 });
 // });

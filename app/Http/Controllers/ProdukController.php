@@ -16,7 +16,7 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $produk = DB::table('produk')->get();
+        $produk = DB::table('produk')->select('*')->paginate(10);
         $kategori = DB::table('produk_kategori')
             ->select()
             ->get();
@@ -37,7 +37,7 @@ class ProdukController extends Controller
         // $produk->foto_produk = $request->file('foto_produk')->store('post-images');
         $produk['user'] = 'USR02'; // Auth()->user()->id();
         $produk->save();
-        return redirect()->back()->with('success', "Data berhasi di tambah");
+        return redirect()->back()->with('success', "Data berhasil di tambah");
     }
 
     /**
@@ -90,7 +90,7 @@ class ProdukController extends Controller
         //
     }
 
-    public function indexstok()
+    public function indexStok()
     {
         $produk = DB::select('SELECT id_produk, nama_produk FROM produk');
         $supplier = DB::select('SELECT id_supplier, nama_supplier FROM Supplier');
@@ -98,7 +98,7 @@ class ProdukController extends Controller
         return view('Admin.inputstokproduk', compact('produk', 'supplier'));
     }
 
-    public function produkmasuk(Request $request)
+    public function produkMasuk(Request $request)
     {
         $id = $request->input('id_produk');
         $tgl_msk = $request->input('tgl_msk');

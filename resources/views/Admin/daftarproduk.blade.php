@@ -164,13 +164,12 @@
 
 {{-- FILTER KATEGORI --}}
 <script>
-  //Filter Recruiters
   $('select#sort-kategori').change(function() {
     var filter = $(this).val();
     filterList(filter);
   });
 
-  // Recruiters filter function
+  // Kategori filter function
   function filterList(value) {
     var list = $(".produk .produk-info");
     $(list).hide();

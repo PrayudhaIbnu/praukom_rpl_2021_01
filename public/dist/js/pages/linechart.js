@@ -1,4 +1,6 @@
-var labels = ["satu", "dua", "tiga", "empat", "lima"];
+// g kepake
+
+var labels = [];
 var users = [100, 200, 300, 400, 500];
 const data = {
     labels: labels,
@@ -19,4 +21,4 @@ const config = {
     options: {},
 };
 
-const myChart = new Chart(document.getElementById("produkTerlasis"), config);
+// const myChart = new Chart(document.getElementById("produkTerlaris"), config);

@@ -36,16 +36,25 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th>20-02-2022</th>
-                <td>12.20</td>
-                <td>Yhahahahaha</td>
-                <td>2</td>
-                <td>400</td>
-                <td>FK20022022001</td>
-              </tr>
+              @forelse ($laporan as $l)
+                <tr>
+                  <th>{{ $l->tanggal }}</th>
+                  <td>{{ $l->jam_jual }}</td>
+                  <td>{{ $l->nama_produk }}</td>
+                  <td>{{ $l->qty }}</td>
+                  <td>{{ $l->sub_total_hrg }}</td>
+                  <td>{{ $l->id_faktur }}</td>
+                </tr>
+              @empty
+                <td colspan="6">
+                  <h6 class="text-center mt-3">Belum ada penjualan bulan ini</h6>
+                </td>
+              @endforelse
             </tbody>
           </table>
+        </div>
+        <div class="d-flex justify-content-center">
+          {!! $laporan->links() !!}
         </div>
       </div>
     </div>
