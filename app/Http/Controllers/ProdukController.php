@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 
 class ProdukController extends Controller
@@ -18,7 +19,7 @@ class ProdukController extends Controller
     //  menampilkan halaman daftar produk
     public function index()
     {
-        $produk = DB::table('produk')->get();
+        $produk = DB::table('produk')->select('*')->paginate(10);
         $kategori = DB::table('produk_kategori')
             ->select()
             ->get();
@@ -69,6 +70,13 @@ class ProdukController extends Controller
     {
         //
         $produk = new Produk;
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('storage/post-images/', $filename);
+            $produk->foto = $filename;
+        }
         $produk->id_produk = $request->input('kode_produk');
         $produk->kategori = $request->input('id_kategori');
         $produk->nama_produk = $request->input('nama_produk');
@@ -76,10 +84,10 @@ class ProdukController extends Controller
         $produk->satuan_produk = $request->input('satuan_produk');
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
-        // $produk->foto_produk = $request->file('foto_produk')->store('post-images');
+
         $produk['user'] = 'USR02'; // Auth()->user()->id();
         $produk->save();
-        return redirect()->back()->with('success', "Data berhasi di tambah");
+        return redirect()->back()->with('success', "Data berhasil di tambah");
     }
 
     /**
@@ -89,7 +97,7 @@ class ProdukController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
+    // tampil detail produk
     public function show($id)
     {
         $detailProduk = collect(DB::select('CALL get_one_produk_by_id(?)', [$id]))->first();
@@ -104,9 +112,13 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // edit produk
     public function edit($id)
     {
-        //
+        $produk = Produk::whereIdProduk($id)->first();
+        return response()->json([
+            'produk' => $produk,
+        ]);
     }
 
     /**
@@ -116,9 +128,31 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    // update produk
+    public function update(Request $request)
     {
-        //
+        $produk_id = $request->input('produk_id');
+        $produk = Produk::find($produk_id);
+        if ($request->hasFile('foto')) {
+            $destination = 'storage/post-images/' . $produk->foto;
+            if (file::exists($destination)) {
+                file::delete($destination);
+            }
+            $file = $request->file('foto');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('storage/post-images/', $filename);
+            $produk->foto = $filename;
+        }
+        $produk->id_produk = $request->input('kode_produk');
+        $produk->kategori = $request->input('id_kategori');
+        $produk->nama_produk = $request->input('nama_produk');
+        $produk->satuan_produk = $request->input('satuan_produk');
+        $produk->harga_beli = $request->input('harga_beli');
+        $produk->harga_jual = $request->input('harga_jual');
+        $produk['user'] = 'USR02'; // Auth()->user()->id();
+        $produk->update();
+        return redirect()->back()->with('success', "Data berhasil di update");
     }
 
     /**
@@ -127,12 +161,20 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    // delete produk
+    public function destroy(Request $request)
     {
-        //
+        $produk_id = $request->input('delete_produk_id');
+        $produk = Produk::find($produk_id);
+        $destination = 'storage/post-images/' . $produk->foto;
+        if (file::exists($destination)) {
+            file::delete($destination);
+        }
+        $produk->delete();
+        return redirect()->back()->with('success', "Data Berhasil di Hapus");
     }
 
-    public function indexstok()
+    public function indexStok()
     {
         $produk = DB::select('SELECT id_produk, nama_produk FROM produk');
         $supplier = DB::select('SELECT id_supplier, nama_supplier FROM Supplier');
@@ -140,7 +182,7 @@ class ProdukController extends Controller
         return view('Admin.inputstokproduk', compact('produk', 'supplier'));
     }
 
-    public function produkmasuk(Request $request)
+    public function produkMasuk(Request $request)
     {
         $id = $request->input('id_produk');
         $tgl_msk = $request->input('tgl_msk');

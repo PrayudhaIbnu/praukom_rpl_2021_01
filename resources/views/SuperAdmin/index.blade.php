@@ -1,6 +1,10 @@
 <x-app-layout>
   <x-dashboard-super-admin />
-
+  {{-- tilte --}}
+  @section('title')
+      Kelola Akun
+  @endsection
+  {{-- end title --}}
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">

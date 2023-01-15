@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('tanggal_masuk');
             $table->date('tanggal_exp');
             $table->integer('qty');
-            $table->char('supplier', 5);
+            $table->char('supplier', 6);
 
             $table
                 ->foreign('supplier')

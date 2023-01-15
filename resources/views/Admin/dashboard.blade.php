@@ -2,6 +2,11 @@
 <x-app-layout>
   {{-- x-dashboard buat struktur dashboard --}}
   <x-dashboard-admin />
+  {{-- tilte --}}
+  @section('title')
+      Dashboard
+  @endsection
+  {{-- end title --}}
   {{-- CONTENT --}}
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -30,35 +35,24 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col">
-            <div class="card">
+            <div class="card" style="overflow-y: scroll; height:95%; ">
               <h6 class="fw-lighter text-center p-2">Daftar Stok Produk yang Hampir Habis</h6>
               <table class="table">
-                <thead class="table-warning">
+                <thead class="sticky-top table-warning">
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama Produk</th>
+                    <th scope="col">Stok</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                  @foreach ($leastStock as $l)
+                    <tr>
+                      <th scope="row">{{ $loop->iteration }}</th>
+                      <td>{{ $l->nama_produk }}</td>
+                      <td>{{ $l->stok }}</td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -105,50 +99,23 @@
               <table class="table">
                 <thead class="sticky-top table-warning">
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama Produk</th>
+                    <th scope="col">Supplier</th>
+                    <th scope="col">Tanggal Masuk</th>
+                    <th scope="col">tanggal Exp</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                  @foreach ($expiredProduct as $e)
+                    <tr>
+                      <th scope="row">{{ $loop->iteration }}</th>
+                      <td>{{ $e->nama_produk }}</td>
+                      <td>{{ $e->nama_supplier }}</td>
+                      <td>{{ $e->tanggal_masuk }}</td>
+                      <td>{{ $e->tanggal_exp }}</td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -156,7 +123,7 @@
           <div class="col-md-4 ">
             <div class="card p-2">
               <h6 class="fw-bold text-center p-2">Top 5 Produk Terlaris</h6>
-              <canvas id="produkTerlasis" style="height:400px;"></canvas>
+              <canvas id="produkTerlaris" style="height:400px;"></canvas>
             </div>
           </div>
         </div>
@@ -171,4 +138,35 @@
       </div>
     </div>
   </div>
+
+  <script>
+    var labels = [
+      @foreach ($bestSell as $b)
+        '{{ $b->nama_produk }}',
+      @endforeach
+    ];
+    var product = [
+      @foreach ($bestSell as $b)
+        '{{ $b->qty }}',
+      @endforeach
+    ];
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: "My First dataset",
+        backgroundColor: ["#E53945", "#52499C", "#00798C", "#EDAD49"],
+        borderColor: ["#E53945", "#52499C", "#00798C", "#EDAD49"],
+        fill: false,
+        data: product,
+      }, ],
+    };
+
+    const config = {
+      type: "pie",
+      data: data,
+      options: {},
+    };
+
+    const myChart = new Chart(document.getElementById("produkTerlaris"), config);
+  </script>
 </x-app-layout>

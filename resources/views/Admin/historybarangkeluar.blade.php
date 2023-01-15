@@ -1,5 +1,10 @@
 <x-app-layout>
     <x-dashboard-admin />
+    {{-- tilte --}}
+  @section('title')
+    History Barang Keluar
+  @endsection
+  {{-- end title --}}
     <div class="content-wrapper">
       <div class="content-header">
         <div class="container-fluid">

@@ -1,5 +1,10 @@
 <x-app-layout>
   <x-dashboard-admin />
+  {{-- tilte --}}
+  @section('title')
+      Daftar Produk
+  @endsection
+  {{-- end title --}}
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -50,6 +55,8 @@
             <table class="table mt-4 table-borderless ">
               <thead class="table-warning">
                 <tr>
+                  <th>No</th>
+                  <th scope="col">Foto</th>
                   <th scope="col">Barcode</th>
                   <th scope="col">Nama Produk</th>
                   <th scope="col">Stok</th>
@@ -62,7 +69,12 @@
               <tbody class="produk">
                 @foreach ($produk as $d)
                   <tr class="produk-info" data-custom-type="{{ $d->kategori }}">
-                    <th scope="row" id="s">{{ $d->id_produk }}</th>
+                    <td> {{ $loop->iteration }}</td>
+                    <td>
+                      <img id="gambar" src="{{ asset('storage/post-images/' . $d->foto) }}" alt=""
+                    style="width: 100px">
+                    </td>
+                    <td>{{ $d->id_produk }}</td>
                     <td>{{ $d->nama_produk }}</td>
                     <td>{{ $d->stok }}</td>
                     <td>{{ $d->satuan_produk }}</td>
@@ -72,9 +84,10 @@
                       <a href="produk/detail/{{ $d->id_produk }}">
                         <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
                       </a>
-                      <button class="btn btn-edit btn-primary" data-toggle="modal" data-target="#editproduk"><i
+                      <button type="button" value="{{ $d->id_produk }}" class="btn btn-edit btn-primary"><i
                           class="fa-solid fa-pen-to-square"></i></button>
-                      <button class="btn btn-hapus btn-danger"><i class="fa-solid fa-trash"></i></button>
+                      <button class="btn btn-hapus btn-danger" value="{{ $d->id_produk }}"
+                        ><i class="fa-solid fa-trash"></i></button>
                     </td>
                   </tr>
                 @endforeach
@@ -102,20 +115,20 @@
           <div class="modal-body">
             <div class="row align-items-start">
               <div class="col mb-3">
-                <label for="foto_produk" class="form-label font-weight-normal">Foto produk</label>
-                <input name="foto_produk" id="foto_produk" class="form-control form-control-sm" type="file">
+                <label for="foto" class="form-label font-weight-normal">Foto produk</label>
+                <input name="foto"  class="form-control form-control-sm" type="file">
 
               </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-3">
                 <label for="kode_produk" class="form-label font-weight-normal">Kode Produk (Barcode ID)</label>
-                <input required name="kode_produk" id="kode_produk" class="form-control form-control-sm" type="number"
+                <input required name="kode_produk"  class="form-control form-control-sm" type="number"
                   aria-label=".form-control-sm example">
               </div>
               <div class="col mb-3">
                 <label for="id_kategori" class="form-label font-weight-normal">Kategori</label>
-                <select required name="id_kategori" id="id_kategori" class="form-select"
+                <select required name="id_kategori"  class="form-select"
                   aria-label="Default select example">
                   @foreach ($kategori as $k)
                     <option value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
@@ -126,24 +139,24 @@
             <div class="row align-items-end">
               <div class="col mb-2">
                 <label for="nama_produk" class="form-label font-weight-normal">Nama Produk</label>
-                <input required name="nama_produk" id="nama_produk" class="form-control form-control-sm"
+                <input required name="nama_produk"  class="form-control form-control-sm"
                   type="text" aria-label=".form-control-sm example">
               </div>
               <div class="col mb-2">
                 <label for="satuan_produk" class="form-label font-weight-normal">Satuan Produk</label>
-                <input required name="satuan_produk" id="satuan_produk" class="form-control form-control-sm"
+                <input required name="satuan_produk"  class="form-control form-control-sm"
                   type="text" aria-label=".form-control-sm example">
               </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-2">
                 <label for="harga_beli" class="form-label font-weight-normal">Harga Beli</label>
-                <input required name="harga_beli" id="harga_beli" class="form-control form-control-sm"
+                <input required name="harga_beli"  class="form-control form-control-sm"
                   type="text" aria-label=".form-control-sm example">
               </div>
               <div class="col mb-2">
                 <label for="harga_jual" class="form-label font-weight-normal">Harga Jual</label>
-                <input required name="harga_jual" id="harga_jual" class="form-control form-control-sm"
+                <input required name="harga_jual"  class="form-control form-control-sm"
                   type="text" aria-label=".form-control-sm example">
               </div>
             </div>
@@ -157,18 +170,115 @@
       </div>
     </div>
   </div>
+
+    <!-- Modal Edit User -->
+    <div class="modal fade" id="editproduk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Form Edit Produk</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="{{ url('admin/update-produk') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="produk_id" id="produk_id">
+            {{-- <input type="hidden" name="path_foto" id="path_foto"> --}}
+            <div class="modal-body">
+              <div class="row align-items-start">
+                <div class="col mb-2">
+                  <label for="foto_produk" class="form-label font-weight-normal">Foto produk</label>
+                  <input name="foto" id="foto_produk" class="form-control form-control-sm" type="file">
+                </div>
+                <div class="mb-2" id="foto"> </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col mb-3">
+                  <label for="kode_produk" class="form-label font-weight-normal">Kode Produk (Barcode ID)</label>
+                  <input required name="kode_produk" id="kode_produk" class="form-control form-control-sm" type="number"
+                    aria-label=".form-control-sm example">
+                </div>
+                <div class="col mb-3">
+                  <label for="id_kategori" class="form-label font-weight-normal">Kategori</label>
+                  <select required name="id_kategori" id="id_kategori" class="form-select"
+                    aria-label="Default select example">
+                    @foreach ($kategori as $k)
+                      <option value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="row align-items-end">
+                <div class="col mb-2">
+                  <label for="nama_produk" class="form-label font-weight-normal">Nama Produk</label>
+                  <input required name="nama_produk" id="nama_produk" class="form-control form-control-sm"
+                    type="text" aria-label=".form-control-sm example">
+                </div>
+                <div class="col mb-2">
+                  <label for="satuan_produk" class="form-label font-weight-normal">Satuan Produk</label>
+                  <input required name="satuan_produk" id="satuan_produk" class="form-control form-control-sm"
+                    type="text" aria-label=".form-control-sm example">
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col mb-2">
+                  <label for="harga_beli" class="form-label font-weight-normal">Harga Beli</label>
+                  <input required name="harga_beli" id="harga_beli" class="form-control form-control-sm"
+                    type="text" aria-label=".form-control-sm example">
+                </div>
+                <div class="col mb-2">
+                  <label for="harga_jual" class="form-label font-weight-normal">Harga Jual</label>
+                  <input required name="harga_jual" id="harga_jual" class="form-control form-control-sm"
+                    type="text" aria-label=".form-control-sm example">
+                </div>
+              </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary btn-simpan">Perbarui</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal Edit User -->
+  
+    {{-- delete modal --}}
+    <div class="modal fade" id="deleteproduk" tabindex="-1" aria-labelledby="tambahuserLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content text-center">
+          <div class="modal-header flex-column">
+            <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h4 class="modal-title w-100">Apakah Anda yakin?</h4>
+          </div>
+          <div class="modal-body">
+            <p>Apakah Anda benar-benar ingin menghapus? Anda tidak akan dapat mengembalikan ini! </p>
+          </div>
+          <form method="POST" action="{{ url('admin/delete-produk') }}" enctype="multipart/form-data">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" id="delete_id" name="delete_produk_id">
+            <div class="modal-footer ">
+              <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Tidak</button>
+              <button type="submit" class="btn btn-danger ">Iya</button>
+            </div>
+        </div>
+      </div>
+    </div>
+    {{-- end delete modal --}}
+  
+  
   @include('sweetalert::alert')
 </x-app-layout>
 
 {{-- FILTER KATEGORI --}}
 <script>
-  //Filter Recruiters
   $('select#sort-kategori').change(function() {
     var filter = $(this).val();
     filterList(filter);
   });
 
-  // Recruiters filter function
+  // Kategori filter function
   function filterList(value) {
     var list = $(".produk .produk-info");
     $(list).hide();
@@ -183,4 +293,39 @@
       });
     }
   }
+
+  $(document).ready(function() {
+    // edit pop up 
+    $(document).on('click', '.btn-edit', function() {
+      var produk_id = $(this).val();
+      // console.log(produk_id);
+      $.ajax({
+        type: "GET",
+        url: "edit-produk/" + produk_id,
+        dataType: "json",
+        success: function(response) {
+          console.log(response);
+          $('#editproduk').modal('show');
+          $('#produk_id').val(produk_id);
+          // $('#foto_produk').val(response.produk.foto);
+          $('#foto').html(
+            `<img src="/storage/post-images/${response.produk.foto}" width="100" class="img-fluid img-thumbnail">`
+          );
+          $('#kode_produk').val(response.produk.id_produk);
+          $('#id_kategori').val(response.produk.kategori);
+          $('#nama_produk').val(response.produk.nama_produk);
+          $('#satuan_produk').val(response.produk.satuan_produk);
+          $('#harga_beli').val(response.produk.harga_beli);
+          $('#harga_jual').val(response.produk.harga_jual);
+        }
+      })
+    });
+
+    // delete
+    $(document).on('click', '.btn-hapus', function() {
+      var produk_id = $(this).val();
+      $('#deleteproduk').modal('show');
+      $('#delete_id').val(produk_id);
+    });
+  });
 </script>

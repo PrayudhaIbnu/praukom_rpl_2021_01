@@ -1,6 +1,10 @@
 <!-- Section: Design Block -->
-
 <x-app-layout>
+  {{-- tilte --}}
+  @section('title')
+      Login
+  @endsection
+  {{-- end title --}}
   <section class="vh-100" style="background-color: #f2f2f2  ;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">

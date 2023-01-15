@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DetailPenjualan;
@@ -13,7 +14,6 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class TransaksiController extends Controller
 {
-
     public function index()
     {
         $produk = DB::select('SELECT id_produk, nama_produk FROM produk');
@@ -54,6 +54,32 @@ class TransaksiController extends Controller
                 'summary' => $summary
             ]
         );
+    }
+
+    public function laporanTransaksi(Request $request)
+    {
+        $tgl = date('Y-m');
+        $laporan = DB::table('laporan_transaksi')->select('*')->where("tanggal", 'LIKE', $tgl . '%')->paginate(10);
+        return view('Kasir.laporan', compact('laporan'));
+    }
+
+    public function indexProduk()
+    {
+        $produk = DB::table('produk')->select('*')->paginate(10);
+        $kategori = DB::table('produk_kategori')
+            ->select()
+            ->get();
+        return view('kasir.daftarproduk', compact('produk', 'kategori'));
+    }
+
+    public function search(Request $request)
+    {
+        $get_name = $request->search;
+        $produk = Produk::where('id_produk', 'LIKE', '%' . $get_name . '%')->orWhere('nama_produk', 'LIKE', '%' . $get_name . '%')->get();
+        $kategori = DB::table('produk_kategori')
+            ->select()
+            ->get();
+        return view('kasir.daftarproduk', compact('produk', 'kategori'));
     }
 
     public function addItem(Request $request)
@@ -170,6 +196,7 @@ class TransaksiController extends Controller
 
             try {
                 $allCart = \Cart::getContent();
+                // dd($allCart);
                 $filterCart = $allCart->map(function ($item) {
                     return [
                         'id' => $item->id,
@@ -209,7 +236,7 @@ class TransaksiController extends Controller
                 Penjualan::create([
                     'id_penjualan' => $id_penjualan,
                     'tanggal' => Carbon::now(),
-                    'jam_jual' => date('H:i')
+                    'jam_jual' => date('H:i:s')
                 ]);
 
                 Faktur::create([
@@ -228,6 +255,15 @@ class TransaksiController extends Controller
                         'sub_total_hrg' => $cart['price']
                     ]);
                 }
+
+                foreach ($filterCart as $cart) {
+                    BarangKeluar::create([
+                        'produk' => $cart['id'],
+                        'qty' => $cart['quantity'],
+                        'tanggal_keluar' => Carbon::now(),
+                        'keterangan' => 'Transaksi'
+                    ]);
+                }
                 \Cart::clear();
 
                 DB::commit();
@@ -240,3 +276,4 @@ class TransaksiController extends Controller
         }
     }
 }
+// SELECT produk, tanggal_masuk, SUM(qty) FROM barang_masuk GROUP BY produk;

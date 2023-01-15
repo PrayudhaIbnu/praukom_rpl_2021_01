@@ -28,7 +28,7 @@
           </span>
 
           <div class="dropdown-divider"></div>
-          <form action="{{ url('/logout') }}" method="POST">
+          <form action="{{ url('logout') }}" method="post">
             @csrf
             <button type="submit" class="dropdown-item logout">
               <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>

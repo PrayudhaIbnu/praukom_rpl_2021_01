@@ -13,7 +13,7 @@ class SuperAdminController extends Controller
     public function index(Request $request)
 
     {
-        // $user = Users::all();
+        // $user = user::all();
         $search = $request->search;
         $level_user = DB::table('level_user')->select()->get();
         $user = DB::table('user')

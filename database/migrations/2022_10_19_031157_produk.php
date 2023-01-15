@@ -42,11 +42,11 @@ return new class extends Migration
                 // ->cascadeOnDelete()
             ;
 
-            $table
-                ->foreign('user')
-                ->references('id_user')
-                ->on('user')
-                ->cascadeOnDelete();
+            // $table
+            //     ->foreign('user')
+            //     ->references('id_user')
+            //     ->on('users')
+            //     ->cascadeOnDelete();
         });
     }
 

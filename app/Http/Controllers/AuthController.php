@@ -11,10 +11,7 @@ class AuthController extends Controller
     public function index()
     {
 
-        return view('Auth.login', [
-            'title' => 'login',
-            'active' => 'login'
-        ]);
+        return view('Auth.login');
     }
 
     public function masuk(Request $request)

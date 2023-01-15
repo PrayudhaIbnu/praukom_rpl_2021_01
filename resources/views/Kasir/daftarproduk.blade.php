@@ -4,50 +4,92 @@
   <x-dashboard-cashier />
   {{-- CONTENT --}}
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row">
           <div class="col-sm-6">
-            <h1 class="m-0">Produk</h1>
+            <h1 class="m-0">Daftar Produk</h1>
           </div>
+          <!-- /.col -->
           <div class="row col-sm-6">
-            <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
+            <form action="{{ route('search.kasir') }}" method="get">
+              @csrf
+              <div class="input-group">
+                <input class="form-control" name="search" {{-- id="search-input" --}} type="text" placeholder="Search"
+                  autocomplete="off">
+                <div class="input-group-append">
+                  <button class="btn btn-info" type="submit">
+                    <i class="fas fa-search fa-fw"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="float-start">
+            <!-- Example single danger button -->
+            <div class="btn-group mb-2 mt-2">
+              <div class="col">
+                <select class="form-select bg-warning form-select-sm" id="sort-kategori"
+                  aria-label="Default select example">
+                  <option class="bg-light" selected value="semua">Semua</option>
+                  @foreach ($kategori as $k)
+                    <option class="bg-light" value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
+                  @endforeach
+                </select>
               </div>
             </div>
           </div>
-        </div>
-        <!-- Main content -->
-        <div class="table-responsive-xl">
-          <table class="table mt-4 table-borderless ">
-            <thead class="table-warning">
-              <tr style="vertical-align: middle;">
-                <th scope="col">Kode Produk</th>
-                <th scope="col" style="width: 400px">Nama Produk</th>
-                <th scope="col" style="width: 90px">Jam</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Harga Total</th>
-                <th scope="col">Faktur</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">0998129129112</th>
-                <td>12.20</td>
-                <td>Yhahahahaha</td>
-                <td>2</td>
-                <td>400</td>
-                <td>FK20022022001</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive-xl">
+            <table class="table mt-4 table-borderless ">
+              <thead class="table-warning">
+                <tr>
+                  <th scope="col">Barcode</th>
+                  <th scope="col">Nama Produk</th>
+                  <th scope="col">Stok</th>
+                  <th scope="col">Satuan</th>
+                  <th scope="col">Harga</th>
+                </tr>
+              </thead>
+              <tbody class="produk">
+                @foreach ($produk as $d)
+                  <tr class="produk-info" data-custom-type="{{ $d->kategori }}">
+                    <th scope="row" id="s">{{ $d->id_produk }}</th>
+                    <td>{{ $d->nama_produk }}</td>
+                    <td>{{ $d->stok }}</td>
+                    <td>{{ $d->satuan_produk }}</td>
+                    <td> Rp {{ number_format($d->harga_jual, 2, ',', '.') }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </x-app-layout>
+{{-- FILTER KATEGORI --}}
+<script>
+  $('select#sort-kategori').change(function() {
+    var filter = $(this).val();
+    filterList(filter);
+  });
+
+  // Kategori filter function
+  function filterList(value) {
+    var list = $(".produk .produk-info");
+    $(list).hide();
+    if (value == "semua") {
+      $(".produk").find("tr").each(function(i) {
+        $(this).show();
+      });
+    } else {
+      // *=" means that if a data-custom type contains multiple values, it will find them
+      $(".produk").find("tr[data-custom-type=" + value + "]").each(function(i) {
+        $(this).show();
+      });
+    }
+  }
+</script>

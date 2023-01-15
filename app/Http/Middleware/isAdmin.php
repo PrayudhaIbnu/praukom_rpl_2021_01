@@ -18,12 +18,7 @@ class isAdmin
     public function handle(Request $request, Closure $next)
     {
 
-        if (auth()->guest()) {
-            return redirect('login');
-        }
-        $user = Auth::user();
-        // dd($user->level);
-        if ($user->level !== '2') {
+        if (Auth::user()->level != 2) {
             abort(403);
         }
         return $next($request);
