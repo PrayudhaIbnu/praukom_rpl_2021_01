@@ -18,7 +18,7 @@ return new class extends Migration
               SELECT penjualan.tanggal, penjualan.jam_jual, produk.nama_produk, detail_penjualan.qty, detail_penjualan.sub_total_hrg, faktur.id_faktur FROM (((detail_penjualan
               INNER JOIN penjualan ON detail_penjualan.penjualan = penjualan.id_penjualan)
               INNER JOIN faktur ON detail_penjualan.penjualan = faktur.penjualan)
-              INNER JOIN produk ON detail_penjualan.produk = produk.id_produk);
+              INNER JOIN produk ON detail_penjualan.produk = produk.id_produk)
             )"
         );
     }

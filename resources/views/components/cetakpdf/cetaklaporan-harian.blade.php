@@ -8,7 +8,8 @@
     <div class="row">
       <label for="staticEmail" class="col-sm-2 col-form-label">Hari/Tgl</label>
       <div class="col-sm-3">
-        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $date }}">
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+          value="{{ \Carbon\Carbon::now()->format('l, d F Y') }}">
       </div>
     </div>
 
@@ -20,8 +21,8 @@
           <th scope="col">Jam</th>
           <th scope="col">Nama Produk</th>
           <th scope="col">Qty</th>
-          <th scope="col">Laba Kotor</th>
-          <th scope="col">Laba Bersih</th>
+          <th scope="col">Harga Jual</th>
+          <th scope="col">Harga Beli</th>
         </tr>
       </thead>
       <tbody>

@@ -10,7 +10,7 @@
           <!-- /.col -->
           <div class="row col-sm-6">
             <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+              <input class="form-control" id="search-input" type="search" placeholder="Search" aria-label="Search">
               <div class="input-group-append">
                 <button class="btn btn-sidebar">
                   <i class="fas fa-search fa-fw"></i>
@@ -47,7 +47,7 @@
                         alt="" style="width: 100px">
                     </td>
                     </td>
-                    <td style="vertical-align: middle">{{ $d->nama_supplier }}</td>
+                    <td id="s"style="vertical-align: middle">{{ $d->nama_supplier }}</td>
                     <td style="vertical-align: middle">{{ $d->alamat_supplier }}</td>
                     <td style="vertical-align: middle">{{ $d->telp_supplier }}</td>
                     <td style="vertical-align: middle">

@@ -53,35 +53,24 @@
             </div>
           </div>
           <div class="col ">
-            <div class="card">
+            <div class="card" style="overflow-y: scroll; height:95%; ">
               <h6 class="fw-lighter text-center p-2">Daftar Produk yang Paling sedikit Terjual</h6>
               <table class="table">
-                <thead class="table-warning">
+                <thead class="sticky-top table-warning">
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama Produk</th>
+                    <th scope="col">Terjual</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                  @foreach ($leastSell as $l)
+                    <tr>
+                      <th scope="row">{{ $loop->iteration }}</th>
+                      <td>{{ $l->nama_produk }}</td>
+                      <td>{{ $l->qty }}</td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -135,6 +124,8 @@
   </div>
 
   <script>
+    // CHART JS PINDAH SINI...
+
     var labels = [
       @foreach ($bestSell as $b)
         '{{ $b->nama_produk }}',

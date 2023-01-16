@@ -1,5 +1,8 @@
 <x-app-layout>
   <div class="form-group align-items-center">
+    <div class="d-flex align-items-center mb-3 pb-1">
+      <img src="/img/logoblud.png" alt="Logo BLUD" class="img" style="width: 4%">
+    </div>
     <p class="text-center h2"><b>REKAPITULASI TRANSAKSI MINGGUAN</b></p>
     <div class="row">
       <label for="staticEmail" class="col-sm-1 col-form-label">Periode</label>
@@ -10,14 +13,16 @@
     </div>
 
     <h4></h4>
-    <table class="static table table-bordered">
+    <table class="static table table-bordered" id="mingguan">
       <thead>
         <tr>
           <th scope="col">No</th>
-          <th scope="col">Jam</th>
+          <th scope="col">Tanggal</th>
+          <th scope="col">Kode Faktur</th>
           <th scope="col">Nama Produk</th>
-          <th scope="col">Laba Kotor</th>
-          <th scope="col">Laba Bersih</th>
+          <th scope="col">Qty</th>
+          <th scope="col">Harga Jual</th>
+          <th scope="col">Harga Beli</th>
         </tr>
       </thead>
       <tbody>
@@ -27,14 +32,52 @@
             <td>{{ $m->tanggal }}</td>
             <td>{{ $m->id_faktur }}</td>
             <td>{{ $m->nama_produk }}</td>
+            <td>{{ $m->qty }}</td>
             <td>{{ $m->sub_total_hrg }}</td>
             <td>{{ $m->laba_bersih }}</td>
           </tr>
         @endforeach
+        <tr class="table-borderless">
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+            <b class="float-end">TOTAL</b>
+          </td>
+          <td id="sum1"></td>
+          <td id="sum2"></td>
+          <td id="sum3"></td>
+        </tr>
       </tbody>
     </table>
   </div>
 </x-app-layout>
 <script type="text/javascript">
   window.print();
+
+  var sum1 = 0;
+  var sum2 = 0;
+  var sum3 = 0;
+  $("#mingguan tr").not(':first').not(':last').each(function() {
+    sum1 += getnum($(this).find("td:eq(3)").text());
+    sum2 += getnum($(this).find("td:eq(4)").text());
+    sum3 += getnum($(this).find("td:eq(5)").text());
+
+    function getnum(t) {
+      if (isNumeric(t)) {
+        return parseInt(t, 10);
+      }
+      return 0;
+
+      function isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+      }
+    }
+  });
+  $("#sum1").text(sum1);
+  $("#sum2").text(sum2);
+  $("#sum3").text(sum3);
 </script>

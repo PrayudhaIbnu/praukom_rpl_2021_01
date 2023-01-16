@@ -1,5 +1,5 @@
 <div class="row">
-
+  <p><i>*Menampilkan transaksi pada bulan <b>{{ \Carbon\Carbon::now()->format('F') }}</b></i></p>
   <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingOne">
@@ -16,25 +16,14 @@
             <div class="row ">
               <div class="col mb-1">
                 <label for="tglawal" name="tglawal" class="form-label font-weight-normal">Tanggal
-                  Awal </label>
+                  Awal Cetak</label>
                 <div class="input-group date" id="datepicker">
                   <input type="date" required class="form-control" id="date" name="tglawal" />
                 </div>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col mb-1">
-                <label for="tglakhir" name="tglakhir" class="form-label font-weight-normal">Tanggal
-                  Akhir</label>
-                <div class="input-group date" id="datepicker">
-                  <input type="date" required class="form-control" id="date" name="tglakhir" />
-                </div>
-              </div>
-            </div>
             <button type="submit" class="w-100 mt-1 btn btn-warning btn-sm">Download <i
                 class="fas fa-cloud-download"></i></button>
-
           </div>
         </div>
       </form>
@@ -51,8 +40,9 @@
         <th scope="col">Tanggal</th>
         <th scope="col">Kode Faktur</th>
         <th scope="col">Nama Produk</th>
-        <th scope="col">Laba Kotor</th>
-        <th scope="col">Laba Bersih</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Harga Jual</th>
+        <th scope="col">Harga Beli</th>
       </tr>
     </thead>
     <tbody>
@@ -61,16 +51,18 @@
           <th scope="row">{{ $loop->iteration }}</th>
           <td>{{ $m->tanggal }}</td>
           <td>{{ $m->id_faktur }}</td>
+          <td>{{ $m->nama_produk }}</td>
           <td>{{ $m->qty }}</td>
           <td>{{ $m->sub_total_hrg }}</td>
           <td>{{ $m->laba_bersih }}</td>
         </tr>
       @empty
         <td colspan="6">
-          <h6 class="text-center mt-3">Belum ada Transaksi Hari Ini</h6>
+          <h6 class="text-center mt-3">Belum ada Transaksi Minggu Ini</h6>
         </td>
       @endforelse
       <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td><b class="float-end">TOTAL</b> </td>

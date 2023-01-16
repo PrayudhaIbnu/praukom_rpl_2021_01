@@ -93,9 +93,9 @@ Route::controller(LaporanController::class)->group(function () {
 
 // Pengennya ni routes bisa dipake role admin sama pengawas 
 Route::controller(LaporanController::class)->group(function () {
-    Route::get('/cetaklaporan-harian', 'cetakHarian')->name('cetak-harian');
+    Route::post('/cetaklaporan-harian', 'cetakHarian')->name('cetak-harian');
     Route::post('/cetaklaporan-mingguan', 'cetakMingguan')->name('atur-tanggal');
-    Route::post('/cetaklaporan-bulanan', 'cetakBulanan')->name('atur-tanggal');
+    Route::post('/cetaklaporan-bulanan', 'cetakBulanan')->name('atur-tanggal-bulanan');
 });
 
 // ROUTES UNTUK ROLE KASIR

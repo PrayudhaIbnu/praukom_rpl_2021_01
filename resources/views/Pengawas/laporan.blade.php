@@ -44,7 +44,7 @@
               <div class="tab-pane fade" id="pills-mingguan" role="tabpanel" aria-labelledby="pills-mingguan-tab"
                 tabindex="0">@include('components.laporan-mingguan')</div>
               <div class="tab-pane fade" id="pills-bulanan" role="tabpanel" aria-labelledby="pills-bulanan-tab"
-                tabindex="0">b</div>
+                tabindex="0">@include('components.laporan-bulanan')</div>
             </div>
           </div>
 
@@ -84,9 +84,9 @@
   $("#sum3").text(sum3);
 
   $("#mingguan tr").not(':first').not(':last').each(function() {
-    sum4 += getnum($(this).find("td:eq(2)").text());
-    sum5 += getnum($(this).find("td:eq(3)").text());
-    sum6 += getnum($(this).find("td:eq(4)").text());
+    sum4 += getnum($(this).find("td:eq(3)").text());
+    sum5 += getnum($(this).find("td:eq(4)").text());
+    sum6 += getnum($(this).find("td:eq(5)").text());
 
     function getnum(t) {
       if (isNumeric(t)) {

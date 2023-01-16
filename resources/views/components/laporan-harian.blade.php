@@ -1,9 +1,47 @@
-<div class="float-start">
+<div class="">
   <h2 class="h3">Today, {{ date('j F Y') }}</h2>
 </div>
-<div class="float-end"><a href="{{ route('cetak-harian') }}">
-    <button class="btn btn-warning btn-sm"> Download <i class="fas fa-cloud-download"></i></button></a>
+{{-- <form action="{{ route('cetak-harian') }}" method="post">
+  <input type="date" required class="form-control" id="date" name="tgl" />
+  <div class="">
+    <button class="btn btn-warning btn-sm w-100"> Download <i class="fas fa-cloud-download"></i></button>
+  </div>
+</form> --}}
+
+<div class="row">
+
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+          Atur Tanggal Cetak Laporan
+        </button>
+      </h2>
+      <form action="{{ route('cetak-harian') }}" method="post">
+        @csrf
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+          data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">
+            <div class="row ">
+              <div class="col mb-1">
+                <label for="tglawal" name="tglawal" class="form-label font-weight-normal">Pilih Tanggal Cetak</label>
+                <div class="input-group date" id="datepicker">
+                  <input type="date" required class="form-control" id="date" name="tgl" />
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="w-100 mt-1 btn btn-warning btn-sm">Download <i
+                class="fas fa-cloud-download"></i></button>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </div>
+
 <div class="table-responsive-xl">
   <table class="table mt-3 table-borderless " id="harian">
     <thead class="table-warning">
@@ -12,8 +50,8 @@
         <th scope="col">Jam</th>
         <th scope="col">Nama Produk</th>
         <th scope="col">Qty</th>
-        <th scope="col">Laba Kotor</th>
-        <th scope="col">Laba Bersih</th>
+        <th scope="col">Harga Jual</th>
+        <th scope="col">Harga Beli</th>
       </tr>
     </thead>
     <tbody>

@@ -1,5 +1,6 @@
 <div class="row">
-
+  <p><i>*Menampilkan transaksi pada tahun <b>
+        {{ date('Y') }}</b></i></p>
   <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingOne">
@@ -8,7 +9,7 @@
           Atur Tanggal Cetak Laporan
         </button>
       </h2>
-      <form action="{{ route('atur-tanggal') }}" method="post">
+      <form action="{{ route('atur-tanggal-bulanan') }}" method="post">
         @csrf
         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
           data-bs-parent="#accordionFlushExample">
@@ -16,19 +17,9 @@
             <div class="row ">
               <div class="col mb-1">
                 <label for="tglawal" name="tglawal" class="form-label font-weight-normal">Tanggal
-                  Awal </label>
+                  Awal Cetak</label>
                 <div class="input-group date" id="datepicker">
-                  <input type="date" class="form-control" id="date" name="tglawal" />
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col mb-1">
-                <label for="tglakhir" name="tglakhir" class="form-label font-weight-normal">Tanggal
-                  Akhir</label>
-                <div class="input-group date" id="datepicker">
-                  <input type="date" class="form-control" id="date" name="tglakhir" />
+                  <input type="date" required class="form-control" id="date" name="tglawal" />
                 </div>
               </div>
             </div>
@@ -49,23 +40,27 @@
       <tr>
         <th scope="col">No</th>
         <th scope="col">Tanggal</th>
+        <th scope="col">Kode Faktur</th>
         <th scope="col">Nama Produk</th>
-        <th scope="col">Laba Kotor</th>
-        <th scope="col">Laba Bersih</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Hartga Jual</th>
+        <th scope="col">Harga Beli</th>
       </tr>
     </thead>
     <tbody>
-      @forelse ($mingguan as $m)
+      @forelse ($bulanan as $b)
         <tr>
           <th scope="row">{{ $loop->iteration }}</th>
-          <td>{{ $m->tanggal }}</td>
-          <td>{{ $m->id_faktur }}</td>
-          <td>{{ $m->grand_total }}</td>
-          <td>{{ $m->grand_bersih }}</td>
+          <td>{{ $b->tanggal }}</td>
+          <td>{{ $b->id_faktur }}</td>
+          <td>{{ $b->nama_produk }}</td>
+          <td>{{ $b->qty }}</td>
+          <td>{{ $b->sub_total_hrg }}</td>
+          <td>{{ $b->laba_bersih }}</td>
         </tr>
       @empty
         <td colspan="6">
-          <h6 class="text-center mt-3">Belum ada Transaksi Hari Ini</h6>
+          <h6 class="text-center mt-3">Belum ada Transaksi Bulan Ini</h6>
         </td>
       @endforelse
     </tbody>
