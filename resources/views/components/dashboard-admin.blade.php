@@ -7,7 +7,7 @@
       </a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <h5 class="m-0 nav-header text-light">Selamat Datang, <?php $user; ?></h5>
+      <h5 class="m-0 nav-header text-light">Selamat Datang</h5>
     </li>
   </ul>
 
@@ -26,12 +26,14 @@
         </span>
 
         <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item logout">
-          <p>
+        <form action="{{ url('logout') }}" method="post">
+          
+          @csrf
+          <button type="submit" class="dropdown-item logout">
             <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
-            <span class="text-sm ">Logout</span>
-          </p>
-        </a>
+          <span class="text-sm ">Logout</span>
+          </button>
+        </form>
       </div>
     </li>
     <li class="nav-item">
@@ -52,7 +54,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="/admin/dashboard" class="nav-link">
+          <a href="/admin/dashboard" class="nav-link" >
             <i class=" nav-icon fas fa-th-large "></i>
             <p>
               Dashboard
@@ -81,7 +83,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link pl-3">
+              <a href="/admin/produkreject" class="nav-link pl-3">
                 <i class="fa-solid fa-circle-xmark"></i>
                 <p>Produk Reject</p>
               </a>
@@ -97,12 +99,35 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/admin/laporan') }}" class="nav-link">
-            <i class="nav-icon fas fa-file-alt"></i>
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt-fast"></i>
             <p>
-              Laporan
+              History
+              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview pl-4">
+            <li class="nav-item">
+              <a href="/admin/history/barang-masuk" class="nav-link">
+                <i class="fa-solid fa-list-ul"></i>
+                <p>Barang Masuk</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/history/barang-keluar" class="nav-link">
+                <i class="fa-brands fa-wpforms"></i>
+                <p>Barang Keluar</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+        <a href="{{ url('/admin/laporan') }}" class="nav-link">
+          <i class="nav-icon fas fa-file-alt"></i>
+          <p>
+            Laporan
+          </p>
+        </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">

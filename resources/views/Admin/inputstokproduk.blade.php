@@ -1,10 +1,15 @@
 <x-app-layout>
   <x-dashboard-admin />
+  {{-- tilte --}}
+  @section('title')
+      Input Stok Produk
+  @endsection
+  {{-- end title --}}
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-sm-6 mb-5">
+          <div class="col-sm-6 mb-4">
             <h1 class="m-0">Input Stok Produk</h1>
           </div>
         </div>
@@ -15,7 +20,7 @@
               <div class="row align-items-center">
                 <div class="col mb-3">
                   <label for="id_produk" class="form-label font-weight-normal">Nama Produk</label>
-                  <select required name="id_produk" id="id_produk" class="form-select"
+                  <select required name="id_produk" id="id_produk" class="form-select bg-white"
                     aria-label="Default select example">
                     {{-- <input type="search" name=" " id=""> --}}
                     <option disabled class="bg-light" selected>Pilih Produk...</option>
@@ -28,7 +33,7 @@
               <div class="row align-items-center">
                 <div class="col mb-3">
                   <label for="nama_supplier" class="form-label font-weight-normal">Nama Supplier</label>
-                  <select required name="id_supplier" id="id_supplier" class="form-select"
+                  <select required name="id_supplier" id="id_supplier" class="form-select bg-white"
                     aria-label="Default select example">
                     <option class="bg-light" disabled selected>Pilih Supplier...</option>
                     @foreach ($supplier as $s)
@@ -36,11 +41,12 @@
                     @endforeach
                   </select>
                 </div>
-                <div class="row align-items-center w-full">
+              </div>
+                <div class="row align-items-center ">
                   <div class="col mb-3">
                     <label for="qty" class="form-label font-weight-normal">Jumlah
                       Masuk </label>
-                    <input class="form-control" type="number" name="qty" id="qty">
+                    <input class="form-control " type="number" name="qty" id="qty">
                   </div>
                 </div>
                 <div class="row align-items-center w-full">

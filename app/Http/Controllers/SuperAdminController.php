@@ -6,18 +6,24 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class SuperAdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
+
     {
-        $user = User::all();
+        // $user = user::all();
+        $search = $request->search;
         $level_user = DB::table('level_user')->select()->get();
-        $user = DB::table('users')
-            ->select(['users.nama', 'users.username', 'level_user.nama_level', 'users.foto', 'users.id_user', 'users.level'])
-            ->join('level_user', 'users.level', '=', 'level_user.id_level')
-            ->orderBy('created_at', 'ASC')
-            ->get();
+        $user = DB::table('user')
+            ->select(['user.nama', 'user.username', 'level_user.nama_level', 'user.foto', 'user.id_user', 'user.level'])
+            ->join('level_user', 'user.level', '=', 'level_user.id_level')
+            ->orderBy('nama', 'ASC')
+            ->where('nama', 'LIKE', '%' . $search . '%')
+            ->orWhere('nama_level', 'LIKE', '%' . $search . '%')
+            ->orWhere('username', 'LIKE', '%' . $search . '%')
+            ->paginate(5);
         return view('SuperAdmin.index', compact('user', 'level_user'));
     }
 
@@ -29,8 +35,8 @@ class SuperAdminController extends Controller
         $id_user = collect(DB::select('SELECT new_iduser() AS new_iduser'))->first()->new_iduser;
         $user['id_user'] = $id_user;
         $user->nama = $request->input('nama');
-        $user->username = $request->input('username');
-        $user->password = $request->input('password');
+        $user->username =  $request->input('username');
+        $user->password = Hash::make($request->input('password'));
         $user->level = $request->input('id_level');
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
@@ -90,10 +96,10 @@ class SuperAdminController extends Controller
     }
 
     // search
-    public function search(Request $request)
-    {
-        $get_name = $request->search;
-        $user = User::where('nama', 'LIKE', '%' . $get_name, '%')->get();
-        return view('SuperAdmin.index', compact('user'));
-    }
+    // public function search(Request $request)
+    // {
+    //     $get_name = $request->search;
+    //     $user = user::where('nama', 'LIKE', '%' . $get_name, '%')->get();
+    //     return view('SuperAdmin.index', compact('user'));
+    // }
 }

@@ -1,6 +1,10 @@
 <x-app-layout>
   <x-dashboard-super-admin />
-
+  {{-- tilte --}}
+  @section('title')
+      Kelola Akun
+  @endsection
+  {{-- end title --}}
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -11,17 +15,17 @@
           <!-- /.col -->
           <div class="row col-sm-6">
             {{-- Search --}}
-            {{-- <form action="/superadmin/kelolaakun/search" method="GET"> --}}
+            <form action="" method="GET">
             <div class="input-group">
               <input class="form-control" name="search" id="search-input" type="text" placeholder="Search"
                 autocomplete="off">
               <div class="input-group-append">
-                <button class="btn btn-info" type="submit">
+                <button class="btn btn-warning" type="submit">
                   <i class="fas fa-search fa-fw"></i>
                 </button>
               </div>
             </div>
-            {{-- </form> --}}
+          </form>
 
             {{-- End Search --}}
           </div>
@@ -48,7 +52,7 @@
 
           {{-- TABEL --}}
           <table class="table table-hover mt-4 ">
-            <thead class="table-warning">
+            <thead class="table-warning" style="vertical-align: middle;">
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">Foto</th>
@@ -58,13 +62,14 @@
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
-            @foreach ($user as $item)
-              <tr>
+            <tbody>
+              @foreach ($user as $item)
+              <tr style="vertical-align: middle;">
                 <td> {{ $loop->iteration }}</td>
                 <td>
                   <img id="gambar" src="{{ asset('storage/post-images/' . $item->foto) }}" alt=""
                     style="width: 100px">
-                </td>
+                </td>             
                 <td id="s">{{ $item->nama }}</td>
                 <td>{{ $item->nama_level }}</td>
                 <td>{{ $item->username }}</td>
@@ -79,6 +84,9 @@
             </tbody>
           </table>
           {{-- End Table --}}
+        </div>
+        <div>
+          {{ $user->withQueryString()->links() }}
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@
   <meta name="description" content="" />
   <meta name="author" content="Fahmi Kurnia, Mulki Rahman, and Ibnu Prayudha" />
   <meta name="generator" content="Hugo 0.104.2" />
-  <title>Dashboard | Kasir BLUD Mart</title>
+  <title>BLUD Mart | @yield('title')</title>
   @Vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
   <link rel="shortcut icon" href="{{ asset('img/logoblud.png') }}" type="image/x-icon">
   <meta name="csrf-token" content="{{ csrf_token() }}">

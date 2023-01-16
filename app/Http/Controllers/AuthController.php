@@ -10,13 +10,7 @@ class AuthController extends Controller
     //
     public function index()
     {
-        if ($user = Auth::user()) {
-            if ($user->level == 'L01') {
-                return redirect()->intended('superadmin');
-            } elseif ($user->level == 'L02') {
-                return redirect()->intended('admin');
-            }
-        }
+
         return view('Auth.login');
     }
 
@@ -27,41 +21,45 @@ class AuthController extends Controller
             [
                 'username' => 'required',
                 'password' => 'required'
+            ],
+            [
+                'username.required' => 'Username tidak boleh kosong!',
+                'password.required' => 'Password tidak boleh kosong!'
             ]
         );
         $credentials = $request->only(['username', 'password']);
 
         if (Auth::attempt($credentials)) {
-            // berhasi login
             $request->session()->regenerate();
             // dd($credentials);
             $user = Auth::user();
-            dd(Auth::user());
-            if ($user->level == 'L01') {
-                return redirect()->intended('superadmin');
-            } elseif ($user->level == 'L02') {
-                return redirect()->intended('admin');
-            } elseif ($user->level == 'L03') {
-                return redirect()->intended('kasir');
-            } else return view('Admin.dashboard');
+            // dd($user);
+            if ($user->level === '1') {
+                return redirect()->intended('superadmin/kelolaakun');
+            } elseif ($user->level === '2') {
+                return redirect()->intended('admin/dashboard');
+            } elseif ($user->level === '3') {
+                return redirect()->intended('kasir/transaksi');
+            } elseif ($user->level === '4') {
+                return redirect()->intended('pengawas/dashboard');
+            }
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
             'username' => 'Username atau Password salah!'
         ])->onlyInput('username');
-
-        // if (Auth::attempt($credentials)) {
-        //     // berhasi login
-        //     $request->session()->regenerate();
-        //     // return redirect()->intended('supplier');
-        // } else {
-        //     return redirect('login')
-        //         ->with('errors', 'Email atau Password salah!');
-        // }
     }
-    public function keluar()
+
+
+    public function keluar(Request $request)
     {
         Auth::logout();
-        return redirect('login')->with('success', 'Anda berhasil Logout');
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

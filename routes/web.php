@@ -6,7 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\HistoryController;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\TransaksiController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,54 +27,68 @@ Route::get('/', function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'index')->name('login');
+    Route::get('/login', 'index')->name('login')->middleware('guest');
     Route::post('/auth', 'masuk');
-    Route::get('/logout', 'keluar');
+    Route::post('/logout', 'keluar');
 });
 
 // ROUTES Super Admin
-// Route::get('/superadmin/kelolaakun/search', [SuperAdminController::class, 'search']);
-
-// Auth???
-// Route::middleware('auth')->group(function () {
-// Route::middleware('ceklevel:L01')->group(function () {
-Route::controller(SuperAdminController::class)->group(function () {
-    Route::get('/superadmin/kelolaakun', 'index')->name('superadmin');
-    Route::post('tambah-user', 'store');
-    Route::get('/superadmin/edit-user/{id}', 'edit');
-    Route::put('update-user',  'update');
-    Route::delete('delete-user',  'destroy');
+Route::group(['middleware' => ['auth']], function () {
+    Route::controller(SuperAdminController::class)->group(function () {
+        Route::get('/superadmin/kelolaakun', 'index')->name('superadmin');
+        Route::post('tambah-user', 'store');
+        Route::get('/superadmin/edit-user/{id}', 'edit');
+        Route::put('update-user',  'update');
+        Route::delete('delete-user',  'destroy');
+    });
 });
-// });
 
 
 // ROUTES UNTUK ROLE ADMIN
 Route::prefix('/admin')->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return view('admin.dashboard');
-    // });
-    Route::get('/produkreject', function () {
-        return view('admin.produkreject');
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
     });
     Route::get('/listkategori', function () {
         return view('admin.listkategori');
     });
 });
+// });
 
-// Routes CRUD Produk
+// untuk role admin history
+Route::get('/admin/history/barang-keluar', [HistoryController::class, 'historybarangkeluar']);
+Route::get('/admin/history/barang-masuk', [HistoryController::class, 'historybarangmasuk']);
+// Routes ADMIN CRUD Produk
 Route::controller(ProdukController::class)
     ->prefix('/admin')
+    ->middleware('auth')
     ->group(function () {
+        // CRUD PRODUK
         Route::get('/produk', 'index')->name('produk');
+        Route::post('/tambah-produk', 'store')->name('tambah-produk');
+        Route::get('/edit-produk/{id}', 'edit');
+        Route::put('update-produk',  'update');
+        Route::delete('delete-produk',  'destroy');
+
+        // input stok
         Route::get('/inputstok', 'indexStok');
         Route::get('/produk/detail/{id}', 'show');
         Route::post('/tambah-stok', 'produkMasuk')->name('tambah-stok');
-        Route::post('/tambah-produk', 'store')->name('tambah-produk');
-        Route::get('/produkreject', [TypeaheadController::class, 'index']);
+        Route::get('/produkreject', 'indexprodukreject');
+        Route::post('/input-produkreject', 'storeprodukreject');
         Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
+        // Produk
+
+        // listkategori
+        Route::get('/listkategori', 'listkategori');
+        Route::post('/tambah-kategori', 'tambahkategori');
+        Route::get('/edit-kategori/{id}', 'editkategori');
+        Route::put('update-kategori',  'updatekategori');
     });
 
-// Routes CRUD Supplier
+
+
+// Routes CRUD ADMIN Supplier
 Route::controller(SupplierController::class)->group(function () {
     Route::post('tambah-supplier', 'tambah');
     Route::put('update-supplier', 'update');
@@ -83,6 +100,7 @@ Route::controller(SupplierController::class)->group(function () {
             Route::get('/supplier/detail/{id}', 'show');
         });
 });
+// });
 
 Route::controller(LaporanController::class)->group(function () {
     Route::prefix('/admin')->group(function () {

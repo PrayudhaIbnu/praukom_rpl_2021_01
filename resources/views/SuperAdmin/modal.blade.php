@@ -71,9 +71,8 @@
               <div class="col mb-2">
                 <label for="foto" class="form-label font-weight-normal">Foto User</label>
                 <input name="foto" class="form-control form-control-sm" type="file" accept="image/*">
-                {{-- <img src="{{ asset('storage/post-images/' . $user->foto) }} alt=""> --}}
               </div>
-              {{-- <div class="mb-2" id="foto"> </div> --}}
+              <div class="mb-2" id="foto"> </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-3">
@@ -103,10 +102,10 @@
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-            <button type="submit" class="btn btn-primary btn-simpan">Update</button>
-          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary btn-simpan">Perbarui</button>
+        </div>
         </form>
       </div>
     </div>

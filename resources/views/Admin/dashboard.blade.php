@@ -2,6 +2,11 @@
 <x-app-layout>
   {{-- x-dashboard buat struktur dashboard --}}
   <x-dashboard-admin />
+  {{-- tilte --}}
+  @section('title')
+      Dashboard
+  @endsection
+  {{-- end title --}}
   {{-- CONTENT --}}
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

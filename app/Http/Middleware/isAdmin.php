@@ -6,9 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-
-class CekLevel
+class isAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,17 +15,12 @@ class CekLevel
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check()) {
-            return redirect('login');
+
+        if (Auth::user()->level != 2) {
+            abort(403);
         }
-        $user = Auth::user();
-        // dd($user);
-        if ($user->level === $role) {
-            return $next($request);
-        }
-        abort(403);
-        // return redirect('login')->with('error', 'Anda Tidak  Dapat Mengakses');
+        return $next($request);
     }
 }

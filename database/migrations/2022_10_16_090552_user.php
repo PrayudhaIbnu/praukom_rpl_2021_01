@@ -11,41 +11,41 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        //
-        {
-            Schema::create('users', function (Blueprint $table) {
-                $table->engine = env('DB_STORAGE_ENGINE', 'InnoDB');
-                $table->charset = env('DB_CHARSET', 'utf8mb4');
-                $table->collation = env('DB_COLLATION', 'utf8mb4_general_ci');
-                $table->char('id_user', 5)->primary();
-                $table->string('nama', 60);
-                $table->string('username')->unique();
-                $table->text('password');
-                $table->text('foto')->nullable();
-                $table->char('level', 3);
+    // public function up()
+    // {
+    //     //
+    //     {
+    //         Schema::create('users', function (Blueprint $table) {
+    //             $table->engine = env('DB_STORAGE_ENGINE', 'InnoDB');
+    //             $table->charset = env('DB_CHARSET', 'utf8mb4');
+    //             $table->collation = env('DB_COLLATION', 'utf8mb4_general_ci');
+    //             $table->char('id_user', 5)->primary();
+    //             $table->string('nama', 60);
+    //             $table->string('username')->unique();
+    //             $table->text('password');
+    //             $table->text('foto')->nullable();
+    //             $table->char('level', 3);
 
-                $table->timestamps();
+    //             $table->timestamps();
 
-                // foreign
-                $table
-                    ->foreign('level')
-                    ->references('id_level')
-                    ->on('level_user')
-                    ->cascadeOnDelete();
-            });
-        }
-    }
+    //             // foreign
+    //             $table
+    //                 ->foreign('level')
+    //                 ->references('id_level')
+    //                 ->on('level_user')
+    //                 ->cascadeOnDelete();
+    //         });
+    //     }
+    // }
 
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
-    {
-        //
-        Schema::dropIfExists('users');
-    }
+    // public function down()
+    // {
+    //     //
+    //     Schema::dropIfExists('users');
+    // }
 };

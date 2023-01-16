@@ -7,7 +7,7 @@
       </a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <h5 class="m-0 nav-header text-light">Selamat Datang, <?php $user; ?></h5>
+      <h5 class="m-0 nav-header text-light">Selamat Datang,</h5>
     </li>
   </ul>
 
