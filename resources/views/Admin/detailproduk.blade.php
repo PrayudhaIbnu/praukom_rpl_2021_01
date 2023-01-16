@@ -57,9 +57,9 @@
             </div>
           </div>
           <div class="col">
-            <div class="card w-25 float-end" style="margin: 0 0 10 0">
+            {{-- <div class="card w-25 float-end" style="margin: 0 0 10 0">
                 <img src="https://img.icons8.com/ios-filled/300/null/noodles.png" class="img-fluid rounded-start" alt="...">
-            </div>
+            </div> --}}
           </div>              
         </div>
 </x-app-layout>
