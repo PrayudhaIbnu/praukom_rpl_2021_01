@@ -23,8 +23,8 @@
 
           <span class="dropdown-item dropdown-header">
             <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
-            <p>Prayudha Ibnu<?php {{ $user; }} ?></p>
-            <p class="font-level">Pengawas<?php {{ $level; }}?></p>
+            <p>Super Admin</p>
+            <p class="font-level">Super Admin</p>
           </span>
 
           <div class="dropdown-divider"></div>

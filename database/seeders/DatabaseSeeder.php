@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
                 [
 
                     'id_level' => '1',
-                    'nama_level' => 'Super Admin',
+                    'nama_level' => 'SuperAdmin',
                 ],
                 [
                     'id_level' => '2',

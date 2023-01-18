@@ -21,8 +21,8 @@
 
         <span class="dropdown-item dropdown-header">
           <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
-          <p>Prayudha Ibnu<?php $user; ?></p>
-          <p class="font-level">Pengawas<?php $level; ?></p>
+          <p>Siti Hardiah</p>
+          <p class="font-level">admin</p>
         </span>
 
         <div class="dropdown-divider"></div>

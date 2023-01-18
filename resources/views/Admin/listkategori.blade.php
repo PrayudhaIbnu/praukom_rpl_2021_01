@@ -15,8 +15,13 @@
                     <div class="row">
                         <div class="col mb-1">
                             <label for="kategori" class="form-label font-weight-normal">Tambah Kategori :</label>
-                            <input autocomplete="off" required  name="nama_kategori" id="kategori" class="form-control form-control-sm" type="text"
+                            <input autocomplete="off"  name="nama_kategori" id="kategori" class="form-control form-control-sm @error('nama_kategori') is-invalid @enderror" type="text"
                             aria-label=".form-control-sm example">
+                            @error('nama_kategori')
+                            <div class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                            @enderror   
                             <button type="submit" class="mt-3 float-end btn btn-primary rounded-3 btn-sm pl-3 pr-3">Tambah</button>
                             <button type="button" class="mt-3 mr-3 float-end btn btn-secondary rounded-3 btn-sm pl-3 pr-3" data-dismiss="modal"><a href="{{ route('produk') }}" style="color: rgb(255, 255, 255)">Kembali</a></button>
                         </div>
@@ -25,6 +30,12 @@
             </form>
         </div>
         <br>
+        {{-- @if (count($errors) > 0)
+        <div class=" alert alert-dismissible fade show alert-danger" role="alert" style="margin-top: 60px">
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+          Data Gagal di Tambah!
+        </div>
+        @endif --}}
         <div class="card w-50 m-auto">
           <table class="table">
             <thead class="table-warning">
@@ -70,7 +81,7 @@
           <div class="row align-items-start">
             <div class="col mb-3">
               <label for="namauser" class="form-label font-weight-normal">Nama Kategori</label>
-              <input required name="nama_kategori" id="nama_kategori" class="form-control form-control-sm" type="text"
+              <input required  name="kategori" id="nama_kategori" class="form-control form-control-sm @error('kategori') is-invalid @enderror" type="text"
                 aria-label=".form-control-sm example">
             </div>
             <div class="modal-footer-noline">

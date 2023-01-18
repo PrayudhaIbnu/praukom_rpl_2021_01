@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Darryldecode\Cart\Validators\Validator;
+use Illuminate\Auth\Events\Failed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -23,15 +25,30 @@ class SuperAdminController extends Controller
             ->where('nama', 'LIKE', '%' . $search . '%')
             ->orWhere('nama_level', 'LIKE', '%' . $search . '%')
             ->orWhere('username', 'LIKE', '%' . $search . '%')
-            ->paginate(5);
+            ->paginate(10);
         return view('SuperAdmin.index', compact('user', 'level_user'));
     }
 
     // tambah
     public function store(Request $request)
     {
+
+        request()->validate(
+            [
+                'nama' => 'required',
+                'username' => 'required|unique:user',
+                'password' => 'required'
+            ],
+            [
+                'nama.required' => 'Nama tidak boleh kosong!',
+                'username.required' => 'Username tidak boleh kosong!',
+                'username.unique' => 'Username sudah tersedia.',
+                'password.required' => 'Password tidak boleh kosong!',
+            ]
+        );
+
+
         $user = new User;
-        // $id_user = substr(md5(rand(0, 99999)), -4);
         $id_user = collect(DB::select('SELECT new_iduser() AS new_iduser'))->first()->new_iduser;
         $user['id_user'] = $id_user;
         $user->nama = $request->input('nama');
@@ -65,7 +82,7 @@ class SuperAdminController extends Controller
         $user = User::find($user_id);
         $user->nama = $request->input('nama');
         $user->username = $request->input('username');
-        $user->password = $request->input('password');
+        $user->password = Hash::make($request->input('password'));
         $user->level = $request->input('id_level');
         if ($request->hasFile('foto')) {
             $destination = 'storage/post-images/' . $user->foto;

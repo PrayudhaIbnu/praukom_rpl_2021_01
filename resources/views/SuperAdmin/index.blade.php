@@ -13,7 +13,7 @@
             <h1>Kelola Akun</h1>
           </div>
           <!-- /.col -->
-          <div class="row col-sm-6">
+          <div class="col-sm-6">
             {{-- Search --}}
             <form action="" method="GET">
             <div class="input-group">
@@ -26,32 +26,36 @@
               </div>
             </div>
           </form>
-
             {{-- End Search --}}
           </div>
         </div>
+        <div class="float-start">
+          {{-- alert --}}
+          @if (session('success_message'))
+            <div class="alert alert-success">
+              {{ session('success_message') }}
+            </div>
+          @endif
+          {{-- End allert --}}
+        </div>
+        <!-- Button  modal -->
+        <div class="float-end">
+          <button type="button" class="btn btn-success my-3 btn-sm" data-bs-toggle="modal"
+            data-bs-target="#tambahuser">
+            Tambah User
+          </button>
+        </div>
+        {{-- End button modal --}}
         <div class="container-fluid-6">
-          <div class="float-start">
-            {{-- alert --}}
-            @if (session('success_message'))
-              <div class="alert alert-success">
-                {{ session('success_message') }}
-              </div>
-            @endif
-
-            {{-- End allert --}}
-          </div>
-          <!-- Button  modal -->
-          <div class="float-end">
-            <button type="button" class="btn btn-success my-3 btn-sm" data-bs-toggle="modal"
-              data-bs-target="#tambahuser">
-              Tambah User
-            </button>
-          </div>
-          {{-- End button modal --}}
-
+          @if (count($errors) > 0)
+            <div class=" alert alert-dismissible fade show alert-danger" role="alert" style="margin-top: 60px">
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+              Data Gagal di Tambah!
+            </div>
+          @endif
+          
           {{-- TABEL --}}
-          <table class="table table-hover mt-4 ">
+          <table class="table table-hover mt-2 ">
             <thead class="table-warning" style="vertical-align: middle;">
               <tr>
                 <th scope="col">No</th>

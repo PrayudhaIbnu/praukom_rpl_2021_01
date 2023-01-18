@@ -2,6 +2,9 @@
 <x-app-layout>
   {{-- x-dashboard buat struktur dashboard --}}
   <x-dashboard-cashier />
+  @section('title')
+      Laporan
+  @endsection
   {{-- CONTENT --}}
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

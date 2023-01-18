@@ -27,13 +27,13 @@ Route::get('/', function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'index')->name('login')->middleware('guest');
+    Route::get('/login', 'index')->name('login');
     Route::post('/auth', 'masuk');
     Route::post('/logout', 'keluar');
 });
 
 // ROUTES Super Admin
-Route::group(['middleware' => ['auth']], function () {
+Route::middleware(['auth', 'ceklevel:SuperAdmin'])->group(function () {
     Route::controller(SuperAdminController::class)->group(function () {
         Route::get('/superadmin/kelolaakun', 'index')->name('superadmin');
         Route::post('tambah-user', 'store');
@@ -61,7 +61,6 @@ Route::get('/admin/history/barang-masuk', [HistoryController::class, 'historybar
 // Routes ADMIN CRUD Produk
 Route::controller(ProdukController::class)
     ->prefix('/admin')
-    ->middleware('auth')
     ->group(function () {
         // CRUD PRODUK
         Route::get('/produk', 'index')->name('produk');
@@ -86,21 +85,23 @@ Route::controller(ProdukController::class)
         Route::put('update-kategori',  'updatekategori');
     });
 
-
-
-// Routes CRUD ADMIN Supplier
-Route::controller(SupplierController::class)->group(function () {
-    Route::post('tambah-supplier', 'tambah');
-    Route::put('update-supplier', 'update');
-    Route::delete('delete-supplier', 'destroy');
-    Route::prefix('/admin')
-        ->group(function () {
-            Route::get('/supplier', 'index')->name('supplier');
-            Route::get('/edit-supplier/{id}', 'edit');
-            Route::get('/supplier/detail/{id}', 'show');
-        });
-});
+// Route::group(['middleware' => ['auth', 'ceklevel:Admin']], function () {
+//     Route::get('/supplier', [SupplierController::class, 'index']);
 // });
+// Routes CRUD ADMIN Supplier
+Route::middleware(['auth', 'ceklevel:Admin'])->group(function () {
+    Route::controller(SupplierController::class)->group(function () {
+        Route::post('tambah-supplier', 'tambah');
+        Route::put('update-supplier', 'update');
+        Route::delete('delete-supplier', 'destroy');
+        Route::prefix('/admin')
+            ->group(function () {
+                Route::get('/supplier', 'index')->name('supplier');
+                Route::get('/edit-supplier/{id}', 'edit');
+                Route::get('/supplier/detail/{id}', 'show');
+            });
+    });
+});
 
 Route::controller(LaporanController::class)->group(function () {
     Route::prefix('/admin')->group(function () {

@@ -50,4 +50,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function level_user()
+    {
+        return $this->belongsTo(LevelUser::class, 'level', 'id_level');
+    }
 }

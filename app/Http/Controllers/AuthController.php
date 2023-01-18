@@ -34,6 +34,7 @@ class AuthController extends Controller
             // dd($credentials);
             $user = Auth::user();
             // dd($user);
+
             if ($user->level === '1') {
                 return redirect()->intended('superadmin/kelolaakun');
             } elseif ($user->level === '2') {

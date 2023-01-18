@@ -5447,19 +5447,19 @@ a.badge-dark:focus, a.badge-dark.focus {
   color: #533f03;
 }
 
-.alert-danger {
+/* .alert-danger {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
-}
+} */
 
-.alert-danger hr {
+/* .alert-danger hr {
   border-top-color: #f1b0b7;
-}
+} */
 
-.alert-danger .alert-link {
+/* .alert-danger .alert-link {
   color: #491217;
-}
+} */
 
 .alert-light {
   color: #818182;
@@ -32841,11 +32841,11 @@ html.maximized-card {
   color: #533f03;
 }
 
-.alert-danger {
+/* .alert-danger {
   color: #fff;
   background-color: #dc3545;
   border-color: #d32535;
-}
+} */
 
 .alert-default-danger {
   color: #721c24;
@@ -33001,13 +33001,13 @@ html.maximized-card {
   color: #533f03;
 }
 
-.dark-mode .alert-danger {
+/* .dark-mode .alert-danger {
   color: #fff;
   background-color: #e74c3c;
   border-color: #e43725;
-}
+} */
 
-.dark-mode .alert-default-danger {
+/* .dark-mode .alert-default-danger {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
@@ -33019,7 +33019,7 @@ html.maximized-card {
 
 .dark-mode .alert-default-danger .alert-link {
   color: #491217;
-}
+} */
 
 .dark-mode .alert-light {
   color: #1f2d3d;

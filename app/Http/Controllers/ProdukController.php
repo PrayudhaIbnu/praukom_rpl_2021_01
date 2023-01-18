@@ -39,6 +39,16 @@ class ProdukController extends Controller
     // tambah kategori
     public function tambahkategori(Request $request)
     {
+        request()->validate(
+            [
+                'nama_kategori' => 'required|unique:produk_kategori,kategori_produk',
+
+            ],
+            [
+                'nama_kategori.required' => 'Kategori Wajib di Isi !',
+                'nama_kategori.unique' => 'Kategori Sudah Tersedia !'
+            ]
+        );
         DB::table('produk_kategori')->insert([
             'kategori_produk' => $request['nama_kategori']
         ]);
@@ -57,9 +67,18 @@ class ProdukController extends Controller
     // update kategori
     public function updatekategori(Request $request)
     {
+        request()->validate(
+            [
+                'kategori' => 'required',
+
+            ],
+            [
+                'kategori.required' => 'Kategori Wajib di Isi !',
+            ]
+        );
         $id_kategori = $request->input('kategori_id');
         DB::table('produk_kategori')->where('id_kategori', $id_kategori)->update([
-            'kategori_produk' => $request['nama_kategori']
+            'kategori_produk' => $request['kategori']
         ]);
 
         return redirect()->back()->with('success', "Data berhasi di Edit");
@@ -184,6 +203,23 @@ class ProdukController extends Controller
 
     public function produkMasuk(Request $request)
     {
+        request()->validate(
+            [
+                'id_produk' => 'required',
+                'tgl_msk' => 'required',
+                'tgl_exp' => 'required',
+                'qty' => 'required|numeric|min:1',
+                'id_supplier' => 'required'
+            ],
+            [
+                'id_produk.required' => 'Pilih Produk !',
+                'tgl_msk.required' => 'Masukkan Tanggal !',
+                'tgl_exp.required' => 'Masukkan Tanggal !',
+                'qty.required' => 'Jumlah tidak boleh kosong !',
+                'qty.min' => 'Masukkan Jumlah Lebih Dari 0 !',
+                'id_supplier.required' => 'Pilih Supplier !',
+            ]
+        );
         $id = $request->input('id_produk');
         $tgl_msk = $request->input('tgl_msk');
         $tgl_exp = $request->input('tgl_exp');
@@ -210,6 +246,22 @@ class ProdukController extends Controller
     // 2.function tambah procuk reject
     public function storeprodukreject(Request $request)
     {
+        request()->validate(
+            [
+                'produk' => 'required',
+                'jml_keluar' => 'required|numeric|min:1',
+                'tgl_keluar' => 'required',
+                'keterangan' => 'required',
+            ],
+            [
+                'produk.required' => 'Pilih Produk !',
+                'tgl_keluar.required' => 'Masukkan Tanggal !',
+                'jml_keluar.required' => 'Jumlah tidak boleh kosong !',
+                'jml_keluar.min' => 'Masukkan Jumlah Lebih Dari 0 !',
+                'keterangan.required' => 'Keterangan Wajib di Isi !',
+            ]
+        );
+
         $nama_produk = $request->input('produk');
         $jml_keluar = $request->input('jml_keluar');
         $tgl_keluar = $request->input('tgl_keluar');

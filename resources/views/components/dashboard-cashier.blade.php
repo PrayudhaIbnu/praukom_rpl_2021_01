@@ -7,7 +7,7 @@
       </a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <h5 class="m-0 nav-header text-light">Selamat Datang,</h5>
+      <h5 class="m-0 nav-header text-light">Selamat Datang</h5>
     </li>
   </ul>
 
@@ -21,17 +21,18 @@
 
         <span class="dropdown-item dropdown-header">
           <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
-          <p>Prayudha Ibnu<?php $user; ?></p>
-          <p class="font-level">Pengawas<?php $level; ?></p>
+          <p>Vera</p>
+          <p class="font-level">Kasir</p>
         </span>
 
         <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item logout">
-          <p>
+        <form action="{{ url('logout') }}" method="post">   
+          @csrf
+          <button type="submit" class="dropdown-item logout">
             <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
-            <span class="text-sm ">Logout</span>
-          </p>
-        </a>
+          <span class="text-sm ">Logout</span>
+          </button>
+        </form>
       </div>
     </li>
     <li class="nav-item">

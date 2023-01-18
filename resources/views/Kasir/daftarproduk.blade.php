@@ -3,6 +3,9 @@
   {{-- x-dashboard buat struktur dashboard --}}
   <x-dashboard-cashier />
   {{-- CONTENT --}}
+  @section('title')
+      Daftar Produk
+  @endsection
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">

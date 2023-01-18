@@ -2,6 +2,9 @@
 <x-app-layout>
   {{-- x-dashboard buat struktur dashboard --}}
   <x-dashboard-cashier />
+  @section('title')
+      Transaksi
+  @endsection
   {{-- CONTENT --}}
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -122,7 +125,7 @@
                 </tr>
               @empty
                 <td colspan="6">
-                  <h6 class="text-center mt-3">Keranjang Anda Kosong, Yuk Belanja!</h6>
+                  <h6 class="text-center mt-3">Keranjang Kosong!</h6>
                 </td>
               @endforelse
             </tbody>
