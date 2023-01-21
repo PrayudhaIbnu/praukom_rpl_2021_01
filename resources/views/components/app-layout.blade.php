@@ -15,6 +15,8 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/dashboard.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dist/css/style-dashboard.css') }}">
+  <link rel="stylesheet" href="{{ asset('others/bootstrap/js/bootstrapselect.min.css') }}">
+  <link rel="stylesheet" href={{ asset('others/DataTables/datatables.min.css') }} />
 </head>
 
 <body class="sidebar-mini">
@@ -30,15 +32,38 @@
   <script src="{{ asset('others/jquery/jquery.min.js') }}"></script>
   <!-- Bootstrap -->
   <script src="{{ asset('others/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  {{-- Select --}}
+  <script src="{{ asset('others/bootstrap/js/bootstrapselect.min.js') }}"></script>
   <!-- JS -->
   <script src="{{ asset('dist/js/dashboard.js') }}"></script>
-  <!-- switalert -->
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="{{ asset('others/DataTables/datatables.min.js') }}"></script>
 
   {{-- Daftar Chart --}}
   <script src={{ asset('dist/js/pages/linechart.js') }}></script>
   <script src={{ asset('dist/js/pages/searchfilter.js') }}></script>
   @stack('jquery')
+  <script>
+    $(document).ready(function() {
+      responsive: true,
+      $('#harian').DataTable({
+        "language": {
+          "emptyTable": "Tidak ada transaksi Hari Ini"
+        }
+      });
+
+      $('#mingguan').DataTable({
+        "language": {
+          "emptyTable": "Tidak ada transaksi Minggu Ini"
+        }
+      });
+
+      $('#bulanan').DataTable({
+        "language": {
+          "emptyTable": "Tidak ada transaksi Bulan Ini"
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

@@ -2,6 +2,9 @@
 <x-app-layout>
   {{-- x-dashboard buat struktur dashboard --}}
   <x-dashboard-cashier />
+  @section('title')
+    Transaksi
+  @endsection
   {{-- CONTENT --}}
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -46,16 +49,25 @@
                   <div class="mb-3 row">
                     <label for="staticEmail" id="produk" class="col-sm-3 col-form-label">Produk</label>
                     <div class="col-sm-9 mb-2">
-                      <select class="form-select" id="produk" name="produk" aria-label="Default select example">
+                      <select class="form-control js-example-basic-multiple" id="produk" name="produk"
+                        aria-label="Default select example">
                         <option disabled class="bg-light" selected>Pilih Produk...</option>
                         @foreach ($produk as $p)
-                          <option value="{{ $p->id_produk }}">{{ $p->nama_produk }}</option>
+                          <option value="{{ $p->id_produk }}">{{ $p->id_produk }} ||
+                            {{ $p->nama_produk }}
+                          </option>
                         @endforeach
                       </select>
+                      {{-- <select class=" form-control js-example-basic-multiple">
+                        <option>Mustard</option>
+                        <option>Ketchup</option>
+                        <option>Barbecue</option>
+                      </select> --}}
+                      {{-- <input type="text" id='search'> --}}
                     </div>
                     <label for="qty" class="col-sm-3 col-form-label">Qty</label>
                     <div class="col-sm-9">
-                      <input type="number" class="form-control" id="qty" name="qty" value="0">
+                      <input type="number" class="form-control" id="qty" name="qty" value="1">
                     </div>
                   </div>
                   <button type="submit" class="btn btn-primary btn-sm float-end tambah-cart">Simpan</button>
@@ -122,7 +134,7 @@
                 </tr>
               @empty
                 <td colspan="6">
-                  <h6 class="text-center mt-3">Keranjang Anda Kosong, Yuk Belanja!</h6>
+                  <h6 class="text-center mt-3">Keranjang Kosong!</h6>
                 </td>
               @endforelse
             </tbody>
@@ -176,20 +188,11 @@
       $("#kembalian").val(kembalian);
     })
 
-    // $(".tambah-cart").click(function(e) {
 
-    //   e.preventDefault();
-
-    //   $.ajax({
-    //     type: 'POST',
-    //     url: "{{ route('tambah-cart') }}",
-    //     data: $('#tambahcart').serialize(),
-    //     success: function(data) {
-    //       $('#tambahcart').trigger("reset");
-    //       alert(data.success);
-    //     }
-    //   });
-
-    // });
+    $(document).ready(function() {
+      $('.js-example-basic-multiple').select2([{
+        width: 'resolve'
+      }]);
+    });
   });
 </script>

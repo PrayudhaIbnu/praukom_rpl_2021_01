@@ -27,10 +27,19 @@
         <div class="container-fluid">
           <div class="float-end">
             <div class="dropdown mb-2 mt-4">
-              <button class="btn btn-success rounded-3 btn-sm" data-toggle="modal" data-target="#tambahsupplier">+
+              <button class="btn btn-success rounded-3 btn" data-toggle="modal" data-target="#tambahsupplier">+
                 Tambah Supplier</button>
             </div>
           </div>
+          @if (count($errors) > 0)
+            <br><br><br>
+            <div class="alert alert-dismissible fade show alert-danger" role="alert">
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+            </div>
+          @endif
           <div class="table-responsive-xl">
             <table class="table mt-4 table-borderless ">
               <thead class="table-warning">
@@ -44,7 +53,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($data as $d)
+                @forelse ($data as $d)
                   <tr>
                     <th style="vertical-align: middle" scope="row">{{ $loop->iteration }}</th>
                     <td style="vertical-align: middle">
@@ -65,7 +74,11 @@
                           class="fa-solid fa-trash"></i></button>
                     </td>
                   </tr>
-                @endforeach
+                @empty
+                  <td colspan="6">
+                    <h6 class="text-center mt-3">Belum ada Transaksi Hari Ini</h6>
+                  </td>
+                @endforelse
               </tbody>
             </table>
           </div>

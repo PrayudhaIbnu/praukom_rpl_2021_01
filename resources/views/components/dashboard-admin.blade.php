@@ -20,18 +20,19 @@
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
         <span class="dropdown-item dropdown-header">
-          <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
-          <p>Prayudha Ibnu<?php $user; ?></p>
-          <p class="font-level">Pengawas<?php $level; ?></p>
+          <img src="/img/busiti.jpeg" style="object-fit: cover;width:100px;height:100px;" alt="User Photos"
+            class="img img-circle">
+          <p class="mt-2 text-bold">Siti Hardiah<?php $user; ?></p>
+          <i class="font-level">Admin<?php $level; ?></i>
         </span>
 
         <div class="dropdown-divider"></div>
         <form action="{{ url('logout') }}" method="post">
-          
+
           @csrf
           <button type="submit" class="dropdown-item logout">
             <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
-          <span class="text-sm ">Logout</span>
+            <span class="text-sm ">Logout</span>
           </button>
         </form>
       </div>
@@ -54,7 +55,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="/admin/dashboard" class="nav-link" >
+          <a href="/admin/dashboard" class="nav-link">
             <i class=" nav-icon fas fa-th-large "></i>
             <p>
               Dashboard
@@ -122,12 +123,12 @@
           </ul>
         </li>
         <li class="nav-item">
-        <a href="{{ url('/admin/laporan') }}" class="nav-link">
-          <i class="nav-icon fas fa-file-alt"></i>
-          <p>
-            Laporan
-          </p>
-        </a>
+          <a href="{{ url('/admin/laporan') }}" class="nav-link">
+            <i class="nav-icon fas fa-file-alt"></i>
+            <p>
+              Laporan
+            </p>
+          </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">

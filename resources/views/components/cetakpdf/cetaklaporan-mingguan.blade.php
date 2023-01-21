@@ -10,6 +10,9 @@
         <input type="text" readonly class="form-control-plaintext" id="staticEmail"
           value="{{ $tglAwal }} / {{ $tglAkhir }}">
       </div>
+      <div class="col-8 ">
+        <i class="float-end">*Menampilkan satuan harga dalam Rupiah</i>
+      </div>
     </div>
 
     <h4></h4>

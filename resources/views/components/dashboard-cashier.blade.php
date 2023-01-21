@@ -21,17 +21,19 @@
 
         <span class="dropdown-item dropdown-header">
           <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
-          <p>Prayudha Ibnu<?php $user; ?></p>
-          <p class="font-level">Pengawas<?php $level; ?></p>
+          <p>Vera<?php $user; ?></p>
+          <p class="font-level">Kasir<?php $level; ?></p>
         </span>
 
         <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item logout">
-          <p>
+        <form action="{{ url('logout') }}" method="post">
+
+          @csrf
+          <button type="submit" class="dropdown-item logout">
             <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
             <span class="text-sm ">Logout</span>
-          </p>
-        </a>
+          </button>
+        </form>
       </div>
     </li>
     <li class="nav-item">

@@ -134,6 +134,9 @@ class TransaksiController extends Controller
         return redirect()->back();
     }
 
+
+
+
     // Tambahin QTY
     public function increaseItem(Request $request)
     {
@@ -275,5 +278,17 @@ class TransaksiController extends Controller
             return redirect()->back()->with('success', "Transaksi Berhasil!");
         }
     }
+
+    // public function autocomplete(Request $request)
+    // {
+    //     $data = Produk::select("id_produk", "nama_produk")
+    //         ->where('id_produk', 'LIKE', '%' . $request->get('search') . '%')
+    //         ->orWhere('nama_produk', 'LIKE', '%' . $request->get('search') . '%')
+    //         ->get();
+
+    //     return response()->json($data);
+    // }
 }
+    
+
 // SELECT produk, tanggal_masuk, SUM(qty) FROM barang_masuk GROUP BY produk;

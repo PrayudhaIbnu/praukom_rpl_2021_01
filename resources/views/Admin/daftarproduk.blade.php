@@ -2,7 +2,7 @@
   <x-dashboard-admin />
   {{-- tilte --}}
   @section('title')
-      Daftar Produk
+    Daftar Produk
   @endsection
   {{-- end title --}}
   <div class="content-wrapper">
@@ -14,27 +14,33 @@
           </div>
           <!-- /.col -->
           <div class="row col-sm-6">
-            <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search-input">
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
+            {{-- Search --}}
+            <form action="" method="GET">
+              <div class="input-group">
+                <input class="form-control" name="search" id="search-input" type="text" placeholder="Search"
+                  autocomplete="off">
+                <div class="input-group-append">
+                  <button class="btn btn-warning" type="submit">
+                    <i class="fas fa-search fa-fw"></i>
+                  </button>
+                </div>
               </div>
-            </div>
+            </form>
+
+            {{-- End Search --}}
           </div>
         </div>
         <div class="container-fluid">
           <div class="float-start">
             <!-- Example single danger button -->
             <div class="btn-group mb-2 mt-2">
-                <select class="form-select bg-warning form-select-sm" id="sort-kategori"
-                  aria-label="Default select example">
-                  <option class="bg-light" selected value="semua">Semua</option>
-                  @foreach ($kategori as $k)
-                    <option class="bg-light" value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
-                  @endforeach
-                </select>
+              <select class="form-select bg-warning form-select-sm" id="sort-kategori"
+                aria-label="Default select example">
+                <option class="bg-light" selected value="semua">Semua</option>
+                @foreach ($kategori as $k)
+                  <option class="bg-light" value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
           <div class="float-end">
@@ -51,12 +57,19 @@
               </ul>
             </div>
           </div>
+          @if (count($errors) > 0)
+            <br><br>
+            <div class="alert alert-dismissible fade show alert-danger" role="alert">
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+            </div>
+          @endif
           <div class="table-responsive-xl">
             <table class="table mt-4 table-borderless ">
               <thead class="table-warning">
                 <tr>
-                  <th>No</th>
-                  <th scope="col">Foto</th>
                   <th scope="col">Barcode</th>
                   <th scope="col">Nama Produk</th>
                   <th scope="col">Stok</th>
@@ -69,12 +82,7 @@
               <tbody class="produk">
                 @foreach ($produk as $d)
                   <tr class="produk-info" data-custom-type="{{ $d->kategori }}">
-                    <td> {{ $loop->iteration }}</td>
-                    <td>
-                      <img id="gambar" src="{{ asset('storage/post-images/' . $d->foto) }}" alt=""
-                    style="width: 100px">
-                    </td>
-                    <td>{{ $d->id_produk }}</td>
+                    <th>{{ $d->id_produk }}</th>
                     <td>{{ $d->nama_produk }}</td>
                     <td>{{ $d->stok }}</td>
                     <td>{{ $d->satuan_produk }}</td>
@@ -86,13 +94,16 @@
                       </a>
                       <button type="button" value="{{ $d->id_produk }}" class="btn btn-edit btn-primary"><i
                           class="fa-solid fa-pen-to-square"></i></button>
-                      <button class="btn btn-hapus btn-danger" value="{{ $d->id_produk }}"
-                        ><i class="fa-solid fa-trash"></i></button>
+                      <button class="btn btn-hapus btn-danger" value="{{ $d->id_produk }}"><i
+                          class="fa-solid fa-trash"></i></button>
                     </td>
                   </tr>
                 @endforeach
               </tbody>
             </table>
+          </div>
+          <div class="d-flex justify-content-center">
+            {!! $produk->links() !!}
           </div>
         </div>
       </div>
@@ -115,21 +126,20 @@
           <div class="modal-body">
             <div class="row align-items-start">
               <div class="col mb-3">
-                <label for="foto" class="form-label font-weight-normal">Foto produk</label>
-                <input name="foto"  class="form-control form-control-sm" type="file">
+                <label for="foto" class="form-label font-weight-normal">Foto Produk</label>
+                <input name="foto" class="form-control form-control-sm" type="file">
 
               </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-3">
                 <label for="kode_produk" class="form-label font-weight-normal">Kode Produk (Barcode ID)</label>
-                <input required name="kode_produk"  class="form-control form-control-sm" type="number"
+                <input required name="kode_produk" class="form-control form-control-sm" type="number"
                   aria-label=".form-control-sm example">
               </div>
               <div class="col mb-3">
                 <label for="id_kategori" class="form-label font-weight-normal">Kategori</label>
-                <select required name="id_kategori"  class="form-select"
-                  aria-label="Default select example">
+                <select required name="id_kategori" class="form-select" aria-label="Default select example">
                   @foreach ($kategori as $k)
                     <option value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
                   @endforeach
@@ -139,25 +149,25 @@
             <div class="row align-items-end">
               <div class="col mb-2">
                 <label for="nama_produk" class="form-label font-weight-normal">Nama Produk</label>
-                <input required name="nama_produk"  class="form-control form-control-sm"
-                  type="text" aria-label=".form-control-sm example">
+                <input required name="nama_produk" class="form-control form-control-sm" type="text"
+                  aria-label=".form-control-sm example">
               </div>
               <div class="col mb-2">
                 <label for="satuan_produk" class="form-label font-weight-normal">Satuan Produk</label>
-                <input required name="satuan_produk"  class="form-control form-control-sm"
-                  type="text" aria-label=".form-control-sm example">
+                <input required name="satuan_produk" class="form-control form-control-sm" type="text"
+                  aria-label=".form-control-sm example">
               </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-2">
                 <label for="harga_beli" class="form-label font-weight-normal">Harga Beli</label>
-                <input required name="harga_beli"  class="form-control form-control-sm"
-                  type="text" aria-label=".form-control-sm example">
+                <input required name="harga_beli" class="form-control form-control-sm" type="text"
+                  aria-label=".form-control-sm example">
               </div>
               <div class="col mb-2">
                 <label for="harga_jual" class="form-label font-weight-normal">Harga Jual</label>
-                <input required name="harga_jual"  class="form-control form-control-sm"
-                  type="text" aria-label=".form-control-sm example">
+                <input required name="harga_jual" class="form-control form-control-sm" type="text"
+                  aria-label=".form-control-sm example">
               </div>
             </div>
           </div>
@@ -171,103 +181,103 @@
     </div>
   </div>
 
-    <!-- Modal Edit User -->
-    <div class="modal fade" id="editproduk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Form Edit Produk</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <form action="{{ url('admin/update-produk') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <input type="hidden" name="produk_id" id="produk_id">
-            {{-- <input type="hidden" name="path_foto" id="path_foto"> --}}
-            <div class="modal-body">
-              <div class="row align-items-start">
-                <div class="col mb-2">
-                  <label for="foto_produk" class="form-label font-weight-normal">Foto produk</label>
-                  <input name="foto" id="foto_produk" class="form-control form-control-sm" type="file">
-                </div>
-                <div class="mb-2" id="foto"> </div>
+  <!-- Modal Edit User -->
+  <div class="modal fade" id="editproduk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Form Edit Produk</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{{ url('admin/update-produk') }}" method="POST" enctype="multipart/form-data">
+          @csrf
+          @method('PUT')
+          <input type="hidden" name="produk_id" id="produk_id">
+          {{-- <input type="hidden" name="path_foto" id="path_foto"> --}}
+          <div class="modal-body">
+            <div class="row align-items-start">
+              <div class="col mb-2">
+                <label for="foto_produk" class="form-label font-weight-normal">Foto produk</label>
+                <input name="foto" id="foto_produk" class="form-control form-control-sm" type="file">
               </div>
-              <div class="row align-items-center">
-                <div class="col mb-3">
-                  <label for="kode_produk" class="form-label font-weight-normal">Kode Produk (Barcode ID)</label>
-                  <input required name="kode_produk" id="kode_produk" class="form-control form-control-sm" type="number"
-                    aria-label=".form-control-sm example">
-                </div>
-                <div class="col mb-3">
-                  <label for="id_kategori" class="form-label font-weight-normal">Kategori</label>
-                  <select required name="id_kategori" id="id_kategori" class="form-select"
-                    aria-label="Default select example">
-                    @foreach ($kategori as $k)
-                      <option value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
-                    @endforeach
-                  </select>
-                </div>
+              <div class="mb-2" id="foto"> </div>
+            </div>
+            <div class="row align-items-center">
+              <div class="col mb-3">
+                <label for="kode_produk" class="form-label font-weight-normal">Kode Produk (Barcode ID)</label>
+                <input required name="kode_produk" id="kode_produk" class="form-control form-control-sm"
+                  type="number" aria-label=".form-control-sm example">
               </div>
-              <div class="row align-items-end">
-                <div class="col mb-2">
-                  <label for="nama_produk" class="form-label font-weight-normal">Nama Produk</label>
-                  <input required name="nama_produk" id="nama_produk" class="form-control form-control-sm"
-                    type="text" aria-label=".form-control-sm example">
-                </div>
-                <div class="col mb-2">
-                  <label for="satuan_produk" class="form-label font-weight-normal">Satuan Produk</label>
-                  <input required name="satuan_produk" id="satuan_produk" class="form-control form-control-sm"
-                    type="text" aria-label=".form-control-sm example">
-                </div>
-              </div>
-              <div class="row align-items-center">
-                <div class="col mb-2">
-                  <label for="harga_beli" class="form-label font-weight-normal">Harga Beli</label>
-                  <input required name="harga_beli" id="harga_beli" class="form-control form-control-sm"
-                    type="text" aria-label=".form-control-sm example">
-                </div>
-                <div class="col mb-2">
-                  <label for="harga_jual" class="form-label font-weight-normal">Harga Jual</label>
-                  <input required name="harga_jual" id="harga_jual" class="form-control form-control-sm"
-                    type="text" aria-label=".form-control-sm example">
-                </div>
+              <div class="col mb-3">
+                <label for="id_kategori" class="form-label font-weight-normal">Kategori</label>
+                <select required name="id_kategori" id="id_kategori" class="form-select"
+                  aria-label="Default select example">
+                  @foreach ($kategori as $k)
+                    <option value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
+                  @endforeach
+                </select>
               </div>
             </div>
+            <div class="row align-items-end">
+              <div class="col mb-2">
+                <label for="nama_produk" class="form-label font-weight-normal">Nama Produk</label>
+                <input required name="nama_produk" id="nama_produk" class="form-control form-control-sm"
+                  type="text" aria-label=".form-control-sm example">
+              </div>
+              <div class="col mb-2">
+                <label for="satuan_produk" class="form-label font-weight-normal">Satuan Produk</label>
+                <input required name="satuan_produk" id="satuan_produk" class="form-control form-control-sm"
+                  type="text" aria-label=".form-control-sm example">
+              </div>
+            </div>
+            <div class="row align-items-center">
+              <div class="col mb-2">
+                <label for="harga_beli" class="form-label font-weight-normal">Harga Beli</label>
+                <input required name="harga_beli" id="harga_beli" class="form-control form-control-sm"
+                  type="text" aria-label=".form-control-sm example">
+              </div>
+              <div class="col mb-2">
+                <label for="harga_jual" class="form-label font-weight-normal">Harga Jual</label>
+                <input required name="harga_jual" id="harga_jual" class="form-control form-control-sm"
+                  type="text" aria-label=".form-control-sm example">
+              </div>
+            </div>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
             <button type="submit" class="btn btn-primary btn-simpan">Perbarui</button>
           </div>
-          </form>
-        </div>
+        </form>
       </div>
     </div>
-    <!-- End Modal Edit User -->
-  
-    {{-- delete modal --}}
-    <div class="modal fade" id="deleteproduk" tabindex="-1" aria-labelledby="tambahuserLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content text-center">
-          <div class="modal-header flex-column">
-            <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close"></button>
-            <h4 class="modal-title w-100">Apakah Anda yakin?</h4>
-          </div>
-          <div class="modal-body">
-            <p>Apakah Anda benar-benar ingin menghapus? Anda tidak akan dapat mengembalikan ini! </p>
-          </div>
-          <form method="POST" action="{{ url('admin/delete-produk') }}" enctype="multipart/form-data">
-            @csrf
-            @method('DELETE')
-            <input type="hidden" id="delete_id" name="delete_produk_id">
-            <div class="modal-footer ">
-              <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Tidak</button>
-              <button type="submit" class="btn btn-danger ">Iya</button>
-            </div>
+  </div>
+  <!-- End Modal Edit User -->
+
+  {{-- delete modal --}}
+  <div class="modal fade" id="deleteproduk" tabindex="-1" aria-labelledby="tambahuserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content text-center">
+        <div class="modal-header flex-column">
+          <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h4 class="modal-title w-100">Apakah Anda yakin?</h4>
         </div>
+        <div class="modal-body">
+          <p>Apakah Anda benar-benar ingin menghapus? Anda tidak akan dapat mengembalikan ini! </p>
+        </div>
+        <form method="POST" action="{{ url('admin/delete-produk') }}" enctype="multipart/form-data">
+          @csrf
+          @method('DELETE')
+          <input type="hidden" id="delete_id" name="delete_produk_id">
+          <div class="modal-footer ">
+            <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Tidak</button>
+            <button type="submit" class="btn btn-danger ">Iya</button>
+          </div>
       </div>
     </div>
-    {{-- end delete modal --}}
-  
-  
+  </div>
+  {{-- end delete modal --}}
+
+
   @include('sweetalert::alert')
 </x-app-layout>
 

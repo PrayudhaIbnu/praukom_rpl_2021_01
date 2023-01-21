@@ -33,7 +33,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 // ROUTES Super Admin
-Route::group(['middleware' => ['auth']], function () {
+Route::middleware('auth')->group(function () {
     Route::controller(SuperAdminController::class)->group(function () {
         Route::get('/superadmin/kelolaakun', 'index')->name('superadmin');
         Route::post('tambah-user', 'store');
@@ -41,19 +41,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('update-user',  'update');
         Route::delete('delete-user',  'destroy');
     });
-});
+    // });
 
-
-// ROUTES UNTUK ROLE ADMIN
-Route::prefix('/admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    });
-    Route::get('/listkategori', function () {
-        return view('admin.listkategori');
+    // ROUTES UNTUK ROLE ADMIN
+    Route::prefix('/admin')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        });
     });
 });
-// });
 
 // untuk role admin history
 Route::get('/admin/history/barang-keluar', [HistoryController::class, 'historybarangkeluar']);
@@ -131,6 +127,7 @@ Route::controller(TransaksiController::class)->group(function () {
         Route::get('/laporan', 'laporanTransaksi');
         Route::get('/produk', 'indexProduk');
         Route::get('/search', 'search')->name('search.kasir');
+        Route::post('/getProduk', 'autocomplete')->name('autocomplete');
     });
 });
 

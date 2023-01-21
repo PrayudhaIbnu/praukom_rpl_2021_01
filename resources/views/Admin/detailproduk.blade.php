@@ -41,7 +41,7 @@
                       <h6 class="mb-0 text-secondary">Kategori</h6>
                     </td>
                     <th>
-                      <h6 class="fw-bold mt-0">{{ $detailProduk->kategori }}</h6>
+                      <h6 class="fw-bold mt-0">{{ $detailProduk->kategori_produk }}</h6>
                     </th>
                   </div>
                   <div class="col-3">
@@ -86,7 +86,7 @@
           </div>
           <div class="col-5">
             <div class="w-75 m-4" style="margin: 0 0 10 0; ">
-              <img alt="Belum ada foto :(" src="{{ asset('storage/post-images/' . $detailSupplier->foto) }}"
+              <img alt="Belum ada foto :(" src="{{ asset('storage/post-images/' . $detailProduk->foto) }}"
                 class="img-fluid rounded">
               <a href="{{ url('/admin/produk') }}">
                 <button class="btn btn-primary float-end mt-2">Kembali</button>

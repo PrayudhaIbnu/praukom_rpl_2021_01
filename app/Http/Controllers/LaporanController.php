@@ -77,12 +77,13 @@ class LaporanController extends Controller
     public function cetakBulanan(Request $request)
     {
         $tglBulanan = $request->tglawal;
+        // $getBulan = ;
 
         // Masih bingung tampilanny mau dibuat kek gmn hmm
         $bulanan = DB::select(DB::raw("SELECT * FROM laporan_mingguan
-        WHERE tanggal BETWEEN '$tglBulanan' AND DATE_SUB('$tglBulanan', INTERVAL -1 MONTH) ORDER BY tanggal DESC"));
+        WHERE tanggal BETWEEN '$tglBulanan' AND DATE_SUB('$tglBulanan', INTERVAL -30 DAY) ORDER BY tanggal DESC"));
 
-        return view('components.cetakpdf.cetaklaporan-bulanan', compact('bulanan'));
+        return view('components.cetakpdf.cetaklaporan-bulanan', compact('bulanan', 'getBulan'));
     }
 
     public function dashboardAdmin()

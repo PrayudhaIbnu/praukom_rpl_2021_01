@@ -17,7 +17,11 @@ return new class extends Migration
         DB::unprepared(
             "CREATE PROCEDURE get_one_produk_by_id(id varchar(15))
                BEGIN
-                SELECT * FROM produk
+                SELECT id_produk, produk_kategori.kategori_produk, nama_produk, stok,
+        satuan_produk,
+        harga_beli,
+        harga_jual,
+        foto  FROM produk INNER JOIN produk_kategori ON produk.kategori = produk_kategori.id_kategori
                 WHERE id_produk = id;
                 END;"
         );

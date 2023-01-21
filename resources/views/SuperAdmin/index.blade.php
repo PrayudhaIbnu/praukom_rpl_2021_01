@@ -2,7 +2,7 @@
   <x-dashboard-super-admin />
   {{-- tilte --}}
   @section('title')
-      Kelola Akun
+    Kelola Akun
   @endsection
   {{-- end title --}}
   <div class="content-wrapper">
@@ -16,16 +16,16 @@
           <div class="row col-sm-6">
             {{-- Search --}}
             <form action="" method="GET">
-            <div class="input-group">
-              <input class="form-control" name="search" id="search-input" type="text" placeholder="Search"
-                autocomplete="off">
-              <div class="input-group-append">
-                <button class="btn btn-warning" type="submit">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
+              <div class="input-group">
+                <input class="form-control" name="search" id="search-input" type="text" placeholder="Search"
+                  autocomplete="off">
+                <div class="input-group-append">
+                  <button class="btn btn-warning" type="submit">
+                    <i class="fas fa-search fa-fw"></i>
+                  </button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
 
             {{-- End Search --}}
           </div>
@@ -49,7 +49,15 @@
             </button>
           </div>
           {{-- End button modal --}}
-
+          @if (count($errors) > 0)
+            <br><br><br>
+            <div class="alert alert-dismissible fade show alert-danger" role="alert">
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+            </div>
+          @endif
           {{-- TABEL --}}
           <table class="table table-hover mt-4 ">
             <thead class="table-warning" style="vertical-align: middle;">
@@ -64,23 +72,23 @@
             </thead>
             <tbody>
               @foreach ($user as $item)
-              <tr style="vertical-align: middle;">
-                <td> {{ $loop->iteration }}</td>
-                <td>
-                  <img id="gambar" src="{{ asset('storage/post-images/' . $item->foto) }}" alt=""
-                    style="width: 100px">
-                </td>             
-                <td id="s">{{ $item->nama }}</td>
-                <td>{{ $item->nama_level }}</td>
-                <td>{{ $item->username }}</td>
-                <td>
-                  <button type="button" value="{{ $item->id_user }}" class="btn btn-edit btn-primary"><i
-                      class="fa-solid fa-pen-to-square"></i></button>
-                  <button type="button" value="{{ $item->id_user }}" class="btn btn-hapus btn-danger"><i
-                      class="fa-solid fa-trash"></i></button>
-                </td>
-              </tr>
-            @endforeach
+                <tr style="vertical-align: middle;">
+                  <td> {{ $loop->iteration }}</td>
+                  <td>
+                    <img id="gambar" src="{{ asset('storage/post-images/' . $item->foto) }}" alt=""
+                      style="width: 100px">
+                  </td>
+                  <td id="s">{{ $item->nama }}</td>
+                  <td>{{ $item->nama_level }}</td>
+                  <td>{{ $item->username }}</td>
+                  <td>
+                    <button type="button" value="{{ $item->id_user }}" class="btn btn-edit btn-primary"><i
+                        class="fa-solid fa-pen-to-square"></i></button>
+                    <button type="button" name="hapus" value="{{ $item->id_user }}"
+                      class="btn btn-hapus btn-danger"><i class="fa-solid fa-trash"></i></button>
+                  </td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
           {{-- End Table --}}

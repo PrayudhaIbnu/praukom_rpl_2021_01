@@ -17,9 +17,14 @@ class ProdukController extends Controller
      */
 
     //  menampilkan halaman daftar produk
-    public function index()
+    public function index(Request $request)
     {
-        $produk = DB::table('produk')->select('*')->paginate(10);
+        $search = $request->search;
+        $produk = DB::table('produk')->select('*')->orderBy('nama_produk', 'ASC')
+            ->where('id_produk', 'LIKE', '%' . $search . '%')
+            ->orWhere('nama_produk', 'LIKE', '%' . $search . '%')
+            ->orWhere('stok', 'LIKE', '%' . $search . '%')
+            ->paginate(10);
         $kategori = DB::table('produk_kategori')
             ->select()
             ->get();
@@ -68,7 +73,20 @@ class ProdukController extends Controller
     // tambah produk
     public function store(Request $request)
     {
-        //
+
+        request()->validate(
+            [
+                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
+                'kode_produk' => 'required|unique:produk,id_produk',
+                'nama_produk' => 'required'
+            ],
+            [
+                'kode_produk.required' => 'Kode Produk tidak boleh kosong!',
+                'kode_produk.unique' => 'Kode Produk sudah pernah di isi!',
+                'nama_produk.required' => 'Password tidak boleh kosong!'
+            ]
+        );
+
         $produk = new Produk;
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
@@ -131,6 +149,19 @@ class ProdukController extends Controller
     // update produk
     public function update(Request $request)
     {
+        request()->validate(
+            [
+                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
+                'kode_produk' => 'required',
+                'nama_produk' => 'required'
+            ],
+            [
+                'kode_produk.required' => 'Kode Produk tidak boleh kosong!',
+                'kode_produk.unique' => 'Kode Produk sudah pernah di isi!',
+                'nama_produk.required' => 'Password tidak boleh kosong!'
+            ]
+        );
+
         $produk_id = $request->input('produk_id');
         $produk = Produk::find($produk_id);
         if ($request->hasFile('foto')) {
@@ -172,6 +203,20 @@ class ProdukController extends Controller
         }
         $produk->delete();
         return redirect()->back()->with('success', "Data Berhasil di Hapus");
+    }
+
+    public function searchProduk(Request $request)
+    {
+        $search = $request->search;
+
+        $produk = DB::table('produk')
+            ->select(['produk.id_produk', 'produk.nama_produk', 'produk.foto', 'produk.stok', 'produk.satuan_produk', 'produk.harga_jual', 'produk.harga_beli'])
+            ->orderBy('nama_produk', 'ASC')
+            ->where('id_produk', 'LIKE', '%' . $search . '%')
+            ->where('nama_produk', 'LIKE', '%' . $search . '%')
+            ->orWhere('stok', 'LIKE', '%' . $search . '%')
+            ->paginate(10);
+        return view('Admin.daftarproduk', compact('produk'));
     }
 
     public function indexStok()
