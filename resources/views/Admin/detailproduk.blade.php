@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="container-fluid">
-          <div class="card mt-5 w-50">
+          <div class="card mt-5 w-100   ">
             <div class="container">
               <div class="col">
                 <div class="row mt-3">
@@ -82,17 +82,18 @@
                   </div>
                 </div>
               </div>
+              <div class="col  ">
+                <div class="card w-50 bg-dark">
+                  <div class="w-75 m-4" style="margin: 0 0 10 0; ">
+                    <img alt="Belum ada foto :(" src="{{ asset('storage/post-images/' . $detailProduk->foto) }}"
+                      class="img-fluid rounded">
+                    <a href="{{ url('/admin/produk') }}">
+                      <button class="btn btn-primary  mt-2">Kembali</button>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="col-5">
-            <div class="w-75 m-4" style="margin: 0 0 10 0; ">
-              <img alt="Belum ada foto :(" src="{{ asset('storage/post-images/' . $detailProduk->foto) }}"
-                class="img-fluid rounded">
-              <a href="{{ url('/admin/produk') }}">
-                <button class="btn btn-primary float-end mt-2">Kembali</button>
-              </a>
-            </div>
-
           </div>
         </div>
 </x-app-layout>

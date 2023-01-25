@@ -56,7 +56,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href="/admin/dashboard" class="nav-link">
-            <i class=" nav-icon fas fa-th-large "></i>
+            <i class=" nav-icon fa-solid fa-grip"></i>
             <p>
               Dashboard
             </p>

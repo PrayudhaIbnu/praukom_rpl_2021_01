@@ -7,7 +7,6 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\HistoryController;
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\TransaksiController;
 
 

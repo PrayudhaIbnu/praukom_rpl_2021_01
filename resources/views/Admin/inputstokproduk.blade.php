@@ -2,7 +2,7 @@
   <x-dashboard-admin />
   {{-- tilte --}}
   @section('title')
-      Input Stok Produk
+    Input Stok Produk
   @endsection
   {{-- end title --}}
   <div class="content-wrapper">
@@ -17,11 +17,19 @@
           <form method="POST" action="{{ route('tambah-stok') }}" enctype="multipart/form-data">
             @csrf
             <div class="modal-body">
+              @if (count($errors) > 0)
+                <div class="alert alert-dismissible fade show alert-danger" role="alert">
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                </div>
+              @endif
               <div class="row align-items-center">
                 <div class="col mb-3">
                   <label for="id_produk" class="form-label font-weight-normal">Nama Produk</label>
-                  <select required name="id_produk" id="id_produk" class="form-select bg-white"
-                    aria-label="Default select example">
+                  <select required name="id_produk" id="id_produk"
+                    class="form-select bg-white js-example-basic-multiple" aria-label="Default select example">
                     {{-- <input type="search" name=" " id=""> --}}
                     <option disabled class="bg-light" selected>Pilih Produk...</option>
                     @foreach ($produk as $p)
@@ -33,8 +41,8 @@
               <div class="row align-items-center">
                 <div class="col mb-3">
                   <label for="nama_supplier" class="form-label font-weight-normal">Nama Supplier</label>
-                  <select required name="id_supplier" id="id_supplier" class="form-select bg-white"
-                    aria-label="Default select example">
+                  <select required name="id_supplier" id="id_supplier"
+                    class="form-select bg-white js-example-basic-multiple" aria-label="Default select example">
                     <option class="bg-light" disabled selected>Pilih Supplier...</option>
                     @foreach ($supplier as $s)
                       <option value="{{ $s->id_supplier }}">{{ $s->nama_supplier }}</option>
@@ -42,39 +50,38 @@
                   </select>
                 </div>
               </div>
-                <div class="row align-items-center ">
-                  <div class="col mb-3">
-                    <label for="qty" class="form-label font-weight-normal">Jumlah
-                      Masuk </label>
-                    <input class="form-control " type="number" name="qty" id="qty">
-                  </div>
-                </div>
-                <div class="row align-items-center w-full">
-                  <div class="col mb-3">
-                    <label for="tgl_msk" name="tgl_msk" class="form-label font-weight-normal">Tanggal
-                      Masuk </label>
-                    <div class="input-group date" id="datepicker">
-                      <input type="date" class="form-control" id="date" name="tgl_msk" />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row align-items-center w-full">
-                  <div class="col mb-2">
-                    <label for="tgl_exp" name="tgl_exp" class="form-label font-weight-normal">Tanggal
-                      Exp</label>
-                    <div class="input-group date" id="datepicker">
-                      <input type="date" class="form-control" id="date" name="tgl_exp" />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary btn-sm pl-3 pr-3"
-                    data-dismiss="modal">Kembali</button>
-                  <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3">Simpan</button>
+              <div class="row align-items-center ">
+                <div class="col mb-3">
+                  <label for="qty" class="form-label font-weight-normal">Jumlah
+                    Masuk </label>
+                  <input class="form-control " type="number" name="qty" id="qty">
                 </div>
               </div>
+              <div class="row align-items-center w-full">
+                <div class="col mb-3">
+                  <label for="tgl_msk" name="tgl_msk" class="form-label font-weight-normal">Tanggal
+                    Masuk </label>
+                  <div class="input-group date" id="datepicker">
+                    <input type="date" class="form-control" id="date" name="tgl_msk" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row align-items-center w-full">
+                <div class="col mb-2">
+                  <label for="tgl_exp" name="tgl_exp" class="form-label font-weight-normal">Tanggal
+                    Exp</label>
+                  <div class="input-group date" id="datepicker">
+                    <input type="date" class="form-control" id="date" name="tgl_exp" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm pl-3 pr-3" data-dismiss="modal">Kembali</button>
+                <button type="submit" class="btn btn-primary btn-sm pl-3 pr-3">Simpan</button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
@@ -82,25 +89,12 @@
   </div>
   @include('sweetalert::alert')
 
-  <!-- <script type="text/javascript">
-    var route = "{{ url('autocomplete-search') }}";
-    $('#produk').typeahead({
-      source: function(query, process) {
-        return $.get(route, {
-          query: query
-        }, function(data) {
-          return process(data);
-        });
-      }
-    });
-  </script> -->
-
 </x-app-layout>
-
 {{-- Autocomplete? --}}
 <script>
-  $("#produk").autocomplete({
-    source: fn(request, response)
-
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2([{
+      width: 'resolve'
+    }]);
   });
 </script>

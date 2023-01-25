@@ -1,4 +1,4 @@
-<div class="">
+<div class="float-end">
   <h2 class="h3">Today, {{ date('j F Y') }}</h2>
 </div>
 {{-- <form action="{{ route('cetak-harian') }}" method="post">

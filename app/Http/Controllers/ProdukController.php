@@ -229,6 +229,13 @@ class ProdukController extends Controller
 
     public function produkMasuk(Request $request)
     {
+        request()->validate(
+            [
+                'qty' => 'numeric|min:1'
+            ],
+            ['qty.min' => 'Jumlah Masuk minimal 1']
+        );
+
         $id = $request->input('id_produk');
         $tgl_msk = $request->input('tgl_msk');
         $tgl_exp = $request->input('tgl_exp');
