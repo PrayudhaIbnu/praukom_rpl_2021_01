@@ -7,7 +7,7 @@
         </a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-          <h5 class="m-0 nav-header text-light">Selamat Datang </h5>
+          <h5 class="m-0 nav-header text-light">Selamat Datang di One Mart {{ Session::get('levelbaru')->nama }} </h5>
       </li>
     </ul>
 
@@ -21,7 +21,7 @@
 
           <span class="dropdown-item dropdown-header">
             <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
-            <p>Siti Hardiah</p>
+            <p>{{ Session::get('levelbaru')->nama }}</p>
             <p class="font-level">Pengawas</p>
           </span>
 
@@ -54,14 +54,14 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="/pengawas/dashboard" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt-fast"></i>
+              <i class="nav-icon fa-solid fa-chart-pie"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/pengawas/laporan" class="nav-link">
+            <a href="{{ url('pengawas/laporan') }}" class="nav-link">
                 <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Laporan
@@ -70,32 +70,40 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-box-open"></i>                  
+              <i class="nav-icon fa-solid fa-clock"></i>
               <p>
-                Log Aktivitas
+                Riwayat
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview pl-4">
               <li class="nav-item">
-                <a href="/pengawas/logproduk" class="nav-link">
-                  <i class="fas fa-balance-scale-right"></i>                 
-                  <p>Log Produk</p>
+                <a href="/admin/history/barang-masuk" class="nav-link">
+                  <i class="fa-solid fa-arrow-right-to-bracket"></i>                 
+                  <p>Riwayat Barang Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/pengawas/logkelolaakun" class="nav-link">
-                    <i class="fas fa-user-cog"></i>                    
-                  <p>Log Kelola Akun</p>
+                <a href="/admin/history/barang-keluar" class="nav-link">
+                  <i class="fa-regular fa-circle-xmark"></i>
+                  <p>Riwayat Barang Keluar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/pengawas/historypenjualan" class="nav-link">
-                  <i class="fas fa-clock"></i>                      
-                  <p>History Penjualan</p>
+                  <i class="fa-solid fa-cart-shopping"></i>                      
+                  <p>Riwayat Transaksi</p>
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/pengawas/logproduk" class="nav-link">
+                <i class="nav-icon fas fa-history"></i>
+              <p>
+                Log Produk
+              </p>
+            </a>
           </li>
         </ul>
     </div>

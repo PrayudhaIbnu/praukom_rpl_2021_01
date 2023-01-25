@@ -14,14 +14,13 @@
             <h1 class="m-0">Daftar Produk</h1>
           </div>
           <!-- /.col -->
-          <div class="row col-sm-6">
+          <div class="col-sm-6">
             <form action="{{ route('search.kasir') }}" method="get">
               @csrf
               <div class="input-group">
-                <input class="form-control" name="search" {{-- id="search-input" --}} type="text" placeholder="Search"
-                  autocomplete="off">
+                <input class="form-control" name="search" {{-- id="search-input" --}} type="text" placeholder="Search" autocomplete="off">
                 <div class="input-group-append">
-                  <button class="btn btn-info" type="submit">
+                  <button class="btn btn-warning" type="submit">
                     <i class="fas fa-search fa-fw"></i>
                   </button>
                 </div>
@@ -29,20 +28,17 @@
             </form>
           </div>
         </div>
-        <div class="container-fluid">
           <div class="float-start">
             <!-- Example single danger button -->
-            <div class="btn-group mb-2 mt-2">
-              <div class="col">
-                <select class="form-select bg-warning form-select-sm" id="sort-kategori"
-                  aria-label="Default select example">
-                  <option class="bg-light" selected value="semua">Semua</option>
-                  @foreach ($kategori as $k)
-                    <option class="bg-light" value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
+            <div class="btn-group my-2">
+              <select class="form-select bg-warning form-select-sm" id="sort-kategori"
+                aria-label="Default select example">
+                <option class="bg-light" selected value="semua">Semua</option>
+                @foreach ($kategori as $k)
+                  <option class="bg-light" value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
+                @endforeach
+              </select>
+          </div>
           </div>
           <div class="table-responsive-xl">
             <table class="table mt-4 table-borderless ">
@@ -58,11 +54,11 @@
               <tbody class="produk">
                 @foreach ($produk as $d)
                   <tr class="produk-info" data-custom-type="{{ $d->kategori }}">
-                    <th scope="row" id="s">{{ $d->id_produk }}</th>
-                    <td>{{ $d->nama_produk }}</td>
-                    <td>{{ $d->stok }}</td>
-                    <td>{{ $d->satuan_produk }}</td>
-                    <td> Rp {{ number_format($d->harga_jual, 2, ',', '.') }}</td>
+                    <td scope="row" id="s">{{ $d->id_produk }}</td>
+                    <td scope="row" >{{ $d->nama_produk }}</td>
+                    <td scope="row" >{{ $d->stok }}</td>
+                    <td scope="row" >{{ $d->satuan_produk }}</td>
+                    <td scope="row" > Rp {{ number_format($d->harga_jual, 2, ',', '.') }}</td>
                   </tr>
                 @endforeach
               </tbody>

@@ -8,7 +8,7 @@
       </li>
       @auth
       <li class="nav-item d-none d-sm-inline-block">
-        <h5 class="m-0 nav-header text-light">Selamat Datang, </h5>
+        <h5 class="m-0 nav-header text-light">Selamat Datang di One Mart {{ Auth::user()->nama }}</h5>
       </li>
       @endauth
     </ul>
@@ -23,7 +23,7 @@
 
           <span class="dropdown-item dropdown-header">
             <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
-            <p>Super Admin</p>
+            <p>{{ Session::get('levelbaru')->nama }}</p>
             <p class="font-level">Super Admin</p>
           </span>
 
@@ -64,5 +64,4 @@
         </ul>
     </div>
 </aside>
-
   {{ $slot }}

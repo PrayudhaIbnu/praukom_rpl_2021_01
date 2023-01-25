@@ -33,7 +33,7 @@
                   </div>
                   <label for="staticEmail" class="col-sm-5 col-form-label">Kasir</label>
                   <div class="col-sm-7">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Kasir 1">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ Session::get('levelbaru')->nama }}">
                   </div>
                 </div>
               </div>
@@ -87,7 +87,7 @@
             <thead class="table-warning sticky-top">
               <tr>
                 <th scope="col"style="width: 80px">No</th>
-                <th scope="col">Nama Produk</th>
+                <th scope="col" style="">Nama Produk</th>
                 <th scope="col" style="width: 180px">Harga Satuan</th>
                 <th scope="col" style="width: 100px">Qty</th>
                 <th scope="col" style="width: 180px">Harga Total</th>

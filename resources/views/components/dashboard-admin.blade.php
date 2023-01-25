@@ -7,7 +7,7 @@
       </a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <h5 class="m-0 nav-header text-light">Selamat Datang</h5>
+      <h5 class="m-0 nav-header text-light">Selamat Datang  di One Mart {{ Session::get('levelbaru')->nama }}</h5>
     </li>
   </ul>
 
@@ -20,8 +20,8 @@
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
         <span class="dropdown-item dropdown-header">
-          <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
-          <p>Siti Hardiah</p>
+          <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}"  class="img img-circle">
+          <p>{{ Session::get('levelbaru')->nama }}</p>
           <p class="font-level">admin</p>
         </span>
 
@@ -55,7 +55,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href="/admin/dashboard" class="nav-link" >
-            <i class=" nav-icon fas fa-th-large "></i>
+            <i class="nav-icon fa-solid fa-chart-pie"></i>
             <p>
               Dashboard
             </p>
@@ -72,19 +72,19 @@
           <ul class="nav nav-treeview pl-4">
             <li class="nav-item">
               <a href="{{ route('produk') }}" class="nav-link">
-                <i class="fa-solid fa-list-ul"></i>
+                <i class="fa-regular fa-rectangle-list"></i>
                 <p>Daftar Produk</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/admin/inputstok" class="nav-link">
-                <i class="fa-brands fa-wpforms"></i>
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 <p>Input Stok Produk</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/admin/produkreject" class="nav-link pl-3">
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i class="fa-regular fa-circle-xmark"></i>
                 <p>Produk Reject</p>
               </a>
             </li>
@@ -100,16 +100,16 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt-fast"></i>
+            <i class="nav-icon fa-solid fa-clock"></i>
             <p>
-              History
+              Riwayat
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview pl-4">
             <li class="nav-item">
               <a href="/admin/history/barang-masuk" class="nav-link">
-                <i class="fa-solid fa-list-ul"></i>
+                <i class="fa-brands fa-wpforms"></i>
                 <p>Barang Masuk</p>
               </a>
             </li>
@@ -122,20 +122,12 @@
           </ul>
         </li>
         <li class="nav-item">
-        <a href="{{ url('/admin/laporan') }}" class="nav-link">
+        <a href="{{ url('admin/laporan') }}" class="nav-link">
           <i class="nav-icon fas fa-file-alt"></i>
           <p>
             Laporan
           </p>
         </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-history"></i>
-            <p>
-              Log Aktivitas
-            </p>
-          </a>
         </li>
       </ul>
   </div>

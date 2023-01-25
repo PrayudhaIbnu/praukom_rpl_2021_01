@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -33,7 +34,8 @@ class AuthController extends Controller
             $request->session()->regenerate();
             // dd($credentials);
             $user = Auth::user();
-            // dd($user);
+            Session::put('levelbaru', Auth::user());
+            // dd(Session::all());
 
             if ($user->level === '1') {
                 return redirect()->intended('superadmin/kelolaakun');
@@ -61,6 +63,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/');
     }
 }

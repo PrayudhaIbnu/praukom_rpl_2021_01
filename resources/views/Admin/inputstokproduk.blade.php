@@ -21,7 +21,7 @@
                 <div class="col mb-3">
                   <label for="id_produk" class="form-label font-weight-normal">Nama Produk</label>
                   <select required name="id_produk" id="id_produk" class="form-select bg-white  @error('id_produk') is-invalid @enderror"
-                    aria-label="Default select example">
+                    aria-label="Default select example" data-live-search="true" >
                     {{-- <input type="search" name=" " id=""> --}}
                     <option disabled class="bg-light" selected>Pilih Produk...</option>
                     @foreach ($produk as $p)
@@ -39,7 +39,7 @@
                 <div class="col mb-3">
                   <label for="nama_supplier" class="form-label font-weight-normal">Nama Supplier</label>
                   <select required name="id_supplier" id="id_supplier" class="form-select bg-white  @error('id_supplier') is-invalid @enderror"
-                    aria-label="Default select example">
+                    aria-label="Default select example" >
                     <option class="bg-light" disabled selected>Pilih Supplier...</option>
                     @foreach ($supplier as $s)
                       <option value="{{ $s->id_supplier }}">{{ $s->nama_supplier }}</option>
@@ -56,7 +56,7 @@
                   <div class="col mb-3">
                     <label for="qty" class="form-label font-weight-normal">Jumlah
                       Masuk </label>
-                    <input class="form-control @error('qty') is-invalid @enderror" type="number" name="qty" id="qty">
+                    <input value="{{ old('qty') }}" class="form-control @error('qty') is-invalid @enderror" type="number" name="qty" id="qty">
                     @error('qty')
                     <div class="invalid-feedback">
                       {{ $message }}

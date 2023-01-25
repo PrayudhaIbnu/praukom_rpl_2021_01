@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('tanggal_exp');
             $table->integer('qty');
             $table->char('supplier', 6);
+            $table->integer('user');
 
             $table
                 ->foreign('supplier')
@@ -34,6 +35,11 @@ return new class extends Migration
                 ->foreign('produk')
                 ->references('id_produk')
                 ->on('produk')
+                ->cascadeOnDelete();
+            $table
+                ->foreign('user')
+                ->references('id')
+                ->on('user')
                 ->cascadeOnDelete();
         });
     }

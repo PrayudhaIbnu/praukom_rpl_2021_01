@@ -21,7 +21,7 @@ class SuperAdminController extends Controller
         $user = DB::table('user')
             ->select(['user.nama', 'user.username', 'level_user.nama_level', 'user.foto', 'user.id_user', 'user.level'])
             ->join('level_user', 'user.level', '=', 'level_user.id_level')
-            ->orderBy('nama', 'ASC')
+            // ->latest('nama')
             ->where('nama', 'LIKE', '%' . $search . '%')
             ->orWhere('nama_level', 'LIKE', '%' . $search . '%')
             ->orWhere('username', 'LIKE', '%' . $search . '%')
@@ -46,6 +46,7 @@ class SuperAdminController extends Controller
                 'password.required' => 'Password tidak boleh kosong!',
             ]
         );
+
 
 
         $user = new User;
@@ -111,12 +112,4 @@ class SuperAdminController extends Controller
         $user->delete();
         return redirect()->back()->with('success', "Data Berhasil di Hapus");
     }
-
-    // search
-    // public function search(Request $request)
-    // {
-    //     $get_name = $request->search;
-    //     $user = user::where('nama', 'LIKE', '%' . $get_name, '%')->get();
-    //     return view('SuperAdmin.index', compact('user'));
-    // }
 }

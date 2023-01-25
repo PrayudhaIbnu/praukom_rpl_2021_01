@@ -13,44 +13,52 @@
             <h1 class="m-0">Daftar Produk</h1>
           </div>
           <!-- /.col -->
-          <div class="row col-sm-6">
+          <div class="col-sm-6">
+            <form action="" method="GET">
             <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search-input">
+              <input class="form-control" name="search" id="search-input" type="text" placeholder="Search" autocomplete="off">
               <div class="input-group-append">
-                <button class="btn btn-sidebar">
+                <button class="btn btn-warning">
                   <i class="fas fa-search fa-fw"></i>
                 </button>
               </div>
             </div>
+            </form>
           </div>
         </div>
-        <div class="container-fluid">
-          <div class="float-start">
-            <!-- Example single danger button -->
-            <div class="btn-group mb-2 mt-2">
-                <select class="form-select bg-warning form-select-sm" id="sort-kategori"
-                  aria-label="Default select example">
-                  <option class="bg-light" selected value="semua">Semua</option>
-                  @foreach ($kategori as $k)
-                    <option class="bg-light" value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
-                  @endforeach
-                </select>
-            </div>
+        <div class="float-start">
+          <!-- Example single danger button -->
+          <div class="btn-group my-2">
+              <select class="form-select bg-warning form-select-sm" id="sort-kategori"
+                aria-label="Default select example">
+                <option class="bg-light" selected value="semua">Semua</option>
+                @foreach ($kategori as $k)
+                  <option class="bg-light" value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
+                @endforeach
+              </select>
           </div>
-          <div class="float-end">
-            <div class="dropdown mb-2 mt-2">
-              <button class="btn btn-success dropdown-toggle rounded-3 btn-sm" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                + Tambah
-              </button>
-              <ul class="dropdown-menu">
-                <li><a href="/admin/listkategori" class="dropdown-item">Tambah Kategori</a></li>
-                <li><button class="dropdown-item" data-toggle="modal" data-target="#tambahproduk">Tambah
-                    Produk</button>
-                </li>
-              </ul>
-            </div>
+        </div>
+        <div class="float-end">
+          <div class="dropdown my-2">
+            <button class="btn btn-success dropdown-toggle  btn-sm" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+                Tambah
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="/admin/listkategori" class="dropdown-item">Tambah Kategori</a></li>
+              <li><button class="dropdown-item" data-toggle="modal" data-target="#tambahproduk">Tambah
+                  Produk</button>
+              </li>
+            </ul>
           </div>
+        </div>
+        <div class="container-fluid-6">
+          @if (count($errors) > 0)
+          <div class=" alert alert-dismissible fade show alert-danger" role="alert" style="margin-top: 60px">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+            Data Gagal di Tambah!
+          </div>
+         @endif
           <div class="table-responsive-xl">
             <table class="table mt-4 table-borderless ">
               <thead class="table-warning">
@@ -75,7 +83,7 @@
                     style="width: 100px">
                     </td>
                     <td>{{ $d->id_produk }}</td>
-                    <td>{{ $d->nama_produk }}</td>
+                    <td id="s">{{ $d->nama_produk }}</td>
                     <td>{{ $d->stok }}</td>
                     <td>{{ $d->satuan_produk }}</td>
                     <td> Rp {{ number_format($d->harga_jual, 2, ',', '.') }}</td>
@@ -117,18 +125,22 @@
               <div class="col mb-3">
                 <label for="foto" class="form-label font-weight-normal">Foto produk</label>
                 <input name="foto"  class="form-control form-control-sm" type="file">
-
               </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-3">
                 <label for="kode_produk" class="form-label font-weight-normal">Kode Produk (Barcode ID)</label>
-                <input required name="kode_produk"  class="form-control form-control-sm" type="number"
+                <input  value="{{ old('kode_produk') }}" name="kode_produk"  class="form-control form-control-sm @error('kode_produk') is-invalid @enderror" type="number"
                   aria-label=".form-control-sm example">
+                  @error('kode_produk')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror   
               </div>
               <div class="col mb-3">
                 <label for="id_kategori" class="form-label font-weight-normal">Kategori</label>
-                <select required name="id_kategori"  class="form-select"
+                <select  name="id_kategori"  class="form-select"
                   aria-label="Default select example">
                   @foreach ($kategori as $k)
                     <option value="{{ $k->id_kategori }}">{{ $k->kategori_produk }}</option>
@@ -139,25 +151,40 @@
             <div class="row align-items-end">
               <div class="col mb-2">
                 <label for="nama_produk" class="form-label font-weight-normal">Nama Produk</label>
-                <input required name="nama_produk"  class="form-control form-control-sm"
+                <input value="{{ old('nama_produk') }}" name="nama_produk"  class="form-control form-control-sm @error('nama_produk') is-invalid @enderror"
                   type="text" aria-label=".form-control-sm example">
+                  @error('nama_produk')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror   
               </div>
               <div class="col mb-2">
                 <label for="satuan_produk" class="form-label font-weight-normal">Satuan Produk</label>
-                <input required name="satuan_produk"  class="form-control form-control-sm"
+                <input readonly value="pcs" name="satuan_produk"  class="form-control form-control-sm "
                   type="text" aria-label=".form-control-sm example">
               </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-2">
                 <label for="harga_beli" class="form-label font-weight-normal">Harga Beli</label>
-                <input required name="harga_beli"  class="form-control form-control-sm"
+                <input value="{{ old('harga_beli') }}" name="harga_beli"  class="form-control form-control-sm @error('harga_beli') is-invalid @enderror"
                   type="text" aria-label=".form-control-sm example">
+                  @error('harga_beli')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror   
               </div>
               <div class="col mb-2">
                 <label for="harga_jual" class="form-label font-weight-normal">Harga Jual</label>
-                <input required name="harga_jual"  class="form-control form-control-sm"
+                <input value="{{ old('harga_jual') }}" name="harga_jual"  class="form-control form-control-sm @error('harga_jual') is-invalid @enderror"
                   type="text" aria-label=".form-control-sm example">
+                  @error('harga_jual')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror   
               </div>
             </div>
           </div>
@@ -216,7 +243,7 @@
                 </div>
                 <div class="col mb-2">
                   <label for="satuan_produk" class="form-label font-weight-normal">Satuan Produk</label>
-                  <input required name="satuan_produk" id="satuan_produk" class="form-control form-control-sm"
+                  <input readonly value="pcs" name="satuan_produk" id="satuan_produk" class="form-control form-control-sm"
                     type="text" aria-label=".form-control-sm example">
                 </div>
               </div>

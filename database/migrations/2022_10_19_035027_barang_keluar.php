@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('qty');
             $table->date('tanggal_keluar');
             $table->text('keterangan');
+            $table->integer('user');
 
             $table
                 ->foreign('produk')
@@ -29,11 +30,11 @@ return new class extends Migration
                 ->on('produk')
                 ->cascadeOnDelete();
 
-            // $table
-            //     ->foreign('laba')
-            //     ->references('id_laba')
-            //     ->on('laba')
-            //     ->cascadeOnDelete();
+            $table
+                ->foreign('user')
+                ->references('id')
+                ->on('user')
+                ->cascadeOnDelete();
         });
     }
 

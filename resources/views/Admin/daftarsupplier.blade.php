@@ -13,23 +13,20 @@
             <h1 class="m-0">Daftar Supplier</h1>
           </div>
           <!-- /.col -->
-          <div class="row col-sm-6">
+          <div class="col-sm-6">
             <div class="input-group">
               <input class="form-control" id="search-input" type="search" placeholder="Search" aria-label="Search">
               <div class="input-group-append">
-                <button class="btn btn-sidebar">
+                <button class="btn btn-sidebar btn-warning">
                   <i class="fas fa-search fa-fw"></i>
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid-6">
           <div class="float-end">
-            <div class="dropdown mb-2 mt-4">
-              <button class="btn btn-success rounded-3 btn-sm" data-toggle="modal" data-target="#tambahsupplier">+
-                Tambah Supplier</button>
-            </div>
+              <button type="button" class="btn btn-success my-2 btn-sm" data-toggle="modal" data-target="#tambahsupplier">Tambah Supplier</button>
           </div>
           <div class="table-responsive-xl">
             <table class="table mt-4 table-borderless ">
@@ -38,7 +35,7 @@
                   <th scope="col">No.</th>
                   <th scope="col">Foto</th>
                   <th scope="col">Nama Supplier</th>
-                  <th scope="col" style="width: 450px;">Alamat Supplier</th>
+                  <th scope="col">Alamat Supplier</th>
                   <th scope="col">No. Telp</th>
                   <th scope="col">Aksi</th>
                 </tr>
@@ -46,16 +43,15 @@
               <tbody>
                 @foreach ($data as $d)
                   <tr>
-                    <th style="vertical-align: middle" scope="row">{{ $loop->iteration }}</th>
-                    <td style="vertical-align: middle">
+                    <td  scope="row">{{ $loop->iteration }}</td>
+                    <td scope="row">
                       <img id="foto_supplier" src="{{ asset('storage/post-images/' . $d->foto_supplier) }}"
                         alt="" style="width: 100px">
                     </td>
-                    </td>
-                    <td id="s"style="vertical-align: middle">{{ $d->nama_supplier }}</td>
-                    <td style="vertical-align: middle">{{ $d->alamat_supplier }}</td>
-                    <td style="vertical-align: middle">{{ $d->telp_supplier }}</td>
-                    <td style="vertical-align: middle">
+                    <td scope="row" id="s">{{ $d->nama_supplier }}</td>
+                    <td scope="row">{{ $d->alamat_supplier }}</td>
+                    <td scope="row">{{ $d->telp_supplier }}</td>
+                    <td scope="row">
                       <a href="supplier/detail/{{ $d->id_supplier }}">
                         <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
                       </a>

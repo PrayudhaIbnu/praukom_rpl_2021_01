@@ -6,6 +6,7 @@ use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\{Auth, Session};
 
 class ProdukController extends Controller
 
@@ -17,12 +18,17 @@ class ProdukController extends Controller
      */
 
     //  menampilkan halaman daftar produk
-    public function index()
+    public function index(Request $request)
     {
-        $produk = DB::table('produk')->select('*')->paginate(10);
-        $kategori = DB::table('produk_kategori')
-            ->select()
-            ->get();
+        $search = $request->search;
+        $kategori = DB::table('produk_kategori')->select()->get();
+        $produk = DB::table('produk')
+            ->select('*')
+            ->where('id_produk', 'LIKE', '%' . $search . '%')
+            ->orWhere('nama_produk', 'LIKE', '%' . $search . '%')
+            ->paginate(10);
+
+
         return view('admin.daftarproduk', compact('produk', 'kategori'));
     }
 
@@ -88,6 +94,25 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         //
+        request()->validate(
+            [
+                'kode_produk' => 'required',
+                'nama_produk' => 'required',
+                // 'satuan_produk' => 'required',
+                'harga_beli' => 'required|numeric|min:1',
+                'harga_jual' => 'required|numeric|min:1',
+
+            ],
+            [
+                'kode_produk.required' => 'Kade Produk Wajib di Isi !',
+                'nama_produk.required' => 'Nama Produk Wajib di Isi !',
+                'harga_beli.required' => 'Harga Beli Wajib di Isi !',
+                'harga_beli.numeric' => 'Tidak Boleh Kurang Dari 0 !',
+                'harga_jual.required' => 'Harga Beli Wajib di Isi !',
+                'harga_jual.numeric' => 'Tidak Boleh Kurang Dari 0 !',
+            ]
+        );
+
         $produk = new Produk;
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
@@ -104,7 +129,7 @@ class ProdukController extends Controller
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
 
-        $produk['user'] = 'USR02'; // Auth()->user()->id();
+        $produk['user'] = Session::get('levelbaru')->id;
         $produk->save();
         return redirect()->back()->with('success', "Data berhasil di tambah");
     }
@@ -220,13 +245,15 @@ class ProdukController extends Controller
                 'id_supplier.required' => 'Pilih Supplier !',
             ]
         );
+
         $id = $request->input('id_produk');
         $tgl_msk = $request->input('tgl_msk');
         $tgl_exp = $request->input('tgl_exp');
-        $jumlah = $request->input('qty');
+        $jml = $request->input('qty');
         $supp = $request->input('id_supplier');
-        DB::select('CALL tambahstokproduk(?, ?, ?, ?, ?)', [$id, $tgl_msk, $tgl_exp, $jumlah, $supp]);
-
+        $user = Session::get('levelbaru')->id;
+        DB::select('CALL tambahstokproduk(?, ?, ?, ?, ?, ?)', [$id, $tgl_msk, $tgl_exp, $jml, $supp, $user]);
+        // dd($stok);
         return redirect()->back()->with('success', "Data berhasil di input");
     }
 
@@ -266,7 +293,9 @@ class ProdukController extends Controller
         $jml_keluar = $request->input('jml_keluar');
         $tgl_keluar = $request->input('tgl_keluar');
         $keterangan = $request->input('keterangan');
-        DB::select('CALL barangkeluar(?,?,?,?)', array($nama_produk, $jml_keluar, $tgl_keluar, $keterangan));
+        $user = Session::get('levelbaru')->id;
+
+        DB::select('CALL barangkeluar(?,?,?,?,?)', array($nama_produk, $jml_keluar, $tgl_keluar, $keterangan, $user));
         return redirect()->back()->with('success', "Data Berhasil di Input");
     }
 }

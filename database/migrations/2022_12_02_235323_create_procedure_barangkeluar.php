@@ -15,10 +15,11 @@ return new class extends Migration
     {
         DB::unprepared("DROP PROCEDURE IF EXISTS barangkeluar");
         DB::unprepared(
-            "CREATE PROCEDURE barangkeluar(id VARCHAR(15), jml INT(11), tgl_keluar DATE, keterangan TEXT)
+            "CREATE PROCEDURE barangkeluar(id VARCHAR(15), jml INT(11), tgl_keluar DATE, keterangan TEXT, usr INT(11))
             BEGIN
             DECLARE jumlahkeluar_last INT(11);
-            INSERT INTO barang_keluar VALUES(id, jml, tgl_keluar, keterangan);
+            INSERT INTO barang_keluar 
+            VALUES(id, jml, tgl_keluar, keterangan, usr);
             SELECT stok INTO jumlahkeluar_last
             FROM produk WHERE id_produk = id;
             SET jumlahkeluar_last = jumlahkeluar_last - jml;

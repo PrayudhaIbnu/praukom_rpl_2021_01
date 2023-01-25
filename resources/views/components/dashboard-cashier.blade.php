@@ -7,7 +7,7 @@
       </a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <h5 class="m-0 nav-header text-light">Selamat Datang</h5>
+      <h5 class="m-0 nav-header text-light">Selamat Datang di One Mart {{ Session::get('levelbaru')->nama }}</h5>
     </li>
   </ul>
 
@@ -21,7 +21,7 @@
 
         <span class="dropdown-item dropdown-header">
           <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
-          <p>Vera</p>
+          <p>{{ Session::get('levelbaru')->nama }}</p>
           <p class="font-level">Kasir</p>
         </span>
 
@@ -53,8 +53,8 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="dashboard" class="nav-link">
-            <i class=" nav-icon fas fa-th-large"></i>
+          <a href="dashboard" class="nav-link ">
+            <i class="nav-icon fa-solid fa-chart-pie"></i>
             <p>
               Dashboard
             </p>
@@ -63,7 +63,7 @@
 
         <li class="nav-item">
           <a href="/kasir/transaksi" class="nav-link">
-            <i class="nav-icon fas fa-shopping-cart"></i>
+            <i class="nav-icon fas fa-shopping-cart "></i>
             <p>
               Transaksi
             </p>
@@ -71,9 +71,9 @@
         </li>
         <li class="nav-item">
           <a href="/kasir/laporan" class="nav-link">
-            <i class="nav-icon fas fa-history"></i>
+            <i class="nav-icon fa-solid fa-clock"></i>
             <p>
-              Laporan Transaksi
+              Riwayat Transaksi
             </p>
           </a>
         </li>

@@ -3,7 +3,7 @@
   {{-- x-dashboard buat struktur dashboard --}}
   <x-dashboard-cashier />
   @section('title')
-      Laporan
+      Riwayat Transaksi
   @endsection
   {{-- CONTENT --}}
   <div class="content-wrapper">
@@ -12,7 +12,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Laporan Transaksi</h1>
+            <h1 class="m-0">Riwayat Transaksi</h1>
           </div>
           <div class="row col-sm-6">
             <div class="input-group">
@@ -30,23 +30,23 @@
           <table class="table mt-4 table-borderless ">
             <thead class="table-warning">
               <tr>
-                <th scope="col" style="width: 140px">Tanggal</th>
-                <th scope="col" style="width: 90px">Jam</th>
-                <th scope="col" style="width: 400px">Nama Produk</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Harga Total</th>
-                <th scope="col">Faktur</th>
+                <th scope="col" >No</th>
+                <th scope="col" >Tanggal</th>
+                <th scope="col" >Faktur</th>
+                <th scope="col">Kasir</th>
               </tr>
             </thead>
             <tbody>
               @forelse ($laporan as $l)
                 <tr>
-                  <th>{{ $l->tanggal }}</th>
-                  <td>{{ $l->jam_jual }}</td>
-                  <td>{{ $l->nama_produk }}</td>
-                  <td>{{ $l->qty }}</td>
-                  <td>{{ $l->sub_total_hrg }}</td>
-                  <td>{{ $l->id_faktur }}</td>
+                  <td>{{ $loop->iteration  }}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                    <a href="detail/faktur">
+                      <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
+                    </a>
+                  </td>
                 </tr>
               @empty
                 <td colspan="6">

@@ -1,5 +1,8 @@
 <x-app-layout>
   <x-dashboard-pengawas />
+  @section('title')
+  Laporan
+  @endsection
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">

@@ -1,5 +1,8 @@
 <x-app-layout>
     <x-dashboard-pengawas />
+    @section('title')
+    Log Produk
+    @endsection
     <div class="content-wrapper">
       <div class="content-header">
         <div class="container-fluid">
@@ -24,17 +27,27 @@
               <table class="table mt-4 table-borderless ">
                 <thead class="table-warning">
                   <tr>
+                    <th scope="col">No</th>
                     <th scope="col">Tanggal</th>
-                    <th scope="col">Aksi</th>
-                    <th scope="col">Keterangan</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Aktifitas</th>
+                    <th scope="col">Nama Produk</th>
+                    <th scope="col">Jumlah</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach ($logproduk as $item)
+                      
+                  
                   <tr>
-                    <th>17-11-2022</th>
-                    <td>tambah</td>
-                    <td>Kak tia menambahkan lee meneral</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->tanggal }}</td>
+                    <td>{{ $item->nama_user }}</td>
+                    <td>{{ $item->aktifitas }}</td>
+                    <td>{{ $item->nama_produk }}</td>
+                    <td>{{ $item->jumlah }}</td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>

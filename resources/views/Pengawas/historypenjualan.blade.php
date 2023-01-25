@@ -1,11 +1,14 @@
 <x-app-layout>
     <x-dashboard-pengawas />
+    @section('title')
+    Riwayat Penjualan
+    @endsection
     <div class="content-wrapper">
       <div class="content-header">
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-6">
-              <h1 class="m-0">History Penjualan</h1>
+              <h1 class="m-0">Riwayat Penjualan</h1>
             </div>
             <!-- /.col -->
             <div class="row col-sm-6">
