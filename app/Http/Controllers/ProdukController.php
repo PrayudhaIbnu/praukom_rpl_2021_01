@@ -98,8 +98,9 @@ class ProdukController extends Controller
         $produk->id_produk = $request->input('kode_produk');
         $produk->kategori = $request->input('id_kategori');
         $produk->nama_produk = $request->input('nama_produk');
-        $produk['stok'] = 0;
         $produk->satuan_produk = $request->input('satuan_produk');
+        $produk['stok'] = 0;
+        $produk['terjual'] = 0;
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
 

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer('harga_jual');
             $table->text('foto')->nullable();
             $table->char('user', 5);
+            $table->integer('terjual')->nullable();
 
             $table
                 ->foreign('kategori')

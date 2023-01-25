@@ -63,7 +63,7 @@
                     <tr>
                       <th scope="row">{{ $loop->iteration }}</th>
                       <td>{{ $l->nama_produk }}</td>
-                      <td>{{ $l->qty }}</td>
+                      <td>{{ $l->terjual }}</td>
                     </tr>
                   @endforeach
                 </tbody>
@@ -108,10 +108,10 @@
         </div>
         <div class="row pt-3">
           <div class="col-12 container ">
-            <div class="card">
+            {{-- <div class="card">
               <h6 class="fw-bold text-center p-2">Top 5 Produk Terlaris</h6>
               <canvas id="grafikBulanan" class="p-2" style="height: 400px;"></canvas>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@
     ];
     var product = [
       @foreach ($bestSell as $b)
-        '{{ $b->qty }}',
+        '{{ $b->terjual }}',
       @endforeach
     ];
     const data = {

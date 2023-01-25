@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BarangKeluar;
+// use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DetailPenjualan;
@@ -217,6 +217,8 @@ class TransaksiController extends Controller
                     }
 
                     $product->decrement('stok', $cart['quantity']);
+
+                    $product->increment('terjual', $cart['quantity']);
                 }
 
                 $id_penjualan = IdGenerator::generate([
@@ -259,14 +261,14 @@ class TransaksiController extends Controller
                     ]);
                 }
 
-                foreach ($filterCart as $cart) {
-                    BarangKeluar::create([
-                        'produk' => $cart['id'],
-                        'qty' => $cart['quantity'],
-                        'tanggal_keluar' => Carbon::now(),
-                        'keterangan' => 'Transaksi'
-                    ]);
-                }
+                // foreach ($filterCart as $cart) {
+                //     BarangKeluar::create([
+                //         'produk' => $cart['id'],
+                //         'qty' => $cart['quantity'],
+                //         'tanggal_keluar' => Carbon::now(),
+                //         'keterangan' => 'Transaksi'
+                //     ]);
+                // }
                 \Cart::clear();
 
                 DB::commit();

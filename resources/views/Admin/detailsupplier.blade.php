@@ -16,8 +16,8 @@
         <div class="container-fluid">
           <div class="card mt-5">
             <div class="row">
-
               <div class="col">
+                
                 <div class="row gx-5 m-4">
                   <div class="col">
                     <h6 class="text-secondary mb-2">Nama Supplier</h6>

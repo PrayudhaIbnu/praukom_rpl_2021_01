@@ -93,9 +93,9 @@ class LaporanController extends Controller
         $getExp = date('Y-m-d');
         $expiredProduct = DB::select(DB::raw("SELECT nama_produk, supplier.nama_supplier, barang_masuk.tanggal_masuk, barang_masuk.tanggal_exp FROM (produk INNER JOIN barang_masuk ON produk.id_produk = barang_masuk.produk) INNER JOIN supplier ON barang_masuk.supplier = supplier.id_supplier WHERE barang_masuk.tanggal_exp >= '$getExp%' ORDER BY barang_masuk.tanggal_exp ASC LIMIT 20"));
 
-        $bestSell = DB::select("SELECT * FROM produk_terdikit_terlaris ORDER BY qty DESC LIMIT 5");
+        $bestSell = DB::select("SELECT * FROM produk_terdikit_terlaris ORDER BY terjual DESC LIMIT 5");
 
-        $leastSell = DB::select("SELECT * FROM produk_terdikit_terlaris ORDER BY qty ASC LIMIT 5");
+        $leastSell = DB::select("SELECT * FROM produk_terdikit_terlaris WHERE terjual > 0 ORDER BY terjual ASC LIMIT 5");
 
         return view('Admin.dashboard', compact('leastStock', 'expiredProduct', 'bestSell', 'leastSell'));
     }
