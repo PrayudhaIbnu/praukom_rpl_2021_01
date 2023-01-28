@@ -20,7 +20,7 @@ class Produk extends Model
         'harga_beli',
         'harga_jual',
         'foto',
-        // 'supplier',
+        'terjual'
         // 'user'
     ];
     public $timestamps = false;

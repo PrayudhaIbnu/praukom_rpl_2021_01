@@ -6,10 +6,13 @@
     <p class="text-center h2">REKAPITULASI TRANSAKSI HARIAN</p>
     <br>
     <div class="row">
-      <label for="staticEmail" class="col-sm-2 col-form-label">Hari/Tgl</label>
+      <label for="staticEmail " class="col-sm-2 col-form-label">Hari/Tgl</label>
       <div class="col-sm-3">
         <input type="text" readonly class="form-control-plaintext" id="staticEmail"
           value="{{ \Carbon\Carbon::now()->format('l, d F Y') }}">
+      </div>
+      <div class="col-7 ">
+        <i class="float-end">*Menampilkan satuan harga dalam Rupiah</i>
       </div>
     </div>
 
@@ -26,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($harian as $h)
+        @forelse ($harian as $h)
           <tr>
             <th scope="row">{{ $loop->iteration }}</th>
             <td>{{ $h->jam_jual }}</td>
@@ -35,7 +38,11 @@
             <td>{{ $h->sub_total_hrg }}</td>
             <td>{{ $h->laba_bersih }}</td>
           </tr>
-        @endforeach
+        @empty
+          <td colspan="6">
+            <h6 class="text-center mt-3">Belum ada Transaksi Hari Ini</h6>
+          </td>
+        @endforelse
         <tr class="table-borderless">
           <td>
           </td>

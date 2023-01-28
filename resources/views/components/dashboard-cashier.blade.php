@@ -20,7 +20,7 @@
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
         <span class="dropdown-item dropdown-header">
-          <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
+          <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}" style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
           <p>{{ Session::get('levelbaru')->nama }}</p>
           <p class="font-level">Kasir</p>
         </span>

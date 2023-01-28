@@ -25,8 +25,8 @@
               <div class="row align-items-start">
                   <div class="col mb-3">
                   <label for="produk" class="form-label font-weight-normal">Nama Produk</label>
-                  <select name="produk" id="produk" class="form-select bg-white @error('produk') is-invalid @enderror" aria-label="Default select example">
-                    <option value="" selected disabled >- Pilih Produk -</option>
+                  <select name="produk" id="produk" class="form-select bg-white js-example-basic-multiple @error('produk') is-invalid @enderror" aria-label="Default select example">
+                    <option value="" selected disabled >Pilih Produk</option>
                     @foreach ($produk as $item)
                       <option value="{{ $item->id_produk }}">{{ $item->nama_produk }}</option>
                     @endforeach
@@ -78,18 +78,12 @@
       </div>
     </div>
   </div>
-
-    <!-- <script type="text/javascript">
-        var route = "{{ url('autocomplete-search') }}";
-        $('#search').typeahead({
-            source: function (query, process) {
-                return $.get(route, {
-                    query: query
-                }, function (data) {
-                    return process(data);
-                });
-            }
-        });
-    </script> -->
     @include('sweetalert::alert')
 </x-app-layout>
+<script>
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2([{
+      width: 'resolve'
+    }]);
+  });
+</script>

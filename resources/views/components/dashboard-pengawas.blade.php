@@ -1,26 +1,26 @@
 <nav class="main-header navbar navbar-expand navbar-dark ">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button">
-          <i class="fas fa-bars"></i>
-        </a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-          <h5 class="m-0 nav-header text-light">Selamat Datang di One Mart {{ Session::get('levelbaru')->nama }} </h5>
-      </li>
-    </ul>
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+        <i class="fas fa-bars"></i>
+      </a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <h5 class="m-0 nav-header text-light">Selamat Datang  di One Mart {{ Session::get('levelbaru')->nama }}</h5>
+    </li>
+  </ul>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fas fa-user"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+  <!-- Right navbar links -->
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown">
+      <a class="nav-link" data-toggle="dropdown" href="#">
+        <i class="fas fa-user"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
           <span class="dropdown-item dropdown-header">
-            <img src="/img/logoblud.png" alt="User Photos" class="img img-circle">
+            <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}" style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
             <p>{{ Session::get('levelbaru')->nama }}</p>
             <p class="font-level">Pengawas</p>
           </span>
@@ -38,7 +38,7 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
-        </a>
+        </a>  
       </li>
     </ul>
 </nav>
@@ -78,21 +78,21 @@
             </a>
             <ul class="nav nav-treeview pl-4">
               <li class="nav-item">
-                <a href="/admin/history/barang-masuk" class="nav-link">
+                <a href="/pengawas/riwayat/barang-masuk" class="nav-link">
                   <i class="fa-solid fa-arrow-right-to-bracket"></i>                 
-                  <p>Riwayat Barang Masuk</p>
+                  <p>Barang Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/history/barang-keluar" class="nav-link">
+                <a href="/pengawas/riwayat/barang-keluar" class="nav-link">
                   <i class="fa-regular fa-circle-xmark"></i>
-                  <p>Riwayat Barang Keluar</p>
+                  <p> Barang Keluar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/pengawas/historypenjualan" class="nav-link">
+                <a href="/pengawas/riwayatpenjualan" class="nav-link">
                   <i class="fa-solid fa-cart-shopping"></i>                      
-                  <p>Riwayat Transaksi</p>
+                  <p> Transaksi</p>
                 </a>
               </li>
             </ul>
@@ -109,4 +109,4 @@
     </div>
 </aside>
 
-  {{ $slot }}
+{{ $slot }}

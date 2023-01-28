@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Hash;
 class SuperAdminController extends Controller
 {
     public function index(Request $request)
-
     {
-        // $user = user::all();
         $search = $request->search;
         $level_user = DB::table('level_user')->select()->get();
         $user = DB::table('user')
@@ -35,6 +33,7 @@ class SuperAdminController extends Controller
 
         request()->validate(
             [
+                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
                 'nama' => 'required',
                 'username' => 'required|unique:user',
                 'password' => 'required'
@@ -46,8 +45,6 @@ class SuperAdminController extends Controller
                 'password.required' => 'Password tidak boleh kosong!',
             ]
         );
-
-
 
         $user = new User;
         $id_user = collect(DB::select('SELECT new_iduser() AS new_iduser'))->first()->new_iduser;
@@ -79,6 +76,12 @@ class SuperAdminController extends Controller
     // update
     public function update(Request $request)
     {
+        request()->validate(
+            [
+                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000'
+            ]
+        );
+
         $user_id = $request->input('user_id');
         $user = User::find($user_id);
         $user->nama = $request->input('nama');
@@ -103,13 +106,19 @@ class SuperAdminController extends Controller
     // hapus
     public function destroy(Request $request)
     {
+
         $user_id = $request->input('delete_user_id');
-        $user = User::find($user_id);
-        $destination = 'storage/post-images/' . $user->foto;
-        if (file::exists($destination)) {
-            file::delete($destination);
+        if ($user_id == 'USR01') {
+            return redirect()->back()->with('warning', 'Super Admin tidak dapat dihapus!');
+        } else {
+            # code...
+            $user = User::find($user_id);
+            $destination = 'storage/post-images/' . $user->foto;
+            if (file::exists($destination)) {
+                file::delete($destination);
+            }
+            $user->delete();
+            return redirect()->back()->with('success', "Data Berhasil di Hapus");
         }
-        $user->delete();
-        return redirect()->back()->with('success', "Data Berhasil di Hapus");
     }
 }

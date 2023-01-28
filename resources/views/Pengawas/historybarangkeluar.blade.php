@@ -1,8 +1,8 @@
 <x-app-layout>
-    <x-dashboard-admin />
+    <x-dashboard-pengawas />
     {{-- tilte --}}
   @section('title')
-    Riwayat Barang Masuk
+    Riwayat Barang Keluar
   @endsection
   {{-- end title --}}
     <div class="content-wrapper">
@@ -10,7 +10,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-6">
-              <h1 class="m-0">Riwayat Barang Masuk</h1>
+              <h1 class="m-0">Riwayat Barang Keluar</h1>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="container-fluid-6">
-          @include('components.barangmasuk')
+          @include('components.barangkeluar')
           </div>
         </div>
       </div>

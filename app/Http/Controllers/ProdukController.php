@@ -24,10 +24,10 @@ class ProdukController extends Controller
         $kategori = DB::table('produk_kategori')->select()->get();
         $produk = DB::table('produk')
             ->select('*')
+            ->orderBy('nama_produk', 'ASC')
             ->where('id_produk', 'LIKE', '%' . $search . '%')
             ->orWhere('nama_produk', 'LIKE', '%' . $search . '%')
             ->paginate(10);
-
 
         return view('admin.daftarproduk', compact('produk', 'kategori'));
     }
@@ -93,9 +93,10 @@ class ProdukController extends Controller
     // tambah produk
     public function store(Request $request)
     {
-        //
         request()->validate(
             [
+                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
+                'kode_produk' => 'required|unique:produk,id_produk',
                 'kode_produk' => 'required',
                 'nama_produk' => 'required',
                 // 'satuan_produk' => 'required',
@@ -105,11 +106,12 @@ class ProdukController extends Controller
             ],
             [
                 'kode_produk.required' => 'Kade Produk Wajib di Isi !',
+                'kode_produk.unique' => 'Kode Produk sudah pernah di isi!',
                 'nama_produk.required' => 'Nama Produk Wajib di Isi !',
                 'harga_beli.required' => 'Harga Beli Wajib di Isi !',
                 'harga_beli.numeric' => 'Tidak Boleh Kurang Dari 0 !',
                 'harga_jual.required' => 'Harga Beli Wajib di Isi !',
-                'harga_jual.numeric' => 'Tidak Boleh Kurang Dari 0 !',
+                'harga_jual.numeric' => 'Tidak Boleh Kurang Dari 0 !'
             ]
         );
 
@@ -124,8 +126,9 @@ class ProdukController extends Controller
         $produk->id_produk = $request->input('kode_produk');
         $produk->kategori = $request->input('id_kategori');
         $produk->nama_produk = $request->input('nama_produk');
-        $produk['stok'] = 0;
         $produk->satuan_produk = $request->input('satuan_produk');
+        $produk['stok'] = 0;
+        $produk['terjual'] = 0;
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
 
@@ -175,6 +178,19 @@ class ProdukController extends Controller
     // update produk
     public function update(Request $request)
     {
+        request()->validate(
+            [
+                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
+                'kode_produk' => 'required',
+                'nama_produk' => 'required'
+            ],
+            [
+                'kode_produk.required' => 'Kode Produk tidak boleh kosong!',
+                'kode_produk.unique' => 'Kode Produk sudah pernah di isi!',
+                'nama_produk.required' => 'Password tidak boleh kosong!'
+            ]
+        );
+
         $produk_id = $request->input('produk_id');
         $produk = Produk::find($produk_id);
         if ($request->hasFile('foto')) {
@@ -194,7 +210,7 @@ class ProdukController extends Controller
         $produk->satuan_produk = $request->input('satuan_produk');
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
-        $produk['user'] = 'USR02'; // Auth()->user()->id();
+        $produk['user'] = Session::get('levelbaru')->id;
         $produk->update();
         return redirect()->back()->with('success', "Data berhasil di update");
     }
@@ -216,6 +232,20 @@ class ProdukController extends Controller
         }
         $produk->delete();
         return redirect()->back()->with('success', "Data Berhasil di Hapus");
+    }
+
+    public function searchProduk(Request $request)
+    {
+        $search = $request->search;
+
+        $produk = DB::table('produk')
+            ->select(['produk.id_produk', 'produk.nama_produk', 'produk.foto', 'produk.stok', 'produk.satuan_produk', 'produk.harga_jual', 'produk.harga_beli'])
+            ->orderBy('nama_produk', 'ASC')
+            ->where('id_produk', 'LIKE', '%' . $search . '%')
+            ->where('nama_produk', 'LIKE', '%' . $search . '%')
+            ->orWhere('stok', 'LIKE', '%' . $search . '%')
+            ->paginate(10);
+        return view('Admin.daftarproduk', compact('produk'));
     }
 
     public function indexStok()

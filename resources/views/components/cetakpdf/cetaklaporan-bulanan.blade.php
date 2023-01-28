@@ -7,7 +7,10 @@
     <div class="row">
       <label for="staticEmail" class="col-sm-1 col-form-label">Bulan Ke</label>
       <div class="col-sm-3">
-        <input type="text" readonly class="form-control-plaintext" id="staticEmail" {{-- value="{{ $getBulanan }}" --}}>
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $getBulanan }}">
+      </div>
+      <div class="col-7 ">
+        <i class="float-end">*Menampilkan satuan harga dalam Rupiah</i>
       </div>
     </div>
 

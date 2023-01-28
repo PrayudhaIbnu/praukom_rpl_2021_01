@@ -20,18 +20,17 @@
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
         <span class="dropdown-item dropdown-header">
-          <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}"  class="img img-circle">
+          <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}" style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
           <p>{{ Session::get('levelbaru')->nama }}</p>
-          <p class="font-level">admin</p>
+          <p class="font-level">Admin</p>
         </span>
 
         <div class="dropdown-divider"></div>
         <form action="{{ url('logout') }}" method="post">
-          
           @csrf
           <button type="submit" class="dropdown-item logout">
             <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
-          <span class="text-sm ">Logout</span>
+            <span class="text-sm ">Logout</span>
           </button>
         </form>
       </div>
@@ -108,14 +107,14 @@
           </a>
           <ul class="nav nav-treeview pl-4">
             <li class="nav-item">
-              <a href="/admin/history/barang-masuk" class="nav-link">
-                <i class="fa-brands fa-wpforms"></i>
+              <a href="/admin/riwayat/barang-masuk" class="nav-link">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 <p>Barang Masuk</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/history/barang-keluar" class="nav-link">
-                <i class="fa-brands fa-wpforms"></i>
+              <a href="/admin/riwayat/barang-keluar" class="nav-link">
+                <i class="fa-regular fa-circle-xmark"></i>
                 <p>Barang Keluar</p>
               </a>
             </li>

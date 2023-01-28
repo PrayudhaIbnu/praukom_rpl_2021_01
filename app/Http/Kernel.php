@@ -68,7 +68,7 @@ class Kernel extends HttpKernel
         'superadmin' => \App\Http\Middleware\isSuperAdmin::class,
         'admin' => \App\Http\Middleware\isAdmin::class,
         'kasir' => \App\Http\Middleware\isKasir::class,
-        'pegawas' => \App\Http\Middleware\isPengawas::class,
+        'pengawas' => \App\Http\Middleware\isPengawas::class,
         'ceklevel' => \App\Http\Middleware\Login::class,
     ];
 }

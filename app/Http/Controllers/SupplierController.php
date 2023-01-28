@@ -23,6 +23,15 @@ class SupplierController extends Controller
 
     public function tambah(Request $request)
     {
+        $valid = request()->validate(
+            [
+                'nama_supplier' => 'required|unique:supplier,nama_supplier'
+            ],
+            [
+                'nama_supplier.unique' => 'Supplier sudah terdaftar!'
+            ]
+        );
+
         $supplier = new Supplier;
         $id_supplier = collect(DB::select('SELECT new_idsupplier() AS new_idsupplier'))->first()->new_idsupplier;
         $supplier['id_supplier'] = $id_supplier;

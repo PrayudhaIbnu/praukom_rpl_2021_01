@@ -30,16 +30,17 @@
           <table class="table mt-4 table-borderless ">
             <thead class="table-warning">
               <tr>
-                <th scope="col" >No</th>
-                <th scope="col" >Tanggal</th>
-                <th scope="col" >Faktur</th>
+                <th scope="col"></th>
+                <th scope="col">Id Penjualan</th>
+                <th scope="col">Tanggal</th>
+                <th scope="col">Jam</th>
                 <th scope="col">Kasir</th>
+                <th scope="col">Detail</th>
               </tr>
             </thead>
             <tbody>
               @forelse ($laporan as $l)
                 <tr>
-                  <td>{{ $loop->iteration  }}</td>
                   <td></td>
                   <td></td>
                   <td></td>

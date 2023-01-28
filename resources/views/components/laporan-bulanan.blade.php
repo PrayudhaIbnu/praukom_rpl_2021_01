@@ -34,8 +34,8 @@
 
 </div>
 
-<div class="table-responsive-xl">
-  <table class="table mt-3 table-borderless ">
+<div class="table-responsive-xl mt-3">
+  <table class="table mt-3 table-borderless" id="bulanan">
     <thead class="table-warning">
       <tr>
         <th scope="col">No</th>
@@ -48,7 +48,7 @@
       </tr>
     </thead>
     <tbody>
-      @forelse ($bulanan as $b)
+      @foreach ($bulanan as $b)
         <tr>
           <th scope="row">{{ $loop->iteration }}</th>
           <td>{{ $b->tanggal }}</td>
@@ -58,11 +58,7 @@
           <td>{{ $b->sub_total_hrg }}</td>
           <td>{{ $b->laba_bersih }}</td>
         </tr>
-      @empty
-        <td colspan="6">
-          <h6 class="text-center mt-3">Belum ada Transaksi Bulan Ini</h6>
-        </td>
-      @endforelse
+      @endforeach
     </tbody>
   </table>
 </div>

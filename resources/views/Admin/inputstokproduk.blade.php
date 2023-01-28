@@ -2,7 +2,7 @@
   <x-dashboard-admin />
   {{-- tilte --}}
   @section('title')
-      Input Stok Produk
+    Input Stok Produk
   @endsection
   {{-- end title --}}
   <div class="content-wrapper">
@@ -20,7 +20,7 @@
               <div class="row align-items-center">
                 <div class="col mb-3">
                   <label for="id_produk" class="form-label font-weight-normal">Nama Produk</label>
-                  <select required name="id_produk" id="id_produk" class="form-select bg-white  @error('id_produk') is-invalid @enderror"
+                  <select  name="id_produk" id="id_produk" class="form-select bg-white js-example-basic-multiple  @error('id_produk') is-invalid @enderror"
                     aria-label="Default select example" data-live-search="true" >
                     {{-- <input type="search" name=" " id=""> --}}
                     <option disabled class="bg-light" selected>Pilih Produk...</option>
@@ -38,7 +38,7 @@
               <div class="row align-items-center">
                 <div class="col mb-3">
                   <label for="nama_supplier" class="form-label font-weight-normal">Nama Supplier</label>
-                  <select required name="id_supplier" id="id_supplier" class="form-select bg-white  @error('id_supplier') is-invalid @enderror"
+                  <select required name="id_supplier" id="id_supplier" class="form-select bg-white js-example-basic-multiple  @error('id_supplier') is-invalid @enderror"
                     aria-label="Default select example" >
                     <option class="bg-light" disabled selected>Pilih Supplier...</option>
                     @foreach ($supplier as $s)
@@ -105,25 +105,12 @@
   </div>
   @include('sweetalert::alert')
 
-  <!-- <script type="text/javascript">
-    var route = "{{ url('autocomplete-search') }}";
-    $('#produk').typeahead({
-      source: function(query, process) {
-        return $.get(route, {
-          query: query
-        }, function(data) {
-          return process(data);
-        });
-      }
-    });
-  </script> -->
-
 </x-app-layout>
-
 {{-- Autocomplete? --}}
 <script>
-  $("#produk").autocomplete({
-    source: fn(request, response)
-
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2([{
+      width: 'resolve'
+    }]);
   });
 </script>

@@ -22,6 +22,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 // untuk login
 Route::get('/', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::controller(AuthController::class)->group(function () {
@@ -29,7 +34,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/logout', 'keluar');
 });
 
-// ROUTES Super Admin
+// -ROUTES UNTUK ROLE SUPER ADMIN-
 Route::middleware(['auth', 'superadmin'])->group(function () {
     Route::controller(SuperAdminController::class)->group(function () {
         Route::get('/superadmin/kelolaakun', 'index')->name('superadmin');
@@ -41,12 +46,8 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
 });
 
 
-// ROUTES UNTUK ROLE ADMIN
-
-// untuk role admin history
+// -ROUTES UNTUK ROLE ADMIN-
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/history/barang-keluar', [HistoryController::class, 'historybarangkeluar']);
-    Route::get('/admin/history/barang-masuk', [HistoryController::class, 'historybarangmasuk']);
     // Routes ADMIN CRUD Produk
     Route::controller(ProdukController::class)
         ->prefix('/admin')
@@ -65,13 +66,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/produkreject', 'indexprodukreject');
             Route::post('/input-produkreject', 'storeprodukreject');
             Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
-            // Produk
 
             // listkategori
             Route::get('/listkategori', 'listkategori');
             Route::post('/tambah-kategori', 'tambahkategori');
             Route::get('/edit-kategori/{id}', 'editkategori');
             Route::put('update-kategori',  'updatekategori');
+
+            // riwayat
+            Route::get('/riwayat/barang-keluar', [HistoryController::class, 'historybarangkeluar']);
+            Route::get('/riwayat/barang-masuk', [HistoryController::class, 'historybarangmasuk']);
         });
 
     // Routes CRUD ADMIN Supplier
@@ -118,24 +122,29 @@ Route::controller(TransaksiController::class)->group(function () {
         Route::get('/laporan', 'laporanTransaksi');
         Route::get('/produk', 'indexProduk');
         Route::get('/search', 'search')->name('search.kasir');
+        Route::post('/getProduk', 'autocomplete')->name('autocomplete');
     });
 });
 
 
 // ROUTES UNTUK ROLE PENGAWAS
-Route::controller(LaporanController::class)->group(function () {
-    Route::prefix('/pengawas')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('pengawas.index');
+Route::middleware(['auth', 'pengawas'])->group(function () {
+    Route::controller(LaporanController::class)->group(function () {
+        Route::prefix('/pengawas')->group(function () {
+            Route::get('/dashboard', function () {
+                return view('pengawas.index');
+            });
+            Route::get('/laporan', 'indexPengawas');
+            Route::get('/logkelolaakun', function () {
+                return view('pengawas.logkelolaakun');
+            });
+            Route::get('/riwayatpenjualan', function () {
+                return view('pengawas.historypenjualan');
+            });
+            Route::get('/logproduk', [LogAktivitasController::class, 'logproduk']);
+            Route::get('/riwayat/barang-keluar', [HistoryController::class, 'riwayatbarangkeluar']);
+            Route::get('/riwayat/barang-masuk', [HistoryController::class, 'riwayatbarangmasuk']);
         });
-        Route::get('/laporan', 'indexPengawas');
-        Route::get('/logkelolaakun', function () {
-            return view('pengawas.logkelolaakun');
-        });
-        Route::get('/historypenjualan', function () {
-            return view('pengawas.historypenjualan');
-        });
-        Route::get('/logproduk', [LogAktivitasController::class, 'logproduk']);
     });
 });
 // });

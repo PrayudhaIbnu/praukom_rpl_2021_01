@@ -2,7 +2,7 @@
   <x-dashboard-admin />
   {{-- tilte --}}
   @section('title')
-      Laporan
+    Laporan
   @endsection
   {{-- end title --}}
   <div class="content-wrapper">
@@ -12,32 +12,22 @@
           <div class="col-sm-6">
             <h1 class="m-0">Laporan</h1>
           </div>
-          <!-- /.col -->
-          <div class="row col-sm-6">
-            <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+
         </div>
         <div class="container-fluid-6">
           <div class="float-start w-100">
             <ul class="nav nav-pills my-3" id="pills-tab" role="tablist">
               <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-harian-tab" data-bs-toggle="pill"
+                <button class="nav-link active btn-sm " id="pills-harian-tab" data-bs-toggle="pill"
                   data-bs-target="#pills-harian" type="button" role="tab" aria-controls="pills-harian"
                   aria-selected="false">Harian</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-migguan-tab" data-bs-toggle="pill" data-bs-target="#pills-mingguan"
+                <button class="nav-link btn-sm " id="pills-migguan-tab" data-bs-toggle="pill" data-bs-target="#pills-mingguan"
                   type="button" role="tab" aria-controls="pills-mingguan" aria-selected="false">Mingguan</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-bulanan-tab" data-bs-toggle="pill" data-bs-target="#pills-bulanan"
+                <button class="nav-link btn-sm" id="pills-bulanan-tab" data-bs-toggle="pill" data-bs-target="#pills-bulanan"
                   type="button" role="tab" aria-controls="pills-bulanan" aria-selected="false">Bulanan</button>
               </li>
             </ul>

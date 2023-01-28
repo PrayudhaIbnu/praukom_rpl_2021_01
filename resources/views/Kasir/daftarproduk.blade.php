@@ -2,6 +2,9 @@
 <x-app-layout>
   {{-- x-dashboard buat struktur dashboard --}}
   <x-dashboard-cashier />
+  @section('title')
+    Daftar Produk
+  @endsection
   {{-- CONTENT --}}
   @section('title')
       Daftar Produk

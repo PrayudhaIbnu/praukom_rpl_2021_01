@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BarangKeluar;
+// use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DetailPenjualan;
@@ -11,6 +11,7 @@ use App\Models\Penjualan;
 use App\Models\Produk;
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Facades\Session;
 
 class TransaksiController extends Controller
 {
@@ -139,6 +140,9 @@ class TransaksiController extends Controller
         return redirect()->back();
     }
 
+
+
+
     // Tambahin QTY
     public function increaseItem(Request $request)
     {
@@ -219,6 +223,8 @@ class TransaksiController extends Controller
                     }
 
                     $product->decrement('stok', $cart['quantity']);
+
+                    $product->increment('terjual', $cart['quantity']);
                 }
 
                 $id_penjualan = IdGenerator::generate([
@@ -249,7 +255,8 @@ class TransaksiController extends Controller
                     'penjualan' => $id_penjualan,
                     'jml_tunai' => $bayar,
                     'jml_kembalian' => $kembalian,
-                    'grand_total' => $cartTotal
+                    'grand_total' => $cartTotal,
+                    'kasir' => Session::get('levelbaru')->id
                 ]);
 
                 foreach ($filterCart as $cart) {
@@ -261,14 +268,14 @@ class TransaksiController extends Controller
                     ]);
                 }
 
-                foreach ($filterCart as $cart) {
-                    BarangKeluar::create([
-                        'produk' => $cart['id'],
-                        'qty' => $cart['quantity'],
-                        'tanggal_keluar' => Carbon::now(),
-                        'keterangan' => 'Transaksi'
-                    ]);
-                }
+                // foreach ($filterCart as $cart) {
+                //     BarangKeluar::create([
+                //         'produk' => $cart['id'],
+                //         'qty' => $cart['quantity'],
+                //         'tanggal_keluar' => Carbon::now(),
+                //         'keterangan' => 'Transaksi'
+                //     ]);
+                // }
                 \Cart::clear();
 
                 DB::commit();
@@ -280,5 +287,6 @@ class TransaksiController extends Controller
             return redirect()->back()->with('success', "Transaksi Berhasil!");
         }
     }
-}
+}    
+
 // SELECT produk, tanggal_masuk, SUM(qty) FROM barang_masuk GROUP BY produk;

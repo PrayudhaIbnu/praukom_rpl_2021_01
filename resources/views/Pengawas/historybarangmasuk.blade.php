@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-dashboard-admin />
+    <x-dashboard-pengawas />
     {{-- tilte --}}
   @section('title')
     Riwayat Barang Masuk

@@ -11,11 +11,11 @@
               <h1 class="m-0">Log Produk</h1>
             </div>
             <!-- /.col -->
-            <div class="row col-sm-6">
+            <div class="col-sm-6">
               <div class="input-group">
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                   <div class="input-group-append">
-                  <button class="btn btn-sidebar">
+                  <button class="btn btn-sidebar btn-warning">
                     <i class="fas fa-search fa-fw"></i>
                   </button>
                </div>

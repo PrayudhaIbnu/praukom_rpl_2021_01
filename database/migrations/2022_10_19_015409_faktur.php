@@ -23,11 +23,18 @@ return new class extends Migration
             $table->integer('jml_tunai');
             $table->integer('jml_kembalian');
             $table->integer('grand_total');
+            $table->integer('kasir');
 
             $table
                 ->foreign('penjualan')
                 ->references('id_penjualan')
                 ->on('penjualan')
+                ->cascadeOnDelete();
+
+            $table
+                ->foreign('kasir')
+                ->references('id')
+                ->on('user')
                 ->cascadeOnDelete();
         });
     }

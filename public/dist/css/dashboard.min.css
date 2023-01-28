@@ -35587,7 +35587,7 @@ html.maximized-card {
     background-color: #dc3545;
     border-color: #d32535;
 } */
-/* .alert-default-danger {
+.alert-default-danger {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
@@ -35715,7 +35715,7 @@ html.maximized-card {
     background-color: #e74c3c;
     border-color: #e43725;
 } */
-/* .dark-mode .alert-default-danger {
+.dark-mode .alert-default-danger {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
