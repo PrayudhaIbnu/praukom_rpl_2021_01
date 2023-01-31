@@ -30,9 +30,26 @@
       })
     });
 
+    $(document).on('click', '.btn-password', function() {
+      var user_id = $(this).val();
+      console.log(user_id);
+      $.ajax({
+        type: "GET",
+        url: "edit-user/" + user_id,
+        dataType: "json",
+        success: function(response) {
+          console.log(response);
+          $('#editpassword').modal('show');
+          $('#user').val(user_id);
+          $('#namaa').val(response.user.nama);
+        }
+      })
+    });
+
     // delete
     $(document).on('click', '.btn-hapus', function() {
       var user_id = $(this).val();
+      console.log(user_id);
       $('#deleteuser').modal('show');
       $('#delete_id').val(user_id);
     });

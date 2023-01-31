@@ -7,7 +7,7 @@
       </a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <h5 class="m-0 nav-header text-light">Selamat Datang  di One Mart {{ Session::get('levelbaru')->nama }}</h5>
+      <h5 class="m-0 nav-header text-light">Selamat Datang di One Mart {{ Session::get('levelbaru')->nama }}</h5>
     </li>
   </ul>
 
@@ -20,9 +20,10 @@
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
         <span class="dropdown-item dropdown-header">
-          <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}" style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
-          <p>{{ Session::get('levelbaru')->nama }}</p>
-          <p class="font-level">Admin</p>
+          <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}"
+            style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
+          <p class="mt-2 text-bold">{{ Session::get('levelbaru')->nama }}</p>
+          <i class="font-level">Admin</i>
         </span>
 
         <div class="dropdown-divider"></div>
@@ -53,7 +54,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="/admin/dashboard" class="nav-link" >
+          <a href="/admin/dashboard" class="nav-link">
             <i class="nav-icon fa-solid fa-chart-pie"></i>
             <p>
               Dashboard
@@ -121,12 +122,12 @@
           </ul>
         </li>
         <li class="nav-item">
-        <a href="{{ url('admin/laporan') }}" class="nav-link">
-          <i class="nav-icon fas fa-file-alt"></i>
-          <p>
-            Laporan
-          </p>
-        </a>
+          <a href="{{ url('admin/laporan') }}" class="nav-link">
+            <i class="nav-icon fas fa-file-alt"></i>
+            <p>
+              Laporan
+            </p>
+          </a>
         </li>
       </ul>
   </div>

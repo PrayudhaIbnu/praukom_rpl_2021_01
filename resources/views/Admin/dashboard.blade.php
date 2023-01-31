@@ -81,7 +81,7 @@
                     <th scope="col">Nama Produk</th>
                     <th scope="col">Supplier</th>
                     <th scope="col">Tanggal Masuk</th>
-                    <th scope="col">tanggal Exp</th>
+                    <th scope="col">Tanggal Exp</th>
                   </tr>
                 </thead>
                 <tbody>

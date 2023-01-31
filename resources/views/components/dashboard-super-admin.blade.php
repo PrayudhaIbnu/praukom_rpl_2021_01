@@ -21,11 +21,12 @@
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-          <span class="dropdown-item dropdown-header">
-            <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}" style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
-            <p>{{ Session::get('levelbaru')->nama }}</p>
-            <p class="font-level">Super Admin</p>
-          </span>
+        <span class="dropdown-item dropdown-header">
+          <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}"
+            style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
+          <p class="mt-2 text-bold">{{ Session::get('levelbaru')->nama }}</p>
+          <i class="font-level">Super Admin</i>
+        </span>
 
         <div class="dropdown-divider"></div>
         <form action="{{ url('logout') }}" method="post">
@@ -65,4 +66,4 @@
       </ul>
   </div>
 </aside>
-  {{ $slot }}
+{{ $slot }}

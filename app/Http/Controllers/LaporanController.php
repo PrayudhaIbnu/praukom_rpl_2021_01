@@ -77,26 +77,38 @@ class LaporanController extends Controller
     public function cetakBulanan(Request $request)
     {
         $tglBulanan = $request->tglawal;
-        // $getBulan = ;
+        $tglBulanan2 = $tglAkhir =  date('Y-m-d', strtotime("+29 day", strtotime($tglBulanan)));
 
         // Masih bingung tampilanny mau dibuat kek gmn hmm
         $bulanan = DB::select(DB::raw("SELECT * FROM laporan_mingguan
         WHERE tanggal BETWEEN '$tglBulanan' AND DATE_SUB('$tglBulanan', INTERVAL -30 DAY) ORDER BY tanggal DESC"));
 
-        return view('components.cetakpdf.cetaklaporan-bulanan', compact('bulanan', 'getBulan'));
+        return view('components.cetakpdf.cetaklaporan-bulanan', compact('bulanan', 'tglBulanan', 'tglBulanan2'));
     }
 
     public function dashboardAdmin()
     {
-        $leastStock = DB::select('SELECT nama_produk, stok FROM produk ORDER BY stok ASC LIMIT 10');
+        $leastStock = DB::select('SELECT nama_produk, stok FROM produk WHERE stok > 0 ORDER BY stok ASC LIMIT 10');
 
         $getExp = date('Y-m-d');
         $expiredProduct = DB::select(DB::raw("SELECT nama_produk, supplier.nama_supplier, barang_masuk.tanggal_masuk, barang_masuk.tanggal_exp FROM (produk INNER JOIN barang_masuk ON produk.id_produk = barang_masuk.produk) INNER JOIN supplier ON barang_masuk.supplier = supplier.id_supplier WHERE barang_masuk.tanggal_exp >= '$getExp%' ORDER BY barang_masuk.tanggal_exp ASC LIMIT 20"));
 
-        $bestSell = DB::select("SELECT * FROM produk_terdikit_terlaris ORDER BY terjual DESC LIMIT 5");
+        $bestSell = DB::select("SELECT * FROM produk_terdikit_terlaris WHERE terjual > 0 ORDER BY terjual DESC LIMIT 5");
 
         $leastSell = DB::select("SELECT * FROM produk_terdikit_terlaris WHERE terjual > 0 ORDER BY terjual ASC LIMIT 5");
 
         return view('Admin.dashboard', compact('leastStock', 'expiredProduct', 'bestSell', 'leastSell'));
+    }
+
+    public function dashboardKasir()
+    {
+        $getExp = date('Y-m-d');
+        $expiredProduct = DB::select(DB::raw("SELECT nama_produk, supplier.nama_supplier, barang_masuk.tanggal_masuk, barang_masuk.tanggal_exp FROM (produk INNER JOIN barang_masuk ON produk.id_produk = barang_masuk.produk) INNER JOIN supplier ON barang_masuk.supplier = supplier.id_supplier WHERE barang_masuk.tanggal_exp >= '$getExp%' ORDER BY barang_masuk.tanggal_exp ASC LIMIT 20"));
+
+        $bestSell = DB::select("SELECT * FROM produk_terdikit_terlaris WHERE terjual > 0 ORDER BY terjual DESC LIMIT 5");
+
+        $leastSell = DB::select("SELECT * FROM produk_terdikit_terlaris WHERE terjual > 0 ORDER BY terjual ASC LIMIT 5");
+
+        return view('Kasir.dashboard', compact('expiredProduct', 'bestSell', 'leastSell'));
     }
 }

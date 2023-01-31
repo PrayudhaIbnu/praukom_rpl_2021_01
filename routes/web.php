@@ -11,18 +11,6 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LogAktivitasController;
 use RealRashid\SweetAlert\Facades\Alert;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -41,6 +29,7 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
         Route::post('tambah-user', 'store');
         Route::get('/superadmin/edit-user/{id}', 'edit');
         Route::put('update-user',  'update');
+        Route::put('update-password',  'updatePassword');
         Route::delete('delete-user',  'destroy');
     });
 });
@@ -65,18 +54,19 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::post('/tambah-stok', 'produkMasuk')->name('tambah-stok');
             Route::get('/produkreject', 'indexprodukreject');
             Route::post('/input-produkreject', 'storeprodukreject');
-            Route::get('/autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);
 
             // listkategori
             Route::get('/listkategori', 'listkategori');
             Route::post('/tambah-kategori', 'tambahkategori');
             Route::get('/edit-kategori/{id}', 'editkategori');
             Route::put('update-kategori',  'updatekategori');
-
-            // riwayat
-            Route::get('/riwayat/barang-keluar', [HistoryController::class, 'historybarangkeluar']);
-            Route::get('/riwayat/barang-masuk', [HistoryController::class, 'historybarangmasuk']);
         });
+
+    // riwayat
+    Route::controller(HistoryController::class)->prefix('/admin')->group(function () {
+        Route::get('/riwayat/barang-keluar', 'historybarangkeluar');
+        Route::get('/riwayat/barang-masuk',  'historybarangmasuk');
+    });
 
     // Routes CRUD ADMIN Supplier
     Route::controller(SupplierController::class)->group(function () {
@@ -108,11 +98,11 @@ Route::controller(LaporanController::class)->group(function () {
 });
 
 // ROUTES UNTUK ROLE KASIR
+Route::controller(LaporanController::class)->prefix('kasir')->group(function () {
+    Route::get('/dashboard', 'dashboardKasir');
+});
 Route::controller(TransaksiController::class)->group(function () {
     Route::prefix('/kasir')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('kasir.dashboard');
-        });
         Route::get('/transaksi', 'index');
         Route::post('/tambah-cart', 'addItem')->name('tambah-cart');
         Route::post('/tambah-qty', 'increaseItem')->name('tambah-qty');
