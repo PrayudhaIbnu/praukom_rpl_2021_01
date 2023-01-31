@@ -15,7 +15,8 @@ class Faktur extends Model
         'penjualan',
         'jml_tunai',
         'jml_kembalian',
-        'grand_total'
+        'grand_total',
+        'kasir'
     ];
     public $timestamps = false;
 }

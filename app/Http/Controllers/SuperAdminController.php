@@ -36,7 +36,7 @@ class SuperAdminController extends Controller
                 'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
                 'nama' => 'required',
                 'username' => 'required|unique:user',
-                'password' => 'required'
+                'password' => 'required|min:5'
             ],
             [
                 'nama.required' => 'Nama tidak boleh kosong!',
@@ -65,7 +65,7 @@ class SuperAdminController extends Controller
     }
 
     // edit
-    public function edit($id)
+    public function edit($id = null)
     {
         $user = User::whereIdUser($id)->first();
         return response()->json([
@@ -86,7 +86,7 @@ class SuperAdminController extends Controller
         $user = User::find($user_id);
         $user->nama = $request->input('nama');
         $user->username = $request->input('username');
-        $user->password = Hash::make($request->input('password'));
+        // $user->password = Hash::make($request->input('password'));
         $user->level = $request->input('id_level');
         if ($request->hasFile('foto')) {
             $destination = 'storage/post-images/' . $user->foto;
@@ -101,6 +101,21 @@ class SuperAdminController extends Controller
         }
         $user->update();
         return redirect()->back()->with('success', "Data Berhasil di Edit");
+    }
+
+    public function updatePassword(Request $request)
+    {
+        request()->validate(
+            [
+                'password' => 'min:5'
+            ]
+        );
+
+        $user_id = $request->input('user_id');
+        $user = User::find($user_id);
+        $user->password = Hash::make($request->input('password'));
+        $user->update();
+        return redirect()->back()->with('success', "Password Berhasil di Edit");
     }
 
     // hapus

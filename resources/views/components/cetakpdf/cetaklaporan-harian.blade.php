@@ -17,7 +17,7 @@
     </div>
 
     <h4></h4>
-    <table class="static table table-bordered" id="harian">
+    <table class="static table table-bordered" id="harian-cetak">
       <thead>
         <tr>
           <th scope="col">No</th>
@@ -64,7 +64,7 @@
   var sum1 = 0;
   var sum2 = 0;
   var sum3 = 0;
-  $("#harian tr").not(':first').not(':last').each(function() {
+  $("#harian-cetak tr").not(':first').not(':last').each(function() {
     sum1 += getnum($(this).find("td:eq(2)").text());
     sum2 += getnum($(this).find("td:eq(3)").text());
     sum3 += getnum($(this).find("td:eq(4)").text());

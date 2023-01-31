@@ -20,17 +20,18 @@
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
         <span class="dropdown-item dropdown-header">
-          <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}" style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
-          <p>{{ Session::get('levelbaru')->nama }}</p>
-          <p class="font-level">Kasir</p>
+          <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}"
+            style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
+          <p class="mt-2 text-bold">{{ Session::get('levelbaru')->nama }}</p>
+          <i class="font-level">Kasir</i>
         </span>
 
         <div class="dropdown-divider"></div>
-        <form action="{{ url('logout') }}" method="post">   
+        <form action="{{ url('logout') }}" method="post">
           @csrf
           <button type="submit" class="dropdown-item logout">
             <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
-          <span class="text-sm ">Logout</span>
+            <span class="text-sm ">Logout</span>
           </button>
         </form>
       </div>

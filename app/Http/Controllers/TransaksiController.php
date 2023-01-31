@@ -94,7 +94,6 @@ class TransaksiController extends Controller
         // dd($cart);
         $cekItemId = $cart->whereIn('id', $rowId);
 
-        // $idProduct = $request->input('produk'); //perlu diadjust lagi
         $product = Produk::find($rowId);
         // dd($cekItemId);
 
