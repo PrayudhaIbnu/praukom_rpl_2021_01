@@ -1,67 +1,58 @@
-{{-- x-app-layout buat struktur html --}}
 <x-app-layout>
-  {{-- x-dashboard buat struktur dashboard --}}
   <x-dashboard-cashier />
   @section('title')
-      Riwayat Transaksi
+  Riwayat Penjualan
   @endsection
-  {{-- CONTENT --}}
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row">
           <div class="col-sm-6">
-            <h1 class="m-0">Riwayat Transaksi</h1>
+            <h1 class="m-0">Riwayat Penjualan</h1>
           </div>
-          <div class="row col-sm-6">
+          <!-- /.col -->
+          <div class="col-sm-6">
             <div class="input-group">
               <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
+                <div class="input-group-append">
+                <button class="btn btn-sidebar btn-warning">
                   <i class="fas fa-search fa-fw"></i>
                 </button>
-              </div>
-            </div>
+             </div>
+           </div>
           </div>
         </div>
-        <!-- Main content -->
-        <div class="table-responsive-xl">
-          <table class="table mt-4 table-borderless ">
-            <thead class="table-warning">
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">Id Penjualan</th>
-                <th scope="col">Tanggal</th>
-                <th scope="col">Jam</th>
-                <th scope="col">Kasir</th>
-                <th scope="col">Detail</th>
-              </tr>
-            </thead>
-            <tbody>
-              @forelse ($laporan as $l)
+        <div class="container-fluid-6">
+          <div class="table-responsive-xl">
+            <table class="table mt-4 table-borderless ">
+              <thead class="table-warning">
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                    <a href="detail/faktur">
-                      <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
-                    </a>
-                  </td>
+                  <th scope="col">Id Penjualan</th>
+                  <th scope="col">Tanggal</th>
+                  <th scope="col">Jam</th>
+                  <th scope="col">Kasir</th>
+                  <th scope="col">Detail</th>
                 </tr>
-              @empty
-                <td colspan="6">
-                  <h6 class="text-center mt-3">Belum ada penjualan bulan ini</h6>
-                </td>
-              @endforelse
-            </tbody>
-          </table>
-        </div>
-        <div class="d-flex justify-content-center">
-          {!! $laporan->links() !!}
+              </thead>
+              <tbody>
+                @foreach ($riwayat as $item)
+                <tr>
+                  <td>{{ $item->id_faktur }}</td>
+                  <td>{{ $item->tanggal }}</td>
+                  <td>{{ $item->jam_jual }}</td>
+                  <td>{{ $item->nama }}</td>
+                  <td>
+                    <a href="/kasir/detail/transaksi/{{ $item->id_faktur }}">
+                      <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
+                    </a> 
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
+  
 </x-app-layout>

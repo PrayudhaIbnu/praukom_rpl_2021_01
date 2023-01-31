@@ -9,6 +9,8 @@ use App\Models\DetailPenjualan;
 use App\Models\Faktur;
 use App\Models\Penjualan;
 use App\Models\Produk;
+use App\Models\ViewRiwayatTransaksi;
+
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Session;
@@ -57,13 +59,25 @@ class TransaksiController extends Controller
         );
     }
 
+    // untuk riwayat transaksi
     public function laporanTransaksi(Request $request)
     {
         // $tgl = date('Y-m');
-        $laporan = DB::table('faktur')->select('*')
-            // ->where("tanggal", 'LIKE', $tgl . '%')
-            ->paginate(10);
-        return view('Kasir.laporan', compact('laporan'));
+        $riwayat = DB::table('riwayat_transaksi')->select()
+            ->paginate(15);
+        // dd($riwayat);
+        return view('Kasir.laporan', compact('riwayat'));
+    }
+
+    // untuk detail transaksi
+    public function detailtransaksi($id)
+    {
+        $id_faktur = DB::select("SELECT * FROM detail_transaksi WHERE id_faktur = '$id'");
+        // $id_faktur = $id_faktur[0];
+        // foreach ($id_faktur as $item) {
+        //     var_dump($item->nama_produk);
+        // }
+        return view('components.cetakpdf.detailtransaksi', compact('id_faktur'));
     }
 
     public function indexProduk()
@@ -235,7 +249,7 @@ class TransaksiController extends Controller
                 ]);
                 // dd($id_penjualan);
                 $date =  date('ymdHi');
-                $prefix = 'FK' . $date;
+                $prefix = 'OD' . $date;
                 $id_faktur = IdGenerator::generate([
                     'table' => 'faktur',
                     'field' => 'id_faktur',

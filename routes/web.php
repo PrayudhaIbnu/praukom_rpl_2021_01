@@ -119,7 +119,8 @@ Route::controller(TransaksiController::class)->group(function () {
         Route::post('/kurang-qty', 'decreaseItem')->name('kurang-qty');
         Route::post('/remove-cart', 'removeItem')->name('hapus-cart');
         Route::post('/checkout', 'handleSubmit')->name('transaksi');
-        Route::get('/laporan', 'laporanTransaksi');
+        Route::get('/riwayat/transaksi', 'laporanTransaksi');
+        Route::get('/detail/transaksi/{id}', 'detailtransaksi');
         Route::get('/produk', 'indexProduk');
         Route::get('/search', 'search')->name('search.kasir');
         Route::post('/getProduk', 'autocomplete')->name('autocomplete');
