@@ -14,7 +14,7 @@ class Penjualan extends Model
         'id_penjualan',
         'tanggal',
         'jam_jual',
-        'keterangan'
+        'kasir'
     ];
     public $timestamps = false;
 }

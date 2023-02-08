@@ -13,13 +13,13 @@
           <!-- /.col -->
           <div class="col-sm-6">
             <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                <button class="btn btn-sidebar btn-warning">
+              <input class="form-control" name="search" id="search-input" type="text" placeholder="Search" autocomplete="off">
+              <div class="input-group-append">
+                <button class="btn btn-warning" type="submit">
                   <i class="fas fa-search fa-fw"></i>
                 </button>
-             </div>
-           </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="container-fluid-6">
@@ -37,7 +37,7 @@
               <tbody>
                 @foreach ($riwayat as $item)
                 <tr>
-                  <td>{{ $item->id_faktur }}</td>
+                  <td id="s">{{ $item->id_faktur }}</td>
                   <td>{{ $item->tanggal }}</td>
                   <td>{{ $item->jam_jual }}</td>
                   <td>{{ $item->nama }}</td>

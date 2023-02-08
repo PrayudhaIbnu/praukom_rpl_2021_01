@@ -55,7 +55,6 @@
         <div class="container-fluid-6">
           @if (count($errors) > 0)
           <div class=" alert alert-dismissible fade show alert-danger" role="alert" style="margin-top: 60px">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
             <div class="alert alert-dismissible fade show alert-danger" role="alert">
               @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>

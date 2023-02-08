@@ -44,7 +44,9 @@
         @if (count($errors) > 0)
           <div class=" alert alert-dismissible fade show alert-danger" role="alert" style="margin-top: 60px">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-            Data Gagal di Tambah!
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
           </div>
         @endif
 
@@ -66,7 +68,7 @@
                 <tr>
                   <td> {{ $loop->iteration }}</td>
                   <td>
-                    <img id="gambar" src="{{ asset('storage/post-images/' . $item->foto) }}" alt=""
+                    <img class="" id="gambar" src="{{ asset('storage/post-images/' . $item->foto) }}" alt=""
                       style="width: 100px">
                   </td>
                   <td id="s">{{ $item->nama }}</td>

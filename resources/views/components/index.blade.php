@@ -1,7 +1,4 @@
-{{-- x-app-layout buat struktur html --}}
-<x-app-layout>
-  {{-- x-dashboard buat struktur dashboard --}}
-  <x-dashboard-admin />
+{{-- Dashboard Admin dan Pengawas --}}
   {{-- tilte --}}
   @section('title')
     Dashboard
@@ -149,4 +146,4 @@
 
     const myChart = new Chart(document.getElementById("produkTerlaris"), config);
   </script>
-</x-app-layout>
+

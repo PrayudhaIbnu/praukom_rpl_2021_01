@@ -1,10 +1,11 @@
 <div class="row">
+  
   <p><i>*Menampilkan transaksi pada tahun <b>
         {{ date('Y') }}</b></i></p>
   <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingOne">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+        <button class="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse"
           data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
           Atur Tanggal Cetak Laporan
         </button>
@@ -16,16 +17,13 @@
           <div class="accordion-body">
             <div class="row ">
               <div class="col mb-1">
-                <label for="tglawal" name="tglawal" class="form-label font-weight-normal">Tanggal
-                  Awal Cetak</label>
+                <label for="tglawal" name="tglawal" class="form-label font-weight-normal">Tanggal Awal Cetak</label>
                 <div class="input-group date" id="datepicker">
                   <input type="date" required class="form-control" id="date" name="tglawal" />
                 </div>
               </div>
             </div>
-            <button type="submit" class="w-100 mt-1 btn btn-warning btn-sm">Download <i
-                class="fas fa-cloud-download"></i></button>
-
+            <button type="submit" class="w-100 mt-1 btn btn-warning btn-sm">Download <i class="fas fa-cloud-download"></i></button>
           </div>
         </div>
       </form>

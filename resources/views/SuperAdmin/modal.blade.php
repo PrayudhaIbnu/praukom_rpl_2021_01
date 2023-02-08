@@ -91,9 +91,9 @@
             </div>
             <div class="row align-items-center">
               <div class="col mb-3">
-                <label for="namauser" class="form-label font-weight-normal">Nama User</label>
-                <input name="nama" id="nama" class="form-control form-control-sm" type="text"
-                  aria-label=".form-control-sm example @error('nama') is-invalid @enderror">
+                  <label for="username" class="form-label font-weight-normal">Username</label>
+                  <input required name="username" id="username" class="form-control form-control-sm" type="text"
+                    aria-label=".form-control-sm example">
               </div>
               <div class="col mb-3">
                 <label for="id_level" class="form-label font-weight-normal">Sebagai</label>
@@ -105,16 +105,11 @@
               </div>
             </div>
             <div class="row align-items-end">
-              <div class="">
-                <label for="username" class="form-label font-weight-normal">Username</label>
-                <input required name="username" id="username" class="form-control form-control-sm" type="text"
-                  aria-label=".form-control-sm example">
+              <div class="col">
+                <label for="namauser" class="form-label font-weight-normal">Nama User</label>
+                <input name="nama" id="nama" class="form-control form-control-sm" type="text"
+                  aria-label=".form-control-sm example @error('nama') is-invalid @enderror">
               </div>
-              {{-- <div class="col mb-2">
-                <label for="password" class="form-label font-weight-normal">Password</label>
-                <input required name="password" id="password" autocomplete="on"
-                  class="form-control form-control-sm" type="password" aria-label=".form-control-sm example">
-              </div> --}}
             </div>
           </div>
           <div class="modal-footer">

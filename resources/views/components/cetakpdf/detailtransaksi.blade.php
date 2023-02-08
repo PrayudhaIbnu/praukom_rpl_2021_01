@@ -82,16 +82,16 @@
                     <thead>
                       <tr>
                         <td class="opacity-40 text-left p-0 pb-2 fw-semibold">Produk</td>
-                        <td class="opacity-40 text-center p-0 pb-2 fw-semibold">Harga Satuan</td>
+                        <td class="opacity-40 text-center p-0 pb-2 pr-2 fw-semibold">Harga Satuan</td>
                         <td class="opacity-40 text-right p-0 pb-2 fw-semibold">Subtotal</td>
                       </tr>
                     </thead>
                     <tbody>
                         @foreach ($id_faktur as $item)
                         <tr>
-                            <td class="text-left p-0">{{ $item->qty }}x{{ $item->nama_produk }}</td>
-                            <td  class="text-center p-0">{{ $item->harga_jual }}</td>
-                            <td class="text-right p-0">{{ $item->sub_total_hrg }}</td>
+                            <td class="text-left p-0">{{ $item->qty }}x {{ $item->nama_produk }}</td>
+                            <td  class="text-center p-0">{{ number_format($item->harga_jual) }}</td>
+                            <td class="text-right p-0">{{ number_format($item->sub_total_hrg) }}</td>
                           </tr>
                         @endforeach
                     </tbody>
@@ -99,25 +99,25 @@
                 {{-- @endforeach --}}
                 <hr>
                 <hr>
-                <div class="flex-container" style="text-align: right; margin-top: 10px;">
+                <div class="row " style="text-align: right; margin-top: 10px;">
                     <div></div>
-                    <div>
+                    <div class="col">
                         <ul>
-                            <li>Grand Total</li>
-                            <li>Pembayaran</li>
-                            <li>Kembalian</li>
+                            <li class="fw-semibold">Grand Total</li>
+                            <li class="fw-semibold">Pembayaran</li>
+                            <li class="fw-semibold">Kembalian</li>
                         </ul>
                     </div>
-                    <div style="text-align: right;">
+                    <div class="col" style="text-align: right;">
                         <ul>
-                            <li>Rp  </li>
-                            <li>Rp </li>
-                            <li>Rp </li>
+                            <li>Rp  {{ number_format($id_faktur[0]->grand_total) }} </li>
+                            <li>Rp {{ number_format($id_faktur[0]->jml_tunai) }} </li>
+                            <li>Rp {{ number_format($id_faktur[0]->jml_kembalian) }} </li>
                         </ul>
                     </div>
                 </div>
                 <hr>
-                <div class="header" style="margin-top: 50px;">
+                <div class="header" style="margin-top: 40px;">
                     <h3>Terimakasih</h3>
                     <p>Silahkan berkunjung kembali</p>
                 </div>
@@ -125,3 +125,6 @@
         </div>
       </div>
 </x-app-layout>
+<script>
+    window.print()
+</script>

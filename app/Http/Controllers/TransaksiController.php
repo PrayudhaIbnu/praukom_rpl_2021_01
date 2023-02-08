@@ -9,8 +9,6 @@ use App\Models\DetailPenjualan;
 use App\Models\Faktur;
 use App\Models\Penjualan;
 use App\Models\Produk;
-use App\Models\ViewRiwayatTransaksi;
-
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Session;
@@ -59,34 +57,12 @@ class TransaksiController extends Controller
         );
     }
 
-    // untuk riwayat transaksi
-    public function laporanTransaksi(Request $request)
-    {
-        // $tgl = date('Y-m');
-        $riwayat = DB::table('riwayat_transaksi')->select()
-            ->paginate(15);
-        // dd($riwayat);
-        return view('Kasir.laporan', compact('riwayat'));
-    }
-
-    // untuk detail transaksi
-    public function detailtransaksi($id)
+    // untuk detail transaksi role kasir dan pengawas
+    public function DetailTransaksi($id)
     {
         $id_faktur = DB::select("SELECT * FROM detail_transaksi WHERE id_faktur = '$id'");
-        // $id_faktur = $id_faktur[0];
-        // foreach ($id_faktur as $item) {
-        //     var_dump($item->nama_produk);
-        // }
+        // dd($id_faktur);
         return view('components.cetakpdf.detailtransaksi', compact('id_faktur'));
-    }
-
-    public function indexProduk()
-    {
-        $produk = DB::table('produk')->select('*')->paginate(10);
-        $kategori = DB::table('produk_kategori')
-            ->select()
-            ->get();
-        return view('kasir.daftarproduk', compact('produk', 'kategori'));
     }
 
     public function search(Request $request)
@@ -260,7 +236,8 @@ class TransaksiController extends Controller
                 Penjualan::create([
                     'id_penjualan' => $id_penjualan,
                     'tanggal' => Carbon::now(),
-                    'jam_jual' => date('H:i:s')
+                    'jam_jual' => date('H:i:s'),
+                    'kasir' => Session::get('levelbaru')->id
                 ]);
 
                 Faktur::create([

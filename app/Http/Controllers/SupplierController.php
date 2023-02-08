@@ -14,6 +14,7 @@ class SupplierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // halaman index admin supplier
     public function index()
     {
         $data = DB::table('supplier')->get();
@@ -21,6 +22,7 @@ class SupplierController extends Controller
         return view('admin.daftarsupplier', ['data' => $data]);
     }
 
+    // tambah supplier
     public function tambah(Request $request)
     {
         $valid = request()->validate(
@@ -55,6 +57,8 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    // detail supplier
     public function show($id)
     {
         $detailSupplier = collect(DB::select('CALL get_one_supplier_by_id(?)', [$id]))->first();
@@ -68,6 +72,8 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    // edit supplier
     public function edit($id)
     {
         //
@@ -84,9 +90,10 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //  update supplier
     public function update(Request $request)
     {
-        //
         $user_id = $request->input('supplier_id');
         $supplier = Supplier::find($user_id);
         $supplier->nama_supplier = $request->input('nama_supplier');
@@ -113,6 +120,8 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //  hapus supplier
     public function destroy(Request $request)
     {
         //
