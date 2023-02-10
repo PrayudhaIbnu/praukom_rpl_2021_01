@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -76,12 +77,15 @@ class LaporanController extends Controller
 
     public function cetakBulanan(Request $request)
     {
+
         $tglBulanan = $request->tglawal;
-        $tglBulanan2 = $tglAkhir =  date('Y-m-d', strtotime("+29 day", strtotime($tglBulanan)));
+        // $date = new DateTime($tglBulanan);
+        // $date->modify('+1 month');
+        $tglBulanan2 = date('Y-m-d', strtotime("+1 month", strtotime($tglBulanan)));
 
         // Masih bingung tampilanny mau dibuat kek gmn hmm
-        $bulanan = DB::select(DB::raw("SELECT * FROM laporan_mingguan
-        WHERE tanggal BETWEEN '$tglBulanan' AND DATE_SUB('$tglBulanan', INTERVAL -30 DAY) ORDER BY tanggal DESC"));
+        $bulanan = DB::select(DB::raw("SELECT * FROM   laporan_mingguan
+        WHERE tanggal BETWEEN '$tglBulanan' AND DATE_SUB('$tglBulanan', INTERVAL -1 MONTH) ORDER BY tanggal DESC"));
 
         return view('components.cetakpdf.cetaklaporan-bulanan', compact('bulanan', 'tglBulanan', 'tglBulanan2'));
     }
