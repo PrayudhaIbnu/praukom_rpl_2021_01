@@ -3,7 +3,7 @@
   {{-- x-dashboard buat struktur dashboard --}}
   <x-dashboard-cashier />
   @section('title')
-      Transaksi
+    Transaksi
   @endsection
   {{-- CONTENT --}}
   <div class="content-wrapper">
@@ -33,7 +33,8 @@
                   </div>
                   <label for="staticEmail" class="col-sm-5 col-form-label">Kasir</label>
                   <div class="col-sm-7">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ Session::get('levelbaru')->nama }}">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                      value="{{ Session::get('levelbaru')->nama }}">
                   </div>
                 </div>
               </div>
@@ -58,17 +59,16 @@
                           </option>
                         @endforeach
                       </select>
-                      {{-- <select class=" form-control js-example-basic-multiple">
-                        <option>Mustard</option>
-                        <option>Ketchup</option>
-                        <option>Barbecue</option>
-                      </select> --}}
-                      {{-- <input type="text" id='search'> --}}
                     </div>
                     <label for="qty" class="col-sm-3 col-form-label">Qty</label>
                     <div class="col-sm-9">
-                      <input type="number" class="form-control" id="qty" name="qty" value="1">
+                      <input type="number" class="form-control form-control-sm" id="qty" name="qty"
+                        value="1">
                     </div>
+                  </div>
+                  <div class="col-9 -mt-lg-3 float-start">
+                    <input type="number" class="form-control form-control-sm" id="qty" name="produk"
+                      aria-label=".form-control-sm example" autofocus>
                   </div>
                   <button type="submit" class="btn btn-primary btn-sm float-end tambah-cart">Simpan</button>
                 </div>
@@ -84,7 +84,7 @@
                   name="grand_total" id="grand_total" value="{{ $summary['total'] }}">
                 <div class="container">
                   <h2 class="h3" style="font-weight: 500; color: #a2a2a2">Grand Total</h2>
-                  <h1>Rp{{number_format($summary['total'], 2, ',', '.') }}</h1>
+                  <h1>Rp{{ number_format($summary['total'], 2, ',', '.') }}</h1>
                   {{-- <p class="float-end" style="font-size: 45px; font-weight: 600;" id="grand_total"></p> --}}
                 </div>
 
@@ -153,7 +153,7 @@
               <div class="card" style="width: 100%; height: 130px;">
                 <div class="card-body">
                   <h2 class="h4" style="font-weight: 500; color: #a2a2a2">Cash</h2>
-                  <input  required class="form-control form-control-lg" style="font-weight: 600;" type="number"
+                  <input required class="form-control form-control-lg" style="font-weight: 600;" type="number"
                     name="tunai" id="tunai" placeholder="Masukan Tunai" aria-label=".form-control-lg example">
                 </div>
               </div>
