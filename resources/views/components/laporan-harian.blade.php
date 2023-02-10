@@ -1,6 +1,4 @@
-<div class="float-end">
-  <h2 class="h3">Today, {{ date('j F Y') }}</h2>
-</div>
+
 {{-- <form action="{{ route('cetak-harian') }}" method="post">
   <input type="date" required class="form-control" id="date" name="tgl" />
   <div class="">
@@ -9,37 +7,41 @@
 </form> --}}
 
 <div class="row">
-
-  <div class="accordion accordion-flush" id="accordionFlushExample">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-headingOne">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-          data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-          Atur Tanggal Cetak Laporan
-        </button>
-      </h2>
-      <form action="{{ route('cetak-harian') }}" method="post">
-        @csrf
-        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">
-            <div class="row ">
-              <div class="col mb-1">
-                <label for="tglawal" name="tglawal" class="form-label font-weight-normal">Pilih Tanggal Cetak</label>
-                <div class="input-group date" id="datepicker">
-                  <input type="date" required class="form-control" id="date" name="tgl" />
+  <div class="col">
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button class="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            Atur Tanggal Cetak Laporan
+          </button>
+        </h2>
+        <form action="{{ route('cetak-harian') }}" method="post">
+          @csrf
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+            data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <div class="row ">
+                <div class="col mb-1">
+                  <label for="tglawal" name="tglawal" class="form-label font-weight-normal">Pilih Tanggal Cetak</label>
+                  <div class="input-group date" id="datepicker">
+                    <input type="date" required class="form-control" id="date" name="tgl" />
+                  </div>
                 </div>
               </div>
+              <button type="submit" class="w-100 mt-1 btn btn-warning btn-sm">Download <i
+                  class="fas fa-cloud-download"></i></button>
             </div>
-            <button type="submit" class="w-100 mt-1 btn btn-warning btn-sm">Download <i
-                class="fas fa-cloud-download"></i></button>
-
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-
+  <div class="col-3">
+    <div class="float-end">
+      <h4 class="">Today, {{ date('j F Y') }}</h4>
+    </div>
+  </div>
 </div>
 <div class="table-responsive-xl mt-3">
   <table class="table mt-3 table-borderless " id="harian">

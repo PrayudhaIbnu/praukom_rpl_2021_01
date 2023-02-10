@@ -20,8 +20,12 @@
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
         <span class="dropdown-item dropdown-header">
-          <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}"
+          @if (Session::get('levelbaru')->foto == null)
+            <img src="/img/user.jpg" style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
+          @else
+            <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}"
             style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
+          @endif
           <p class="mt-2 text-bold">{{ Session::get('levelbaru')->nama }}</p>
           <i class="font-level">Admin</i>
         </span>

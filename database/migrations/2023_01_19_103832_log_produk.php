@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->text('nama_user', 60);
             $table->string('aktifitas', 20);
-            $table->string('nama_produk', 15);
+            $table->string('nama_produk', 100);
             $table->integer('jumlah');
         });
     }

@@ -21,7 +21,13 @@ return new class extends Migration
             $table->char('id_penjualan', 13)->primary();
             $table->date('tanggal')->default(now());
             $table->time('jam_jual')->default(now());
-            $table->text('keterangan')->nullable();
+            $table->integer('kasir');
+
+            $table
+                ->foreign('kasir')
+                ->references('id')
+                ->on('user')
+                ->cascadeOnDelete();
         });
     }
 

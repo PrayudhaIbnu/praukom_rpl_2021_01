@@ -30,6 +30,7 @@
       })
     });
 
+    // untuk edit password
     $(document).on('click', '.btn-password', function() {
       var user_id = $(this).val();
       console.log(user_id);

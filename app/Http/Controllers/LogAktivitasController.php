@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class LogAktivitasController extends Controller
 {
+    // log aktivitas produk halaman role pengwas
     public function logproduk()
     {
         $logproduk = DB::table('log_produk')->select()->get();

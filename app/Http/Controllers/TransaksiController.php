@@ -57,22 +57,12 @@ class TransaksiController extends Controller
         );
     }
 
-    public function laporanTransaksi(Request $request)
+    // untuk detail transaksi role kasir dan pengawas
+    public function DetailTransaksi($id)
     {
-        // $tgl = date('Y-m');
-        $laporan = DB::table('faktur')->select('*')
-            // ->where("tanggal", 'LIKE', $tgl . '%')
-            ->paginate(10);
-        return view('Kasir.laporan', compact('laporan'));
-    }
-
-    public function indexProduk()
-    {
-        $produk = DB::table('produk')->select('*')->paginate(10);
-        $kategori = DB::table('produk_kategori')
-            ->select()
-            ->get();
-        return view('kasir.daftarproduk', compact('produk', 'kategori'));
+        $id_faktur = DB::select("SELECT * FROM detail_transaksi WHERE id_faktur = '$id'");
+        // dd($id_faktur);
+        return view('components.cetakpdf.detailtransaksi', compact('id_faktur'));
     }
 
     public function search(Request $request)
@@ -234,7 +224,7 @@ class TransaksiController extends Controller
                 ]);
                 // dd($id_penjualan);
                 $date =  date('ymdHi');
-                $prefix = 'FK' . $date;
+                $prefix = 'OD' . $date;
                 $id_faktur = IdGenerator::generate([
                     'table' => 'faktur',
                     'field' => 'id_faktur',
@@ -246,7 +236,8 @@ class TransaksiController extends Controller
                 Penjualan::create([
                     'id_penjualan' => $id_penjualan,
                     'tanggal' => Carbon::now(),
-                    'jam_jual' => date('H:i:s')
+                    'jam_jual' => date('H:i:s'),
+                    'kasir' => Session::get('levelbaru')->id
                 ]);
 
                 Faktur::create([

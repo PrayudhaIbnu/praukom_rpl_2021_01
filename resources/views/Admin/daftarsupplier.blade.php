@@ -72,7 +72,7 @@
                   </tr>
                 @empty
                   <td colspan="6">
-                    <h6 class="text-center mt-3">Belum ada Transaksi Hari Ini</h6>
+                    <h6 class="text-center mt-3 opacity-50">TIDAK ADA SUPPLIER</h6>
                   </td>
                 @endforelse
               </tbody>

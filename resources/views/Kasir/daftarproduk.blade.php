@@ -21,7 +21,7 @@
             <form action="{{ route('search.kasir') }}" method="get">
               @csrf
               <div class="input-group">
-                <input class="form-control" name="search" {{-- id="search-input" --}} type="text" placeholder="Search" autocomplete="off">
+                <input class="form-control" name="search" id="search-input" type="text" placeholder="Search" autocomplete="off">
                 <div class="input-group-append">
                   <button class="btn btn-warning" type="submit">
                     <i class="fas fa-search fa-fw"></i>
@@ -57,8 +57,8 @@
               <tbody class="produk">
                 @foreach ($produk as $d)
                   <tr class="produk-info" data-custom-type="{{ $d->kategori }}">
-                    <td scope="row" id="s">{{ $d->id_produk }}</td>
-                    <td scope="row" >{{ $d->nama_produk }}</td>
+                    <td scope="row">{{ $d->id_produk }}</td>
+                    <td id="s" scope="row" >{{ $d->nama_produk }}</td>
                     <td scope="row" >{{ $d->stok }}</td>
                     <td scope="row" >{{ $d->satuan_produk }}</td>
                     <td scope="row" > Rp {{ number_format($d->harga_jual, 2, ',', '.') }}</td>

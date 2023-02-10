@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
-class SuperAdminController extends Controller
+class KelolaAkunController extends Controller
 {
     public function index(Request $request)
     {
@@ -36,13 +36,15 @@ class SuperAdminController extends Controller
                 'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
                 'nama' => 'required',
                 'username' => 'required|unique:user',
-                'password' => 'required|min:5'
+                'password' => 'required|min:8'
             ],
             [
                 'nama.required' => 'Nama tidak boleh kosong!',
                 'username.required' => 'Username tidak boleh kosong!',
                 'username.unique' => 'Username sudah tersedia.',
                 'password.required' => 'Password tidak boleh kosong!',
+                'password.min' => 'Minimal terdiri 8 karakter!',
+                'password.numbers' => 'Minimal terdiri 1 angka!',
             ]
         );
 
@@ -78,7 +80,14 @@ class SuperAdminController extends Controller
     {
         request()->validate(
             [
-                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000'
+                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
+                'nama' => 'required',
+                'username' => 'required',
+            ],
+            [
+                'nama.required' => 'Nama tidak boleh kosong!',
+                'username.required' => 'Username tidak boleh kosong!',
+                // 'username.unique' => 'Username sudah tersedia.',
             ]
         );
 
@@ -107,7 +116,12 @@ class SuperAdminController extends Controller
     {
         request()->validate(
             [
-                'password' => 'min:5'
+                'password' => 'required|min:8'
+            ],
+            [
+                'password.required' => 'Password tidak boleh kosong!',
+                'password.min' => 'Password minimal terdiri 8 karakter!',
+                // 'password.numbers' => 'Password minimal terdapat 1 angkat!'
             ]
         );
 

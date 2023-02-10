@@ -22,7 +22,7 @@ return new class extends Migration
             FOR EACH ROW
             BEGIN
             DECLARE users VARCHAR(60);
-            DECLARE produks VARCHAR(15);
+            DECLARE produks VARCHAR(100);
             DECLARE jml INT(11);
             SELECT user.nama INTO users FROM user WHERE user.id = new.user;
             SELECT nama_produk INTO produks FROM produk WHERE produk.id_produk = new.produk;

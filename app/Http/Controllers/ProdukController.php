@@ -32,6 +32,16 @@ class ProdukController extends Controller
         return view('admin.daftarproduk', compact('produk', 'kategori'));
     }
 
+    // untuk halaman daftar produk role kasir
+    public function KasirDaftarProduk()
+    {
+        $produk = DB::table('produk')->select('*')->paginate(10);
+        $kategori = DB::table('produk_kategori')
+            ->select()
+            ->get();
+        return view('kasir.daftarproduk', compact('produk', 'kategori'));
+    }
+
     // menampilkan halaman listkategori
     public function listkategori()
     {

@@ -1,4 +1,4 @@
 <x-app-layout>
-    <x-dashboard-pengawas />
+    <x-dashboard-admin />
         @include('components.index')
 </x-app-layout>

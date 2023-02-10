@@ -82,9 +82,12 @@
               <div class="card-body">
                 <input type="text" class="form-control form-control-lg float-end" style="display: none" readonly
                   name="grand_total" id="grand_total" value="{{ $summary['total'] }}">
-                <h2 class="h3" style="font-weight: 500; color: #a2a2a2">Grand Total</h2>
-                <p class="float-end" style="font-size: 45px; font-weight: 600;" id="grand_total">Rp
-                  {{ number_format($summary['total'], 2, ',', '.') }}</p>
+                <div class="container">
+                  <h2 class="h3" style="font-weight: 500; color: #a2a2a2">Grand Total</h2>
+                  <h1>Rp{{number_format($summary['total'], 2, ',', '.') }}</h1>
+                  {{-- <p class="float-end" style="font-size: 45px; font-weight: 600;" id="grand_total"></p> --}}
+                </div>
+
               </div>
             </div>
             {{-- akhir card --}}
@@ -110,6 +113,7 @@
                   <td>{{ $cart['name'] }}</td>
                   <td>Rp {{ number_format($cart['pricesingle'], 2, ',', '.') }}</td>
                   <td>{{ $cart['qty'] }}</td>
+                  {{-- <td><input type="number" value="1"></td> --}}
                   <td>Rp {{ number_format($cart['price'], 2, ',', '.') }}</td>
                   <td style="display: flex">
                     <form action="{{ route('tambah-qty') }}" method="post">
@@ -149,7 +153,7 @@
               <div class="card" style="width: 100%; height: 130px;">
                 <div class="card-body">
                   <h2 class="h4" style="font-weight: 500; color: #a2a2a2">Cash</h2>
-                  <input class="form-control form-control-lg" style="font-weight: 600;" type="number"
+                  <input  required class="form-control form-control-lg" style="font-weight: 600;" type="number"
                     name="tunai" id="tunai" placeholder="Masukan Tunai" aria-label=".form-control-lg example">
                 </div>
               </div>
