@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
+
 
 class KelolaAkunController extends Controller
 {
@@ -19,7 +21,6 @@ class KelolaAkunController extends Controller
         $user = DB::table('user')
             ->select(['user.nama', 'user.username', 'level_user.nama_level', 'user.foto', 'user.id_user', 'user.level'])
             ->join('level_user', 'user.level', '=', 'level_user.id_level')
-            // ->latest('nama')
             ->where('nama', 'LIKE', '%' . $search . '%')
             ->orWhere('nama_level', 'LIKE', '%' . $search . '%')
             ->orWhere('username', 'LIKE', '%' . $search . '%')
@@ -34,18 +35,23 @@ class KelolaAkunController extends Controller
         request()->validate(
             [
                 'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
-                'nama' => 'required',
-                'username' => 'required|unique:user',
-                'password' => 'required|min:8'
+                'nama' => 'required|regex:/^[\pL\s\-]+$/u|max:60',
+                'username' => 'required|unique:user|alpha_num:ascii|lowercase|max:20',
+                'password' => ['required', Password::min(8)]
             ],
             [
                 'nama.required' => 'Nama tidak boleh kosong!',
+                'nama.regex' => 'Nama hanya dapat mengandung huruf.',
+                'nama.max' => 'Nama tidak dapat melebihi 60 huruf.',
                 'username.required' => 'Username tidak boleh kosong!',
                 'username.unique' => 'Username sudah tersedia.',
+                'username.alpha_num' => 'Username hanya dapat mengandung huruf dan angka tanpa spasi.',
+                'username.lowercase' => 'Username harus menggunakan huruf kecil!.',
+                'username.max' => 'Username maksimal 20 karakter.',
                 'password.required' => 'Password tidak boleh kosong!',
-                'password.min' => 'Minimal terdiri 8 karakter!',
-                'password.numbers' => 'Minimal terdiri 1 angka!',
+                'password.min' => 'Password minimal 8 karakter',
             ]
+
         );
 
         $user = new User;
@@ -81,13 +87,18 @@ class KelolaAkunController extends Controller
         request()->validate(
             [
                 'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
-                'nama' => 'required',
-                'username' => 'required',
+                'nama' => 'required|regex:/^[\pL\s\-]+$/u|max:60',
+                'username' => 'required|alpha_num:ascii|lowercase|max:20',
             ],
             [
+
                 'nama.required' => 'Nama tidak boleh kosong!',
+                'nama.regex' => 'Nama hanya dapat mengandung huruf.',
+                'nama.max' => 'Nama tidak dapat melebihi 60 huruf.',
                 'username.required' => 'Username tidak boleh kosong!',
-                // 'username.unique' => 'Username sudah tersedia.',
+                'username.alpha_num' => 'Username hanya dapat mengandung huruf dan angka tanpa spasi.',
+                'username.lowercase' => 'Username harus menggunakan huruf kecil!.',
+                'username.max' => 'Username maksimal 20 karakter.',
             ]
         );
 
@@ -120,7 +131,7 @@ class KelolaAkunController extends Controller
             ],
             [
                 'password.required' => 'Password tidak boleh kosong!',
-                'password.min' => 'Password minimal terdiri 8 karakter!',
+                'password.min' => 'Password minimal 8 karakter!',
                 // 'password.numbers' => 'Password minimal terdapat 1 angkat!'
             ]
         );

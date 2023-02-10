@@ -18,13 +18,8 @@
             <div class="row align-items-center">
               <div class="col mb-3">
                 <label for="namauser" class="form-label font-weight-normal ">Nama User</label>
-                <input name="nama" class="form-control form-control-sm @error('nama') is-invalid @enderror"
+                <input placeholder="Hanya mengandung huruf" value="{{ old('nama') }}" name="nama" class="form-control form-control-sm @error('nama') is-invalid @enderror"
                   type="text"aria-label=".form-control-sm example">
-                @error('nama')
-                  <div class="invalid-feedback">
-                    {{ $message }}
-                  </div>
-                @enderror
               </div>
               <div class="col mb-3">
                 <label for="id_level" class="form-label font-weight-normal">Sebagai</label>
@@ -38,23 +33,13 @@
             <div class="row align-items-end">
               <div class="col mb-2">
                 <label for="username" class="form-label font-weight-normal">Username</label>
-                <input name="username" class="form-control form-control-sm @error('username') is-invalid @enderror "
+                <input placeholder="Gunakan huruf kecil" value="{{ old('username') }}" name="username" class="form-control form-control-sm @error('username') is-invalid @enderror "
                   type="text" aria-label=".form-control-sm example">
-                @error('username')
-                  <div class="invalid-feedback">
-                    {{ $message }}
-                  </div>
-                @enderror
               </div>
               <div class="col mb-2">
                 <label for="password" class="form-label font-weight-normal">Password</label>
-                <input name="password" class="form-control form-control-sm @error('password') is-invalid @enderror"
+                <input placeholder="Minimal 8 karakter" name="password" class="form-control form-control-sm @error('password') is-invalid @enderror"
                   type="password" autocomplete="on" aria-label=".form-control-sm example">
-                @error('password')
-                  <div class="invalid-feedback">
-                    {{ $message }}
-                  </div>
-                @enderror
               </div>
             </div>
           </div>
@@ -92,7 +77,7 @@
             <div class="row align-items-center">
               <div class="col mb-3">
                   <label for="username" class="form-label font-weight-normal">Username</label>
-                  <input required name="username" id="username" class="form-control form-control-sm" type="text"
+                  <input placeholder="Gunakan huruf kecil" required name="username" id="username" class="form-control form-control-sm @error('username') is-invalid @enderror" type="text"
                     aria-label=".form-control-sm example">
               </div>
               <div class="col mb-3">
@@ -107,7 +92,7 @@
             <div class="row align-items-end">
               <div class="col">
                 <label for="namauser" class="form-label font-weight-normal">Nama User</label>
-                <input name="nama" id="nama" class="form-control form-control-sm" type="text"
+                <input placeholder="Hanya mengandung huruf" name="nama" id="nama" class="form-control form-control-sm @error('nama') is-invalid @enderror" type="text"
                   aria-label=".form-control-sm example @error('nama') is-invalid @enderror">
               </div>
             </div>
@@ -122,6 +107,7 @@
   </div>
   <!-- End Modal Edit User -->
 
+  {{-- modal edit password --}}
   <div class="modal fade" id="editpassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -143,7 +129,7 @@
             <div class="row align-items-start">
               <div class="col">
                 <label for="password" class="form-label font-weight-normal">Password Baru</label>
-                <input required name="password" autocomplete="on" class="form-control form-control-sm"
+                <input placeholder="minimal 8 karakter" required name="password" autocomplete="on" class="form-control form-control-sm"
                   type="password" aria-label=".form-control-sm example">
               </div>
             </div>
@@ -156,6 +142,7 @@
       </div>
     </div>
   </div>
+  {{-- end edit password --}}
 
   {{-- delete modal --}}
   <div class="modal fade" id="deleteuser" tabindex="-1" aria-labelledby="tambahuserLabel" aria-hidden="true">

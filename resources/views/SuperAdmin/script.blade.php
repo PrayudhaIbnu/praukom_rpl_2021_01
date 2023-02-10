@@ -20,7 +20,7 @@
           $('#user_id').val(user_id);
           $('#path_foto').val(response.user.foto);
           $('#foto').html(
-            `<img src="/storage/post-images/${response.user.foto}" width="100" class="img-fluid img-thumbnail">`
+            `<img src="/storage/post-images/${response.user.foto}" width="100" class="img-fluid img-thumbnail" style="object-fit: cover;width:90px;height:90px;">`
           );
           $('#nama').val(response.user.nama);
           $('#username').val(response.user.username);

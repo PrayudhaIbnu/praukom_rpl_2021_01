@@ -114,7 +114,7 @@ Route::middleware(['auth', 'pengawas'])->group(function () {
         Route::get('/riwayat/barang-masuk', [RiwayatController::class, 'PengawasRiwayatBarangmasuk']);
         Route::get('/riwayat/penjualan', [RiwayatController::class, 'PengawasRiwayatTransaksi']);
         Route::get('/detail/penjualan/{id}', [TransaksiController::class, 'DetailTransaksi']);
-        Route::get('/logproduk', [LogAktivitasController::class, 'logproduk']);
+        Route::get('/logproduk', [LogAktivitasController::class, 'logProduk']);
     });
 });
 // END ROUTES PENGAWAS
