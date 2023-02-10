@@ -26,7 +26,8 @@
         </div>
         <div class="container-fluid-6">
           <div class="float-end">
-              <button type="button" class="btn btn-success my-2 btn-sm" data-toggle="modal" data-target="#tambahsupplier">Tambah Supplier</button>
+            <button type="button" class="btn btn-success my-2 btn-sm" data-toggle="modal"
+              data-target="#tambahsupplier">Tambah Supplier</button>
           </div>
           @if (count($errors) > 0)
             <br><br><br>
@@ -52,7 +53,7 @@
               <tbody>
                 @forelse ($data as $d)
                   <tr>
-                    <td  scope="row">{{ $loop->iteration }}</td>
+                    <td scope="row">{{ $loop->iteration }}</td>
                     <td scope="row">
                       <img id="foto_supplier" src="{{ asset('storage/post-images/' . $d->foto_supplier) }}"
                         alt="" style="width: 100px">
@@ -95,7 +96,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="POST" action="{{ url('tambah-supplier') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url('admin/tambah-supplier') }}" enctype="multipart/form-data">
           @csrf
           <div class="modal-body">
             <div class="row align-items-start">
@@ -147,7 +148,7 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Form Edit User</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="POST" action="{{ url('update-supplier') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url('admin/update-supplier') }}" enctype="multipart/form-data">
           @csrf
           @method('PUT')
           <input type="hidden" id="supplier_id" name="supplier_id">
@@ -200,7 +201,7 @@
         <div class="modal-body">
           <p>Apakah Anda benar-benar ingin menghapus? Anda tidak akan dapat mengembalikan ini! </p>
         </div>
-        <form method="POST" action="{{ url('delete-supplier') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url('/admin/delete-supplier') }}" enctype="multipart/form-data">
           @csrf
           @method('DELETE')
           <input type="hidden" id="delete_id" name="delete_supplier_id">
