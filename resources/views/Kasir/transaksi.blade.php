@@ -62,12 +62,12 @@
                     </div>
                     <label for="qty" class="col-sm-3 col-form-label">Qty</label>
                     <div class="col-sm-9">
-                      <input type="number" class="form-control form-control-sm" id="qty" name="qty"
+                      <input type="number" class="form-control form-control-sm" id="qty" name="qty" required
                         value="1">
                     </div>
                   </div>
                   <div class="col-9 -mt-lg-3 float-start">
-                    <input type="number" class="form-control form-control-sm" id="qty" name="produk"
+                    <input type="number" class="form-control form-control-sm" id="produk" name="barcode"
                       aria-label=".form-control-sm example" autofocus>
                   </div>
                   <button type="submit" class="btn btn-primary btn-sm float-end tambah-cart">Simpan</button>
