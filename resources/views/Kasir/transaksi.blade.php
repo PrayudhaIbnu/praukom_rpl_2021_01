@@ -65,12 +65,14 @@
                       <input type="number" class="form-control form-control-sm" id="qty" name="qty" required
                         value="1">
                     </div>
+                    <div class="col-form-label col-sm-9 float-start">
+                      <input type="number" class="form-control form-control-sm" id="produk" name="barcode"
+                        aria-label=".form-control-sm example" autofocus>
+                    </div>
+                    <div class="float-end col-form-label col-3">
+                      <button type="submit" class="btn btn-primary btn-sm  tambah-cart">Simpan</button>
+                    </div>
                   </div>
-                  <div class="col-9 -mt-lg-3 float-start">
-                    <input type="number" class="form-control form-control-sm" id="produk" name="barcode"
-                      aria-label=".form-control-sm example" autofocus>
-                  </div>
-                  <button type="submit" class="btn btn-primary btn-sm float-end tambah-cart">Simpan</button>
                 </div>
               </div>
             </form>

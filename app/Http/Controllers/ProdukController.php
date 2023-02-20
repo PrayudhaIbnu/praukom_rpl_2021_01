@@ -107,7 +107,6 @@ class ProdukController extends Controller
             [
                 'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
                 'kode_produk' => 'required|unique:produk,id_produk',
-                'kode_produk' => 'required',
                 'nama_produk' => 'required',
                 // 'satuan_produk' => 'required',
                 'harga_beli' => 'required|numeric|min:1',

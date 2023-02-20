@@ -118,7 +118,7 @@
               <div class="col mb-2">
                 <label for="telp_supplier" class="form-label font-weight-normal">No. Telp</label>
                 <input required name="telp_supplier" id="telp_supplier" class="form-control form-control-sm"
-                  type="text" aria-label=".form-control-sm example">
+                  type="tel" aria-label=".form-control-sm example">
               </div>
             </div>
             <div class="row align-items-center">
@@ -170,7 +170,7 @@
               <div class="col mb-2">
                 <label for="telp_supplier" class="form-label font-weight-normal">No. Telp</label>
                 <input required name="telp_supplier" id="telp_spr" class="form-control form-control-sm"
-                  type="number" aria-label=".form-control-sm example">
+                  type="tel" type="number" aria-label=".form-control-sm example">
               </div>
             </div>
             <div class="row align-items-center">

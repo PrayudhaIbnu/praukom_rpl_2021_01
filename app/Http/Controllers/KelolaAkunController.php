@@ -80,7 +80,7 @@ class KelolaAkunController extends Controller
     {
         request()->validate(
             [
-                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
+                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200',
                 'nama' => 'required',
                 'username' => 'required',
             ],
