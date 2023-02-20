@@ -10,6 +10,7 @@ use App\Models\Faktur;
 use App\Models\Penjualan;
 use App\Models\Produk;
 use Carbon\Carbon;
+use Darryldecode\Cart\Cart;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Session;
 
@@ -74,17 +75,21 @@ class TransaksiController extends Controller
         // dd($rowId);
 
         $cart = \Cart::getContent();
-        // dd($cart);
         $cekItemId = $cart->whereIn('id', $rowId);
+        $cekQtyId = \Cart::get($rowId);
+        // dd($cekQtyId);
 
         $product = Produk::find($rowId);
+        if (!$product) {
+            return redirect()->back()->with('warning', 'Produk Tidak Tersedia!');
+        }
         // dd($cekItemId);
-
         if ($rowId == null) {
             return redirect()->back()->with('warning', 'Input Produk Terlebih Dahulu!');
         }
         if ($request->input('qty') < 1) {
-            return redirect()->back()->with('warning', 'Input Jumlah Terlebih Dahulu (Minimal 1)!');
+            return redirect()->back()->with('warning', 'Input Jumlah
+            Terlebih Dahulu (Minimal 1)!');
         } else {
             if ($product->stok < $request->input('qty')) {
                 // session()->flash('error', 'Error:  Tidak dapat input stok (Melebihi Stok!)');
@@ -191,6 +196,7 @@ class TransaksiController extends Controller
                 $filterCart = $allCart->map(function ($item) {
                     return [
                         'id' => $item->id,
+                        'name' => $item->name,
                         'quantity' => $item->quantity,
                         'price' => $item->getPriceSum()
                     ];
@@ -199,12 +205,16 @@ class TransaksiController extends Controller
                 // dd($filterCart);
                 foreach ($filterCart as $cart) {
                     $product = Produk::find($cart['id']);
+                    // dd($product->stok);
 
-                    if ($product->qty === 0) {
+                    if ($product->stok === 0) {
                         return redirect()->back()->with('warning', 'Jumlah item kurang');
                     }
-
                     $product->decrement('stok', $cart['quantity']);
+                    if ($product->stok < $cart['quantity']) {
+                        # code...
+                        return redirect()->back()->with('warning', $cart['name'] . ' Tidak dapat input stok (Melebihi Stok!)');
+                    }
 
                     $product->increment('terjual', $cart['quantity']);
                 }
