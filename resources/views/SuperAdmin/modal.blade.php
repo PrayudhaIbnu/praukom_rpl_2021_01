@@ -12,19 +12,15 @@
             <div class="row align-items-start">
               <div class="col mb-3">
                 <label for="foto" class="form-label font-weight-normal">Foto User</label>
-                <input name="foto" class="form-control form-control-sm" type="file" accept="image/*">
+                <input id="img_tambah"  name="foto" class="image form-control form-control-sm" type="file" accept="image/*" onchange="previewImgTambah()">
+                <img  class="img-tambah img-fluid img-thumbnail mt-2" style="object-fit:cover;width:90px;height:90px;">
               </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-3">
                 <label for="namauser" class="form-label font-weight-normal ">Nama User</label>
-                <input name="nama" class="form-control form-control-sm @error('nama') is-invalid @enderror"
+                <input placeholder="Hanya mengandung huruf" value="{{ old('nama') }}" name="nama" class="form-control form-control-sm @error('nama') is-invalid @enderror"
                   type="text"aria-label=".form-control-sm example">
-                @error('nama')
-                  <div class="invalid-feedback">
-                    {{ $message }}
-                  </div>
-                @enderror
               </div>
               <div class="col mb-3">
                 <label for="id_level" class="form-label font-weight-normal">Sebagai</label>
@@ -38,23 +34,13 @@
             <div class="row align-items-end">
               <div class="col mb-2">
                 <label for="username" class="form-label font-weight-normal">Username</label>
-                <input name="username" class="form-control form-control-sm @error('username') is-invalid @enderror "
+                <input placeholder="Gunakan huruf kecil" value="{{ old('username') }}" name="username" class="form-control form-control-sm @error('username') is-invalid @enderror "
                   type="text" aria-label=".form-control-sm example">
-                @error('username')
-                  <div class="invalid-feedback">
-                    {{ $message }}
-                  </div>
-                @enderror
               </div>
               <div class="col mb-2">
                 <label for="password" class="form-label font-weight-normal">Password</label>
-                <input name="password" class="form-control form-control-sm @error('password') is-invalid @enderror"
+                <input placeholder="Minimal 8 karakter" name="password" class="form-control form-control-sm @error('password') is-invalid @enderror"
                   type="password" autocomplete="on" aria-label=".form-control-sm example">
-                @error('password')
-                  <div class="invalid-feedback">
-                    {{ $message }}
-                  </div>
-                @enderror
               </div>
             </div>
           </div>
@@ -80,19 +66,20 @@
           @csrf
           @method('PUT')
           <input type="hidden" name="user_id" id="user_id">
-          {{-- <input type="hidden" name="path_foto" id="path_foto"> --}}
           <div class="modal-body">
             <div class="row align-items-start">
               <div class="col mb-2">
-                <label for="foto" class="form-label font-weight-normal">Foto User</label>
-                <input name="foto" class="form-control form-control-sm" type="file" accept="image/*">
+                <label for="img_edit" class="form-label font-weight-normal">Foto User</label>
+                <input id="img_edit" name="foto" class="image form-control form-control-sm" type="file" accept="image/*" onchange="previewImgEdit()">
               </div>
+              {{-- untuk img preview lewat js  --}}
               <div class="mb-2" id="foto"> </div>
+              {{-- end img preview --}}
             </div>
             <div class="row align-items-center">
               <div class="col mb-3">
                   <label for="username" class="form-label font-weight-normal">Username</label>
-                  <input required name="username" id="username" class="form-control form-control-sm" type="text"
+                  <input placeholder="Gunakan huruf kecil" required name="username_e" id="username" class="form-control form-control-sm @error('username_e') is-invalid @enderror" type="text"
                     aria-label=".form-control-sm example">
               </div>
               <div class="col mb-3">
@@ -106,9 +93,12 @@
             </div>
             <div class="row align-items-end">
               <div class="col">
-                <label for="namauser" class="form-label font-weight-normal">Nama User</label>
-                <input name="nama" id="nama" class="form-control form-control-sm" type="text"
+                <label for="nama" class="form-label font-weight-normal">Nama User</label>
+                <input placeholder="Hanya mengandung huruf" name="nama_e" id="nama" class="form-control form-control-sm @error('nama_e') is-invalid @enderror" type="text"
                   aria-label=".form-control-sm example @error('nama') is-invalid @enderror">
+                  @if ($errors->has('nama'))
+                    <div class="invalid-feedback">{{ $errors->first('nama') }}</div>
+                  @endif
               </div>
             </div>
           </div>
@@ -122,6 +112,7 @@
   </div>
   <!-- End Modal Edit User -->
 
+  {{-- modal edit password --}}
   <div class="modal fade" id="editpassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -143,7 +134,7 @@
             <div class="row align-items-start">
               <div class="col">
                 <label for="password" class="form-label font-weight-normal">Password Baru</label>
-                <input required name="password" autocomplete="on" class="form-control form-control-sm"
+                <input placeholder="minimal 8 karakter" required name="password" autocomplete="on" class="form-control form-control-sm"
                   type="password" aria-label=".form-control-sm example">
               </div>
             </div>
@@ -156,6 +147,7 @@
       </div>
     </div>
   </div>
+  {{-- end edit password --}}
 
   {{-- delete modal --}}
   <div class="modal fade" id="deleteuser" tabindex="-1" aria-labelledby="tambahuserLabel" aria-hidden="true">
@@ -180,3 +172,5 @@
     </div>
   </div>
   {{-- end delete modal --}}
+
+

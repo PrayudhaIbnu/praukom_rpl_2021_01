@@ -66,20 +66,9 @@ class TransaksiController extends Controller
         return view('components.cetakpdf.detailtransaksi', compact('id_faktur'));
     }
 
-    public function search(Request $request)
-    {
-        $get_name = $request->search;
-        $produk = Produk::where('id_produk', 'LIKE', '%' . $get_name . '%')->orWhere('nama_produk', 'LIKE', '%' . $get_name . '%')->get();
-        $kategori = DB::table('produk_kategori')
-            ->select()
-            ->get();
-        return view('kasir.daftarproduk', compact('produk', 'kategori'));
-    }
-
     public function addItem(Request $request)
     {
         $rowId = $request->input('produk');
-
         if ($request->input('produk') == null) {
             $rowId = $request->input('barcode');
         }
@@ -104,7 +93,7 @@ class TransaksiController extends Controller
         } else {
             if ($product->stok < $request->input('qty')) {
                 // session()->flash('error', 'Error:  Tidak dapat input stok (Melebihi Stok!)');
-                return redirect()->back()->with('warning', 'Tidak dapat input stok (Melebihi Stok!)');
+                return redirect()->back()->with('warning', 'Tidak dapat input stok (Stok Habis!)');
             } else {
                 if ($cekItemId->isNotEmpty()) {
                     if ($product->stok < $request->input('qty')) {

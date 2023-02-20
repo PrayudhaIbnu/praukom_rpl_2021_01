@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
+use App\Models\LogProduk;
 
 class LogAktivitasController extends Controller
 {
     // log aktivitas produk halaman role pengwas
-    public function logproduk()
+    public function logProduk()
     {
-        $logproduk = DB::table('log_produk')->select()->get();
+        $logproduk = LogProduk::select()->get();
         return view('Pengawas.logproduk', compact('logproduk'));
     }
 }

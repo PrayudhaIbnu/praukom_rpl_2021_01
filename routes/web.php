@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LaporanController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KelolaAkunController;
 use App\Http\Controllers\ProdukController;
@@ -10,7 +10,6 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LogAktivitasController;
-use RealRashid\SweetAlert\Facades\Alert;
 
 // DEFAULT ROUTES
 // Route::get('/', function () {
@@ -85,21 +84,24 @@ Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
 
 // ROUTES UNTUK ROLE KASIR
 Route::middleware(['auth', 'kasir'])->group(function () {
-    Route::controller(TransaksiController::class)->group(function () {
-        Route::prefix('/kasir')->group(function () {
-            Route::get('/dashboard', [DashboardController::class, 'dashboardKasir']);
+    Route::prefix('/kasir')->group(function () {
+        // dashboard kasir
+        Route::get('/dashboard', [DashboardController::class, 'dashboardKasir']);
+        // transaksi
+        Route::controller(TransaksiController::class)->group(function () {
             Route::get('/transaksi', 'index');
             Route::post('/tambah-cart', 'addItem')->name('tambah-cart');
             Route::post('/tambah-qty', 'increaseItem')->name('tambah-qty');
             Route::post('/kurang-qty', 'decreaseItem')->name('kurang-qty');
             Route::post('/remove-cart', 'removeItem')->name('hapus-cart');
             Route::post('/checkout', 'handleSubmit')->name('transaksi');
-            Route::get('/riwayat/transaksi', [RiwayatController::class, 'KasirRiwayatTransaksi']);
             Route::get('/detail/transaksi/{id}', 'DetailTransaksi');
-            Route::get('/produk', [ProdukController::class, 'KasirDaftarProduk']);
-            Route::get('/search', 'search')->name('search.kasir');
             Route::post('/getProduk', 'autocomplete')->name('autocomplete');
         });
+        // riwayat transaksi
+        Route::get('/riwayat/transaksi', [RiwayatController::class, 'KasirRiwayatTransaksi']);
+        // index daftar produk
+        Route::get('/produk', [ProdukController::class, 'KasirDaftarProduk']);
     });
 });
 // END ROUTES KASIR
@@ -114,7 +116,7 @@ Route::middleware(['auth', 'pengawas'])->group(function () {
         Route::get('/riwayat/barang-masuk', [RiwayatController::class, 'PengawasRiwayatBarangmasuk']);
         Route::get('/riwayat/penjualan', [RiwayatController::class, 'PengawasRiwayatTransaksi']);
         Route::get('/detail/penjualan/{id}', [TransaksiController::class, 'DetailTransaksi']);
-        Route::get('/logproduk', [LogAktivitasController::class, 'logproduk']);
+        Route::get('/logproduk', [LogAktivitasController::class, 'logProduk']);
     });
 });
 // END ROUTES PENGAWAS

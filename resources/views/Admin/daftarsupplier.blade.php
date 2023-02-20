@@ -43,7 +43,6 @@
               <thead class="table-warning">
                 <tr>
                   <th scope="col">No.</th>
-                  <th scope="col">Foto</th>
                   <th scope="col">Nama Supplier</th>
                   <th scope="col">Alamat Supplier</th>
                   <th scope="col">No. Telp</th>
@@ -54,10 +53,6 @@
                 @forelse ($data as $d)
                   <tr>
                     <td scope="row">{{ $loop->iteration }}</td>
-                    <td scope="row">
-                      <img id="foto_supplier" src="{{ asset('storage/post-images/' . $d->foto_supplier) }}"
-                        alt="" style="width: 100px">
-                    </td>
                     <td scope="row" id="s">{{ $d->nama_supplier }}</td>
                     <td scope="row">{{ $d->alamat_supplier }}</td>
                     <td scope="row">{{ $d->telp_supplier }}</td>

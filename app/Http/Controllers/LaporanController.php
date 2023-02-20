@@ -67,9 +67,6 @@ class LaporanController extends Controller
             WHERE tanggal BETWEEN '$tglAwal' AND DATE_SUB('$tglAwal', INTERVAL -7 DAY) ORDER BY tanggal DESC"
         ));
 
-        // $getTotal = DB::select(DB::raw(
-        //     "SELECT penjualan.tanggal, id_faktur, faktur.grand_total, qty, sum(qty) AS total_qty, qty*produk.harga_beli AS grand_bersih FROM ((detail_penjualan INNER JOIN penjualan ON detail_penjualan.penjualan = penjualan.id_penjualan) INNER JOIN faktur ON detail_penjualan.penjualan = faktur.penjualan) INNER JOIN produk ON produk.id_produk = detail_penjualan.produk WHERE penjualan.tanggal BETWEEN '$tglAwal' AND '$tglAkhir'"
-        // ));
         return view('components.cetakpdf.cetaklaporan-mingguan', compact('mingguan', 'tglAwal', 'tglAkhir'));
     }
 
@@ -78,8 +75,6 @@ class LaporanController extends Controller
     {
 
         $tglBulanan = $request->tglawal;
-        // $date = new DateTime($tglBulanan);
-        // $date->modify('+1 month');
         $tglBulanan2 = date('Y-m-d', strtotime("+1 month", strtotime($tglBulanan)));
 
         // Masih bingung tampilanny mau dibuat kek gmn hmm
