@@ -46,7 +46,6 @@
                     <img src="{{ asset('storage/post-images/' . $detailSupplier->foto_supplier) }}"
                     class="img-fluid img-thumbnail my-4" >
                     @endif
-
               </div>
               <div class="col text-center">
                 <a href="{{ url('/admin/supplier') }}">

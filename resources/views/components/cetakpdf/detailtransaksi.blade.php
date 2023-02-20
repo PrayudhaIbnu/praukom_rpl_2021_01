@@ -52,7 +52,7 @@
             font-weight: bold;
         }
     </style>
-    <div class="card my-3 mx-auto" style="width: 25rem;" >
+    <div class="card my-3 mx-auto border" style="width: 25rem;" >
         <div class="card-body mx-2" >
             {{-- <div class="container"> --}}
                 <div class="header" style="margin-bottom: 30px;">

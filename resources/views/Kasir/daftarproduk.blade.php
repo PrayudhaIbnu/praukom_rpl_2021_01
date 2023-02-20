@@ -18,7 +18,7 @@
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
-            <form action="{{ route('search.kasir') }}" method="get">
+            <form action="" method="get">
               @csrf
               <div class="input-group">
                 <input class="form-control" name="search" id="search-input" type="text" placeholder="Search" autocomplete="off">

@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect()->back()->with('warning', "Harap Logout Terlebih Dahulu!");
+                return back()->with('warning', "Harap Logout Terlebih Dahulu!");
             }
         }
 

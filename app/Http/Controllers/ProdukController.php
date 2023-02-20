@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\{Auth, Session};
+use Illuminate\Support\Facades\Session;
+use App\Models\ProdukKategori;
+use App\Models\Produk;
+use App\Models\Supplier;
+use App\Models\BarangKeluar;
+
 
 class ProdukController extends Controller
-
 {
     /**
      * Display a listing of the resource.
@@ -17,39 +20,12 @@ class ProdukController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //  menampilkan halaman daftar produk
-    public function index(Request $request)
-    {
-        $search = $request->search;
-        $kategori = DB::table('produk_kategori')->select()->get();
-        $produk = DB::table('produk')
-            ->select('*')
-            ->orderBy('nama_produk', 'ASC')
-            ->where('id_produk', 'LIKE', '%' . $search . '%')
-            ->orWhere('nama_produk', 'LIKE', '%' . $search . '%')
-            ->paginate(10);
-
-        return view('admin.daftarproduk', compact('produk', 'kategori'));
-    }
-
-    // untuk halaman daftar produk role kasir
-    public function KasirDaftarProduk()
-    {
-        $produk = DB::table('produk')->select('*')->paginate(10);
-        $kategori = DB::table('produk_kategori')
-            ->select()
-            ->get();
-        return view('kasir.daftarproduk', compact('produk', 'kategori'));
-    }
-
     // menampilkan halaman listkategori
     public function listkategori()
     {
-        $produk = DB::table('produk')->get();
-        $kategori = DB::table('produk_kategori')
-            ->select()
-            ->get();
-        return view('admin.listkategori', compact('produk', 'kategori'));
+        // $produk = DB::table('produk')->get();
+        $kategori = ProdukKategori::select()->get();
+        return view('admin.listkategori', compact('kategori'));
     }
 
     // tambah kategori
@@ -61,11 +37,11 @@ class ProdukController extends Controller
 
             ],
             [
-                'nama_kategori.required' => 'Kategori Wajib di Isi !',
+                'nama_kategori.required' => 'Kategori tidak boleh kosong!',
                 'nama_kategori.unique' => 'Kategori Sudah Tersedia !'
             ]
         );
-        DB::table('produk_kategori')->insert([
+        ProdukKategori::insert([
             'kategori_produk' => $request['nama_kategori']
         ]);
         return redirect()->back()->with('success', "Data berhasi di tambah");
@@ -74,7 +50,7 @@ class ProdukController extends Controller
     // edit kategori
     public function editkategori($id)
     {
-        $kategori = DB::table('produk_kategori')->where('id_kategori', $id)->first();
+        $kategori = ProdukKategori::where('id_kategori', $id)->first();
         return response()->json([
             'kategori' => $kategori,
         ]);
@@ -93,13 +69,39 @@ class ProdukController extends Controller
             ]
         );
         $id_kategori = $request->input('kategori_id');
-        DB::table('produk_kategori')->where('id_kategori', $id_kategori)->update([
+        ProdukKategori::where('id_kategori', $id_kategori)->update([
             'kategori_produk' => $request['kategori']
         ]);
 
         return redirect()->back()->with('success', "Data berhasi di Edit");
     }
 
+    //  menampilkan halaman daftar produk role admin
+    public function index(Request $request)
+    {
+        $search = $request->search;
+        $kategori = ProdukKategori::select()->get();
+        $produk = Produk::select()
+            ->orderBy('nama_produk', 'ASC')
+            ->where('id_produk', 'LIKE', '%' . $search . '%')
+            ->orWhere('nama_produk', 'LIKE', '%' . $search . '%')
+            ->paginate(10);
+
+        return view('admin.daftarproduk', compact('produk', 'kategori'));
+    }
+
+    // untuk halaman daftar produk role kasir
+    public function KasirDaftarProduk(Request $request)
+    {
+        $search = $request->search;
+        $kategori = ProdukKategori::select()->get();
+        $produk = Produk::select()
+            ->orderBy('nama_produk', 'ASC')
+            ->where('id_produk', 'LIKE', '%' . $search . '%')
+            ->orWhere('nama_produk', 'LIKE', '%' . $search . '%')
+            ->paginate(10);
+        return view('kasir.daftarproduk', compact('produk', 'kategori'));
+    }
     // tambah produk
     public function store(Request $request)
     {
@@ -107,9 +109,7 @@ class ProdukController extends Controller
             [
                 'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1000',
                 'kode_produk' => 'required|unique:produk,id_produk',
-                'kode_produk' => 'required',
                 'nama_produk' => 'required',
-                // 'satuan_produk' => 'required',
                 'harga_beli' => 'required|numeric|min:1',
                 'harga_jual' => 'required|numeric|min:1',
 
@@ -244,28 +244,16 @@ class ProdukController extends Controller
         return redirect()->back()->with('success', "Data Berhasil di Hapus");
     }
 
-    public function searchProduk(Request $request)
-    {
-        $search = $request->search;
-
-        $produk = DB::table('produk')
-            ->select(['produk.id_produk', 'produk.nama_produk', 'produk.foto', 'produk.stok', 'produk.satuan_produk', 'produk.harga_jual', 'produk.harga_beli'])
-            ->orderBy('nama_produk', 'ASC')
-            ->where('id_produk', 'LIKE', '%' . $search . '%')
-            ->where('nama_produk', 'LIKE', '%' . $search . '%')
-            ->orWhere('stok', 'LIKE', '%' . $search . '%')
-            ->paginate(10);
-        return view('Admin.daftarproduk', compact('produk'));
-    }
-
+    // index halaman input stok produk
     public function indexStok()
     {
-        $produk = DB::select('SELECT id_produk, nama_produk FROM produk');
-        $supplier = DB::select('SELECT id_supplier, nama_supplier FROM Supplier');
+        $produk = Produk::select('id_produk', 'nama_produk')->get();
+        $supplier = DB::table('supplier')->select('id_supplier', 'nama_supplier')->get();
 
         return view('Admin.inputstokproduk', compact('produk', 'supplier'));
     }
 
+    // tambah produk masuk
     public function produkMasuk(Request $request)
     {
         request()->validate(
@@ -298,19 +286,18 @@ class ProdukController extends Controller
     }
 
 
-    // untuk produk reject
-    // 1. tampilan halaman produk reject
+    // tampilan halaman produk reject
     public function indexprodukreject()
     {
         $produk = DB::table('produk')->select()->get();
-        $brg_keluar = DB::table('barang_keluar')
-            ->select(['produk.nama_produk', 'barang_keluar.qty', 'barang_keluar.tanggal_keluar', 'barang_keluar.keterangan'])
+        $brg_keluar = DB::table('barang_keluar')->select(['produk.nama_produk', 'barang_keluar.qty', 'barang_keluar.tanggal_keluar', 'barang_keluar.keterangan'])
             ->join('produk', 'barang_keluar.produk', '=', 'produk.id_produk')
             ->get();
 
         return view('admin.produkreject', compact('brg_keluar', 'produk'));
     }
-    // 2.function tambah procuk reject
+
+    //  tambah procuk reject
     public function storeprodukreject(Request $request)
     {
         request()->validate(

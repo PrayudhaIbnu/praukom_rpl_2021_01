@@ -47,30 +47,37 @@
               @csrf
               <div class="card" style="width: 100%; height: 165px;">
                 <div class="card-body">
-                  <div class="mb-3 row">
-                    <label for="staticEmail" id="produk" class="col-sm-3 col-form-label">Produk</label>
-                    <div class="col-sm-9 mb-2">
-                      <select class="form-control js-example-basic-multiple" id="produk" name="produk"
-                        aria-label="Default select example">
-                        <option disabled class="bg-light" selected>Pilih Produk...</option>
-                        @foreach ($produk as $p)
-                          <option value="{{ $p->id_produk }}">{{ $p->id_produk }} ||
-                            {{ $p->nama_produk }}
-                          </option>
-                        @endforeach
-                      </select>
+                  <div class="row">
+                    <div class="col-3 mt-2">
+                      <p class="font-weight-bold mt-2">Produk</p>
+                      <p class="font-weight-bold mt-3">Barcode</p>
+                      <p class="font-weight-bold mt-2">Qty</p>
                     </div>
-                    <label for="qty" class="col-sm-3 col-form-label">Qty</label>
-                    <div class="col-sm-9">
-                      <input type="number" class="form-control form-control-sm" id="qty" name="qty"
+                    <div class="col-7 mt-2">
+                      <div class="container">
+                        <select class="form-control js-example-basic-multiple" id="produk" name="produk"
+                          aria-label="Default select example">
+                          <option disabled class="bg-light" selected>Pilih Produk...</option>
+                          @foreach ($produk as $p)
+                            <option value="{{ $p->id_produk }}">{{ $p->nama_produk }} </option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="container mt-2">
+                        <input type="number" class="form-control form-control-sm" id="barcode" name="barcode"
+                        aria-label=".form-control-sm example" autofocus>
+                      </div>
+                      <div class="container mt-2">
+                        <input type="number" class="form-control form-control-sm" id="qty" name="qty"
                         value="1">
+                      </div>
+                    </div>
+                    <div class="col-2 mt-2">
+                      <div class="container ml-2" >
+                        <button type="submit" class="btn btn-primary btn-sm float-end tambah-cart">Simpan</button>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-9 -mt-lg-3 float-start">
-                    <input type="number" class="form-control form-control-sm" id="qty" name="produk"
-                      aria-label=".form-control-sm example" autofocus>
-                  </div>
-                  <button type="submit" class="btn btn-primary btn-sm float-end tambah-cart">Simpan</button>
                 </div>
               </div>
             </form>
@@ -85,9 +92,7 @@
                 <div class="container">
                   <h2 class="h3" style="font-weight: 500; color: #a2a2a2">Grand Total</h2>
                   <h1>Rp{{ number_format($summary['total'], 2, ',', '.') }}</h1>
-                  {{-- <p class="float-end" style="font-size: 45px; font-weight: 600;" id="grand_total"></p> --}}
                 </div>
-
               </div>
             </div>
             {{-- akhir card --}}
@@ -109,11 +114,11 @@
             <tbody>
               @forelse($carts as $index=>$cart)
                 <tr>
-                  <th scope="row">{{ $index + 1 }}</th>
+                  <td scope="row">{{ $index + 1 }}</td>
                   <td>{{ $cart['name'] }}</td>
                   <td>Rp {{ number_format($cart['pricesingle'], 2, ',', '.') }}</td>
-                  <td>{{ $cart['qty'] }}</td>
-                  {{-- <td><input type="number" value="1"></td> --}}
+                  {{-- <td > <input id="qty" name="qty" style="width: 50%;" type="number" value="{{ $cart['qty'] }}"></td> --}}
+                  <td >{{ $cart['qty'] }}</td>
                   <td>Rp {{ number_format($cart['price'], 2, ',', '.') }}</td>
                   <td style="display: flex">
                     <form action="{{ route('tambah-qty') }}" method="post">

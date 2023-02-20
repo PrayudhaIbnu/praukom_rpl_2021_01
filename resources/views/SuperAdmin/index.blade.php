@@ -5,6 +5,11 @@
     Kelola Akun
   @endsection
   {{-- end title --}}
+  @php
+  if (count($errors) > 0) {
+    alert()->error('Gagal', ($errors->all()));
+  }
+@endphp
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -41,14 +46,14 @@
       </div>
       {{-- End button modal --}}
       <div class="container-fluid">
-        @if (count($errors) > 0)
+        {{-- @if (count($errors) > 0)
           <div class=" alert alert-dismissible fade show alert-danger" role="alert" style="margin-top: 60px">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
             @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
           @endforeach
           </div>
-        @endif
+        @endif --}}
 
         {{-- TABEL --}}
         <div class="table-responsive-xl">
@@ -101,5 +106,11 @@
   </div>
   @include('SuperAdmin.modal')
   @include('sweetalert::alert')
+
+  {{-- @php
+      if (count($errors) > 0) {
+        alert()->error('warning','Gagal');
+      }
+  @endphp --}}
 </x-app-layout>
 @include('SuperAdmin.script')

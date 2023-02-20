@@ -47,6 +47,7 @@
                             is-invalid
                           @enderror
                           " placeholder="Password" style="border-radius:10px; " />
+                          {{-- <i class="fa-solid fa-eye"></i> --}}
                         @error('password')
                           <div class="invalid-feedback">
                             {{ $message }}

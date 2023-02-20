@@ -55,12 +55,12 @@
         <div class="container-fluid-6">
           @if (count($errors) > 0)
           <div class=" alert alert-dismissible fade show alert-danger" role="alert" style="margin-top: 60px">
-            <div class="alert alert-dismissible fade show alert-danger" role="alert">
+            {{-- <div class="alert alert-dismissible fade show alert-danger" role="alert"> --}}
               @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
               @endforeach
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-            </div>
+            {{-- </div> --}}
           </div>
          @endif
           <div class="table-responsive-xl">
@@ -200,7 +200,7 @@
     </div>
   </div>
 
-  <!-- Modal Edit User -->
+  <!-- Modal Edit Produk -->
   <div class="modal fade" id="editproduk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -224,7 +224,7 @@
             <div class="row align-items-center">
               <div class="col mb-3">
                 <label for="kode_produk" class="form-label font-weight-normal">Kode Produk (Barcode ID)</label>
-                <input required name="kode_produk" id="kode_produk" class="form-control form-control-sm"
+                <input readonly name="kode_produk" id="kode_produk" class="form-control form-control-sm"
                   type="number" aria-label=".form-control-sm example">
               </div>
               <div class="col mb-3">

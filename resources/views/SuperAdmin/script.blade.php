@@ -18,9 +18,9 @@
           console.log(response);
           $('#edituser').modal('show');
           $('#user_id').val(user_id);
-          $('#path_foto').val(response.user.foto);
+          // $('#img_update').val(response.user.foto);
           $('#foto').html(
-            `<img src="/storage/post-images/${response.user.foto}" width="100" class="img-fluid img-thumbnail" style="object-fit: cover;width:90px;height:90px;">`
+            `<img  src="/storage/post-images/${response.user.foto}" width="100" class="img-edit img-fluid img-thumbnail" style="object-fit: cover;width:90px;height:90px;">`
           );
           $('#nama').val(response.user.nama);
           $('#username').val(response.user.username);
@@ -55,4 +55,24 @@
       $('#delete_id').val(user_id);
     });
   });
+
+
+  // preview image tambah
+  function previewImgTambah() {
+    const image = document.querySelector('#img_tambah');
+    const imagePreview = document.querySelector('.img-tambah');
+
+    const blob = URL.createObjectURL(image.files[0]);
+    imagePreview.src = blob;
+    }
+  // preview image edit
+  function previewImgEdit() {
+    const image = document.querySelector('#img_edit');
+    const imagePreview = document.querySelector('.img-edit');
+
+    const blob = URL.createObjectURL(image.files[0]);
+    imagePreview.src = blob;
+    }
+ 
+
 </script>
