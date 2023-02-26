@@ -1,4 +1,3 @@
-
 {{-- <form action="{{ route('cetak-harian') }}" method="post">
   <input type="date" required class="form-control" id="date" name="tgl" />
   <div class="">
@@ -8,6 +7,8 @@
 
 <div class="row">
   <div class="col">
+    <h4 class="">Today, {{ date('j F Y') }}</h4>
+
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
@@ -35,11 +36,6 @@
           </div>
         </form>
       </div>
-    </div>
-  </div>
-  <div class="col-3">
-    <div class="float-end">
-      <h4 class="">Today, {{ date('j F Y') }}</h4>
     </div>
   </div>
 </div>

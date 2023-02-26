@@ -115,13 +115,13 @@ class ProdukController extends Controller
 
             ],
             [
-                'kode_produk.required' => 'Kade Produk Wajib di Isi !',
+                'kode_produk.required' => 'Kode Produk Wajib di Isi !',
                 'kode_produk.unique' => 'Kode Produk sudah pernah di isi!',
                 'nama_produk.required' => 'Nama Produk Wajib di Isi !',
                 'harga_beli.required' => 'Harga Beli Wajib di Isi !',
-                'harga_beli.numeric' => 'Tidak Boleh Kurang Dari 0 !',
-                'harga_jual.required' => 'Harga Beli Wajib di Isi !',
-                'harga_jual.numeric' => 'Tidak Boleh Kurang Dari 0 !'
+                'harga_beli.numeric' => 'Harga Beli Tidak Boleh Kurang Dari 0 !',
+                'harga_jual.required' => 'Harga Jual Wajib di Isi !',
+                'harga_jual.numeric' => 'Harga Jual Tidak Boleh Kurang Dari 0 !'
             ]
         );
 
@@ -197,7 +197,7 @@ class ProdukController extends Controller
             [
                 'kode_produk.required' => 'Kode Produk tidak boleh kosong!',
                 'kode_produk.unique' => 'Kode Produk sudah pernah di isi!',
-                'nama_produk.required' => 'Password tidak boleh kosong!'
+                'nama_produk.required' => 'Nama Produk tidak boleh kosong!'
             ]
         );
 
