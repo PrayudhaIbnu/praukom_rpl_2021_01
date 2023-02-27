@@ -206,15 +206,15 @@ class TransaksiController extends Controller
                 foreach ($filterCart as $cart) {
                     $product = Produk::find($cart['id']);
                     // dd($product->stok);
+                    // dd($cart['quantity']);
 
                     if ($product->stok === 0) {
                         return redirect()->back()->with('warning', 'Jumlah item kurang');
                     }
-                    $product->decrement('stok', $cart['quantity']);
                     if ($product->stok < $cart['quantity']) {
-                        # code...
                         return redirect()->back()->with('warning', $cart['name'] . ' Tidak dapat input stok (Melebihi Stok!)');
                     }
+                    $product->decrement('stok', $cart['quantity']);
 
                     $product->increment('terjual', $cart['quantity']);
                 }
@@ -274,6 +274,7 @@ class TransaksiController extends Controller
                 DB::commit();
             } catch (\Throwable $th) {
                 DB::rollback();
+                dd($th);
                 return redirect()->back()->with('error', $th);
             }
 

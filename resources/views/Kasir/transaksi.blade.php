@@ -65,18 +65,19 @@
                       </div>
                       <div class="container mt-2">
                         <input type="number" class="form-control form-control-sm" id="barcode" name="barcode"
-                        aria-label=".form-control-sm example" autofocus>
+                          aria-label=".form-control-sm example" autofocus>
                       </div>
                       <div class="container mt-2">
                         <input type="number" class="form-control form-control-sm" id="qty" name="qty"
-                        value="1">
+                          value="1">
                       </div>
                     </div>
                     <div class="col-2 mt-2">
-                      <div class="container ml-2" >
+                      <div class="container ml-2">
                         <button type="submit" class="btn btn-primary btn-sm float-end tambah-cart">Simpan</button>
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -118,7 +119,7 @@
                   <td>{{ $cart['name'] }}</td>
                   <td>Rp {{ number_format($cart['pricesingle'], 2, ',', '.') }}</td>
                   {{-- <td > <input id="qty" name="qty" style="width: 50%;" type="number" value="{{ $cart['qty'] }}"></td> --}}
-                  <td >{{ $cart['qty'] }}</td>
+                  <td>{{ $cart['qty'] }}</td>
                   <td>Rp {{ number_format($cart['price'], 2, ',', '.') }}</td>
                   <td style="display: flex">
                     <form action="{{ route('tambah-qty') }}" method="post">

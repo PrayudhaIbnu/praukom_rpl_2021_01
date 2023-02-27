@@ -1,4 +1,3 @@
-
 {{-- <form action="{{ route('cetak-harian') }}" method="post">
   <input type="date" required class="form-control" id="date" name="tgl" />
   <div class="">
@@ -39,10 +38,6 @@
       </div>
     </div>
   </div>
-  {{-- <div class="col-3">
-    <div class="float-end">
-    </div>
-  </div> --}}
 </div>
 <div class="table-responsive-xl mt-3">
   <table class="table mt-3 table-borderless " id="harian">

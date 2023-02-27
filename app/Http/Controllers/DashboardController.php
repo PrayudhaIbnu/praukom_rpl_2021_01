@@ -19,7 +19,15 @@ class DashboardController extends Controller
 
         $leastSell = DB::select("SELECT * FROM produk_terdikit_terlaris WHERE terjual > 0 ORDER BY terjual ASC LIMIT 5");
 
-        return view('Admin.index', compact('leastStock', 'expiredProduct', 'bestSell', 'leastSell'));
+        $totalProduk = DB::select("SELECT total FROM total_produk");
+        $totalStokProduk = DB::select("SELECT * FROM total_stokproduk");
+        $totalSupplier = DB::select("SELECT * FROM total_supplier");
+
+        // if ($totalStokProduk[0]->total = null) {
+        //     $totalStokProduk[0]->total
+        // }
+        // dd($totalStokProduk);
+        return view('Admin.index', compact('leastStock', 'expiredProduct', 'bestSell', 'leastSell', 'totalProduk', 'totalStokProduk', 'totalSupplier'));
     }
     // untuk dashboard pengawas
     public function dashboardPengawas()
