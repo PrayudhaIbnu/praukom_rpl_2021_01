@@ -12,19 +12,26 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($brg_masuk as $item)
+        {{-- ($collection as $item) --}}
+            
+
+        @forelse  ($brg_masuk as $key => $item)
         <tr>
-          <td>{{ $loop->iteration }}</td>
+          <td>{{ $brg_masuk->firstItem()+$key }}</td>
           <td>{{ $item->nama_produk }}</td>
           <td>{{ $item->qty }}</td>
-          <td>{{ $item->tanggal_masuk }}</td>
+          <td id="s">{{ $item->tanggal_masuk }}</td>
           <td>{{ $item->tanggal_exp }}</td>
           <td>{{ $item->nama_supplier }}</td>
         </tr>
-        @endforeach
+        @empty
+        <td colspan="6">
+          <h6 class="text-center mt-3 opacity-50">Tidak ada data.</h6>
+        </td>
+        @endforelse
       </tbody>       
     </table>
     <div>
-      {{ $brg_masuk->withQueryString()->links() }}
+      {{ $brg_masuk->links() }}
     </div>
   </div> 

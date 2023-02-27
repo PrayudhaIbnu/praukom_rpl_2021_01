@@ -24,6 +24,7 @@ class KelolaAkunController extends Controller
             ->where('nama', 'LIKE', '%' . $search . '%')
             ->orWhere('nama_level', 'LIKE', '%' . $search . '%')
             ->orWhere('username', 'LIKE', '%' . $search . '%')
+            ->latest()
             ->paginate(10);
         return view('SuperAdmin.index', compact('user', 'level_user', 'usr'));
     }
@@ -34,20 +35,24 @@ class KelolaAkunController extends Controller
 
         request()->validate(
             [
-                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:500',
-                'nama' => 'required|regex:/^[\pL\s\-]+$/u|max:60',
-                'username' => 'required|alpha_num:ascii|lowercase|max:20|unique:user,username',
+                'foto' => 'image|mimes:jpg,png,jpeg|max:500',
+                'nama' => 'required|regex:/^[\pL\s\-]+$/u|max:60|min:5',
+                'username' => 'required|alpha_num:ascii|lowercase|max:20|min:5|unique:user,username',
                 'password' => ['required', Password::min(8)]
             ],
             [
+                'foto.mimes' => 'Format harus jpg/png/jpeg.',
+                'foto.max' => 'Ukuran Foto maksimal 500kb.',
                 'nama.required' => 'Nama tidak boleh kosong!',
                 'nama.regex' => 'Nama hanya dapat mengandung huruf.',
                 'nama.max' => 'Nama tidak dapat melebihi 60 huruf.',
+                'nama.min' => 'Nama minimal 5 huruf.',
                 'username.required' => 'Username tidak boleh kosong!',
                 'username.unique' => 'Username sudah tersedia.',
                 'username.alpha_num' => 'Username hanya dapat mengandung huruf dan angka tanpa spasi.',
                 'username.lowercase' => 'Username harus menggunakan huruf kecil!.',
                 'username.max' => 'Username maksimal 20 karakter.',
+                'username.min' => 'Username minimal 5 karakter.',
                 'password.required' => 'Password tidak boleh kosong!',
                 'password.min' => 'Password minimal 8 karakter',
             ]
@@ -88,14 +93,17 @@ class KelolaAkunController extends Controller
     {
         request()->validate(
             [
-                'foto' => 'image|mimes:jpg,png,jpeg,gif,svg|max:500',
+                'foto_e' => 'image|mimes:jpg,png,jpeg|max:500',
                 'nama_e' => 'required|regex:/^[\pL\s\-]+$/u|max:60|min:5',
                 'username_e' => 'required|alpha_num:ascii|lowercase|max:20|min:5'
             ],
             [
-
+                'foto_e.mimes' => 'Format harus jpg/png/jpeg.',
+                'foto_e.max' => 'Ukuran Foto maksimal 500kb.',
                 'nama_e.required' => 'nama tidak boleh kosong!',
-                'nama_e.required' => 'nama tidak boleh kosong!',
+                'nama_e.regex' => 'Nama hanya dapat mengandung huruf.',
+                'nama_e.max' => 'Nama tidak dapat melebihi 60 huruf.',
+                'nama_e.min' => 'Nama minimal 5 huruf.',
                 'username_e.required' => 'Username tidak boleh kosong!',
                 'username_e.alpha_num' => 'Username hanya dapat mengandung huruf dan angka tanpa spasi.',
                 'username_e.lowercase' => 'Username harus menggunakan huruf kecil!.',
@@ -122,23 +130,20 @@ class KelolaAkunController extends Controller
             );
         }
         $usr->level = $request->input('id_level');
-        if ($request->hasFile('foto')) {
+        if ($request->hasFile('foto_e')) {
             $destination = 'storage/post-images/' . $usr->foto;
             if (file::exists($destination)) {
                 file::delete($destination);
             }
-            $file = $request->file('foto');
+            $file = $request->file('foto_e');
             $extention = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extention;
             $file->move('storage/post-images/', $filename);
             $usr->foto = $filename;
         }
+        $usr->update();
 
-        if ($usr->update()) {
-            return back()->with('success', "Data Berhasil di Edit");
-        } else {
-            return back()->alert()->error('warning', "Data Berhasil di Edit");
-        }
+        return back()->with('success', "Data Berhasil di Edit");
 
         // ->withErrors('warning', "Data Gagal di Edit");
     }
@@ -147,17 +152,17 @@ class KelolaAkunController extends Controller
     {
         request()->validate(
             [
-                'password' => 'required|min:8'
+                'password_e' => 'required|min:8'
             ],
             [
-                'password.required' => 'Password tidak boleh kosong!',
-                'password.min' => 'Password minimal 8 karakter!',
+                'password_e.required' => 'Password tidak boleh kosong!',
+                'password_e.min' => 'Password minimal 8 karakter!',
             ]
         );
 
         $user_id = $request->input('user_id');
         $user = User::find($user_id);
-        $user->password = Hash::make($request->input('password'));
+        $user->password = Hash::make($request->input('password_e'));
         $user->update();
         return redirect()->back()->with('success', "Password Berhasil di Edit");
     }

@@ -18,7 +18,7 @@
         <i class="fas fa-user"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        <span class="dropdown-item dropdown-header">
+        <span class="dropdown dropdown-header">
           @if (Session::get('levelbaru')->foto == null)
             <img src="/img/user.jpg" style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
           @else
@@ -29,12 +29,14 @@
           <i class="font-level">Kasir</i>
         </span>
 
-        <div class="dropdown-divider"></div>
         <form action="{{ url('logout') }}" method="post">
           @csrf
-          <button type="submit" class="dropdown-item logout">
+          <button type="submit" class="dropdown-item logout" style="border-bottom-right-radius: 0.55rem !important;
+          border-bottom-left-radius: 0.55rem !important;">
+          <div class="float-left">
             <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
             <span class="text-sm ">Logout</span>
+          </div>
           </button>
         </form>
       </div>

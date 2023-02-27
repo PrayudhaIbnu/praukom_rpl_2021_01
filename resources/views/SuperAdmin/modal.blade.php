@@ -70,7 +70,7 @@
             <div class="row align-items-start">
               <div class="col mb-2">
                 <label for="img_edit" class="form-label font-weight-normal">Foto User</label>
-                <input id="img_edit" name="foto" class="image form-control form-control-sm" type="file" accept="image/*" onchange="previewImgEdit()">
+                <input id="img_edit" name="foto_e" class="image form-control form-control-sm" type="file" accept="image/*" onchange="previewImgEdit()">
               </div>
               {{-- untuk img preview lewat js  --}}
               <div class="mb-2" id="foto"> </div>
@@ -134,7 +134,7 @@
             <div class="row align-items-start">
               <div class="col">
                 <label for="password" class="form-label font-weight-normal">Password Baru</label>
-                <input placeholder="minimal 8 karakter" required name="password" autocomplete="on" class="form-control form-control-sm"
+                <input placeholder="minimal 8 karakter"  name="password_e" autocomplete="on" class="form-control form-control-sm"
                   type="password" aria-label=".form-control-sm example">
               </div>
             </div>

@@ -35,23 +35,28 @@ class RiwayatController extends Controller
     }
 
     // untuk  halaman history barang masuk role pengawas
-    public function PengawasRiwayatBarangmasuk()
+    public function PengawasRiwayatBarangmasuk(Request $request)
     {
         $produk = Produk::select()->get();
         $supplier = Supplier::select()->get();
         $brg_masuk = BarangMasuk::select(['produk.nama_produk', 'barang_masuk.tanggal_masuk', 'barang_masuk.tanggal_exp', 'barang_masuk.qty', 'supplier.nama_supplier'])
             ->join('produk', 'barang_masuk.produk', '=', 'produk.id_produk')
             ->join('supplier', 'barang_masuk.supplier', '=', 'supplier.id_supplier')
+            ->where('nama_produk', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('tanggal_masuk', 'LIKE', '%' . $request->search . '%')
             ->paginate('10');
         return view('Pengawas.historybarangmasuk', compact('brg_masuk', 'supplier', 'produk'));
     }
 
     //untuk  halaman history barang keluar role pengawas
-    public function PengawasRiwayatBarangkeluar()
+    public function PengawasRiwayatBarangkeluar(Request $request)
     {
+        $search = $request->search;
         $produk = Produk::select()->get();
         $brg_keluar = BarangKeluar::select(['produk.nama_produk', 'barang_keluar.qty', 'barang_keluar.tanggal_keluar', 'barang_keluar.keterangan'])
             ->join('produk', 'barang_keluar.produk', '=', 'produk.id_produk')
+            ->where('nama_produk', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('tanggal_keluar', 'LIKE', '%' . $request->search . '%')
             ->paginate('10');
         return view('pengawas.historybarangkeluar', compact('brg_keluar', 'produk'));
     }
@@ -62,7 +67,10 @@ class RiwayatController extends Controller
         $tglHarian = date('Y-m-d');
         $riwayat = RiwayatTransaksi::select()
             ->where('tanggal', $tglHarian)
-            ->paginate(15);
+            ->where('id_faktur', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('tanggal', 'LIKE', '%' . $request->search . '%')
+            ->latest()
+            ->paginate(10);
         return view('Pengawas.riwayattransaksi', compact('riwayat'));
     }
 
