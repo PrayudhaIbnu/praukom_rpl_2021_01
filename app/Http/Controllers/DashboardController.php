@@ -23,10 +23,6 @@ class DashboardController extends Controller
         $totalStokProduk = DB::select("SELECT * FROM total_stokproduk");
         $totalSupplier = DB::select("SELECT * FROM total_supplier");
 
-        // if ($totalStokProduk[0]->total = null) {
-        //     $totalStokProduk[0]->total
-        // }
-        // dd($totalStokProduk);
         return view('Admin.index', compact('leastStock', 'expiredProduct', 'bestSell', 'leastSell', 'totalProduk', 'totalStokProduk', 'totalSupplier'));
     }
     // untuk dashboard pengawas
