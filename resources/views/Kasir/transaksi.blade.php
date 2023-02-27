@@ -23,8 +23,7 @@
                 <div class="mb-3 row">
                   <label for="staticEmail" class="col-sm-5 col-form-label">Jam</label>
                   <div class="col-sm-7">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                      value="{{ date('H:i') }}">
+                    <h6 class="form-control-plaintext" id="jam"></h6>
                   </div>
                   <label for="staticEmail" class="col-sm-5 col-form-label">Tanggal</label>
                   <div class="col-sm-7">
@@ -205,4 +204,23 @@
       }]);
     });
   });
+
+  window.onload = function() { jam(); }
+   
+   function jam() {
+    var e = document.getElementById('jam'),
+    d = new Date(), h, m, s;
+    h = d.getHours();
+    m = set(d.getMinutes());
+    s = set(d.getSeconds());
+  
+    e.innerHTML = h +':'+ m +':'+ s;
+  
+    setTimeout('jam()', 1000);
+   }
+  
+   function set(e) {
+    e = e < 10 ? '0'+ e : e;
+    return e;
+   }
 </script>
