@@ -16,9 +16,7 @@ return new class extends Migration
     {
         DB::unprepared(
             "CREATE OR REPLACE VIEW detail_transaksi AS (
-              SELECT faktur.id_faktur, 
-              user.nama, 
-              penjualan.tanggal, penjualan.jam_jual, produk.nama_produk, detail_penjualan.qty, produk.harga_jual, detail_penjualan.sub_total_hrg, faktur.grand_total, faktur.jml_tunai, faktur.jml_kembalian 
+              SELECT faktur.id_faktur, user.nama, penjualan.tanggal, penjualan.jam_jual, produk.nama_produk, detail_penjualan.qty, produk.harga_jual, detail_penjualan.sub_total_hrg, faktur.grand_total, faktur.jml_tunai, faktur.jml_kembalian 
                 FROM faktur
                 INNER JOIN penjualan ON faktur.penjualan = penjualan.id_penjualan
                 INNER JOIN detail_penjualan ON penjualan.id_penjualan = detail_penjualan.penjualan

@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-6">
-            <h1 class="m-0">Riwayat Penjualan</h1>
+            <h1 class="m-0">Riwayat Transaksi</h1>
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
@@ -22,9 +22,14 @@
             </div>
           </div>
         </div>
+        
+        <div class="container mt-2">
+          <p><i>*Menampilkan riwayat transaksi pada hari ini,<b> {{ date('j F Y') }}</b></i></p>
+        </div>
+
         <div class="container-fluid-6">
           <div class="table-responsive-xl">
-            <table class="table mt-4 table-borderless ">
+            <table class="table  table-borderless ">
               <thead class="table-warning">
                 <tr>
                   <th scope="col">Id Penjualan</th>
@@ -51,6 +56,9 @@
             </table>
           </div>
         </div>
+      </div>
+      <div>
+        {{ $riwayat->withQueryString()->links() }}
       </div>
     </div>
   </div>

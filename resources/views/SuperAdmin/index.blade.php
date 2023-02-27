@@ -9,7 +9,7 @@
   if (count($errors) > 0) {
     alert()->error('Gagal', ($errors->all()));
   }
-@endphp
+  @endphp
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -69,9 +69,9 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($user as $item)
+              @foreach ($user as $key => $item)
                 <tr>
-                  <td> {{ $loop->iteration }}</td>
+                  <td> {{ $user->firstItem()+$key }}</td>
                   <td>
                     @if ($item->foto)
                       <img style="object-fit: cover;width:90px;height:90px;" class="img img-circle" id="gambar" src="{{ asset('storage/post-images/' . $item->foto) }}"
@@ -100,8 +100,9 @@
 
       </div>
       <div>
-        {{ $user->withQueryString()->links() }}
+        {{ $user->links() }}
       </div>
+
     </div>
   </div>
   @include('SuperAdmin.modal')

@@ -8,6 +8,8 @@
 
 <div class="row">
   <div class="col">
+    <h4 class="">Today, {{ date('j F Y') }}</h4>
+
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
@@ -37,11 +39,10 @@
       </div>
     </div>
   </div>
-  <div class="col-3">
+  {{-- <div class="col-3">
     <div class="float-end">
-      <h4 class="">Today, {{ date('j F Y') }}</h4>
     </div>
-  </div>
+  </div> --}}
 </div>
 <div class="table-responsive-xl mt-3">
   <table class="table mt-3 table-borderless " id="harian">
