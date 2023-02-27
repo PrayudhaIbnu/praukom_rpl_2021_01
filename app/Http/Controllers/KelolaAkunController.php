@@ -141,7 +141,7 @@ class KelolaAkunController extends Controller
             $file->move('storage/post-images/', $filename);
             $usr->foto = $filename;
         }
-        $user->update();
+        $usr->update();
 
         return back()->with('success', "Data Berhasil di Edit");
 

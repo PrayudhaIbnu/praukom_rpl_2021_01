@@ -75,3 +75,26 @@
     </div>
   </section>
 </x-app-layout>
+
+<script>
+  let password = document.querySelector('.password #password');
+   let visibility = document.querySelector('.password .visibility');
+
+  let is_show=true;
+  visibility.addEventListener('click', function() {
+      // alert('s');
+      if(is_show) {
+        // alert('first');
+        // is_show=false;
+        password.setAttribute('type','text');
+        visibility.innerHTML='visibility';
+      } else{
+        // alert('second');
+        // is_show=true;
+        password.setAttribute('type','password');
+        visibility.innerHTML='visibility_off';
+
+      }
+      is_show=!is_show;
+  });
+</script>

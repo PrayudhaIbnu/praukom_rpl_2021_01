@@ -18,7 +18,6 @@
           console.log(response);
           $('#edituser').modal('show');
           $('#user_id').val(user_id);
-          // $('#img_update').val(response.user.foto);
           $('#foto').html(
             `<img  src="/storage/post-images/${response.user.foto}" width="100" class="img-edit img-fluid img-thumbnail" style="object-fit: cover;width:90px;height:90px;">`
           );

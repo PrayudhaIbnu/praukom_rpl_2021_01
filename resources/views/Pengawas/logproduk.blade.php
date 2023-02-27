@@ -12,14 +12,17 @@
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
-              <div class="input-group">
-                <input class="form-control" name="search" id="search-input" type="text" placeholder="Search" autocomplete="off">
-                <div class="input-group-append">
-                  <button class="btn btn-warning" type="submit">
-                    <i class="fas fa-search fa-fw"></i>
-                  </button>
-                </div>
-              </div>
+              <form action="" method="GET">
+                <div class="input-group">
+                  <input class="form-control" name="search" id="search-input" type="text" placeholder="Search"
+                    autocomplete="off">
+                  <div class="input-group-append">
+                    <button class="btn btn-warning" type="submit">
+                      <i class="fas fa-search fa-fw"></i>
+                    </button>
+                  </div>
+                </div>   
+              </form>
             </div>
           </div>
           <div class="container-fluid-6">
@@ -29,7 +32,7 @@
                   <tr>
                     <th scope="col">No</th>
                     <th scope="col">Tanggal</th>
-                    <th scope="col">Username</th>
+                    <th scope="col">Nama Admin</th>
                     <th scope="col">Aktifitas</th>
                     <th scope="col">Nama Produk</th>
                     <th scope="col">Jumlah</th>
