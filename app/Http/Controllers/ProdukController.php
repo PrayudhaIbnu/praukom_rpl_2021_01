@@ -316,7 +316,13 @@ class ProdukController extends Controller
         );
 
         $nama_produk = $request->input('produk');
+        $produk = Produk::select('stok')
+            ->where('id_produk', $nama_produk)
+            ->get();
         $jml_keluar = $request->input('jml_keluar');
+        if ($jml_keluar > $produk[0]->stok) {
+            return redirect()->back()->with('warning', "Jumlah Keluar Melebihi Stok");
+        }
         $tgl_keluar = $request->input('tgl_keluar');
         $keterangan = $request->input('keterangan');
         $user = Session::get('levelbaru')->id;

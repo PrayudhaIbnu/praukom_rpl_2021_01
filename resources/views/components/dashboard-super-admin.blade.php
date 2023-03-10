@@ -32,7 +32,6 @@
           <i class="font-level">Super Admin</i>
         </span>
 
-
         <form action="{{ url('logout') }}" method="post" >
           @csrf
           <button  type="submit" class=" dropdown-item logout " style="border-bottom-right-radius: 0.55rem !important;
@@ -53,7 +52,7 @@
   </ul>
 </nav>
 <aside class="main-sidebar sidebar-light-primary sidebar-no-expand">
-  <a href="" class="brand-link">
+  <a href="/superadmin/kelolaakun" class="brand-link">
     <img src="/img/logoblud.png" alt="BLUD Logo" class="brand-image">
     <span class="brand-text font-weight-bold text-yellow">One</span><span
       class="brand-text font-weight-bold text-orange">Mart</span>
@@ -62,8 +61,8 @@
   <div class="sidebar">
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item">
-          <a href="/superadmin/kelolaakun" class="nav-link">
+        <li class="nav-item ">
+          <a href="/superadmin/kelolaakun" class="nav-link {{ Request::path() === 'superadmin/kelolaakun' ? 'bg-secondary' : '' }} " >
             <i class="nav-icon fas fa-user-cog"></i>
             <p>
               Kelola Akun

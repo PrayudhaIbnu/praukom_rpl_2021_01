@@ -1,5 +1,12 @@
 <!-- Section: Design Block -->
 <x-app-layout>
+  <style>
+    #eye {
+      position: absolute;
+      transform: translateY(-32px);
+      right: 15%;
+    }
+  </style>
   {{-- tilte --}}
   @section('title')
       Login
@@ -41,13 +48,13 @@
                     </div>
                     
                     <div class="form-outline mb-4">
-                      <input type="password" id="form2Example27" name="password"
+                      <input type="password" id="password" name="password"
                         class="form-control form-control-lg border-warning form-control-sm
                           @error('password')
                             is-invalid
                           @enderror
                           " placeholder="Password" style="border-radius:10px; " />
-                          {{-- <i class="fa-solid fa-eye"></i> --}}
+                            <i class="fa-regular fa-eye-slash" id="eye" onclick="toggle()"></i>
                         @error('password')
                           <div class="invalid-feedback">
                             {{ $message }}
@@ -77,24 +84,17 @@
 </x-app-layout>
 
 <script>
-  let password = document.querySelector('.password #password');
-   let visibility = document.querySelector('.password .visibility');
-
-  let is_show=true;
-  visibility.addEventListener('click', function() {
-      // alert('s');
-      if(is_show) {
-        // alert('first');
-        // is_show=false;
-        password.setAttribute('type','text');
-        visibility.innerHTML='visibility';
-      } else{
-        // alert('second');
-        // is_show=true;
-        password.setAttribute('type','password');
-        visibility.innerHTML='visibility_off';
-
-      }
-      is_show=!is_show;
-  });
+  let state = false;
+  function toggle(){
+    if (state) {
+      document.getElementById("password").setAttribute("type","password");
+      document.getElementById("eye").className = "fa-regular fa-eye-slash";
+      state = false;
+        
+    } else {
+      document.getElementById("password").setAttribute("type","text");
+      document.getElementById("eye").className = "fa-regular fa-eye";
+      state = true;
+    }
+  }
 </script>

@@ -52,6 +52,9 @@
             font-weight: bold;
         }
     </style>
+     @section('title')
+     Struk
+     @endsection
     <div class="card my-3 mx-auto border" style="width: 25rem;" >
         <div class="card-body mx-2" >
             {{-- <div class="container"> --}}
@@ -71,9 +74,9 @@
                     </div>
                     <div class="col text-right">
                         <ul>
-                            <li> {{ $id_faktur[0]->id_faktur }} </li>
-                            <li> {{ $id_faktur[0]->nama}} </li>
-                            <li> {{ $id_faktur[0]->tanggal}}/{{ $id_faktur[0]->jam_jual}} </li>
+                            <li> {{ $id_struk[0]->id_struk }} </li>
+                            <li> {{ $id_struk[0]->nama}} </li>
+                            <li> {{ $id_struk[0]->tanggal}}/{{ $id_struk[0]->jam_jual}} </li>
                         </ul>
                     </div>
                 </div>
@@ -87,7 +90,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($id_faktur as $item)
+                        @foreach ($id_struk as $item)
                         <tr>
                             <td class="text-left p-0">{{ $item->qty }}x {{ $item->nama_produk }}</td>
                             <td  class="text-center p-0">{{ number_format($item->harga_jual) }}</td>
@@ -110,9 +113,9 @@
                     </div>
                     <div class="col" style="text-align: right;">
                         <ul>
-                            <li>Rp  {{ number_format($id_faktur[0]->grand_total) }} </li>
-                            <li>Rp {{ number_format($id_faktur[0]->jml_tunai) }} </li>
-                            <li>Rp {{ number_format($id_faktur[0]->jml_kembalian) }} </li>
+                            <li>Rp  {{ number_format($id_struk[0]->grand_total) }} </li>
+                            <li>Rp {{ number_format($id_struk[0]->jml_tunai) }} </li>
+                            <li>Rp {{ number_format($id_struk[0]->jml_kembalian) }} </li>
                         </ul>
                     </div>
                 </div>

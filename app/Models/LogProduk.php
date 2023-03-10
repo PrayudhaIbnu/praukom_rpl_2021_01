@@ -13,7 +13,7 @@ class LogProduk extends Model
         'id',
         'tanggal',
         'nama_user',
-        'aktifitas',
+        'aktivitas',
         'nama_produk',
         'jumlah'
     ];

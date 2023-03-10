@@ -1,3 +1,16 @@
+{{-- style css vibilisty password --}}
+<style>
+  #eye-tambah {
+    position: absolute;
+    transform: translateY(-25px);
+    right: 10%;
+  }
+  #eye-edit {
+    position: absolute;
+    transform: translateY(-25px);
+    right: 5%;
+  }
+</style>
   <!-- Modal Tambah User -->
   <div class="modal fade" id="tambahuser" tabindex="-1" aria-labelledby="tambahuserLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -39,8 +52,9 @@
               </div>
               <div class="col mb-2">
                 <label for="password" class="form-label font-weight-normal">Password</label>
-                <input placeholder="Minimal 8 karakter" name="password" class="form-control form-control-sm @error('password') is-invalid @enderror"
+                <input id="password" placeholder="Minimal 8 karakter" name="password" class="form-control form-control-sm @error('password') is-invalid @enderror"
                   type="password" autocomplete="on" aria-label=".form-control-sm example">
+                  <i class="fa-regular fa-eye-slash" id="eye-tambah" onclick="toggleTambah()"></i>
               </div>
             </div>
           </div>
@@ -133,9 +147,10 @@
           <div class="modal-body">
             <div class="row align-items-start">
               <div class="col">
-                <label for="password" class="form-label font-weight-normal">Password Baru</label>
+                <label for="password_e" class="form-label font-weight-normal">Password Baru</label>
                 <input placeholder="minimal 8 karakter"  name="password_e" autocomplete="on" class="form-control form-control-sm"
-                  type="password" aria-label=".form-control-sm example">
+                  type="password" aria-label=".form-control-sm example" id="password_e">
+                  <i class="fa-regular fa-eye-slash" id="eye-edit" onclick="toggleEdit()"></i>
               </div>
             </div>
           </div>

@@ -1,3 +1,4 @@
+
 <nav class="main-header navbar navbar-expand navbar-dark ">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
@@ -30,15 +31,15 @@
           <i class="font-level">Pengawas</i>
         </span>
 
-        <form action="{{ url('logout') }}" method="post">
+        <form action="{{ url('logout') }}" method="post" >
           @csrf
-          <button type="submit" class="dropdown-item logout" style="border-bottom-right-radius: 0.55rem !important;
+          <button  type="submit" class=" dropdown-item logout " style="border-bottom-right-radius: 0.55rem !important;
           border-bottom-left-radius: 0.55rem !important;">
-          <div class="float-left">
+            <div class="float-left">
             <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
             <span class="text-sm ">Logout</span>
+          </div>
           </button>
-        </div>
         </form>
       </div>
     </li>
@@ -49,8 +50,9 @@
     </li>
   </ul>
 </nav>
+
 <aside class="main-sidebar sidebar-light-primary sidebar-no-expand">
-  <a href="" class="brand-link">
+  <a href="/pengawas/dashboard" class="brand-link">
     <img src="/img/logoblud.png" alt="BLUD Logo" class="brand-image">
     <span class="brand-text font-weight-bold text-yellow">One</span><span
       class="brand-text font-weight-bold text-orange">Mart</span>
@@ -61,15 +63,15 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="/pengawas/dashboard" class="nav-link">
+          <a href="/pengawas/dashboard" class="nav-link {{ Request::path() === 'pengawas/dashboard' ? 'bg-secondary' : '' }}" >
             <i class="nav-icon fa-solid fa-chart-pie"></i>
             <p>
               Dashboard
-            </p>
+            </p >
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{ url('pengawas/laporan') }}" class="nav-link">
+        <li class="nav-item" >
+          <a href="{{ url('pengawas/laporan') }}" class="nav-link {{ Request::path() === 'pengawas/laporan' ? 'bg-secondary' : '' }}">
             <i class="nav-icon fas fa-file-alt"></i>
             <p>
               Laporan
@@ -86,19 +88,19 @@
           </a>
           <ul class="nav nav-treeview pl-4">
             <li class="nav-item">
-              <a href="/pengawas/riwayat/barang-masuk" class="nav-link">
+              <a href="/pengawas/riwayat/barang-masuk" class="nav-link {{ Request::path() === 'pengawas/riwayat/barang-masuk' ? 'bg-secondary' : '' }}">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 <p>Barang Masuk</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/pengawas/riwayat/barang-keluar" class="nav-link">
+              <a href="/pengawas/riwayat/barang-keluar" class="nav-link {{ Request::path() === 'pengawas/riwayat/barang-keluar' ? 'bg-secondary' : '' }}">
                 <i class="fa-regular fa-circle-xmark"></i>
                 <p> Barang Keluar</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/pengawas/riwayat/penjualan" class="nav-link">
+              <a href="/pengawas/riwayat/transaksi" class="nav-link {{ Request::path() === 'pengawas/riwayat/transaksi' ? 'bg-secondary' : '' }}">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <p> Transaksi</p>
               </a>
@@ -106,7 +108,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="/pengawas/logproduk" class="nav-link">
+          <a href="/pengawas/logproduk" class="nav-link {{ Request::path() === 'pengawas/logproduk' ? 'bg-secondary' : '' }}">
             <i class="nav-icon fas fa-history"></i>
             <p>
               Log Produk

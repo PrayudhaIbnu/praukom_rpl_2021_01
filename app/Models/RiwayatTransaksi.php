@@ -10,7 +10,7 @@ class RiwayatTransaksi extends Model
     use HasFactory;
     protected $table = "riwayat_transaksi";
     protected $fillable = [
-        'id_faktur',
+        'id_struk',
         'tanggal',
         'jam_jual',
         'nama'

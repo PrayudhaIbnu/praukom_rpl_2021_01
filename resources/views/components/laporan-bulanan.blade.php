@@ -38,7 +38,7 @@
       <tr>
         <th scope="col">No</th>
         <th scope="col">Tanggal</th>
-        <th scope="col">Kode Faktur</th>
+        <th scope="col">Kode struk</th>
         <th scope="col">Nama Produk</th>
         <th scope="col">Qty</th>
         <th scope="col">Hartga Jual</th>
@@ -50,7 +50,7 @@
         <tr>
           <th scope="row">{{ $loop->iteration }}</th>
           <td>{{ $b->tanggal }}</td>
-          <td>{{ $b->id_faktur }}</td>
+          <td>{{ $b->id_struk }}</td>
           <td>{{ $b->nama_produk }}</td>
           <td>{{ $b->qty }}</td>
           <td>{{ $b->sub_total_hrg }}</td>

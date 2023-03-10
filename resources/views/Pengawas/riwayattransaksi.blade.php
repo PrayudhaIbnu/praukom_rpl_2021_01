@@ -46,13 +46,13 @@
               <tbody>
                 @forelse ($riwayat as $key => $item)
                 <tr>
-                  <td {{ $riwyat->firstItem()+$key }}</td>
-                  <td id="s">{{ $item->id_faktur }}</td>
+                  <td >{{ $riwayat->firstItem()+$key }}</td>
+                  <td id="s">{{ $item->id_struk }}</td>
                   <td>{{ $item->tanggal }}</td>
                   <td>{{ $item->jam_jual }}</td>
                   <td>{{ $item->nama }}</td>
                   <td>
-                    <a href="/pengawas/detail/penjualan/{{ $item->id_faktur }}">
+                    <a href="/pengawas/detail/transaksi/{{ $item->id_struk }}">
                       <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
                     </a> 
                 </tr>

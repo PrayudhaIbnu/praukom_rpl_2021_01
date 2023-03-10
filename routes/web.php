@@ -114,8 +114,8 @@ Route::middleware(['auth', 'pengawas'])->group(function () {
         Route::get('/laporan', [LaporanController::class, 'LaporanPengawas']);
         Route::get('/riwayat/barang-keluar', [RiwayatController::class, 'PengawasRiwayatBarangkeluar']);
         Route::get('/riwayat/barang-masuk', [RiwayatController::class, 'PengawasRiwayatBarangmasuk']);
-        Route::get('/riwayat/penjualan', [RiwayatController::class, 'PengawasRiwayatTransaksi']);
-        Route::get('/detail/penjualan/{id}', [TransaksiController::class, 'DetailTransaksi']);
+        Route::get('/riwayat/transaksi', [RiwayatController::class, 'PengawasRiwayatTransaksi']);
+        Route::get('/detail/transaksi/{id}', [TransaksiController::class, 'DetailTransaksi']);
         Route::get('/logproduk', [LogAktivitasController::class, 'logProduk']);
     });
 });

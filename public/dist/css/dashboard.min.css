@@ -6337,7 +6337,7 @@ a.bg-secondary:focus,
 a.bg-secondary:hover,
 button.bg-secondary:focus,
 button.bg-secondary:hover {
-    background-color: #545b62 !important;
+    /* background-color: #ececec !important; */
 }
 .bg-success {
     background-color: #28a745 !important;
@@ -51360,11 +51360,11 @@ blockquote.quote-gray-dark h6 {
     color: #fff;
 }
 .bg-secondary {
-    background-color: #6c757d !important;
+    background-color: #ececec !important;
 }
 .bg-secondary,
 .bg-secondary > a {
-    color: #fff !important;
+    color: #000 !important;
 }
 .bg-secondary.btn:hover {
     border-color: #545b62;

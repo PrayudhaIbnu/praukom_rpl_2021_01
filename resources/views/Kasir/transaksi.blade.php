@@ -23,7 +23,7 @@
                 <div class="mb-3 row">
                   <label for="staticEmail" class="col-sm-5 col-form-label">Jam</label>
                   <div class="col-sm-7">
-                    <h6 class="form-control-plaintext" id="jam"></h6>
+                    <p class="form-control-plaintext" id="jam"></p>
                   </div>
                   <label for="staticEmail" class="col-sm-5 col-form-label">Tanggal</label>
                   <div class="col-sm-7">

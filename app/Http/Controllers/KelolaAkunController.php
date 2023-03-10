@@ -69,7 +69,7 @@ class KelolaAkunController extends Controller
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
+            $filename = date('y-m-d') . '.' . $extention;
             $file->move('storage/post-images/', $filename);
             $user->foto = $filename;
         }
@@ -137,7 +137,7 @@ class KelolaAkunController extends Controller
             }
             $file = $request->file('foto_e');
             $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
+            $filename = date('y-m-d') . '.' . $extention;
             $file->move('storage/post-images/', $filename);
             $usr->foto = $filename;
         }

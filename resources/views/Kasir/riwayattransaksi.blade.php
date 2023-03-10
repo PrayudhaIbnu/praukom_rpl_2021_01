@@ -37,12 +37,12 @@
               <tbody>
                 @foreach ($riwayat as $item)
                 <tr>
-                  <td id="s">{{ $item->id_faktur }}</td>
+                  <td id="s">{{ $item->id_struk }}</td>
                   <td>{{ $item->tanggal }}</td>
                   <td>{{ $item->jam_jual }}</td>
                   <td>{{ $item->nama }}</td>
                   <td>
-                    <a href="/kasir/detail/transaksi/{{ $item->id_faktur }}">
+                    <a href="/kasir/detail/transaksi/{{ $item->id_struk }}">
                       <button class="btn btn-detail btn-warning"><i class="fa-solid fa-info"></i></button>
                     </a> 
                 </tr>

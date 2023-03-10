@@ -49,7 +49,7 @@
   </ul>
 </nav>
 <aside class="main-sidebar sidebar-light-primary sidebar-no-expand">
-  <a href="" class="brand-link">
+  <a href="/kasir/dashboard" class="brand-link">
     <img src="/img/logoblud.png" alt="BLUD Logo" class="brand-image">
     <span class="brand-text font-weight-bold text-yellow">One</span><span
       class="brand-text font-weight-bold text-orange">Mart</span>
@@ -59,7 +59,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="/kasir/dashboard" class="nav-link ">
+          <a href="/kasir/dashboard" class="nav-link {{ Request::path() === 'kasir/dashboard' ? 'bg-secondary' : '' }}">
             <i class="nav-icon fa-solid fa-chart-pie"></i>
             <p>
               Dashboard
@@ -68,7 +68,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="/kasir/transaksi" class="nav-link">
+          <a href="/kasir/transaksi" class="nav-link {{ Request::path() === 'kasir/transaksi' ? 'bg-secondary' : '' }}">
             <i class="nav-icon fas fa-shopping-cart "></i>
             <p>
               Transaksi
@@ -77,7 +77,7 @@
           >
         </li>
         <li class="nav-item">
-          <a href="/kasir/riwayat/transaksi" class="nav-link">
+          <a href="/kasir/riwayat/transaksi" class="nav-link {{ Request::path() === 'kasir/riwayat/transaksi' ? 'bg-secondary' : '' }}">
             <i class="nav-icon fa-solid fa-clock"></i>
             <p>
               Riwayat Transaksi
@@ -85,7 +85,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="/kasir/produk" class="nav-link">
+          <a href="/kasir/produk" class="nav-link {{ Request::path() === 'kasir/produk' ? 'bg-secondary' : '' }}">
             <i class="nav-icon fas fa-box-open"></i>
             <p>
               Daftar Produk
