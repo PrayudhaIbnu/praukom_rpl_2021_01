@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-dashboard-pengawas />
+    <x-menu-navigasi />
     @section('title')
     Log Produk
     @endsection

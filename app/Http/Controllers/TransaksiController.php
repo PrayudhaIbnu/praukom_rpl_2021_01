@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-// use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DetailPenjualan;
@@ -10,9 +9,8 @@ use App\Models\Struk;
 use App\Models\Penjualan;
 use App\Models\Produk;
 use Carbon\Carbon;
-use Darryldecode\Cart\Cart;
+use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-use Illuminate\Support\Facades\Session;
 
 class TransaksiController extends Controller
 {
@@ -59,11 +57,11 @@ class TransaksiController extends Controller
     }
 
     // untuk detail transaksi role kasir dan pengawas
-    public function DetailTransaksi($id)
+    public function strukTransaksi($id)
     {
         $id_struk = DB::select("SELECT * FROM detail_transaksi WHERE id_struk = '$id'");
         // dd($id_struk);
-        return view('components.cetakpdf.detailtransaksi', compact('id_struk'));
+        return view('components.cetakpdf.cetak-struk', compact('id_struk'));
     }
 
     public function addItem(Request $request)
@@ -240,7 +238,7 @@ class TransaksiController extends Controller
                     'id_penjualan' => $id_penjualan,
                     'tanggal' => Carbon::now(),
                     'jam_jual' => date('H:i:s'),
-                    'kasir' => Session::get('levelbaru')->id
+                    'kasir' => Auth::user()->id
                 ]);
 
                 Struk::create([
@@ -249,7 +247,7 @@ class TransaksiController extends Controller
                     'jml_tunai' => $bayar,
                     'jml_kembalian' => $kembalian,
                     'grand_total' => $cartTotal,
-                    'kasir' => Session::get('levelbaru')->id
+                    'kasir' => Auth::user()->id
                 ]);
 
                 foreach ($filterCart as $cart) {
@@ -260,15 +258,6 @@ class TransaksiController extends Controller
                         'sub_total_hrg' => $cart['price']
                     ]);
                 }
-
-                // foreach ($filterCart as $cart) {
-                //     BarangKeluar::create([
-                //         'produk' => $cart['id'],
-                //         'qty' => $cart['quantity'],
-                //         'tanggal_keluar' => Carbon::now(),
-                //         'keterangan' => 'Transaksi'
-                //     ]);
-                // }
                 \Cart::clear();
 
                 DB::commit();
@@ -281,6 +270,4 @@ class TransaksiController extends Controller
             return redirect()->back()->with('success', "Transaksi Berhasil!");
         }
     }
-}    
-
-// SELECT produk, tanggal_masuk, SUM(qty) FROM barang_masuk GROUP BY produk;
+}

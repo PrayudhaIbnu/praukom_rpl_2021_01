@@ -1,5 +1,5 @@
 <x-app-layout>
-  <x-dashboard-super-admin />
+  <x-menu-navigasi />
   {{-- tilte --}}
   @section('title')
     Kelola Akun

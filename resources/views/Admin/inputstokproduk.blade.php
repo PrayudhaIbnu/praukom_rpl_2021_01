@@ -1,5 +1,5 @@
 <x-app-layout>
-  <x-dashboard-admin />
+  <x-menu-navigasi />
   {{-- tilte --}}
   @section('title')
     Input Stok Produk

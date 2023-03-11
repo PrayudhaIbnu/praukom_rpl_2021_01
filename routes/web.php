@@ -11,10 +11,6 @@ use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LogAktivitasController;
 
-// DEFAULT ROUTES
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 // ROUTES LOGIN
 Route::get('/', [AuthController::class, 'index'])->name('login')->middleware('guest');
@@ -25,11 +21,11 @@ Route::controller(AuthController::class)->group(function () {
 // END ROUTES LOGIN
 
 // ROUTES UNTUK ROLE SUPER ADMIN
-Route::middleware(['auth', 'superadmin'])->group(function () {
+Route::middleware(['auth', 'level:Super Admin'])->group(function () {
     Route::controller(KelolaAkunController::class)->group(function () {
-        Route::get('/superadmin/kelolaakun', 'index');
+        Route::get('/kelolaakun', 'index');
         Route::post('tambah-user', 'store');
-        Route::get('/superadmin/edit-user/{id}', 'edit');
+        Route::get('edit-user/{id}', 'edit');
         Route::put('update-user',  'update');
         Route::put('update-password',  'updatePassword');
         Route::delete('delete-user',  'destroy');
@@ -37,15 +33,11 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
 });
 // END ROUTES SUPER ADMIN
 
-
 // ROUTES UNTUK ROLE ADMIN
-Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
-    // Dashboard Admin
-    Route::get('/dashboard', [DashboardController::class, 'dashboardAdmin']);
+Route::middleware(['auth', 'level:Admin'])->group(function () {
     // PRODUK
     Route::controller(ProdukController::class)->group(function () {
         // CRUD PRODUK
-        Route::get('/produk', 'index')->name('produk');
         Route::post('/tambah-produk', 'store')->name('tambah-produk');
         Route::get('/edit-produk/{id}', 'edit');
         Route::put('update-produk',  'update');
@@ -57,16 +49,12 @@ Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
         Route::get('/produkreject', 'indexprodukreject');
         Route::post('/input-produkreject', 'storeprodukreject');
         // listkategori
-        Route::get('/listkategori', 'listkategori');
+        Route::get('/kategori', 'kategori');
         Route::post('/tambah-kategori', 'tambahkategori');
         Route::get('/edit-kategori/{id}', 'editkategori');
         Route::put('update-kategori',  'updatekategori');
     });
-    // RIWAYAT
-    Route::controller(RiwayatController::class)->group(function () {
-        Route::get('/riwayat/barang-masuk',  'AdminRiwayatBarangmasuk');
-        Route::get('/riwayat/barang-keluar', 'AdminRiwayatBarangkeluar');
-    });
+
     // CRUD SUPPLIER
     Route::controller(SupplierController::class)->group(function () {
         Route::get('/supplier', 'index')->name('supplier');
@@ -76,58 +64,52 @@ Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
         Route::delete('delete-supplier', 'destroy');
         Route::get('/supplier/detail/{id}', 'show');
     });
-    // LAPORAN
-    Route::get('/laporan', [LaporanController::class, 'LaporanAdmin']);
 });
 // END ROUTES ADMIN
 
-
 // ROUTES UNTUK ROLE KASIR
-Route::middleware(['auth', 'kasir'])->group(function () {
-    Route::prefix('/kasir')->group(function () {
-        // dashboard kasir
-        Route::get('/dashboard', [DashboardController::class, 'dashboardKasir']);
-        // transaksi
-        Route::controller(TransaksiController::class)->group(function () {
-            Route::get('/transaksi', 'index');
-            Route::post('/tambah-cart', 'addItem')->name('tambah-cart');
-            Route::post('/tambah-qty', 'increaseItem')->name('tambah-qty');
-            Route::post('/kurang-qty', 'decreaseItem')->name('kurang-qty');
-            Route::post('/remove-cart', 'removeItem')->name('hapus-cart');
-            Route::post('/checkout', 'handleSubmit')->name('transaksi');
-            Route::get('/detail/transaksi/{id}', 'DetailTransaksi');
-            Route::post('/getProduk', 'autocomplete')->name('autocomplete');
-        });
-        // riwayat transaksi
-        Route::get('/riwayat/transaksi', [RiwayatController::class, 'KasirRiwayatTransaksi']);
-        // index daftar produk
-        Route::get('/produk', [ProdukController::class, 'KasirDaftarProduk']);
+Route::middleware(['auth', 'level:Kasir'])->group(function () {
+    // transaksi
+    Route::controller(TransaksiController::class)->group(function () {
+        Route::get('/transaksi', 'index');
+        Route::post('/tambah-cart', 'addItem')->name('tambah-cart');
+        Route::post('/tambah-qty', 'increaseItem')->name('tambah-qty');
+        Route::post('/kurang-qty', 'decreaseItem')->name('kurang-qty');
+        Route::post('/remove-cart', 'removeItem')->name('hapus-cart');
+        Route::post('/checkout', 'handleSubmit')->name('transaksi');
+        Route::post('/getProduk', 'autocomplete')->name('autocomplete');
     });
 });
 // END ROUTES KASIR
 
-
 // ROUTES UNTUK ROLE PENGAWAS
-Route::middleware(['auth', 'pengawas'])->group(function () {
-    Route::prefix('/pengawas')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'dashboardPengawas']);
-        Route::get('/laporan', [LaporanController::class, 'LaporanPengawas']);
-        Route::get('/riwayat/barang-keluar', [RiwayatController::class, 'PengawasRiwayatBarangkeluar']);
-        Route::get('/riwayat/barang-masuk', [RiwayatController::class, 'PengawasRiwayatBarangmasuk']);
-        Route::get('/riwayat/transaksi', [RiwayatController::class, 'PengawasRiwayatTransaksi']);
-        Route::get('/detail/transaksi/{id}', [TransaksiController::class, 'DetailTransaksi']);
-        Route::get('/logproduk', [LogAktivitasController::class, 'logProduk']);
-    });
-});
+Route::get('/logproduk', [LogAktivitasController::class, 'logProduk'])->middleware(['auth', 'level:Pengawas']);
 // END ROUTES PENGAWAS
 
+// ROUTES DASHBOARD UNTUK ROLE ADMIN, KASIR, PENGAWAS 
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'level:Admin,Kasir,Pengawas']);
+
+// ROUTES DAFTAR PRODUK UNTUK ROLE ADMIN DAN KASIR
+Route::get('/daftar-produk', [ProdukController::class, 'index'])->middleware(['auth', 'level:Admin,Kasir']);
+
+// ROUTES RIWAYAT BARANG MASUK DAN KELUAR UNTUK ROLE ADMIN DAN PENGAWAS
+Route::controller(RiwayatController::class)->middleware(['auth', 'level:Admin,Pengawas'])->group(function () {
+    Route::get('/riwayat/barang-masuk',  'RiwayatBarangmasuk');
+    Route::get('/riwayat/barang-keluar', 'RiwayatBarangkeluar');
+});
 
 // ROUTES CETAK LAPORAN UNTUK ROLE ADMIN dan PENGAWAS
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'level:Admin,Pengawas'])->group(function () {
     Route::controller(LaporanController::class)->group(function () {
+        Route::get('/laporan', 'laporan');
         Route::post('/cetaklaporan-harian', 'cetakHarian')->name('cetak-harian');
         Route::post('/cetaklaporan-mingguan', 'cetakMingguan')->name('atur-tanggal');
         Route::post('/cetaklaporan-bulanan', 'cetakBulanan')->name('atur-tanggal-bulanan');
     });
 });
-// END ROUTES
+
+// ROUTES RIWAYAT TRANSAKSI UNTUK ROLE KASIR DAN PENGAWAS
+Route::get('/riwayat-penjualan', [RiwayatController::class, 'RiwayatPenjualan'])->middleware(['auth', 'level:Kasir,Pengawas']);
+
+// ROUTES DETAIL TRANSAKSI UNTUK ROLE KASIR DAN PENGAWAS
+Route::get('/struk/{id}', [TransaksiController::class, 'strukTransaksi'])->middleware(['auth', 'level:Kasir,Pengawas']);

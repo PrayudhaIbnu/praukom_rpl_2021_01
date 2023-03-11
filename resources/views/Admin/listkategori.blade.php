@@ -1,5 +1,5 @@
 <x-app-layout>
-  <x-dashboard-admin /> 
+  <x-menu-navigasi /> 
   {{-- tilte --}}
   @section('title')
       Kategori
@@ -9,7 +9,7 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="card w-50 m-auto">
-            <form method="POST" action="{{ url('/admin/tambah-kategori') }}">
+            <form method="POST" action="{{ url('/tambah-kategori') }}">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
@@ -23,19 +23,13 @@
                             </div>
                             @enderror   
                             <button type="submit" class="mt-3 float-end btn btn-primary rounded-3 btn-sm pl-3 pr-3">Tambah</button>
-                            <button type="button" class="mt-3 mr-3 float-end btn btn-secondary rounded-3 btn-sm pl-3 pr-3" data-dismiss="modal"><a href="{{ route('produk') }}" style="color: rgb(255, 255, 255)">Kembali</a></button>
+                            <button type="button" class="mt-3 mr-3 float-end btn btn-secondary rounded-3 btn-sm pl-3 pr-3" data-dismiss="modal"><a href="/daftar-produk" style="color: rgb(255, 255, 255)">Kembali</a></button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
         <br>
-        {{-- @if (count($errors) > 0)
-        <div class=" alert alert-dismissible fade show alert-danger" role="alert" style="margin-top: 60px">
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-          Data Gagal di Tambah!
-        </div>
-        @endif --}}
         <div class="card w-50 m-auto">
           <table class="table">
             <thead class="table-warning">
@@ -73,7 +67,7 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">Perbarui Kategori</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="{{ url('/admin/update-kategori') }}" method="POST" >
+      <form action="{{ url('/update-kategori') }}" method="POST" >
         @csrf
         @method('PUT')
         <input type="hidden" name="kategori_id" id="kategori_id">

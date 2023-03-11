@@ -12,8 +12,8 @@ use App\Models\RiwayatTransaksi;
 class RiwayatController extends Controller
 {
 
-    // untuk halaman history barang masuk role admin
-    public function AdminRiwayatBarangmasuk()
+    // untuk halaman history barang masuk role admin dan pengwawas
+    public function RiwayatBarangmasuk()
     {
         $produk = Produk::select()->get();
         $supplier = Supplier::select()->get();
@@ -21,48 +21,22 @@ class RiwayatController extends Controller
             ->join('produk', 'barang_masuk.produk', '=', 'produk.id_produk')
             ->join('supplier', 'barang_masuk.supplier', '=', 'supplier.id_supplier')
             ->paginate('10');
-        return view('admin.historybarangmasuk', compact('brg_masuk', 'supplier', 'produk'));
+        return view('components.riwayat-barangmasuk', compact('brg_masuk', 'supplier', 'produk'));
     }
 
-    //untuk halaman history barang keluar role admin
-    public function AdminRiwayatBarangkeluar()
+    //untuk halaman history barang keluar role admin dan pengawas
+    public function RiwayatBarangkeluar()
     {
         $produk = Produk::select()->get();
         $brg_keluar = BarangKeluar::select(['produk.nama_produk', 'barang_keluar.qty', 'barang_keluar.tanggal_keluar', 'barang_keluar.keterangan'])
             ->join('produk', 'barang_keluar.produk', '=', 'produk.id_produk')
             ->paginate('10');
-        return view('admin.historybarangkeluar', compact('brg_keluar', 'produk'));
+        return view('components.riwayat-barangkeluar', compact('brg_keluar', 'produk'));
     }
 
-    // untuk  halaman history barang masuk role pengawas
-    public function PengawasRiwayatBarangmasuk(Request $request)
-    {
-        $produk = Produk::select()->get();
-        $supplier = Supplier::select()->get();
-        $brg_masuk = BarangMasuk::select(['produk.nama_produk', 'barang_masuk.tanggal_masuk', 'barang_masuk.tanggal_exp', 'barang_masuk.qty', 'supplier.nama_supplier'])
-            ->join('produk', 'barang_masuk.produk', '=', 'produk.id_produk')
-            ->join('supplier', 'barang_masuk.supplier', '=', 'supplier.id_supplier')
-            ->where('nama_produk', 'LIKE', '%' . $request->search . '%')
-            ->orWhere('tanggal_masuk', 'LIKE', '%' . $request->search . '%')
-            ->paginate('10');
-        return view('Pengawas.historybarangmasuk', compact('brg_masuk', 'supplier', 'produk'));
-    }
 
-    //untuk  halaman history barang keluar role pengawas
-    public function PengawasRiwayatBarangkeluar(Request $request)
-    {
-        $search = $request->search;
-        $produk = Produk::select()->get();
-        $brg_keluar = BarangKeluar::select(['produk.nama_produk', 'barang_keluar.qty', 'barang_keluar.tanggal_keluar', 'barang_keluar.keterangan'])
-            ->join('produk', 'barang_keluar.produk', '=', 'produk.id_produk')
-            ->where('nama_produk', 'LIKE', '%' . $request->search . '%')
-            ->orWhere('tanggal_keluar', 'LIKE', '%' . $request->search . '%')
-            ->paginate('10');
-        return view('pengawas.historybarangkeluar', compact('brg_keluar', 'produk'));
-    }
-
-    // untuk halaman riwayat transaksi role pengawas
-    public function PengawasRiwayatTransaksi(Request $request)
+    // untuk halaman riwayat transaksi role kasir dan pengawas
+    public function RiwayatPenjualan(Request $request)
     {
         $tglHarian = date('Y-m-d');
         $riwayat = RiwayatTransaksi::select()
@@ -71,18 +45,6 @@ class RiwayatController extends Controller
             ->orWhere('tanggal', 'LIKE', '%' . $request->search . '%')
             ->latest('id_struk')
             ->paginate(10);
-        return view('Pengawas.riwayattransaksi', compact('riwayat'));
-    }
-
-    // untuk riwayat transaksi role kasir
-    public function KasirRiwayatTransaksi(Request $request)
-    {
-
-        $tglHarian = date('Y-m-d');
-        $riwayat = RiwayatTransaksi::select()
-            ->where('tanggal', $tglHarian)
-            ->latest('id_struk')
-            ->paginate(15);
-        return view('Kasir.riwayattransaksi', compact('riwayat'));
+        return view('components.riwayat-penjualan', compact('riwayat'));
     }
 }

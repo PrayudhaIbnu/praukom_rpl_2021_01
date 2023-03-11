@@ -1,7 +1,7 @@
 {{-- x-app-layout buat struktur html --}}
 <x-app-layout>
   {{-- x-dashboard buat struktur dashboard --}}
-  <x-dashboard-cashier />
+  <x-menu-navigasi />
   @section('title')
     Transaksi
   @endsection
@@ -33,7 +33,7 @@
                   <label for="staticEmail" class="col-sm-5 col-form-label">Kasir</label>
                   <div class="col-sm-7">
                     <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                      value="{{ Session::get('levelbaru')->nama }}">
+                      value="{{ Auth::user()->nama}}">
                   </div>
                 </div>
               </div>

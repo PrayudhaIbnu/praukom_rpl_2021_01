@@ -15,8 +15,6 @@ class KelolaAkunController extends Controller
 {
     public function index(Request $request)
     {
-        $usr = DB::select('select * from user');
-        // dd($usr);
         $search = $request->search;
         $level_user = LevelUser::select()->get();
         $user = User::select(['user.nama', 'user.username', 'level_user.nama_level', 'user.foto', 'user.id_user', 'user.level'])
@@ -26,7 +24,7 @@ class KelolaAkunController extends Controller
             ->orWhere('username', 'LIKE', '%' . $search . '%')
             ->latest()
             ->paginate(10);
-        return view('SuperAdmin.index', compact('user', 'level_user', 'usr'));
+        return view('SuperAdmin.index', compact('user', 'level_user'));
     }
 
     // tambah

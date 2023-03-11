@@ -21,11 +21,10 @@ class ProdukController extends Controller
      */
 
     // menampilkan halaman listkategori
-    public function listkategori()
+    public function kategori()
     {
-        // $produk = DB::table('produk')->get();
         $kategori = ProdukKategori::select()->get();
-        return view('admin.listkategori', compact('kategori'));
+        return view('Admin.listkategori', compact('kategori'));
     }
 
     // tambah kategori
@@ -76,7 +75,7 @@ class ProdukController extends Controller
         return redirect()->back()->with('success', "Data berhasi di Edit");
     }
 
-    //  menampilkan halaman daftar produk role admin
+    //  menampilkan halaman daftar produk 
     public function index(Request $request)
     {
         $search = $request->search;
@@ -87,21 +86,9 @@ class ProdukController extends Controller
             ->orWhere('nama_produk', 'LIKE', '%' . $search . '%')
             ->paginate(10);
 
-        return view('admin.daftarproduk', compact('produk', 'kategori'));
+        return view('components.daftarproduk', compact('produk', 'kategori'));
     }
 
-    // untuk halaman daftar produk role kasir
-    public function KasirDaftarProduk(Request $request)
-    {
-        $search = $request->search;
-        $kategori = ProdukKategori::select()->get();
-        $produk = Produk::select()
-            ->orderBy('nama_produk', 'ASC')
-            ->where('id_produk', 'LIKE', '%' . $search . '%')
-            ->orWhere('nama_produk', 'LIKE', '%' . $search . '%')
-            ->paginate(10);
-        return view('kasir.daftarproduk', compact('produk', 'kategori'));
-    }
     // tambah produk
     public function store(Request $request)
     {
@@ -296,7 +283,7 @@ class ProdukController extends Controller
         return view('admin.produkreject', compact('brg_keluar', 'produk'));
     }
 
-    //  tambah procuk reject
+    //  tambah input procuk reject
     public function storeprodukreject(Request $request)
     {
         request()->validate(

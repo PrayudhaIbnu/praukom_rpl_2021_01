@@ -1,9 +1,3 @@
-{{-- <form action="{{ route('cetak-harian') }}" method="post">
-  <input type="date" required class="form-control" id="date" name="tgl" />
-  <div class="">
-    <button class="btn btn-warning btn-sm w-100"> Download <i class="fas fa-cloud-download"></i></button>
-  </div>
-</form> --}}
 
 <div class="row">
   <div class="col">

@@ -1,7 +1,5 @@
+{{-- css modal hapus --}}
 <style>
-    body {
-        font-family: 'Varela Round', sans-serif;
-    }
     .modal-confirm {		
         color: #636363;
         width: 400px;
