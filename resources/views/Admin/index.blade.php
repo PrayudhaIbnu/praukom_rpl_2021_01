@@ -44,7 +44,9 @@ Dashboard
       <div class="col-4">
         <div class="card ">
           <div class="card-body">
-            <h5 class="h3">{{ $totalSupplier[0]->total }}</h5>
+            <h5 class="h3">
+              {{ $totalSupplier[0]->total }}
+            </h5>
             <p class="card-text">Total Supplier</p>
           </div>
         </div>

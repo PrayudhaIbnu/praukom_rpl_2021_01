@@ -15,9 +15,9 @@ return new class extends Migration
     {
         DB::unprepared(
             "CREATE OR REPLACE VIEW laporan_transaksi AS (
-              SELECT penjualan.tanggal, penjualan.jam_jual, produk.nama_produk, detail_penjualan.qty, detail_penjualan.sub_total_hrg, faktur.id_faktur FROM (((detail_penjualan
+              SELECT penjualan.tanggal, penjualan.jam_jual, produk.nama_produk, detail_penjualan.qty, detail_penjualan.sub_total_hrg, struk.id_struk FROM (((detail_penjualan
               INNER JOIN penjualan ON detail_penjualan.penjualan = penjualan.id_penjualan)
-              INNER JOIN faktur ON detail_penjualan.penjualan = faktur.penjualan)
+              INNER JOIN struk ON detail_penjualan.penjualan = struk.penjualan)
               INNER JOIN produk ON detail_penjualan.produk = produk.id_produk)
             )"
         );

@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DetailPenjualan;
-use App\Models\Faktur;
+use App\Models\Struk;
 use App\Models\Penjualan;
 use App\Models\Produk;
 use Carbon\Carbon;
@@ -61,9 +61,9 @@ class TransaksiController extends Controller
     // untuk detail transaksi role kasir dan pengawas
     public function DetailTransaksi($id)
     {
-        $id_faktur = DB::select("SELECT * FROM detail_transaksi WHERE id_faktur = '$id'");
-        // dd($id_faktur);
-        return view('components.cetakpdf.detailtransaksi', compact('id_faktur'));
+        $id_struk = DB::select("SELECT * FROM detail_transaksi WHERE id_struk = '$id'");
+        // dd($id_struk);
+        return view('components.cetakpdf.detailtransaksi', compact('id_struk'));
     }
 
     public function addItem(Request $request)
@@ -228,9 +228,9 @@ class TransaksiController extends Controller
                 // dd($id_penjualan);
                 $date =  date('ymdHi');
                 $prefix = 'OD' . $date;
-                $id_faktur = IdGenerator::generate([
-                    'table' => 'faktur',
-                    'field' => 'id_faktur',
+                $id_struk = IdGenerator::generate([
+                    'table' => 'struk',
+                    'field' => 'id_struk',
                     'length' => 12,
                     'prefix' => $prefix,
                 ]);
@@ -243,8 +243,8 @@ class TransaksiController extends Controller
                     'kasir' => Session::get('levelbaru')->id
                 ]);
 
-                Faktur::create([
-                    'id_faktur' => $id_faktur,
+                Struk::create([
+                    'id_struk' => $id_struk,
                     'penjualan' => $id_penjualan,
                     'jml_tunai' => $bayar,
                     'jml_kembalian' => $kembalian,

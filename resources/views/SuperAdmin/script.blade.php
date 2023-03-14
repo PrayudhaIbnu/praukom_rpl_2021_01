@@ -24,7 +24,6 @@
           $('#nama').val(response.user.nama);
           $('#username').val(response.user.username);
           $('#nama_level').val(response.user.level);
-          $('#password').val(response.user.password);
         }
       })
     });
@@ -72,6 +71,34 @@
     const blob = URL.createObjectURL(image.files[0]);
     imagePreview.src = blob;
     }
+
+    // visibility pasword
+    let state = false;
+  function toggleTambah(){
+    if (state) {
+      document.getElementById("password").setAttribute("type","password");
+      document.getElementById("eye-tambah").className = "fa-regular fa-eye-slash";
+      state = false;
+        
+    } else {
+      document.getElementById("password").setAttribute("type","text");
+      document.getElementById("eye-tambah").className = "fa-regular fa-eye";
+      state = true;
+    }
+  }
+
+  function toggleEdit(){
+    if (state) {
+      document.getElementById("password_e").setAttribute("type","password");
+      document.getElementById("eye-edit").className = "fa-regular fa-eye-slash";
+      state = false;
+        
+    } else {
+      document.getElementById("password_e").setAttribute("type","text");
+      document.getElementById("eye-edit").className = "fa-regular fa-eye";
+      state = true;
+    }
+  }
  
 
 </script>

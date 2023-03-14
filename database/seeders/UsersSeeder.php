@@ -33,6 +33,22 @@ class UsersSeeder extends Seeder
                 'password' => Hash::make('admin'),
                 'foto' => '',
                 'level' => '2',
+            ],
+            [
+                'id_user' => 'USR03',
+                'nama' => 'Fahmi Kurnia',
+                'username' => 'kasir',
+                'password' => Hash::make('kasir'),
+                'foto' => '',
+                'level' => '3',
+            ],
+            [
+                'id_user' => 'USR04',
+                'nama' => 'Ibnu Pryudha',
+                'username' => 'pengawas',
+                'password' => Hash::make('pengawas'),
+                'foto' => '',
+                'level' => '4',
             ]
         ]);
         $users->each(fn ($user) => User::create($user));

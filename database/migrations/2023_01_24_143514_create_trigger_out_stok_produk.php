@@ -26,7 +26,7 @@ return new class extends Migration
             DECLARE jml INT(11);
             SELECT user.nama INTO users FROM user WHERE user.id = new.user;
             SELECT nama_produk INTO produks FROM produk WHERE produk.id_produk = new.produk;
-            INSERT INTO log_produk  (tanggal, nama_user, aktifitas, nama_produk, jumlah) 
+            INSERT INTO log_produk  (tanggal, nama_user, aktivitas, nama_produk, jumlah) 
             VALUES (NOW(), users, 'Keluar Stok', produks, new.qty);
             END;"
         );

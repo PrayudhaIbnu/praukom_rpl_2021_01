@@ -1,4 +1,7 @@
 <x-app-layout>
+  @section('title')
+  Laporan Harian
+  @endsection
   <div class="form-group">
     <div class="d-flex align-items-center mb-3 pb-1">
       <img src="/img/logoblud.png" alt="Logo BLUD" class="img" style="width: 4%">

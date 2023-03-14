@@ -26,9 +26,9 @@
                   <div class="col mb-3">
                   <label for="produk" class="form-label font-weight-normal">Nama Produk</label>
                   <select name="produk" id="produk" class="form-select bg-white js-example-basic-multiple @error('produk') is-invalid @enderror" aria-label="Default select example">
-                    <option value="" selected disabled >Pilih Produk</option>
+                    <option  selected disabled >Pilih Produk</option>
                     @foreach ($produk as $item)
-                      <option value="{{ $item->id_produk }}">{{ $item->nama_produk }}</option>
+                      <option  value="{{ $item->id_produk }}">{{ $item->nama_produk }}</option>
                     @endforeach
                   </select>
                   @error('produk')
@@ -41,7 +41,7 @@
               <div class="row align-items-center">
                   <div class="col mb-2">
                     <label for="jml_keluar" class="form-label font-weight-normal">Jumlah Keluar</label>
-                    <input  name="jml_keluar" id="jml_keluar" class="form-control form-control-sm @error('jml_keluar') is-invalid @enderror" type="number" aria-label=".form-control-sm example">
+                    <input value="{{ old('jml_keluar') }}" name="jml_keluar" id="jml_keluar" class="form-control form-control-sm @error('jml_keluar') is-invalid @enderror" type="number" aria-label=".form-control-sm example">
                     @error('jml_keluar')
                     <div class="invalid-feedback">
                       {{ $message }}
@@ -50,7 +50,7 @@
                   </div>
                   <div class="col mb-2">
                     <label for="tgl_keluar" class="form-label font-weight-normal">Tanggal Keluar</label>
-                    <input  name="tgl_keluar" id="tgl_keluar" class="form-control form-control-sm  @error('tgl_keluar') is-invalid @enderror" type="date" aria-label=".form-control-sm example">
+                    <input value="{{ old('tgl_keluar') }}" name="tgl_keluar" id="tgl_keluar" class="form-control form-control-sm  @error('tgl_keluar') is-invalid @enderror" type="date" aria-label=".form-control-sm example">
                     @error('tgl_keluar')
                     <div class="invalid-feedback">
                       {{ $message }}
@@ -61,7 +61,7 @@
               <div class="row align-items-center">
                 <div class="col mb-">
                   <label for="keterangan"  class="form-label font-weight-normal">Keterangan </label>
-                  <textarea class="form-control  @error('keterangan') is-invalid @enderror" name="keterangan" id="keterangan" rows="4"></textarea>
+                  <textarea value="{{ old('keterangan') }}" class="form-control  @error('keterangan') is-invalid @enderror" name="keterangan" id="keterangan" rows="4"></textarea>
                   @error('keterangan')
                   <div class="invalid-feedback">
                     {{ $message }}

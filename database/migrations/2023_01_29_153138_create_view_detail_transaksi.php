@@ -16,11 +16,11 @@ return new class extends Migration
     {
         DB::unprepared(
             "CREATE OR REPLACE VIEW detail_transaksi AS (
-              SELECT faktur.id_faktur, user.nama, penjualan.tanggal, penjualan.jam_jual, produk.nama_produk, detail_penjualan.qty, produk.harga_jual, detail_penjualan.sub_total_hrg, faktur.grand_total, faktur.jml_tunai, faktur.jml_kembalian 
-                FROM faktur
-                INNER JOIN penjualan ON faktur.penjualan = penjualan.id_penjualan
+              SELECT struk.id_struk, user.nama, penjualan.tanggal, penjualan.jam_jual, produk.nama_produk, detail_penjualan.qty, produk.harga_jual, detail_penjualan.sub_total_hrg, struk.grand_total, struk.jml_tunai, struk.jml_kembalian 
+                FROM struk
+                INNER JOIN penjualan ON struk.penjualan = penjualan.id_penjualan
                 INNER JOIN detail_penjualan ON penjualan.id_penjualan = detail_penjualan.penjualan
-                INNER JOIN user ON faktur.kasir = user.id
+                INNER JOIN user ON struk.kasir = user.id
                 INNER JOIN produk ON detail_penjualan.produk = produk.id_produk
             )"
         );

@@ -67,9 +67,9 @@ class RiwayatController extends Controller
         $tglHarian = date('Y-m-d');
         $riwayat = RiwayatTransaksi::select()
             ->where('tanggal', $tglHarian)
-            ->where('id_faktur', 'LIKE', '%' . $request->search . '%')
+            ->where('id_struk', 'LIKE', '%' . $request->search . '%')
             ->orWhere('tanggal', 'LIKE', '%' . $request->search . '%')
-            ->latest()
+            ->latest('id_struk')
             ->paginate(10);
         return view('Pengawas.riwayattransaksi', compact('riwayat'));
     }
@@ -81,6 +81,7 @@ class RiwayatController extends Controller
         $tglHarian = date('Y-m-d');
         $riwayat = RiwayatTransaksi::select()
             ->where('tanggal', $tglHarian)
+            ->latest('id_struk')
             ->paginate(15);
         return view('Kasir.riwayattransaksi', compact('riwayat'));
     }

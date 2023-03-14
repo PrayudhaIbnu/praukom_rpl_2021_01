@@ -33,13 +33,12 @@
 
         <form action="{{ url('logout') }}" method="post">
           @csrf
-          <button type="submit" class=" dropdown-item logout "
-            style="border-bottom-right-radius: 0.55rem !important;
+          <button type="submit" class=" dropdown-item logout " style="border-bottom-right-radius: 0.55rem !important;
           border-bottom-left-radius: 0.55rem !important;">
-            <div class="float-left">
-              <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
-              <span class="text-sm ">Logout</span>
-            </div>
+          <div class="float-left">
+            <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
+            <span class="text-sm ">Logout</span>
+          </div>
           </button>
         </form>
       </div>
@@ -52,7 +51,7 @@
   </ul>
 </nav>
 <aside class="main-sidebar sidebar-light-primary sidebar-no-expand">
-  <a href="" class="brand-link">
+  <a href="/admin/dashboard" class="brand-link">
     <img src="/img/logoblud.png" alt="BLUD Logo" class="brand-image">
     <span class="brand-text font-weight-bold text-yellow">One</span><span
       class="brand-text font-weight-bold text-orange">Mart</span>
@@ -62,7 +61,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="/admin/dashboard" class="nav-link">
+          <a href="/admin/dashboard" class="nav-link {{ Request::path() === 'admin/dashboard' ? 'bg-secondary' : '' }}">
             <i class="nav-icon fa-solid fa-chart-pie"></i>
             <p>
               Dashboard
@@ -79,19 +78,19 @@
           </a>
           <ul class="nav nav-treeview pl-4">
             <li class="nav-item">
-              <a href="{{ route('produk') }}" class="nav-link">
+              <a href="{{ route('produk') }}" class="nav-link {{ Request::path() === 'admin/produk' ? 'bg-secondary' : '' }}">
                 <i class="fa-regular fa-rectangle-list"></i>
                 <p>Daftar Produk</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/inputstok" class="nav-link">
+              <a href="/admin/inputstok" class="nav-link {{ Request::path() === 'admin/inputstok' ? 'bg-secondary' : '' }}">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 <p>Input Stok Produk</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/produkreject" class="nav-link pl-3">
+              <a href="/admin/produkreject" class="nav-link pl-3 {{ Request::path() === 'admin/produkreject' ? 'bg-secondary' : '' }}">
                 <i class="fa-regular fa-circle-xmark"></i>
                 <p>Produk Reject</p>
               </a>
@@ -99,7 +98,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="{{ route('supplier') }}" class="nav-link">
+          <a href="{{ route('supplier') }}" class="nav-link {{ Request::path() === 'admin/supplier' ? 'bg-secondary' : '' }}">
             <i class="nav-icon fas fa-user"></i>
             <p>
               Daftar Supplier
@@ -116,13 +115,13 @@
           </a>
           <ul class="nav nav-treeview pl-4">
             <li class="nav-item">
-              <a href="/admin/riwayat/barang-masuk" class="nav-link">
+              <a href="/admin/riwayat/barang-masuk" class="nav-link {{ Request::path() === 'admin/riwayat/barang-masuk' ? 'bg-secondary' : '' }}">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 <p>Barang Masuk</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/riwayat/barang-keluar" class="nav-link">
+              <a href="/admin/riwayat/barang-keluar" class="nav-link {{ Request::path() === 'admin/riwayat/barang-keluar' ? 'bg-secondary' : '' }}">
                 <i class="fa-regular fa-circle-xmark"></i>
                 <p>Barang Keluar</p>
               </a>
@@ -130,7 +129,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="{{ url('admin/laporan') }}" class="nav-link">
+          <a href="{{ url('admin/laporan') }}" class="nav-link {{ Request::path() === 'admin/laporan' ? 'bg-secondary' : '' }}">
             <i class="nav-icon fas fa-file-alt"></i>
             <p>
               Laporan

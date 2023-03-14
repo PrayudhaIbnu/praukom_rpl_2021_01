@@ -24,7 +24,7 @@
             <div class="accordion-body">
               <div class="row ">
                 <div class="col mb-1">
-                  <label for="tglawal" name="tglawal" class="form-label font-weight-normal">Pilih Tanggal Cetak</label>
+                  <label for="date" class="form-label font-weight-normal">Pilih Tanggal Cetak</label>
                   <div class="input-group date" id="datepicker">
                     <input type="date" required class="form-control" id="date" name="tgl" />
                   </div>

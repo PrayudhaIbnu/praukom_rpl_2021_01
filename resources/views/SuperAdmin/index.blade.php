@@ -90,9 +90,22 @@
         </div>
         {{-- End Table --}}
       </div>
-      <div>
-        {{ $user->links() }}
+      {{-- pagination --}}
+      <div class="container-fluid">
+        <div class="float-right">
+          {{ $user->links() }}
+        </div>
+        <div>
+          showing
+          {{ $user->firstItem() }}
+          to
+          {{ $user->lastItem() }}
+          of
+          {{ $user->total() }}
+       </div>
       </div>
+
+
     </div>
   </div>
   @include('SuperAdmin.modal')

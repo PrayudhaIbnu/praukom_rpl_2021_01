@@ -33,7 +33,7 @@
                     <th scope="col">No</th>
                     <th scope="col">Tanggal</th>
                     <th scope="col">Nama Admin</th>
-                    <th scope="col">Aktifitas</th>
+                    <th scope="col">Aktivitas</th>
                     <th scope="col">Nama Produk</th>
                     <th scope="col">Jumlah</th>
                   </tr>
@@ -46,7 +46,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td id="s">{{ $item->tanggal }}</td>
                     <td>{{ $item->nama_user }}</td>
-                    <td>{{ $item->aktifitas }}</td>
+                    <td>{{ $item->aktivitas }}</td>
                     <td>{{ $item->nama_produk }}</td>
                     <td>{{ $item->jumlah }}</td>
                   </tr>
