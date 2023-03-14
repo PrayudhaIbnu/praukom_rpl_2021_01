@@ -8,7 +8,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="POST" action="{{ url('admin/tambah-supplier') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url('tambah-supplier') }}" enctype="multipart/form-data">
           @csrf
           <div class="modal-body">
             <div class="row align-items-start">

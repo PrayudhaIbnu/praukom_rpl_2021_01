@@ -96,7 +96,7 @@
               <h1 class="modal-title fs-5" id="exampleModalLabel">Form Edit Produk</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ url('admin/update-produk') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/update-produk') }}" method="POST" enctype="multipart/form-data">
               @csrf
               @method('PUT')
               <input type="hidden" name="produk_id" id="produk_id">

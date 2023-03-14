@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use App\Models\ProdukKategori;
 use App\Models\Produk;
 use App\Models\Supplier;
@@ -129,7 +129,7 @@ class ProdukController extends Controller
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
 
-        $produk['user'] = Session::get('levelbaru')->id;
+        $produk['user'] = Auth::user()->id;
         $produk->save();
         return redirect()->back()->with('success', "Data berhasil di tambah");
     }
@@ -206,7 +206,7 @@ class ProdukController extends Controller
         $produk->satuan_produk = $request->input('satuan_produk');
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
-        $produk['user'] = Session::get('levelbaru')->id;
+        $produk['user'] = Auth::user()->id;
         $produk->update();
         return redirect()->back()->with('success', "Data berhasil di update");
     }
@@ -265,7 +265,7 @@ class ProdukController extends Controller
         $tgl_exp = $request->input('tgl_exp');
         $jml = $request->input('qty');
         $supp = $request->input('id_supplier');
-        $user = Session::get('levelbaru')->id;
+        $user = Auth::user()->id;
         DB::select('CALL tambahstokproduk(?, ?, ?, ?, ?, ?)', [$id, $tgl_msk, $tgl_exp, $jml, $supp, $user]);
         // dd($stok);
         return redirect()->back()->with('success', "Data berhasil di input");
@@ -312,7 +312,7 @@ class ProdukController extends Controller
         }
         $tgl_keluar = $request->input('tgl_keluar');
         $keterangan = $request->input('keterangan');
-        $user = Session::get('levelbaru')->id;
+        $user = Auth::user()->id;
 
         DB::select('CALL barangkeluar(?,?,?,?,?)', array($nama_produk, $jml_keluar, $tgl_keluar, $keterangan, $user));
         return redirect()->back()->with('success', "Data Berhasil di Input");
