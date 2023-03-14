@@ -5,6 +5,11 @@
     Daftar Supplier
   @endsection
   {{-- end title --}}
+  @php
+    if (count($errors) > 0) {
+        alert()->error('Gagal', $errors->all());
+    }
+  @endphp
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -29,15 +34,15 @@
             <button type="button" class="btn btn-success my-2 btn-sm" data-toggle="modal"
               data-target="#tambahsupplier">Tambah Supplier</button>
           </div>
-          @if (count($errors) > 0)
+          {{-- @if (count($errors) > 0)
             <br><br><br>
             <div class="alert alert-dismissible fade show alert-danger" role="alert">
               @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
-              @endforeach
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-            </div>
-          @endif
+              @endforeach 
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+        @endif --}}
           <div class="table-responsive-xl">
             <table class="table mt-4 table-borderless ">
               <thead class="table-warning">
@@ -106,20 +111,19 @@
               <div class="col mb-3">
                 <label for="nama_supplier" class="form-label font-weight-normal">Nama Supplier</label>
                 <input required name="nama_supplier" id="nama" class="form-control form-control-sm" type="text"
-                  aria-label=".form-control-sm example">
+                  value="{{ old('nama_supplier') }}" aria-label=".form-control-sm example">
               </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-2">
                 <label for="telp_supplier" class="form-label font-weight-normal">No. Telp</label>
                 <input required name="telp_supplier" id="telp_supplier" class="form-control form-control-sm"
-                  type="tel" aria-label=".form-control-sm example">
+                  value="{{ old('telp_supplier') }}" type="tel" aria-label=".form-control-sm example">
               </div>
             </div>
             <div class="row align-items-center">
               <div class="col mb-2">
-                <label for="alamat_supplier" name="alamat_supplier"
-                  class="form-label font-weight-normal">Alamat</label>
+                <label for="alamat_supplier" name="alamat_supplier" class="form-label font-weight-normal">Alamat</label>
                 <textarea class="form-control" name="alamat_supplier" id="alamat_supplier" rows="4"></textarea>
               </div>
             </div>

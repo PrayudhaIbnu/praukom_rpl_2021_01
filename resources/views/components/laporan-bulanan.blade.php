@@ -1,5 +1,5 @@
 <div class="row">
-  
+
   <p><i>*Menampilkan transaksi pada tahun <b>
         {{ date('Y') }}</b></i></p>
   <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -23,7 +23,8 @@
                 </div>
               </div>
             </div>
-            <button type="submit" class="w-100 mt-1 btn btn-warning btn-sm">Download <i class="fas fa-cloud-download"></i></button>
+            <button type="submit" class="w-100 mt-1 btn btn-warning btn-sm">Download <i
+                class="fas fa-cloud-download"></i></button>
           </div>
         </div>
       </form>
@@ -41,7 +42,7 @@
         <th scope="col">Kode Faktur</th>
         <th scope="col">Nama Produk</th>
         <th scope="col">Qty</th>
-        <th scope="col">Hartga Jual</th>
+        <th scope="col">Harga Jual</th>
         <th scope="col">Harga Beli</th>
       </tr>
     </thead>
@@ -61,4 +62,3 @@
   </table>
 </div>
 @include('sweetalert::alert')
-

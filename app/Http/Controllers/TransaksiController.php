@@ -274,7 +274,7 @@ class TransaksiController extends Controller
                 DB::commit();
             } catch (\Throwable $th) {
                 DB::rollback();
-                dd($th);
+                // dd($th);
                 return redirect()->back()->with('error', $th);
             }
 

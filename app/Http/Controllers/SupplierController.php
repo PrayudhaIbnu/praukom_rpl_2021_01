@@ -48,7 +48,7 @@ class SupplierController extends Controller
         $supplier->alamat_supplier = $request->input('alamat_supplier');
         $supplier->telp_supplier = $request->input('telp_supplier');
         $supplier->save();
-        return redirect()->back()->with('success', "Data berhasi di tambah");
+        return redirect()->back()->with('success', "Data berhasil di tambah");
     }
 
     /**

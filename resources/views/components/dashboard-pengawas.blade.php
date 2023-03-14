@@ -21,10 +21,11 @@
 
         <span class="dropdown dropdown-header">
           @if (Session::get('levelbaru')->foto == null)
-            <img src="/img/user.jpg" style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
+            <img src="/img/user.jpg" style="object-fit: cover;width:100px;height:100px;" alt=""
+              class="img img-circle">
           @else
             <img src="{{ asset('storage/post-images/' . Session::get('levelbaru')->foto) }}"
-            style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
+              style="object-fit: cover;width:100px;height:100px;" alt="" class="img img-circle">
           @endif
           <p class="mt-2 text-bold">{{ Session::get('levelbaru')->nama }}</p>
           <i class="font-level">Pengawas</i>
@@ -32,13 +33,14 @@
 
         <form action="{{ url('logout') }}" method="post">
           @csrf
-          <button type="submit" class="dropdown-item logout" style="border-bottom-right-radius: 0.55rem !important;
+          <button type="submit" class=" dropdown-item logout "
+            style="border-bottom-right-radius: 0.55rem !important;
           border-bottom-left-radius: 0.55rem !important;">
-          <div class="float-left">
-            <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
-            <span class="text-sm ">Logout</span>
+            <div class="float-left">
+              <i class="nav-icons fa-solid fa-arrow-right-from-bracket"></i>
+              <span class="text-sm ">Logout</span>
+            </div>
           </button>
-        </div>
         </form>
       </div>
     </li>

@@ -86,6 +86,7 @@ class ProdukController extends Controller
             ->where('id_produk', 'LIKE', '%' . $search . '%')
             ->orWhere('nama_produk', 'LIKE', '%' . $search . '%')
             ->paginate(10);
+        // dd($produk);
 
         return view('admin.daftarproduk', compact('produk', 'kategori'));
     }
