@@ -27,10 +27,13 @@
                     <div class="d-flex align-items-center mb-3 pb-1">
                       <img src="/img/logoblud.png" alt="Logo BLUD" class="img">
                     </div>
-                    <h2 class="text-center fst-italic"><span class="font-weight-bold text-yellow">One</span><span
-                        class="font-weight-bold text-orange">Mart</span></h2>
+                    <h2 class="text-center fst-italic">
+                      <span class="font-weight-bold text-yellow">One</span>
+                      <span class="font-weight-bold text-orange">Mart</span>
+                    </h2>
                     <h6 class="fw-normal mb-3 pb-1" style="letter-spacing: 1px; color: orange; text-align:center;">
-                      Aplikasi Manajemen Waserba SMKN 1 Kota Bekasi</h6>
+                      Aplikasi Manajemen Waserba SMKN 1 Kota Bekasi
+                    </h6>
                     <form method="POST" action="{{ url('/auth') }}">  
                     @csrf
                     <div class="form-outline mb-4">

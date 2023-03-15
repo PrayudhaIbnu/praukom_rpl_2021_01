@@ -32,18 +32,22 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            $user = Auth::user();
+            $user = Auth::user()->level_user->nama_level;
             // Session::put('levelbaru', Auth::user());
-            if ($user->level === '1') {
-                return redirect()->intended('kelolaakun');
-            } elseif ($user->level === '2') {
-                return redirect()->intended('dashboard');
-            } elseif ($user->level === '3') {
-                return redirect()->intended('transaksi');
-            } elseif ($user->level === '4') {
-                return redirect()->intended('dashboard');
+            switch ($user) {
+                case 'Super Admin':
+                    return to_route('kelolaakun');
+                    break;
+                case 'Admin':
+                    return to_route('dashboard');
+                    break;
+                case 'Kasir':
+                    return to_route('transaksi');
+                    break;
+                case 'Pengawas':
+                    return to_route('dashboard');
+                    break;
             }
-            return redirect()->intended('/');
         }
 
         return back()->withErrors([

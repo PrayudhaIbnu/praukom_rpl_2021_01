@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Dashboard extends Component
+class dashboards extends Component
 {
     /**
      * Create a new component instance.

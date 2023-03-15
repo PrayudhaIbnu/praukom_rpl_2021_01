@@ -22,6 +22,9 @@
               </div>
             </div>
           </div>
+          <div class="container mt-2">
+            <p><i>*Menampilkan riwayat penjualan pada hari ini,<b> {{ date('j F Y') }}</b></i></p>
+          </div>
           <div class="container-fluid-6">
             <div class="table-responsive-xl">
               <table class="table mt-4 table-borderless ">

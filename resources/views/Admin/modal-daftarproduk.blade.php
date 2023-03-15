@@ -96,7 +96,7 @@
               <h1 class="modal-title fs-5" id="exampleModalLabel">Form Edit Produk</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ url('admin/update-produk') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('update-produk') }}" method="POST" enctype="multipart/form-data">
               @csrf
               @method('PUT')
               <input type="hidden" name="produk_id" id="produk_id">
@@ -171,7 +171,7 @@
             <div class="modal-body">
               <p>Apakah Anda benar-benar ingin menghapus? Anda tidak akan dapat mengembalikan ini! </p>
             </div>
-            <form method="POST" action="{{ url('admin/delete-produk') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ url('delete-produk') }}" enctype="multipart/form-data">
               @csrf
               @method('DELETE')
               <input type="hidden" id="delete_id" name="delete_produk_id">

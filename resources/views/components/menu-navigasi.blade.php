@@ -30,7 +30,7 @@
             <i class="font-level">{{ Auth::user()->level_user->nama_level }}</i>
           </span>
   
-          <form action="{{ url('logout') }}" method="post" >
+          <form action="{{ url('/logout') }}" method="post" >
             @csrf
             <button  type="submit" class=" dropdown-item logout " style="border-bottom-right-radius: 0.55rem !important;
             border-bottom-left-radius: 0.55rem !important;">
@@ -177,7 +177,7 @@
               </li>
               @can('pengawas')
               <li class="nav-item">
-                <a href="riwayat-transaksi" class="nav-link {{ Request::path() === 'riwayat-transaksi' ? 'bg-secondary' : '' }}">
+                <a href="riwayat-penjualan" class="nav-link {{ Request::path() === 'riwayat-penjualan' ? 'bg-secondary' : '' }}">
                   <i class="fa-solid fa-cart-shopping"></i>
                   <p>Penjualan</p>
                 </a>
@@ -197,6 +197,7 @@
           </li>
           @endcan
         </ul>
+        
     </div>
   </aside>
   {{ $slot }}

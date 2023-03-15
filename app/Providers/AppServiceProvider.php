@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //pagination
+        //pagination 
         Paginator::useBootstrap();
 
         // gate untuk superadmin

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Models\ProdukKategori;
 use App\Models\Produk;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Supplier;
 use App\Models\BarangKeluar;
 
@@ -129,7 +130,7 @@ class ProdukController extends Controller
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
 
-        $produk['user'] = Session::get('levelbaru')->id;
+        $produk['user'] = Auth::user()->id;
         $produk->save();
         return redirect()->back()->with('success', "Data berhasil di tambah");
     }
@@ -206,7 +207,7 @@ class ProdukController extends Controller
         $produk->satuan_produk = $request->input('satuan_produk');
         $produk->harga_beli = $request->input('harga_beli');
         $produk->harga_jual = $request->input('harga_jual');
-        $produk['user'] = Session::get('levelbaru')->id;
+        $produk['user'] = Auth::user()->id;
         $produk->update();
         return redirect()->back()->with('success', "Data berhasil di update");
     }

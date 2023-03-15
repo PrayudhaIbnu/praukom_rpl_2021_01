@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class DashboardAdmin extends Component
+class MenuNavigasi extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class DashboardAdmin extends Component
      */
     public function render()
     {
-        return view('components.dashboard-admin');
+        return view('components.menu-navigasi');
     }
 }
