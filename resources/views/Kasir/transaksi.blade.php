@@ -150,7 +150,7 @@
           </table>
         </div>
         {{-- akhir table   --}}
-        <form action="{{ route('transaksi') }}" method="POST">
+        <form action="{{ route('checkout') }}" method="POST">
           @csrf
           <div class="row gx-3 ">
             <div class="col-5">

@@ -91,7 +91,7 @@
             </a>
             <ul class="nav nav-treeview pl-4">
               <li class="nav-item">
-                <a href="daftar-produk" class="nav-link {{ Request::path() === 'daftar-produk' ? 'bg-secondary' : '' }}">
+                <a href="/daftar-produk" class="nav-link {{ Request::path() === 'daftar-produk' ? 'bg-secondary' : '' }}">
                   <i class="fa-regular fa-rectangle-list"></i>
                   <p>Daftar Produk</p>
                 </a>
@@ -103,7 +103,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="produkreject" class="nav-link pl-3 {{ Request::path() === 'produkreject' ? 'bg-secondary' : '' }}">
+                <a href="/produkreject" class="nav-link pl-3 {{ Request::path() === 'produkreject' ? 'bg-secondary' : '' }}">
                   <i class="fa-regular fa-circle-xmark"></i>
                   <p>Produk Reject</p>
                 </a>
@@ -129,7 +129,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="riwayat-penjualan" class="nav-link {{ Request::path() === 'riwayat-penjualan' ? 'bg-secondary' : '' }}">
+            <a href="/riwayat-penjualan" class="nav-link {{ Request::path() === 'riwayat-penjualan' ? 'bg-secondary' : '' }}">
               <i class="nav-icon fa-solid fa-clock"></i>
               <p>
                 Riwayat Penjualan
@@ -137,7 +137,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="daftar-produk" class="nav-link {{ Request::path() === 'daftar-produk' ? 'bg-secondary' : '' }}">
+            <a href="/daftar-produk" class="nav-link {{ Request::path() === 'daftar-produk' ? 'bg-secondary' : '' }}">
               <i class="nav-icon fas fa-box-open"></i>
               <p>
                 Daftar Produk
@@ -147,7 +147,7 @@
           @endcan
           @can('admin-pengawas')
           <li class="nav-item" >
-            <a href="{{ url('laporan') }}" class="nav-link {{ Request::path() === 'laporan' ? 'bg-secondary' : '' }}">
+            <a href="/laporan" class="nav-link {{ Request::path() === 'laporan' ? 'bg-secondary' : '' }}">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Laporan
@@ -177,7 +177,7 @@
               </li>
               @can('pengawas')
               <li class="nav-item">
-                <a href="riwayat-penjualan" class="nav-link {{ Request::path() === 'riwayat-penjualan' ? 'bg-secondary' : '' }}">
+                <a href="/riwayat-penjualan" class="nav-link {{ Request::path() === 'riwayat-penjualan' ? 'bg-secondary' : '' }}">
                   <i class="fa-solid fa-cart-shopping"></i>
                   <p>Penjualan</p>
                 </a>
@@ -188,7 +188,7 @@
           @endcan
           @can('pengawas')
           <li class="nav-item">
-            <a href="logproduk" class="nav-link {{ Request::path() === 'pengawas/logproduk' ? 'bg-secondary' : '' }}">
+            <a href="/logproduk" class="nav-link {{ Request::path() === 'pengawas/logproduk' ? 'bg-secondary' : '' }}">
               <i class="nav-icon fas fa-history"></i>
               <p>
                 Log Produk

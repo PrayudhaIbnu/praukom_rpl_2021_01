@@ -76,7 +76,7 @@ Route::middleware(['auth', 'level:Kasir'])->group(function () {
         Route::post('/tambah-qty', 'increaseItem')->name('tambah-qty');
         Route::post('/kurang-qty', 'decreaseItem')->name('kurang-qty');
         Route::post('/remove-cart', 'removeItem')->name('hapus-cart');
-        Route::post('/checkout', 'handleSubmit')->name('transaksi');
+        Route::post('/checkout', 'handleSubmit')->name('checkout');
         Route::post('/getProduk', 'autocomplete')->name('autocomplete');
     });
 });
@@ -110,6 +110,7 @@ Route::middleware(['auth', 'level:Admin,Pengawas'])->group(function () {
 
 // ROUTES RIWAYAT TRANSAKSI UNTUK ROLE KASIR DAN PENGAWAS
 Route::get('/riwayat-penjualan', [RiwayatController::class, 'RiwayatPenjualan'])->middleware(['auth', 'level:Kasir,Pengawas']);
+Route::get('/riwayat-penjualan/cari', [RiwayatController::class, 'search'])->name('search')->middleware(['auth', 'level:Kasir,Pengawas']);
 
 // ROUTES DETAIL TRANSAKSI UNTUK ROLE KASIR DAN PENGAWAS
 Route::get('/struk/{id}', [TransaksiController::class, 'strukTransaksi'])->middleware(['auth', 'level:Kasir,Pengawas']);

@@ -41,12 +41,25 @@ class RiwayatController extends Controller
     // untuk halaman riwayat penjualan role kasir dan pengawas
     public function RiwayatPenjualan(Request $request)
     {
+        $search = $request->search;
         $tglHarian = date('Y-m-d');
         $riwayat = RiwayatTransaksi::select()
             ->where('tanggal', $tglHarian)
             ->latest('id_struk')
             ->paginate(10);
 
+        return view('components.riwayat-penjualan', compact('riwayat'));
+    }
+    // untuk pencarian halaman riwayat penjualan role kasir dan pengawas
+    public function search(Request $request)
+    {
+        $cari = $request->search;
+        // mengambil data dari table pegawai sesuai pencarian data
+        $riwayat = RiwayatTransaksi::select()
+            ->where('id_struk', 'LIKE', '%' . $cari . '%')
+            ->orWhere('tanggal', 'LIKE', '%' . $cari . '%')
+            ->latest('id_struk')
+            ->paginate(10);
         return view('components.riwayat-penjualan', compact('riwayat'));
     }
 }

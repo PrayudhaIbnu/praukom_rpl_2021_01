@@ -14,14 +14,17 @@
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
-            <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <form action="" method="GET">
+              <div class="input-group">
+                <input class="form-control" name="search" id="search-input" type="text" placeholder="Search"
+                  autocomplete="off">
                 <div class="input-group-append">
-                <button class="btn btn-sidebar btn-warning">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
-             </div>
-           </div>
+                  <button class="btn btn-warning" type="submit">
+                    <i class="fas fa-search fa-fw"></i>
+                  </button>
+                </div>
+              </div>   
+            </form>
           </div>
         </div>
         <div class="container-fluid-6">

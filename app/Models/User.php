@@ -18,7 +18,6 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    //GAK KEPAKE
 
     protected $table = "user";
     protected $primaryKey = 'id_user';

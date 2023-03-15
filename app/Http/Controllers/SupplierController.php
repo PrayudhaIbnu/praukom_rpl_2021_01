@@ -15,11 +15,16 @@ class SupplierController extends Controller
      * @return \Illuminate\Http\Response
      */
     // halaman index admin supplier
-    public function index()
+    public function index(Request $request)
     {
-        $data = DB::table('supplier')->get();
+        $search = $request->search;
+        $data = DB::table('supplier')
+            ->where('nama_supplier', 'LIKE', '%' . $search . '%')
+            ->orWhere('telp_supplier', 'LIKE', '%' . $search . '%')
+            ->latest('id_supplier')
+            ->paginate(10);
 
-        return view('admin.daftarsupplier', ['data' => $data]);
+        return view('admin.daftarsupplier', compact('data'));
     }
 
     // tambah supplier
