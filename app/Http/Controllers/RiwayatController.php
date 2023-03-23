@@ -19,8 +19,9 @@ class RiwayatController extends Controller
         $brg_masuk = BarangMasuk::select(['produk.nama_produk', 'barang_masuk.tanggal_masuk', 'barang_masuk.tanggal_exp', 'barang_masuk.qty', 'supplier.nama_supplier'])
             ->join('produk', 'barang_masuk.produk', '=', 'produk.id_produk')
             ->join('supplier', 'barang_masuk.supplier', '=', 'supplier.id_supplier')
-            ->where('nama_produk', 'LIKE', '%' . $request->search . '%')
-            ->orWhere('tanggal_masuk', 'LIKE', '%' . $request->search . '%')
+            // ->where('nama_produk', 'LIKE', '%' . $request->search . '%')
+            // ->orWhere('tanggal_masuk', 'LIKE', '%' . $request->search . '%')
+            ->orderBy('tanggal_masuk', 'DESC')
             ->paginate('10');
         return view('components.riwayat-barangmasuk', compact('brg_masuk', 'supplier', 'produk'));
     }
@@ -32,8 +33,9 @@ class RiwayatController extends Controller
         $produk = Produk::select()->get();
         $brg_keluar = BarangKeluar::select(['produk.nama_produk', 'barang_keluar.qty', 'barang_keluar.tanggal_keluar', 'barang_keluar.keterangan'])
             ->join('produk', 'barang_keluar.produk', '=', 'produk.id_produk')
-            ->where('nama_produk', 'LIKE', '%' . $request->search . '%')
-            ->orWhere('tanggal_keluar', 'LIKE', '%' . $request->search . '%')
+            // ->where('nama_produk', 'LIKE', '%' . $request->search . '%')
+            // ->orWhere('tanggal_keluar', 'LIKE', '%' . $request->search . '%')
+            ->orderBy('tanggal_keluar', 'DESC')
             ->paginate('10');
         return view('components.riwayat-barangkeluar', compact('brg_keluar', 'produk'));
     }
@@ -54,7 +56,6 @@ class RiwayatController extends Controller
     public function search(Request $request)
     {
         $cari = $request->search;
-        // mengambil data dari table pegawai sesuai pencarian data
         $riwayat = RiwayatTransaksi::select()
             ->where('id_struk', 'LIKE', '%' . $cari . '%')
             ->orWhere('tanggal', 'LIKE', '%' . $cari . '%')

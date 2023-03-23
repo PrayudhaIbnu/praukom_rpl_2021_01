@@ -33,7 +33,7 @@
                   <label for="staticEmail" class="col-sm-5 col-form-label">Kasir</label>
                   <div class="col-sm-7">
                     <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                      value="{{ Auth::user()->nama}}">
+                      value="{{ Auth::user()->nama }}">
                   </div>
                 </div>
               </div>
@@ -99,6 +99,14 @@
           </div>
         </div>
         {{-- Akhir Card Grid --}}
+        @if (count($errors) > 0)
+          <div class=" alert alert-dismissible fade show alert-danger" role="alert">
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+          </div>
+        @endif
         <div class="card" style="width: 100%; height: 220px; overflow-y: scroll;">
           <table class="table table-sm table-hover table-borderless ">
             <thead class="table-warning sticky-top">
@@ -115,6 +123,7 @@
               @forelse($carts as $index=>$cart)
                 <tr>
                   <td scope="row">{{ $index + 1 }}</td>
+                  <input type="text" hidden name="rowId" value="{{ $cart['rowId'] }}">
                   <td>{{ $cart['name'] }}</td>
                   <td>Rp {{ number_format($cart['pricesingle'], 2, ',', '.') }}</td>
                   {{-- <td > <input id="qty" name="qty" style="width: 50%;" type="number" value="{{ $cart['qty'] }}"></td> --}}
@@ -205,22 +214,25 @@
     });
   });
 
-  window.onload = function() { jam(); }
-   
-   function jam() {
+  window.onload = function() {
+    jam();
+  }
+
+  function jam() {
     var e = document.getElementById('jam'),
-    d = new Date(), h, m, s;
+      d = new Date(),
+      h, m, s;
     h = d.getHours();
     m = set(d.getMinutes());
     s = set(d.getSeconds());
-  
-    e.innerHTML = h +':'+ m +':'+ s;
-  
+
+    e.innerHTML = h + ':' + m + ':' + s;
+
     setTimeout('jam()', 1000);
-   }
-  
-   function set(e) {
-    e = e < 10 ? '0'+ e : e;
+  }
+
+  function set(e) {
+    e = e < 10 ? '0' + e : e;
     return e;
-   }
+  }
 </script>

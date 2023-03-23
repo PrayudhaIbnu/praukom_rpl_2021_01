@@ -182,6 +182,17 @@ class TransaksiController extends Controller
 
     public function handleSubmit(Request $request)
     {
+
+        request()->validate(
+            [
+                'rowId' => 'required'
+            ],
+            [
+                'rowId.required' => 'Input Produk Terlebih Dahulu !'
+            ]
+        );
+
+
         $cartTotal = \Cart::getTotal();
         $bayar = $request->input('tunai');
         $kembalian = $request->input('kembalian');
@@ -233,7 +244,6 @@ class TransaksiController extends Controller
                     'prefix' => $prefix,
                 ]);
 
-                //harusnya ada field user => Auth()->user()->id(),
                 Penjualan::create([
                     'id_penjualan' => $id_penjualan,
                     'tanggal' => Carbon::now(),
